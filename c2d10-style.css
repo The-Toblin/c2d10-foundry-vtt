@@ -307,10 +307,10 @@
 .pad-xl {
   padding: 25px !important;
 }
-.chat-log {
+#chat-log {
   background: linear-gradient(0deg, #29a253, 15%, rgba(41, 162, 83, 0.5));
 }
-.chat-log:before {
+#chat-log:before {
   content: url();
   display: block;
   position: absolute;
@@ -322,4 +322,17 @@
   z-index: 2;
   background-size: 100% 2px, 3px 100%;
   pointer-events: none;
+}
+#chat-log .chat-message {
+  border-radius: 0px;
+  border: 1px solid #29a253;
+  color: ghostwhite;
+  font-family: VT323, monospace;
+  font-size: 14px;
+  font-weight: 200;
+  letter-spacing: 1px;
+}
+#chat-log .message-content {
+  font-family: inherit;
+  font-size: inherit;
 }
