@@ -246,7 +246,8 @@
   background: rgba(6, 27, 14, 0.2);
   box-shadow: 0 0 50px 5px #000 inset;
   border-radius: 3px;
-  border: 2px solid #29a253;
+  border: 2px solid;
+  border-color: #29a253 !important;
   color: ghostwhite;
   text-shadow: 0 0 5px ghostwhite;
   font-family: VT323, monospace;
@@ -312,9 +313,23 @@
 }
 #chat-log {
   background: linear-gradient(0deg, #061b0e, 15%, rgba(6, 27, 14, 0.5));
+  color: #29a253;
   box-shadow: 0 0 50px 5px #000 inset;
 }
-#chat-log:before {
+#chat-log .chat-message {
+  background: rgba(6, 27, 14, 0.2);
+  box-shadow: 0 0 50px 5px #000 inset;
+  border-radius: 3px;
+  border: 2px solid;
+  border-color: #29a253 !important;
+  color: ghostwhite;
+  text-shadow: 0 0 5px ghostwhite;
+  font-family: VT323, monospace;
+  font-size: 14px;
+  font-weight: 200;
+  letter-spacing: 1px;
+}
+#chat-log .chat-message:before {
   content: url();
   display: block;
   position: absolute;
@@ -326,18 +341,6 @@
   z-index: 2;
   background-size: 100% 2px, 3px 100%;
   pointer-events: none;
-}
-#chat-log .chat-message {
-  background: rgba(6, 27, 14, 0.2);
-  box-shadow: 0 0 50px 5px #000 inset;
-  border-radius: 3px;
-  border: 2px solid #29a253;
-  color: ghostwhite;
-  text-shadow: 0 0 5px ghostwhite;
-  font-family: VT323, monospace;
-  font-size: 14px;
-  font-weight: 200;
-  letter-spacing: 1px;
 }
 #chat-log .message-content {
   font-family: inherit;
