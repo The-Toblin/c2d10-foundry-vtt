@@ -342,6 +342,13 @@
   font-size: 14px;
   font-weight: 200;
   letter-spacing: 1px;
+  padding: 13px 15px 50px 11px;
+  border-width: 0px !important;
+  box-shadow: 0 1px 5px #000;
+  background-size: 100%;
+  background-position: top, bottom, 0px 18px;
+  background-repeat: no-repeat, no-repeat, repeat;
+  background-image: url(assets/chat-top.png), url(assets/chat-bottom.png), url(assets/chat-middle.png);
 }
 #chat-log .chat-message .message-header .message-sender,
 #chat-log .chat-message .message-header .message-metadata {
@@ -350,7 +357,23 @@
 #chat-log .chat-message:hover {
   animation: textShadow 2s infinite !important;
 }
-#chat-log .message-content {
-  font-family: inherit;
-  font-size: inherit;
+#chat-log .chat-message.whisper {
+  background: rgba(6, 27, 14, 0.2);
+  box-shadow: 0 0 50px 5px #000 inset;
+  border-radius: 3px;
+  border: 2px solid;
+  border-color: #29a253 !important;
+  color: ghostwhite;
+  text-shadow: 0 0 5px ghostwhite;
+  font-family: VT323, monospace;
+  font-size: 14px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 15px 50px 11px;
+  border-width: 0px !important;
+  box-shadow: 0 1px 5px #000;
+  background-size: 100%;
+  background-position: top, bottom, 0px 18px;
+  background-repeat: no-repeat, no-repeat, repeat;
+  background-image: url(images/hidden-chat-top.png), url(images/hidden-chat-bottom.png), url(images/hidden-chat-middle.png);
 }

@@ -1,5 +1,5 @@
 #chat-log {
-    position:relative;
+    position: relative;
     .crt-filter();
     .c2d10-section();
     color: @colors[green];
@@ -7,6 +7,15 @@
 
     .chat-message {
         .c2d10-subsection();
+
+        padding: 13px 15px 50px 11px;
+        border-width: 0px !important;
+        box-shadow: 0 1px 5px #000;
+        background-size: 100%;
+        background-position: top, bottom, 0px 18px;
+        background-repeat: no-repeat, no-repeat, repeat;
+        background-image: url(./assets/chat-top.png), url(./assets/chat-bottom.png), url(./assets/chat-middle.png);
+
         .message-header {
 
             .message-sender,
@@ -20,8 +29,15 @@
         }
     }
 
-    .message-content {
-        font-family: inherit;
-        font-size: inherit;
+    .chat-message.whisper {
+        .c2d10-subsection();
+        padding: 13px 15px 50px 11px;
+        border-width: 0px !important;
+        box-shadow: 0 1px 5px #000;
+        background-size: 100%;
+        background-position: top, bottom, 0px 18px;
+        background-repeat: no-repeat, no-repeat, repeat;
+        background-image: url(./images/hidden-chat-top.png), url(./images/hidden-chat-bottom.png), url(./images/hidden-chat-middle.png);
+
     }
 }
