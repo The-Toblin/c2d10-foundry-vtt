@@ -5,24 +5,70 @@
 
     .chat-message {
         .c2d10-subsection();
+
+        .message-content {
+            position: relative;
+            .crt-filter();
+
+            &:hover {
+                .crt-chromatic-aberration();
+            }
+
+            &:before {
+                top: 10px;
+                left: 7px;
+                bottom: 45px;
+                right: 7px;
+            }
+        }
+
         padding: 13px 15px 50px 11px;
         border-width: 0px !important;
         box-shadow: 0 1px 5px #000;
         background-size: 100%;
-        background-position: top, bottom, 0px 18px;
-        background-repeat: no-repeat, no-repeat, repeat;
-        background-image: url(./assets/chat-top.webp), url(./assets/chat-bottom.webp), url(./assets/chat-middle.webp);
+        background-position: top,
+        bottom,
+        0px 18px;
+        background-repeat: no-repeat,
+        no-repeat,
+        repeat;
+        background-image: url(./assets/chat-top.webp),
+        url(./assets/chat-bottom.webp),
+        url(./assets/chat-middle.webp);
     }
 
     .chat-message.whisper {
         .c2d10-subsection();
+
+        .message-content {
+            position: relative;
+            .crt-filter();
+
+            &:hover {
+                .crt-chromatic-aberration();
+            }
+
+            &:before {
+                top: 10px;
+                left: 7px;
+                bottom: 45px;
+                right: 7px;
+            }
+        }
+
         padding: 13px 15px 50px 11px;
         border-width: 0px !important;
         box-shadow: 0 1px 5px #000;
         background-size: 100%;
-        background-position: top, bottom, 0px 18px;
-        background-repeat: no-repeat, no-repeat, repeat;
-        background-image: url(./assets/hidden-chat-top.webp), url(./assets/hidden-chat-bottom.webp), url(./assets/hidden-chat-middle.webp);
+        background-position: top,
+        bottom,
+        0px 18px;
+        background-repeat: no-repeat,
+        no-repeat,
+        repeat;
+        background-image: url(./assets/hidden-chat-top.webp),
+        url(./assets/hidden-chat-bottom.webp),
+        url(./assets/hidden-chat-middle.webp);
 
     }
 
@@ -34,12 +80,4 @@
         }
     }
 
-    .message-content {
-        position: relative;
-        .crt-filter();
-
-        &:hover {
-            .crt-chromatic-aberration();
-        }
-    }
 }
