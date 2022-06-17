@@ -1,0 +1,27 @@
+#chat-log {
+    position:relative;
+    .crt-filter();
+    .c2d10-section();
+    color: @colors[green];
+    box-shadow: 0 0 50px 5px #000 inset;
+
+    .chat-message {
+        .c2d10-subsection();
+        .message-header {
+
+            .message-sender,
+            .message-metadata {
+                color: @colors[green];
+            }
+        }
+
+        &:hover {
+            .crt-chromatic-aberration();
+        }
+    }
+
+    .message-content {
+        font-family: inherit;
+        font-size: inherit;
+    }
+}
