@@ -7,11 +7,19 @@
     box-shadow: 0 0 50px 5px #000 inset;
 
     .chat-message {
-        .crt-filter();
         .c2d10-subsection();
+
+        .message-header {
+
+            .message-sender,
+            .message-metadata {
+                color: @colors[green];
+            }
+        }
     }
 
     .message-content {
+        .crt-filter();
         font-family: inherit;
         font-size: inherit;
     }

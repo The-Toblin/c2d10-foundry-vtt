@@ -329,7 +329,15 @@
   font-weight: 200;
   letter-spacing: 1px;
 }
-#chat-log .chat-message:before {
+#chat-log .chat-message .message-header .message-sender,
+#chat-log .chat-message .message-header .message-metadata {
+  color: #29a253;
+}
+#chat-log .message-content {
+  font-family: inherit;
+  font-size: inherit;
+}
+#chat-log .message-content:before {
   content: url();
   display: block;
   position: absolute;
@@ -341,8 +349,4 @@
   z-index: 2;
   background-size: 100% 2px, 3px 100%;
   pointer-events: none;
-}
-#chat-log .message-content {
-  font-family: inherit;
-  font-size: inherit;
 }
