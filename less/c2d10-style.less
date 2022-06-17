@@ -8,7 +8,6 @@
 
     .chat-message {
         .c2d10-subsection();
-
         .message-header {
 
             .message-sender,
@@ -16,14 +15,14 @@
                 color: @colors[green];
             }
         }
+
+        &:hover {
+            .crt-chromatic-aberration();
+        }
     }
 
     .message-content {
         font-family: inherit;
         font-size: inherit;
-
-        &:before {
-            .crt-filter();
-        }
     }
 }

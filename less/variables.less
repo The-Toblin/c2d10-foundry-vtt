@@ -77,7 +77,7 @@
     color: @colors[ghost];
     text-shadow: 0 0 5px @colors[ghost];
     font-family: @m2;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 200;
     letter-spacing: 1px;
 }
@@ -97,7 +97,7 @@
 
 // Animations
 .crt-blink {
-    content: " ";
+    content: "";
     position: relative;
     top: 20px;
     left: 3px;
@@ -135,17 +135,19 @@
 
 // Filters
 .crt-filter {
-    content: " ";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: linear-gradient(#12101000 50%, #00000040 50%), linear-gradient(90deg, #ff00000f, #00ff0005, #0000ff0f);
-    z-index: 2;
-    background-size: 100% 2px, 3px 100%;
-    pointer-events: none;
+    &:before {
+        content: " ";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: linear-gradient(#12101000 50%, #00000040 50%), linear-gradient(90deg, #ff00000f, #00ff0005, #0000ff0f);
+        z-index: 2;
+        background-size: 100% 2px, 3px 100%;
+        pointer-events: none;
+    }
 }
 
 // Functions
