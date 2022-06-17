@@ -240,7 +240,7 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 .c2d10-section {
-  background: linear-gradient(0deg, #061b0e, 15%, rgba(6, 27, 14, 0.5));
+  background: linear-gradient(0deg, #061b0e, 15%, rgba(6, 27, 14, 0.85));
 }
 .c2d10-subsection {
   background: rgba(6, 27, 14, 0.2);
@@ -312,7 +312,7 @@
   padding: 25px !important;
 }
 #chat-log {
-  background: linear-gradient(0deg, #061b0e, 15%, rgba(6, 27, 14, 0.5));
+  background: linear-gradient(0deg, #061b0e, 15%, rgba(6, 27, 14, 0.85));
   color: #29a253;
   box-shadow: 0 0 50px 5px #000 inset;
 }
