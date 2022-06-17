@@ -240,12 +240,13 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 .c2d10-section {
-  background: linear-gradient(0deg, #29a253, 15%, rgba(41, 162, 83, 0.5));
+  background: linear-gradient(0deg, #061b0e, 15%, rgba(6, 27, 14, 0.5));
 }
 .c2d10-subsection {
-  border-radius: 0px;
-  border: 1px solid #29a253;
+  border-radius: 3px;
+  border: 2px solid #29a253;
   color: ghostwhite;
+  text-shadow: 0 0 5px ghostwhite;
   font-family: VT323, monospace;
   font-size: 14px;
   font-weight: 200;
@@ -258,7 +259,7 @@
   left: 3px;
   width: 12px;
   height: 2px;
-  background: #29a253;
+  background: #061b0e;
   display: inline-block;
   animation: crtBlink 1.5s steps(2) infinite;
 }
@@ -308,7 +309,8 @@
   padding: 25px !important;
 }
 #chat-log {
-  background: linear-gradient(0deg, #29a253, 15%, rgba(41, 162, 83, 0.5));
+  background: linear-gradient(0deg, #061b0e, 15%, rgba(6, 27, 14, 0.5));
+  box-shadow: 0 0 10px 15px #000 inset;
 }
 #chat-log:before {
   content: url();
@@ -324,9 +326,10 @@
   pointer-events: none;
 }
 #chat-log .chat-message {
-  border-radius: 0px;
-  border: 1px solid #29a253;
+  border-radius: 3px;
+  border: 2px solid #29a253;
   color: ghostwhite;
+  text-shadow: 0 0 5px ghostwhite;
   font-family: VT323, monospace;
   font-size: 14px;
   font-weight: 200;

@@ -1,8 +1,10 @@
 // Colors
 @colors: {
     main: #88f2ad;
-    bkg: #29a253;
+    bkg: #061b0e;
+    green: #29a253;
     alert: #e0f287;
+    ghost: ghostwhite;
 }
 
 // Fonts
@@ -67,9 +69,10 @@
 }
 
 .c2d10-subsection {
-    border-radius: 0px;
-    border: 1px solid @colors[bkg];
-    color: ghostwhite;
+    border-radius: 3px;
+    border: 2px solid @colors[green];
+    color: @colors[ghost];
+    text-shadow: 0 0 5px @colors[ghost];
     font-family: @m2;
     font-size: 14px;
     font-weight: 200;
