@@ -1,0 +1,162 @@
+// Colors
+@colors: {
+    main: #88f2ad;
+    bkg: #29a253;
+    alert: #e0f287;
+}
+
+// Fonts
+@font-face {
+    font-family: Quantum;
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://rawcdn.githack.com/The-Toblin/Revamped/54a9aba6c35ac2dcbd60818414294762f6b9c37f/Quantum.otf);
+}
+
+@font-face {
+    font-family: Kosugi;
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/kosugi/v14/pxiFyp4_v8FCjlI4NA.ttf);
+}
+
+@font-face {
+    font-family: Blinker;
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/blinker/v12/cIf4MaFatEE-VTaP_OGARGE.ttf);
+}
+
+@font-face {
+    font-family: Major Mono Display;
+    font-style: monospace;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/majormonodisplay/v10/RWmVoLyb5fEqtsfBX9PDZIGr2tFubRhLCg.ttf);
+}
+
+@font-face {
+    font-family: VT323;
+    font-style: monospace;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/vt323/v15/pxiKyp0ihIEF2hsY.ttf);
+}
+
+@font-face {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu4mxK.woff2);
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC,
+        U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@h1: Quantum, sans-serif;
+@h2: Kosugi, sans-serif;
+@h3: Major Mono Display, monospace;
+@m1: Blinker, sans-serif;
+@m2: VT323, monospace;
+@m3: Roboto, sans-serif;
+
+// Card Classes
+.c2d10-section {
+    background: linear-gradient(0deg, @colors[bkg], 15%, fade(@colors[bkg], 50%));
+}
+
+.c2d10-subsection {
+    border-radius: 0px;
+    border: 1px solid @colors[bkg];
+    color: ghostwhite;
+    font-family: @m2;
+    font-size: 14px;
+    font-weight: 200;
+    letter-spacing: 1px;
+}
+
+// Buttons
+
+// Text
+@size: {
+    base: 12px;
+    small: 0.9rem;
+    normal: 1.1rem;
+    large: 1.25rem;
+    giant: 1.75rem;
+}
+
+// Basic Functions
+
+// Animations
+.crt-blink {
+    content: url();
+    position: relative;
+    top: 20px;
+    left: 3px;
+    width: 12px;
+    height: 2px;
+    background: @colors[bkg];
+    display: inline-block;
+    animation: crtBlink 1.5s steps(2) infinite;
+}
+
+.crt-chromatic-aberration {
+    animation: textShadow 2s infinite !important;
+}
+
+.crt-flicker {
+    &:after {
+        content: url();
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: #1210101a;
+        opacity: 0;
+        z-index: 2;
+        pointer-events: none;
+        animation: crtFlicker 0.25s infinite;
+    }
+}
+
+.neon-flicker {
+    animation: neonFlicker 2.25s infinite;
+}
+
+// Filters
+.crt-filter {
+    &:before {
+        content: url();
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: linear-gradient(#12101000 50%, #00000040 50%), linear-gradient(90deg, #ff00000f, #00ff0005, #0000ff0f);
+        z-index: 2;
+        background-size: 100% 2px, 3px 100%;
+        pointer-events: none;
+    }
+}
+
+// Functions
+.pad-sm {
+    padding: 4px !important;
+}
+
+.pad-md {
+    padding: 8px !important;
+}
+
+.pad-lg {
+    padding: 12px !important;
+}
+
+.pad-xl {
+    padding: 25px !important;
+}

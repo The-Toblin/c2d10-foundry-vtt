@@ -1,0 +1,325 @@
+@keyframes crtBlink {
+  0% {
+    opacity: 0;
+  }
+}
+@keyframes neonFlicker {
+  0% {
+    opacity: 1;
+  }
+  1% {
+    opacity: 0.2;
+  }
+  2% {
+    opacity: 0.4;
+  }
+  3% {
+    opacity: 0.8;
+  }
+  5% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 1;
+  }
+  41% {
+    opacity: 0.2;
+  }
+  42% {
+    opacity: 0.4;
+  }
+  43% {
+    opacity: 0.8;
+  }
+  45% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  61% {
+    opacity: 0.2;
+  }
+  62% {
+    opacity: 0.4;
+  }
+  63% {
+    opacity: 0.8;
+  }
+  65% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  91% {
+    opacity: 0.2;
+  }
+  92% {
+    opacity: 0.4;
+  }
+  93% {
+    opacity: 0.8;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+@keyframes textShadow {
+  0% {
+    text-shadow: 0.43899242px 0 1px #001eff80, -0.43899242px 0 1px #ff00504d, 0 0 3px;
+  }
+  5% {
+    text-shadow: 2.7928974px 0 1px #001eff80, -2.7928974px 0 1px #ff00504d, 0 0 3px;
+  }
+  10% {
+    text-shadow: 0.02956276px 0 1px #001eff80, -0.02956276px 0 1px #ff00504d, 0 0 3px;
+  }
+  15% {
+    text-shadow: 0.40218539px 0 1px #001eff80, -0.40218539px 0 1px #ff00504d, 0 0 3px;
+  }
+  20% {
+    text-shadow: 3.47940379px 0 1px #001eff80, -3.47940379px 0 1px #ff00504d, 0 0 3px;
+  }
+  25% {
+    text-shadow: 1.61256304px 0 1px #001eff80, -1.61256304px 0 1px #ff00504d, 0 0 3px;
+  }
+  30% {
+    text-shadow: 0.70155901px 0 1px #001eff80, -0.70155901px 0 1px #ff00504d, 0 0 3px;
+  }
+  35% {
+    text-shadow: 3.89691405px 0 1px #001eff80, -3.89691405px 0 1px #ff00504d, 0 0 3px;
+  }
+  40% {
+    text-shadow: 3.87090561px 0 1px #001eff80, -3.87090561px 0 1px #ff00504d, 0 0 3px;
+  }
+  45% {
+    text-shadow: 2.23105696px 0 1px #001eff80, -2.23105696px 0 1px #ff00504d, 0 0 3px;
+  }
+  50% {
+    text-shadow: 0.0808429px 0 1px #001eff80, -0.0808429px 0 1px #ff00504d, 0 0 3px;
+  }
+  55% {
+    text-shadow: 2.37584611px 0 1px #001eff80, -2.37584611px 0 1px #ff00504d, 0 0 3px;
+  }
+  60% {
+    text-shadow: 2.20219305px 0 1px #001eff80, -2.20219305px 0 1px #ff00504d, 0 0 3px;
+  }
+  65% {
+    text-shadow: 2.86387806px 0 1px #001eff80, -2.86387806px 0 1px #ff00504d, 0 0 3px;
+  }
+  70% {
+    text-shadow: 0.48874025px 0 1px #001eff80, -0.48874025px 0 1px #ff00504d, 0 0 3px;
+  }
+  75% {
+    text-shadow: 1.89484913px 0 1px #001eff80, -1.89484913px 0 1px #ff00504d, 0 0 3px;
+  }
+  80% {
+    text-shadow: 0.08330373px 0 1px #001eff80, -0.08330373px 0 1px #ff00504d, 0 0 3px;
+  }
+  85% {
+    text-shadow: 0.09769827px 0 1px #001eff80, -0.09769827px 0 1px #ff00504d, 0 0 3px;
+  }
+  90% {
+    text-shadow: 3.44333976px 0 1px #001eff80, -3.44333976px 0 1px #ff00504d, 0 0 3px;
+  }
+  95% {
+    text-shadow: 2.18418389px 0 1px #001eff80, -2.18418389px 0 1px #ff00504d, 0 0 3px;
+  }
+  100% {
+    text-shadow: 2.62087645px 0 1px #001eff80, -2.62087645px 0 1px #ff00504d, 0 0 3px;
+  }
+}
+@keyframes crtFlicker {
+  0% {
+    opacity: 0.27861;
+  }
+  5% {
+    opacity: 0.34769;
+  }
+  10% {
+    opacity: 0.23604;
+  }
+  15% {
+    opacity: 0.90626;
+  }
+  20% {
+    opacity: 0.18128;
+  }
+  25% {
+    opacity: 0.83891;
+  }
+  30% {
+    opacity: 0.65583;
+  }
+  35% {
+    opacity: 0.67807;
+  }
+  40% {
+    opacity: 0.26559;
+  }
+  45% {
+    opacity: 0.84693;
+  }
+  50% {
+    opacity: 0.96019;
+  }
+  55% {
+    opacity: 0.08594;
+  }
+  60% {
+    opacity: 0.20313;
+  }
+  65% {
+    opacity: 0.71988;
+  }
+  70% {
+    opacity: 0.53455;
+  }
+  75% {
+    opacity: 0.37288;
+  }
+  80% {
+    opacity: 0.71428;
+  }
+  85% {
+    opacity: 0.70419;
+  }
+  90% {
+    opacity: 0.7003;
+  }
+  95% {
+    opacity: 0.36108;
+  }
+  100% {
+    opacity: 0.24387;
+  }
+}
+@font-face {
+  font-family: Quantum;
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://rawcdn.githack.com/The-Toblin/Revamped/54a9aba6c35ac2dcbd60818414294762f6b9c37f/Quantum.otf);
+}
+@font-face {
+  font-family: Kosugi;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/kosugi/v14/pxiFyp4_v8FCjlI4NA.ttf);
+}
+@font-face {
+  font-family: Blinker;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/blinker/v12/cIf4MaFatEE-VTaP_OGARGE.ttf);
+}
+@font-face {
+  font-family: Major Mono Display;
+  font-style: monospace;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/majormonodisplay/v10/RWmVoLyb5fEqtsfBX9PDZIGr2tFubRhLCg.ttf);
+}
+@font-face {
+  font-family: VT323;
+  font-style: monospace;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/vt323/v15/pxiKyp0ihIEF2hsY.ttf);
+}
+@font-face {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu4mxK.woff2);
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+.c2d10-section {
+  background: linear-gradient(0deg, #29a253, 15%, rgba(41, 162, 83, 0.5));
+}
+.c2d10-subsection {
+  border-radius: 0px;
+  border: 1px solid #29a253;
+  color: ghostwhite;
+  font-family: VT323, monospace;
+  font-size: 14px;
+  font-weight: 200;
+  letter-spacing: 1px;
+}
+.crt-blink {
+  content: url();
+  position: relative;
+  top: 20px;
+  left: 3px;
+  width: 12px;
+  height: 2px;
+  background: #29a253;
+  display: inline-block;
+  animation: crtBlink 1.5s steps(2) infinite;
+}
+.crt-chromatic-aberration {
+  animation: textShadow 2s infinite !important;
+}
+.crt-flicker:after {
+  content: url();
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #1210101a;
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+  animation: crtFlicker 0.25s infinite;
+}
+.neon-flicker {
+  animation: neonFlicker 2.25s infinite;
+}
+.crt-filter:before {
+  content: url();
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(#12101000 50%, #00000040 50%), linear-gradient(90deg, #ff00000f, #00ff0005, #0000ff0f);
+  z-index: 2;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}
+.pad-sm {
+  padding: 4px !important;
+}
+.pad-md {
+  padding: 8px !important;
+}
+.pad-lg {
+  padding: 12px !important;
+}
+.pad-xl {
+  padding: 25px !important;
+}
+.chat-log {
+  background: linear-gradient(0deg, #29a253, 15%, rgba(41, 162, 83, 0.5));
+}
+.chat-log:before {
+  content: url();
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(#12101000 50%, #00000040 50%), linear-gradient(90deg, #ff00000f, #00ff0005, #0000ff0f);
+  z-index: 2;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}
