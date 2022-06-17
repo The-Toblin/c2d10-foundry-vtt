@@ -7,8 +7,8 @@
     "url": "https://github.com/The-Toblin/c2d10-foundry-vtt/",
     "flags": {},
     "version": 0.01,
-    "minimumCoreVersion": "10",
-    "compatibleCoreVersion": "10",
+    "minimumCoreVersion": "9",
+    "compatibleCoreVersion": "9",
     "scripts": [],
     "esmodules": [
         "c2d10.js"
