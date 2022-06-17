@@ -19,8 +19,11 @@
     }
 
     .message-content {
-        .crt-filter();
         font-family: inherit;
         font-size: inherit;
+
+        &:before {
+            .crt-filter();
+        }
     }
 }
