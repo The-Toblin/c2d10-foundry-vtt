@@ -5,9 +5,6 @@
 
     .chat-message {
         .c2d10-subsection();
-        position: relative;
-        .crt-filter();
-
         padding: 13px 15px 50px 11px;
         border-width: 0px !important;
         box-shadow: 0 1px 5px #000;
@@ -15,24 +12,10 @@
         background-position: top, bottom, 0px 18px;
         background-repeat: no-repeat, no-repeat, repeat;
         background-image: url(./assets/chat-top.webp), url(./assets/chat-bottom.webp), url(./assets/chat-middle.webp);
-
-        .message-header {
-
-            .message-sender,
-            .message-metadata {
-                color: @colors[green];
-            }
-        }
-
-        &:hover {
-            .crt-chromatic-aberration();
-        }
     }
 
     .chat-message.whisper {
         .c2d10-subsection();
-        position: relative;
-        .crt-filter();
         padding: 13px 15px 50px 11px;
         border-width: 0px !important;
         box-shadow: 0 1px 5px #000;
@@ -41,5 +24,22 @@
         background-repeat: no-repeat, no-repeat, repeat;
         background-image: url(./images/hidden-chat-top.webp), url(./images/hidden-chat-bottom.webp), url(./images/hidden-chat-middle.webp);
 
+    }
+
+    .message-header {
+
+        .message-sender,
+        .message-metadata {
+            color: @colors[green];
+        }
+    }
+
+    .message-content {
+        position: relative;
+        .crt-filter();
+
+        &:hover {
+            .crt-chromatic-aberration();
+        }
     }
 }
