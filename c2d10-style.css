@@ -316,7 +316,8 @@
   color: #29a253;
   box-shadow: 0 0 50px 5px #000 inset;
 }
-#chat-log .chat-message {
+#chat-log .chat-message,
+#chat-log .chat-message.whisper {
   background: rgba(6, 27, 14, 0.2);
   box-shadow: 0 0 50px 5px #000 inset;
   border-radius: 3px;
@@ -338,39 +339,8 @@
   background-repeat: no-repeat, no-repeat, repeat;
   background-image: url(assets/chat-top.webp), url(assets/chat-bottom.webp), url(assets/chat-middle.webp);
 }
-#chat-log .chat-message.whisper {
-  background: rgba(6, 27, 14, 0.2);
-  box-shadow: 0 0 50px 5px #000 inset;
-  border-radius: 3px;
-  border: 2px solid;
-  border-color: #29a253 !important;
-  color: ghostwhite;
-  text-shadow: 0 0 5px ghostwhite;
-  font-family: VT323, monospace;
-  font-size: 14px;
-  font-weight: 200;
-  letter-spacing: 1px;
-  padding: 13px 15px 50px 11px;
-  border-width: 0px !important;
-  box-shadow: 0 1px 5px #000;
-  background-size: 100%;
-  background-position: top,
-            bottom,
-            0px 18px;
-  background-repeat: no-repeat, no-repeat, repeat;
-  background-image: url(assets/hidden-chat-top.webp), url(assets/hidden-chat-bottom.webp), url(assets/hidden-chat-middle.webp);
-}
-#chat-log .message-header .message-sender,
-#chat-log .message-header .message-metadata {
-  color: #29a253;
-}
-#chat-log .message-content {
-  position: relative;
-}
-#chat-log .message-content:hover {
-  animation: textShadow 2s infinite !important;
-}
-#chat-log .message-content:before {
+#chat-log .chat-message:before,
+#chat-log .chat-message.whisper:before {
   content: " ";
   display: block;
   position: absolute;
@@ -382,4 +352,17 @@
   z-index: 2;
   background-size: 100% 2px, 3px 100%;
   pointer-events: none;
+}
+#chat-log .chat-message.whisper {
+  background-image: url(assets/hidden-chat-top.webp), url(assets/hidden-chat-bottom.webp), url(assets/hidden-chat-middle.webp) !important;
+}
+#chat-log .message-header .message-sender,
+#chat-log .message-header .message-metadata {
+  color: #29a253;
+}
+#chat-log .message-content {
+  position: relative;
+}
+#chat-log .message-content:hover {
+  animation: textShadow 2s infinite !important;
 }
