@@ -329,6 +329,7 @@
   font-size: 14px;
   font-weight: 200;
   letter-spacing: 1px;
+  position: relative;
   padding: 13px 15px 50px 11px;
   border-width: 0px !important;
   box-shadow: 0 1px 5px #000;
@@ -353,16 +354,16 @@
   background-size: 100% 2px, 3px 100%;
   pointer-events: none;
 }
-#chat-log .chat-message.whisper {
-  background-image: url(assets/hidden-chat-top.webp), url(assets/hidden-chat-bottom.webp), url(assets/hidden-chat-middle.webp) !important;
-}
-#chat-log .message-header .message-sender,
-#chat-log .message-header .message-metadata {
+#chat-log .chat-message .message-header .message-sender,
+#chat-log .chat-message.whisper .message-header .message-sender,
+#chat-log .chat-message .message-header .message-metadata,
+#chat-log .chat-message.whisper .message-header .message-metadata {
   color: #29a253;
 }
-#chat-log .message-content {
-  position: relative;
-}
-#chat-log .message-content:hover {
+#chat-log .chat-message .message-content::hover,
+#chat-log .chat-message.whisper .message-content::hover {
   animation: textShadow 2s infinite !important;
+}
+#chat-log .chat-message.whisper {
+  background-image: url(assets/hidden-chat-top.webp), url(assets/hidden-chat-bottom.webp), url(assets/hidden-chat-middle.webp) !important;
 }
