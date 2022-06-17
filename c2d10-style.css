@@ -243,6 +243,8 @@
   background: linear-gradient(0deg, #061b0e, 15%, rgba(6, 27, 14, 0.5));
 }
 .c2d10-subsection {
+  background: rgba(6, 27, 14, 0.2);
+  box-shadow: 0 0 50px 5px #000 inset;
   border-radius: 3px;
   border: 2px solid #29a253;
   color: ghostwhite;
@@ -310,7 +312,7 @@
 }
 #chat-log {
   background: linear-gradient(0deg, #061b0e, 15%, rgba(6, 27, 14, 0.5));
-  box-shadow: 0 0 10px 15px #000 inset;
+  box-shadow: 0 0 50px 5px #000 inset;
 }
 #chat-log:before {
   content: url();
@@ -326,6 +328,8 @@
   pointer-events: none;
 }
 #chat-log .chat-message {
+  background: rgba(6, 27, 14, 0.2);
+  box-shadow: 0 0 50px 5px #000 inset;
   border-radius: 3px;
   border: 2px solid #29a253;
   color: ghostwhite;
