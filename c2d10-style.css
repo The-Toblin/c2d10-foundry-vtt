@@ -373,6 +373,13 @@
   pointer-events: none;
   animation: crtFlicker 0.25s infinite;
 }
+#chat-log .chat-message .message-header:after,
+#chat-log .chat-message.whisper .message-header:after {
+  top: 10px;
+  left: 7px;
+  bottom: 45px;
+  right: 7px;
+}
 #chat-log .chat-message .message-header .message-sender,
 #chat-log .chat-message.whisper .message-header .message-sender,
 #chat-log .chat-message .message-header .message-metadata,
@@ -397,6 +404,13 @@
   z-index: 2;
   pointer-events: none;
   animation: crtFlicker 0.25s infinite;
+}
+#chat-log .chat-message .message-content:after,
+#chat-log .chat-message.whisper .message-content:after {
+  top: 10px;
+  left: 7px;
+  bottom: 45px;
+  right: 7px;
 }
 #chat-log .chat-message.whisper {
   background-image: url(assets/hidden-chat-top.webp), url(assets/hidden-chat-bottom.webp), url(assets/hidden-chat-middle.webp) !important;
