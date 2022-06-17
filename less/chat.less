@@ -36,14 +36,16 @@
         }
 
         .message-header {
-            .crt-chromatic-aberration();
-            .crt-flicker();
+            &:hover {
+                .crt-chromatic-aberration();
+                .crt-flicker();
 
-            &:after {
-                top: 10px;
-                left: 7px;
-                bottom: 45px;
-                right: 7px;
+                &:after {
+                    top: 10px;
+                    left: 7px;
+                    bottom: 45px;
+                    right: 7px;
+                }
             }
 
             .message-sender,
@@ -53,14 +55,16 @@
         }
 
         .message-content {
-            .crt-chromatic-aberration();
-            .crt-flicker();
+            &:hover {
+                .crt-chromatic-aberration();
+                .crt-flicker();
 
-            &:after {
-                top: 10px;
-                left: 7px;
-                bottom: 45px;
-                right: 7px;
+                &:after {
+                    top: 10px;
+                    left: 7px;
+                    bottom: 45px;
+                    right: 7px;
+                }
             }
         }
     }

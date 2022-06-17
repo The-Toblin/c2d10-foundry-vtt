@@ -354,12 +354,12 @@
   background-size: 100% 2px, 3px 100%;
   pointer-events: none;
 }
-#chat-log .chat-message .message-header,
-#chat-log .chat-message.whisper .message-header {
+#chat-log .chat-message .message-header:hover,
+#chat-log .chat-message.whisper .message-header:hover {
   animation: textShadow 2s infinite !important;
 }
-#chat-log .chat-message .message-header:after,
-#chat-log .chat-message.whisper .message-header:after {
+#chat-log .chat-message .message-header:hover:after,
+#chat-log .chat-message.whisper .message-header:hover:after {
   content: " ";
   display: block;
   position: absolute;
@@ -373,8 +373,8 @@
   pointer-events: none;
   animation: crtFlicker 0.25s infinite;
 }
-#chat-log .chat-message .message-header:after,
-#chat-log .chat-message.whisper .message-header:after {
+#chat-log .chat-message .message-header:hover:after,
+#chat-log .chat-message.whisper .message-header:hover:after {
   top: 10px;
   left: 7px;
   bottom: 45px;
@@ -386,12 +386,12 @@
 #chat-log .chat-message.whisper .message-header .message-metadata {
   color: #29a253;
 }
-#chat-log .chat-message .message-content,
-#chat-log .chat-message.whisper .message-content {
+#chat-log .chat-message .message-content:hover,
+#chat-log .chat-message.whisper .message-content:hover {
   animation: textShadow 2s infinite !important;
 }
-#chat-log .chat-message .message-content:after,
-#chat-log .chat-message.whisper .message-content:after {
+#chat-log .chat-message .message-content:hover:after,
+#chat-log .chat-message.whisper .message-content:hover:after {
   content: " ";
   display: block;
   position: absolute;
@@ -405,8 +405,8 @@
   pointer-events: none;
   animation: crtFlicker 0.25s infinite;
 }
-#chat-log .chat-message .message-content:after,
-#chat-log .chat-message.whisper .message-content:after {
+#chat-log .chat-message .message-content:hover:after,
+#chat-log .chat-message.whisper .message-content:hover:after {
   top: 10px;
   left: 7px;
   bottom: 45px;
