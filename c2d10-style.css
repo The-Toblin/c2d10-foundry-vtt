@@ -312,23 +312,9 @@
   padding: 25px !important;
 }
 #chat-log {
-  position: relative;
   background: linear-gradient(0deg, #061b0e, 15%, rgba(6, 27, 14, 0.5));
   color: #29a253;
   box-shadow: 0 0 50px 5px #000 inset;
-}
-#chat-log:before {
-  content: " ";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-  z-index: 2;
-  background-size: 100% 2px, 3px 100%;
-  pointer-events: none;
 }
 #chat-log .chat-message {
   background: rgba(6, 27, 14, 0.2);
@@ -342,6 +328,7 @@
   font-size: 14px;
   font-weight: 200;
   letter-spacing: 1px;
+  position: relative;
   padding: 13px 15px 50px 11px;
   border-width: 0px !important;
   box-shadow: 0 1px 5px #000;
@@ -349,6 +336,19 @@
   background-position: top, bottom, 0px 18px;
   background-repeat: no-repeat, no-repeat, repeat;
   background-image: url(assets/chat-top.webp), url(assets/chat-bottom.webp), url(assets/chat-middle.webp);
+}
+#chat-log .chat-message:before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 2;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
 }
 #chat-log .chat-message .message-header .message-sender,
 #chat-log .chat-message .message-header .message-metadata {
@@ -369,6 +369,7 @@
   font-size: 14px;
   font-weight: 200;
   letter-spacing: 1px;
+  position: relative;
   padding: 13px 15px 50px 11px;
   border-width: 0px !important;
   box-shadow: 0 1px 5px #000;
@@ -376,4 +377,17 @@
   background-position: top, bottom, 0px 18px;
   background-repeat: no-repeat, no-repeat, repeat;
   background-image: url(images/hidden-chat-top.webp), url(images/hidden-chat-bottom.webp), url(images/hidden-chat-middle.webp);
+}
+#chat-log .chat-message.whisper:before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 2;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
 }
