@@ -5,70 +5,36 @@
 
     .chat-message {
         .c2d10-subsection();
-
-        .message-content {
-            position: relative;
-            .crt-filter();
-
-            &:hover {
-                .crt-chromatic-aberration();
-            }
-
-            &:before {
-                top: 10px;
-                left: 7px;
-                bottom: 45px;
-                right: 7px;
-            }
-        }
-
         padding: 13px 15px 50px 11px;
         border-width: 0px !important;
         box-shadow: 0 1px 5px #000;
         background-size: 100%;
         background-position: top,
-        bottom,
-        0px 18px;
+            bottom,
+            0px 18px;
         background-repeat: no-repeat,
-        no-repeat,
-        repeat;
+            no-repeat,
+            repeat;
         background-image: url(./assets/chat-top.webp),
-        url(./assets/chat-bottom.webp),
-        url(./assets/chat-middle.webp);
+            url(./assets/chat-bottom.webp),
+            url(./assets/chat-middle.webp);
     }
 
     .chat-message.whisper {
         .c2d10-subsection();
-
-        .message-content {
-            position: relative;
-            .crt-filter();
-
-            &:hover {
-                .crt-chromatic-aberration();
-            }
-
-            &:before {
-                top: 10px;
-                left: 7px;
-                bottom: 45px;
-                right: 7px;
-            }
-        }
-
         padding: 13px 15px 50px 11px;
         border-width: 0px !important;
         box-shadow: 0 1px 5px #000;
         background-size: 100%;
         background-position: top,
-        bottom,
-        0px 18px;
+            bottom,
+            0px 18px;
         background-repeat: no-repeat,
-        no-repeat,
-        repeat;
+            no-repeat,
+            repeat;
         background-image: url(./assets/hidden-chat-top.webp),
-        url(./assets/hidden-chat-bottom.webp),
-        url(./assets/hidden-chat-middle.webp);
+            url(./assets/hidden-chat-bottom.webp),
+            url(./assets/hidden-chat-middle.webp);
 
     }
 
@@ -80,4 +46,25 @@
         }
     }
 
+    .message-content {
+        position: relative;
+
+        &:hover {
+            .crt-chromatic-aberration();
+        }
+
+        &:before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 10px;
+            left: 7px;
+            bottom: 45px;
+            right: 7px;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+    }
 }
