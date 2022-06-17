@@ -354,15 +354,49 @@
   background-size: 100% 2px, 3px 100%;
   pointer-events: none;
 }
+#chat-log .chat-message .message-header,
+#chat-log .chat-message.whisper .message-header {
+  animation: textShadow 2s infinite !important;
+}
+#chat-log .chat-message .message-header:after,
+#chat-log .chat-message.whisper .message-header:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #1210101a;
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+  animation: crtFlicker 0.25s infinite;
+}
 #chat-log .chat-message .message-header .message-sender,
 #chat-log .chat-message.whisper .message-header .message-sender,
 #chat-log .chat-message .message-header .message-metadata,
 #chat-log .chat-message.whisper .message-header .message-metadata {
   color: #29a253;
 }
-#chat-log .chat-message .message-content::hover,
-#chat-log .chat-message.whisper .message-content::hover {
+#chat-log .chat-message .message-content,
+#chat-log .chat-message.whisper .message-content {
   animation: textShadow 2s infinite !important;
+}
+#chat-log .chat-message .message-content:after,
+#chat-log .chat-message.whisper .message-content:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #1210101a;
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+  animation: crtFlicker 0.25s infinite;
 }
 #chat-log .chat-message.whisper {
   background-image: url(assets/hidden-chat-top.webp), url(assets/hidden-chat-bottom.webp), url(assets/hidden-chat-middle.webp) !important;
