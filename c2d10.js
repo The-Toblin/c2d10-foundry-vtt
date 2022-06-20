@@ -56,16 +56,16 @@ Hooks.once("init", function() {
     if (n > 0) {
       for (let i = 0; i < n; ++i) {
         res +=
-      `<div class="dot-container empty">
-        <i class="fas fa-diamond fa-sm"></i>
+      `<div class="dot-container full">
+        <i class="fas fa-diamond"></i>
       </div>`;
       }
     }
 
     for (let i = n; i < max; ++i) {
       res +=
-        `<div class="dot-container full">
-          <i class="far fa-diamond fa-sm"></i>
+        `<div class="dot-container empty">
+          <i class="far fa-diamond"></i>
         </div>`;
     }
 
