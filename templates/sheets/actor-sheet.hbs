@@ -92,28 +92,418 @@
             {{localize "c2d10.sheet.talents"}}
         </h1>
         <div class="content-box c2d10-subsection flex-row flex-between">
-            <div class="c2d10-contentbox w-100">
-                phy
+            <div class="flex-col flex-start w-100">
+                <h3>
+                    {{localize "c2d10.talents.physical"}}
+                </h3>
+                <div class="c2d10-contentbox">
+                    <table>
+                        <colgroup>
+                            <col class="w-80">
+                            <col class="w-20">
+                        </colgroup>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.talents.agility"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.talents.endurance"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.talents.strength"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-            <div class="c2d10-contentbox w-100">
-                soc
+            <div class="flex-col flex-start w-100">
+                <h3>
+                    {{localize "c2d10.talents.social"}}
+                </h3>
+                <div class="c2d10-contentbox">
+                    <table>
+                        <colgroup>
+                            <col class="w-80">
+                            <col class="w-20">
+                        </colgroup>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.talents.charm"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.talents.empathy"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.talents.manipulation"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-            <div class="c2d10-contentbox w-100">
-                men
+            <div class="flex-col flex-start w-100">
+                <h3>
+                    {{localize "c2d10.talents.mental"}}
+                </h3>
+                <div class="c2d10-contentbox">
+                    <table>
+                        <colgroup>
+                            <col class="w-80">
+                            <col class="w-20">
+                        </colgroup>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.talents.logic"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.talents.reason"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.talents.willpower"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
         <h1>
             {{localize "c2d10.sheet.skills"}}
         </h1>
         <div class="content-box c2d10-subsection flex-row flex-between">
-            <div class="c2d10-contentbox w-100">
-                phy
+            <div class="flex-col flex-start w-100">
+                <h3>
+                    {{localize "c2d10.skills.physical"}}
+                </h3>
+                <div class="c2d10-contentbox">
+                    <table>
+                        <colgroup>
+                            <col class="w-80">
+                            <col class="w-20">
+                        </colgroup>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.skills.acrobatics"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.skills.athletics"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.skills.brawl"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.skills.burglary"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.skills.crafts"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.skills.driving"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.skills.firearms"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.skills.melee"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-            <div class="c2d10-contentbox w-100">
-                soc
+            <div class="flex-col flex-start w-100">
+                <h3>
+                    {{localize "c2d10.skills.social"}}
+                </h3>
+                <div class="c2d10-contentbox">
+                    <table>
+                        <colgroup>
+                            <col class="w-80">
+                            <col class="w-20">
+                        </colgroup>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.skills.carousing"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.skills.insight"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.skills.intimidation"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.skills.leadership"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.skills.persuasion"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.skills.politics"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.skills.street-smarts"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.skills.subterfuge"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-            <div class="c2d10-contentbox w-100">
-                men
+            <div class="flex-col flex-start w-100">
+                <h3>
+                    {{localize "c2d10.skills.mental"}}
+                </h3>
+                <div class="c2d10-contentbox">
+                    <table>
+                        <colgroup>
+                            <col class="w-80">
+                            <col class="w-20">
+                        </colgroup>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.skills.academia"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.skills.awareness"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.skills.investigation"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.skills.medicine"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.skills.science"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.skills.stealth"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.skills.survival"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-no-border">{{localize "c2d10.skills.technology"}}</th>
+                            <td class="flex-row table-no-border">
+                                {{#times 5}}
+                                <div class="dot-container crossed">
+                                    <i class="far fa-diamond fa-sm"></i>
+                                </div>
+                                {{/times}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
