@@ -1,4 +1,5 @@
 <form class="{{cssClass}}" autocomplete="off">
+    {{log actor.data.data}}
     <div class="sheet-main-content c2d10-section flex-col flex-start">
         <h1>
             {{localize "c2d10.sheet.info"}}
@@ -16,15 +17,13 @@
                             {{localize "c2d10.character.name"}}
                         </th>
                         <td>
-                            <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "
-                                c2d10.character.name"}}" />
+                            <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "c2d10.character.name"}}" />
                         </td>
                         <th>
                             {{localize "c2d10.character.campaign"}}
                         </th>
                         <td>
-                            <input name="system.campaign" type="text" value="{{actor.data.data.campaign}}"
-                                placeholder="{{localize " c2d10.character.campaign"}}" />
+                            <input name="system.campaign" type="text" value="{{actor.data.data.campaign}}" placeholder="{{localize "c2d10.character.campaign"}}" />
                         </td>
                     </tr>
                     <tr>
@@ -32,15 +31,14 @@
                             {{localize "c2d10.character.concept"}}
                         </th>
                         <td>
-                            <input name="system.concept" type="text" value="{{actor.data.data.concept}}"
-                                placeholder="{{localize " c2d10.character.concept"}}" />
+                            <input name="system.concept" type="text" value="{{actor.data.data.concept}}" placeholder="{{localize "c2d10.character.concept"}}" />
                         </td>
                         <th>
                             {{localize "c2d10.character.ambition"}}
                         </th>
                         <td>
                             <input name="system.ambition" type="text" value="{{actor.data.data.ambition}}"
-                                placeholder="{{localize " c2d10.character.ambition"}}" />
+                                placeholder="{{localize "c2d10.character.ambition"}}" />
                         </td>
                     </tr>
                     <tr>
@@ -49,14 +47,14 @@
                         </th>
                         <td>
                             <input name="system.species" type="text" value="{{actor.data.data.species}}"
-                                placeholder="{{localize " c2d10.character.species"}}" />
+                                placeholder="{{localize "c2d10.character.species"}}" />
                         </td>
                         <th>
                             {{localize "c2d10.character.faction"}}
                         </th>
                         <td>
                             <input name="system.faction" type="text" value="{{actor.data.data.faction}}"
-                                placeholder="{{localize " c2d10.character.faction"}}" />
+                                placeholder="{{localize "c2d10.character.faction"}}" />
                         </td>
                     </tr>
                 </table>

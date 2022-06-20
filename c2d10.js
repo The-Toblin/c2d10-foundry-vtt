@@ -48,7 +48,7 @@ Hooks.once("init", function() {
   /* Register all system settings for C2D10 */
   registerSystemSettings();
 
-  Handlebars.registerHelper("dots", function(n, options) {
+  Handlebars.registerHelper("dots", function(n) {
     /* Handlebars helper to render dots on sheets. */
 
     const max = 5;
