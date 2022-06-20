@@ -378,6 +378,15 @@
 .w-20 {
   width: 20%;
 }
+.w-40 {
+  width: 40%;
+}
+.w-50 {
+  width: 50%;
+}
+.w-60 {
+  width: 60%;
+}
 .w-80 {
   width: 80%;
 }
@@ -599,4 +608,9 @@ table input {
   z-index: 2;
   pointer-events: none;
   animation: crtFlicker 0.25s infinite;
+}
+.c2d10.sheet .d10-dot-full,
+.c2d10.sheet .d10-dot-empty {
+  min-width: 15px;
+  min-height: 15px;
 }

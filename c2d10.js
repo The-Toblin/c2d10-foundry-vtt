@@ -57,7 +57,7 @@ Hooks.once("init", function() {
       for (let i = 0; i < n; ++i) {
         res +=
       `<div class="dot-container full">
-        <i class="fas fa-circle fa-sm"></i>
+        <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp"/>
       </div>`;
       }
     }
@@ -65,7 +65,7 @@ Hooks.once("init", function() {
     for (let i = n; i < max; ++i) {
       res +=
         `<div class="dot-container empty">
-          <i class="far fa-circle fa-sm"></i>
+        <img class="d10-dot-empty" src="/systems/c2d10/assets/d10-white-empty.webp"/>
         </div>`;
     }
 

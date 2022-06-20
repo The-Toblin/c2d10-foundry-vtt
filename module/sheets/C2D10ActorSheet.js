@@ -8,7 +8,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     return mergeObject(super.defaultOptions, {
       template: "systems/c2d10/templates/sheets/actor-sheet.hbs",
       classes: ["c2d10", "sheet"],
-      height: 910,
+      height: 950,
       width: 780,
       tabs: [
         {
