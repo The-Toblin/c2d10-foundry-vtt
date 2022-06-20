@@ -38,15 +38,23 @@ export default class C2D10ActorSheet extends ActorSheet {
    * @param {object} event The clicked event-data.
    */
   _onResourceChange(event) {
+    event.preventDefault();
     const element = event.currentTarget;
     const res = element.closest(".resource-row").dataset.id;
 
-    event.preventDefault();
 
     if (event.type === "click") {
       this.actor.modifyResource(1, res);
     } else {
       this.actor.modifyResource(-1, res);
     }
+
+    const chatData = {
+      speaker: ChatMessage.getSpeaker(),
+      content: `${ChatMessage.getSpeaker().alias} modified ${res.replace(/^\w/, c => c.toUpperCase())}`
+    };
+
+    /* Print results to chatlog. */
+    ChatMessage.create(chatData);
   }
 }
