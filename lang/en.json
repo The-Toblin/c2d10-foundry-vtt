@@ -1,0 +1,19 @@
+{
+    "c2d10": {
+        "character": {
+            "name": "Name",
+            "campaign": "Campaign",
+            "concept": "Concept",
+            "ambition": "Ambition",
+            "species": "Species",
+            "faction": "Faction",
+            "wounds": "Wounds",
+            "stress": "Stress"
+        },
+        "sheet": {
+            "info": "Information",
+            "talents": "Talents",
+            "skills": "Skills"
+        }
+    }
+}

@@ -1,0 +1,120 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <div class="sheet-main-content c2d10-section flex-col flex-start">
+        <h1>
+            {{localize "c2d10.sheet.info"}}
+        </h1>
+        <div class="content-box c2d10-subsection flex-row flex-between">
+            <div class="c2d10-contentbox w-fit">
+                <div class="image-box">
+                    <img class="actor-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="145px" />
+                </div>
+            </div>
+            <div class="c2d10-contentbox w-100">
+                <table>
+                    <tr>
+                        <th>
+                            {{localize "c2d10.character.name"}}
+                        </th>
+                        <td>
+                            <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "
+                                c2d10.character.name"}}" />
+                        </td>
+                        <th>
+                            {{localize "c2d10.character.campaign"}}
+                        </th>
+                        <td>
+                            <input name="campaign" type="text" value="{{actor.campaign}}" placeholder="{{localize "
+                                c2d10.character.campaign"}}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{localize "c2d10.character.concept"}}
+                        </th>
+                        <td>
+                            <input name="concept" type="text" value="{{actor.concept}}" placeholder="{{localize "
+                                c2d10.character.concept"}}" />
+                        </td>
+                        <th>
+                            {{localize "c2d10.character.ambition"}}
+                        </th>
+                        <td>
+                            <input name="ambition" type="text" value="{{actor.ambition}}" placeholder="{{localize "
+                                c2d10.character.ambition"}}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{localize "c2d10.character.species"}}
+                        </th>
+                        <td>
+                            <input name="species" type="text" value="{{actor.species}}" placeholder="{{localize "
+                                c2d10.character.species"}}" />
+                        </td>
+                        <th>
+                            {{localize "c2d10.character.faction"}}
+                        </th>
+                        <td>
+                            <input name="faction" type="text" value="{{actor.faction}}" placeholder="{{localize "
+                                c2d10.character.faction"}}" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="w-20 flex-col">
+                <div class="flex-col flex-between c2d10-contentbox h-100">
+                    <h3>
+                        {{localize "c2d10.character.wounds"}}
+                    </h3>
+                    <div class="flex-row flex-center">
+                        {{#times 5}}
+                        <div class="dot-container crossed">
+                            <i class="far fa-diamond fa-sm"></i>
+                        </div>
+                        {{/times}}
+                    </div>
+                </div>
+                <div class="flex-col flex-between c2d10-contentbox h-100">
+                    <h3>
+                        {{localize "c2d10.character.stress"}}
+                    </h3>
+                    <div class="flex-row flex-center">
+                        {{#times 5}}
+                        <div class="dot-container crossed">
+                            <i class="far fa-diamond fa-sm"></i>
+                        </div>
+                        {{/times}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h1>
+            {{localize "c2d10.sheet.talents"}}
+        </h1>
+        <div class="content-box c2d10-subsection flex-row flex-between">
+            <div class="c2d10-contentbox w-100">
+                phy
+            </div>
+            <div class="c2d10-contentbox w-100">
+                soc
+            </div>
+            <div class="c2d10-contentbox w-100">
+                men
+            </div>
+        </div>
+        <h1>
+            {{localize "c2d10.sheet.skills"}}
+        </h1>
+        <div class="content-box c2d10-subsection flex-row flex-between">
+            <div class="c2d10-contentbox w-100">
+                phy
+            </div>
+            <div class="c2d10-contentbox w-100">
+                soc
+            </div>
+            <div class="c2d10-contentbox w-100">
+                men
+            </div>
+        </div>
+    </div>
+</form>

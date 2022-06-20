@@ -1,8 +1,9 @@
 // Colors
 @colors: {
     main: #88f2ad;
-    bkg: #061b0e;
+    bkg: #010804;
     green: #29a253;
+    green-d: #007228;
     alert: #e0f287;
     ghost: ghostwhite;
 }
@@ -69,17 +70,43 @@
 }
 
 .c2d10-subsection {
-    background: fade(@colors[bkg], 20%);
-    box-shadow: 0 0 50px 5px #000 inset;
-    border-radius: 3px;
-    border: 2px solid;
-    border-color: @colors[green] !important;
+    .green-border();
+    .inset-shadow();
+    background: linear-gradient(0deg, @colors[green-d], 15%, fade(@colors[green-d], 85%));
+    padding: 10px;
+    margin: 2px;
+    margin-bottom: 10px;
+}
+
+.c2d10-contentbox {
+    .white-border();
+    background-color: fade(@colors[bkg], 75%);
     color: @colors[ghost];
     text-shadow: 0 0 5px @colors[ghost];
     font-family: @m2;
     font-size: 14px;
     font-weight: 200;
     letter-spacing: 1px;
+    padding: 10px;
+    margin: 2px;
+    position: relative;
+    .crt-filter();
+}
+
+.inset-shadow() {
+    box-shadow: 0 0 50px 5px #000 inset;
+}
+
+.white-border {
+    border-radius: 3px;
+    border: 2px solid;
+    border-color: @colors[ghost] !important;
+}
+
+.green-border {
+    border-radius: 3px;
+    border: 2px solid;
+    border-color: @colors[green] !important;
 }
 
 // Buttons
@@ -165,4 +192,99 @@
 
 .pad-xl {
     padding: 25px !important;
+}
+
+// Containers for content
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-start {
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+
+.flex-even {
+    justify-content: space-evenly;
+    align-content: flex-start;
+}
+
+.flex-between {
+    justify-content: space-between;
+    align-content: flex-start;
+}
+
+.flex-center {
+    justify-content: center;
+    align-content: flex-start;
+}
+
+.w-100 {
+    width: 100%
+}
+
+.w-20 {
+    width: 20%
+}
+
+.w-fit {
+    min-width: fit-content;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+.h-fit {
+    min-height: fit-content;
+}
+
+table {
+    border: none;
+    border-collapse: separate;
+    border-spacing: 5px;
+
+    tr {
+        background: unset;
+        background-color: unset;
+
+        &:nth-child(even),
+        &:nth-child(odd) {
+            background: unset;
+            background-color: unset;
+        }
+    }
+
+    th,
+    td {
+        background: none;
+        border: none;
+        vertical-align: middle;
+        padding: 4px 5px 4px 5px;
+        color: inherit;
+        border-radius: 3px;
+        border: 2px solid;
+        border-color: @colors[green];
+    }
+
+    th {
+        text-align: left;
+    }
+
+    td {
+        text-align: right;
+    }
+
+    input {
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        color: inherit !important;
+    }
 }
