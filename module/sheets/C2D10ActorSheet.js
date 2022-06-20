@@ -55,6 +55,6 @@ export default class C2D10ActorSheet extends ActorSheet {
     };
 
     /* Print results to chatlog. */
-    ChatMessage.create(chatData);
+    // ChatMessage.create(chatData);
   }
 }
