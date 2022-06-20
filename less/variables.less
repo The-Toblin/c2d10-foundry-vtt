@@ -82,9 +82,8 @@
     .white-border();
     background-color: fade(@colors[bkg], 75%);
     color: @colors[ghost];
-    text-shadow: 0 0 5px @colors[ghost];
     font-family: @m2;
-    font-size: 14px;
+    font-size: @size[normal];
     font-weight: 200;
     letter-spacing: 1px;
     padding: 10px;
@@ -103,6 +102,10 @@
     border-color: @colors[ghost] !important;
 }
 
+.white-shadow {
+    text-shadow: 0 0 10px @colors[ghost];
+}
+
 .green-border {
     border-radius: 3px;
     border: 2px solid;
@@ -115,7 +118,7 @@
 @size: {
     base: 12px;
     small: 0.9rem;
-    normal: 1.1rem;
+    normal: 1.0rem;
     large: 1.25rem;
     giant: 1.75rem;
 }
@@ -279,6 +282,7 @@ table {
 
     th {
         text-align: left;
+        text-transform: uppercase;
     }
 
     td {

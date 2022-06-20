@@ -258,9 +258,8 @@
   border-color: #e5e5ec !important;
   background-color: rgba(2, 17, 9, 0.75);
   color: #e5e5ec;
-  text-shadow: 0 0 5px #e5e5ec;
   font-family: VT323, monospace;
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 200;
   letter-spacing: 1px;
   padding: 10px;
@@ -284,6 +283,9 @@
   border-radius: 3px;
   border: 2px solid;
   border-color: #e5e5ec !important;
+}
+.white-shadow {
+  text-shadow: 0 0 10px #e5e5ec;
 }
 .green-border {
   border-radius: 3px;
@@ -415,6 +417,7 @@ table td {
 }
 table th {
   text-align: left;
+  text-transform: uppercase;
 }
 table td {
   text-align: right;
@@ -437,9 +440,8 @@ table input {
   border-color: #e5e5ec !important;
   background-color: rgba(2, 17, 9, 0.75);
   color: #e5e5ec;
-  text-shadow: 0 0 5px #e5e5ec;
   font-family: VT323, monospace;
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 200;
   letter-spacing: 1px;
   padding: 10px;
@@ -576,4 +578,25 @@ table input {
 }
 .c2d10.sheet .table-no-border {
   border: none !important;
+}
+.c2d10.sheet .warning {
+  color: #e0f287 !important;
+}
+.c2d10.sheet .red {
+  color: red !important;
+  animation: textShadow 2s infinite !important;
+}
+.c2d10.sheet .red:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #1210101a;
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+  animation: crtFlicker 0.25s infinite;
 }

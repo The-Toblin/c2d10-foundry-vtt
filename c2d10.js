@@ -37,6 +37,7 @@ Hooks.once("init", function() {
 
   Actors.unregisterSheet("core", ActorSheet);
   Actors.registerSheet("c2d10", C2D10ActorSheet, {
+    types: ["actor"],
     makeDefault: true,
     label: "C2D10 Character Sheet"
   });
@@ -47,15 +48,28 @@ Hooks.once("init", function() {
   /* Register all system settings for C2D10 */
   registerSystemSettings();
 
-  Handlebars.registerHelper("times", function(n, content) {
-    /* Handlebars helper to run a for-loop. Used to render dots on sheets. */
+  Handlebars.registerHelper("dots", function(n, options) {
+    /* Handlebars helper to render dots on sheets. */
 
-    let result = "";
-    for (let i = 0; i < n; ++i) {
-      content.data.index = i + 1;
-      result += content.fn(i);
+    const max = 5;
+    let res = "";
+    if (n > 0) {
+      for (let i = 0; i < n; ++i) {
+        res +=
+      `<div class="dot-container empty">
+        <i class="fas fa-diamond fa-sm"></i>
+      </div>`;
+      }
     }
 
-    return result;
+    for (let i = n; i < max; ++i) {
+      res +=
+        `<div class="dot-container full">
+          <i class="far fa-diamond fa-sm"></i>
+        </div>`;
+    }
+
+    return res;
   });
 });
+

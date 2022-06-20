@@ -23,8 +23,8 @@
                             {{localize "c2d10.character.campaign"}}
                         </th>
                         <td>
-                            <input name="campaign" type="text" value="{{actor.campaign}}" placeholder="{{localize "
-                                c2d10.character.campaign"}}" />
+                            <input name="system.campaign" type="text" value="{{actor.data.data.campaign}}"
+                                placeholder="{{localize " c2d10.character.campaign"}}" />
                         </td>
                     </tr>
                     <tr>
@@ -32,15 +32,15 @@
                             {{localize "c2d10.character.concept"}}
                         </th>
                         <td>
-                            <input name="concept" type="text" value="{{actor.concept}}" placeholder="{{localize "
-                                c2d10.character.concept"}}" />
+                            <input name="system.concept" type="text" value="{{actor.data.data.concept}}"
+                                placeholder="{{localize " c2d10.character.concept"}}" />
                         </td>
                         <th>
                             {{localize "c2d10.character.ambition"}}
                         </th>
                         <td>
-                            <input name="ambition" type="text" value="{{actor.ambition}}" placeholder="{{localize "
-                                c2d10.character.ambition"}}" />
+                            <input name="system.ambition" type="text" value="{{actor.data.data.ambition}}"
+                                placeholder="{{localize " c2d10.character.ambition"}}" />
                         </td>
                     </tr>
                     <tr>
@@ -48,15 +48,15 @@
                             {{localize "c2d10.character.species"}}
                         </th>
                         <td>
-                            <input name="species" type="text" value="{{actor.species}}" placeholder="{{localize "
-                                c2d10.character.species"}}" />
+                            <input name="system.species" type="text" value="{{actor.data.data.species}}"
+                                placeholder="{{localize " c2d10.character.species"}}" />
                         </td>
                         <th>
                             {{localize "c2d10.character.faction"}}
                         </th>
                         <td>
-                            <input name="faction" type="text" value="{{actor.faction}}" placeholder="{{localize "
-                                c2d10.character.faction"}}" />
+                            <input name="system.faction" type="text" value="{{actor.data.data.faction}}"
+                                placeholder="{{localize " c2d10.character.faction"}}" />
                         </td>
                     </tr>
                 </table>
@@ -66,24 +66,18 @@
                     <h3>
                         {{localize "c2d10.character.wounds"}}
                     </h3>
-                    <div class="flex-row flex-center">
-                        {{#times 5}}
-                        <div class="dot-container crossed">
-                            <i class="far fa-diamond fa-sm"></i>
-                        </div>
-                        {{/times}}
+                    <div class="flex-row flex-center resource-row {{#if (eq actor.data.data.wounds 4)}}warning{{/if}} {{#if (eq actor.data.data.wounds 5)}}red{{/if}}" data-value="{{actor.data.data.wounds}}"
+                        data-id="wounds">
+                        {{#dots actor.data.data.wounds}}{{/dots}}
                     </div>
                 </div>
                 <div class="flex-col flex-between c2d10-contentbox h-100">
                     <h3>
                         {{localize "c2d10.character.stress"}}
                     </h3>
-                    <div class="flex-row flex-center">
-                        {{#times 5}}
-                        <div class="dot-container crossed">
-                            <i class="far fa-diamond fa-sm"></i>
-                        </div>
-                        {{/times}}
+                    <div class="flex-row flex-center resource-row {{#if (eq actor.data.data.stress 4)}}warning{{/if}} {{#if (eq actor.data.data.stress 5)}}red{{/if}}" data-value="{{actor.data.data.stress}}"
+                        data-id="stress">
+                        {{#dots actor.data.data.stress}}{{/dots}}
                     </div>
                 </div>
             </div>
@@ -104,32 +98,20 @@
                         </colgroup>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.talents.agility"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row" data-id="agility">
+                                {{#dots actor.data.data.agility}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.talents.endurance"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row" data-id="endurance">
+                                {{#dots actor.data.data.endurance}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.talents.strength"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row" data-id="strength">
+                                {{#dots actor.data.data.strength}}{{/dots}}
                             </td>
                         </tr>
                     </table>
@@ -147,32 +129,20 @@
                         </colgroup>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.talents.charm"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row" data-id="charm">
+                                {{#dots actor.data.data.charm}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.talents.empathy"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row" data-id="empathy">
+                                {{#dots actor.data.data.empathy}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.talents.manipulation"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row" data-id="manipulation">
+                                {{#dots actor.data.data.manipulation}}{{/dots}}
                             </td>
                         </tr>
                     </table>
@@ -190,32 +160,20 @@
                         </colgroup>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.talents.logic"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row" data-id="logic">
+                                {{#dots actor.data.data.logic}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.talents.reason"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row" data-id="reason">
+                                {{#dots actor.data.data.reason}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.talents.willpower"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row" data-id="willpower">
+                                {{#dots actor.data.data.willpower}}{{/dots}}
                             </td>
                         </tr>
                     </table>
@@ -238,82 +196,50 @@
                         </colgroup>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.skills.acrobatics"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row " data-id="acrobatics">
+                                {{#dots actor.data.data.acrobatics}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.skills.athletics"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row " data-id="athletics">
+                                {{#dots actor.data.data.athletics}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.skills.brawl"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row " data-id="brawl">
+                                {{#dots actor.data.data.brawl}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.skills.burglary"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row " data-id="burglary">
+                                {{#dots actor.data.data.burglary}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.skills.crafts"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row " data-id="crafts">
+                                {{#dots actor.data.data.crafts}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.skills.driving"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row " data-id="driving">
+                                {{#dots actor.data.data.driving}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.skills.firearms"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row " data-id="firearms">
+                                {{#dots actor.data.data.firearms}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.skills.melee"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row " data-id="melee">
+                                {{#dots actor.data.data.melee}}{{/dots}}
                             </td>
                         </tr>
                     </table>
@@ -331,82 +257,50 @@
                         </colgroup>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.skills.carousing"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row " data-id="carousing">
+                                {{#dots actor.data.data.carousing}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.skills.insight"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row " data-id="insight">
+                                {{#dots actor.data.data.insight}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.skills.intimidation"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row " data-id="intimidation">
+                                {{#dots actor.data.data.intimidation}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.skills.leadership"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row " data-id="leadership">
+                                {{#dots actor.data.data.leadership}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.skills.persuasion"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row " data-id="persuasion">
+                                {{#dots actor.data.data.persuasion}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.skills.politics"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row " data-id="politics">
+                                {{#dots actor.data.data.politics}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
-                            <th class="table-no-border">{{localize "c2d10.skills.street-smarts"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <th class="table-no-border">{{localize "c2d10.skills.streetsmarts"}}</th>
+                            <td class="flex-row table-no-border resource-row " data-id="streetsmarts">
+                                {{#dots actor.data.data.streetsmarts}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.skills.subterfuge"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row " data-id="subterfuge">
+                                {{#dots actor.data.data.subterfuge}}{{/dots}}
                             </td>
                         </tr>
                     </table>
@@ -424,82 +318,50 @@
                         </colgroup>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.skills.academia"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row " data-id="academia">
+                                {{#dots actor.data.data.academia}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.skills.awareness"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row " data-id="awareness">
+                                {{#dots actor.data.data.awareness}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.skills.investigation"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row " data-id="investigation">
+                                {{#dots actor.data.data.investigation}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.skills.medicine"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row " data-id="medicine">
+                                {{#dots actor.data.data.medicine}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.skills.science"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row " data-id="science">
+                                {{#dots actor.data.data.science}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.skills.stealth"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row " data-id="stealth">
+                                {{#dots actor.data.data.stealth}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.skills.survival"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row " data-id="survival">
+                                {{#dots actor.data.data.survival}}{{/dots}}
                             </td>
                         </tr>
                         <tr>
                             <th class="table-no-border">{{localize "c2d10.skills.technology"}}</th>
-                            <td class="flex-row table-no-border">
-                                {{#times 5}}
-                                <div class="dot-container crossed">
-                                    <i class="far fa-diamond fa-sm"></i>
-                                </div>
-                                {{/times}}
+                            <td class="flex-row table-no-border resource-row " data-id="technology">
+                                {{#dots actor.data.data.technology}}{{/dots}}
                             </td>
                         </tr>
                     </table>

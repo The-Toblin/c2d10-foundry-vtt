@@ -1,4 +1,50 @@
 {
-    "Actor": {},
+    "Actor": {
+        "types": [
+            "actor"
+        ],
+        "actor": {
+            "concept": "",
+            "species": "",
+            "campaign": "",
+            "ambition": "",
+            "faction": "",
+            "wounds": 0,
+            "stress": 0,
+            "agility": 1,
+            "endurance": 1,
+            "strength": 1,
+            "charm": 1,
+            "empathy": 1,
+            "manipulation": 1,
+            "logic": 1,
+            "reason": 1,
+            "willpower": 1,
+            "acrobatics": 0,
+            "athletics": 0,
+            "brawl": 0,
+            "burglary": 0,
+            "crafts": 0,
+            "driving": 0,
+            "firearms": 0,
+            "melee": 0,
+            "carousing": 0,
+            "insight": 0,
+            "intimidation": 0,
+            "leadership": 0,
+            "persuasion": 0,
+            "politics": 0,
+            "streetsmarts": 0,
+            "subterfuge": 0,
+            "academia": 0,
+            "awareness": 0,
+            "investigation": 0,
+            "medicine": 0,
+            "science": 0,
+            "stealth": 0,
+            "survival": 0,
+            "technology": 0
+        }
+    },
     "Item": {}
 }
