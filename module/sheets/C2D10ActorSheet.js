@@ -17,15 +17,14 @@ export default class C2D10ActorSheet extends ActorSheet {
     });
   }
 
-  constructor(actor, options) {
-    super(actor, options);
-    this.actor.setFlag("c2d10", "locked", true);
-  }
-
   getData() {
     const sheetData = super.getData();
     sheetData.config = CONFIG.cd10;
     sheetData.data = sheetData.data.data;
+
+    if (this.actor.getFlag("c2d10", "locked") === undefined) {
+      this.actor.setFlag("c2d10", "locked", true);
+    }
 
     /* Make system settings available for sheets to use for rendering */
     sheetData.showEffects = game.settings.get("c2d10", "showEffects");
