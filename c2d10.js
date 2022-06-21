@@ -17,7 +17,15 @@ async function preloadHandlebarsTemplates() {
  * Register all system settings necessary.
  */
 function registerSystemSettings() {
-
+  // Whether or not to show fancy effects in the system.
+  game.settings.register("c2d10", "showEffects", {
+    config: true,
+    scope: "world",
+    name: "SETTINGS.showEffects.name",
+    hint: "SETTINGS.showEffects.label",
+    type: Boolean,
+    default: false
+  });
 }
 
 Hooks.once("init", function() {

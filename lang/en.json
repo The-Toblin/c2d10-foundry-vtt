@@ -58,5 +58,11 @@
             "survival": "Survival",
             "technology": "Technology"
         }
+    },
+    "SETTINGS": {
+        "showEffects": {
+            "name": "Show fancy CSS effects",
+            "label": "Show CRT-filters and text glow on sheets. Defaults to disabled for accessibility reasons."
+        }
     }
 }

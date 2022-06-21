@@ -1,15 +1,24 @@
 <form class="{{cssClass}}" autocomplete="off">
     <div class="sheet-main-content c2d10-section flex-col flex-start">
+        {{#unless actor.flags.c2d10.locked}}
+        <div class="edit-lock green">
+            <i class="fas fa-lock-open"></i>
+        </div>
+        {{else}}
+        <div class="edit-lock red">
+            <i class="fas fa-lock"></i>
+        </div>
+        {{/unless}}
         <h1>
             {{localize "c2d10.sheet.info"}}
         </h1>
         <div class="content-box c2d10-subsection flex-row flex-between">
-            <div class="c2d10-contentbox w-fit">
+            <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} w-fit">
                 <div class="image-box">
                     <img class="actor-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="145px" />
                 </div>
             </div>
-            <div class="c2d10-contentbox w-100">
+            <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} w-100">
                 <table>
                     <tr>
                         <th>
@@ -63,8 +72,8 @@
                     <h3>
                         {{localize "c2d10.character.wounds"}}
                     </h3>
-                    <div class="flex-row flex-center resource-row {{#if (eq actor.data.data.wounds 4)}}warning{{/if}} {{#if (eq actor.data.data.wounds 5)}}red{{/if}}" data-value="{{actor.data.data.wounds}}"
-                        data-id="wounds">
+                    <div class="flex-row flex-center resource-row" data-value="{{actor.data.data.wounds}}"
+                        data-id="wounds" data-pass="true">
                         {{#dots actor.data.data.wounds}}{{/dots}}
                     </div>
                 </div>
@@ -72,8 +81,8 @@
                     <h3>
                         {{localize "c2d10.character.stress"}}
                     </h3>
-                    <div class="flex-row flex-center resource-row {{#if (eq actor.data.data.stress 4)}}warning{{/if}} {{#if (eq actor.data.data.stress 5)}}red{{/if}}" data-value="{{actor.data.data.stress}}"
-                        data-id="stress">
+                    <div class="flex-row flex-center resource-row" data-value="{{actor.data.data.stress}}"
+                        data-id="stress" data-pass="true">
                         {{#dots actor.data.data.stress}}{{/dots}}
                     </div>
                 </div>
@@ -87,7 +96,7 @@
                 <h3>
                     {{localize "c2d10.talents.physical"}}
                 </h3>
-                <div class="c2d10-contentbox">
+                <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
                     <table>
                         <colgroup>
                             <col class="w-60">
@@ -118,7 +127,7 @@
                 <h3>
                     {{localize "c2d10.talents.social"}}
                 </h3>
-                <div class="c2d10-contentbox">
+                <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
                     <table>
                         <colgroup>
                             <col class="w-60">
@@ -149,7 +158,7 @@
                 <h3>
                     {{localize "c2d10.talents.mental"}}
                 </h3>
-                <div class="c2d10-contentbox">
+                <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
                     <table>
                         <colgroup>
                             <col class="w-60">
@@ -185,7 +194,7 @@
                 <h3>
                     {{localize "c2d10.skills.physical"}}
                 </h3>
-                <div class="c2d10-contentbox">
+                <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
                     <table>
                         <colgroup>
                             <col class="w-60">
@@ -246,7 +255,7 @@
                 <h3>
                     {{localize "c2d10.skills.social"}}
                 </h3>
-                <div class="c2d10-contentbox">
+                <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
                     <table>
                         <colgroup>
                             <col class="w-60">
@@ -307,7 +316,7 @@
                 <h3>
                     {{localize "c2d10.skills.mental"}}
                 </h3>
-                <div class="c2d10-contentbox">
+                <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
                     <table>
                         <colgroup>
                             <col class="w-60">

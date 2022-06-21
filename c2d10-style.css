@@ -266,19 +266,6 @@
   margin: 2px;
   position: relative;
 }
-.c2d10-contentbox:before {
-  content: " ";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-  z-index: 2;
-  background-size: 100% 2px, 3px 100%;
-  pointer-events: none;
-}
 .white-border {
   border-radius: 3px;
   border: 2px solid;
@@ -291,6 +278,22 @@
   border-radius: 3px;
   border: 2px solid;
   border-color: #29a253 !important;
+}
+.fancy-effects {
+  text-shadow: 0 0 10px #e5e5ec;
+}
+.fancy-effects:before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 2;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
 }
 .crt-blink {
   content: "";
@@ -471,20 +474,6 @@ table input {
   content: " ";
   display: block;
   position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-  z-index: 2;
-  background-size: 100% 2px, 3px 100%;
-  pointer-events: none;
-}
-#chat-log .chat-message:before,
-#chat-log .chat-message.whisper:before {
-  content: " ";
-  display: block;
-  position: absolute;
   top: 10px;
   left: 7px;
   bottom: 45px;
@@ -564,6 +553,11 @@ table input {
   background-position: center;
   background-size: cover;
 }
+.c2d10.sheet .edit-lock {
+  position: absolute;
+  top: 45px;
+  right: 15px;
+}
 .c2d10.sheet img {
   max-height: 145px;
 }
@@ -595,19 +589,8 @@ table input {
   color: red !important;
   animation: textShadow 2s infinite !important;
 }
-.c2d10.sheet .red:after {
-  content: " ";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: #1210101a;
-  opacity: 0;
-  z-index: 2;
-  pointer-events: none;
-  animation: crtFlicker 0.25s infinite;
+.c2d10.sheet .green {
+  color: green !important;
 }
 .c2d10.sheet .d10-dot-full,
 .c2d10.sheet .d10-dot-empty {

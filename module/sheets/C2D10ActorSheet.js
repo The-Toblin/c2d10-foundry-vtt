@@ -17,6 +17,22 @@ export default class C2D10ActorSheet extends ActorSheet {
     });
   }
 
+  constructor(actor, options) {
+    super(actor, options);
+    this.actor.setFlag("c2d10", "locked", true);
+  }
+
+  getData() {
+    const sheetData = super.getData();
+    sheetData.config = CONFIG.cd10;
+    sheetData.data = sheetData.data.data;
+
+    /* Make system settings available for sheets to use for rendering */
+    sheetData.showEffects = game.settings.get("c2d10", "showEffects");
+    return sheetData;
+  }
+
+
   // Define which template to be used by this actor type.
   get template() {
     return "systems/c2d10/templates/sheets/actor-sheet.hbs";
@@ -29,32 +45,36 @@ export default class C2D10ActorSheet extends ActorSheet {
    */
   activateListeners(html) {
     html.find(".dot-container").on("click contextmenu", this._onResourceChange.bind(this));
+    html.find(".edit-lock").click(this._toggleEditLock.bind(this));
 
     super.activateListeners(html);
   }
 
   /**
-   * Simple function to increase or decrese wounds. Triggers an actor-resident function to validate.
+   * Function to increase or decrease a resource on the sheet.
    * @param {object} event The clicked event-data.
    */
   _onResourceChange(event) {
     event.preventDefault();
+
     const element = event.currentTarget;
     const res = element.closest(".resource-row").dataset.id;
+    const pass = element.closest(".resource-row").dataset.pass;
 
-
-    if (event.type === "click") {
-      this.actor.modifyResource(1, res);
+    if (pass || !this.actor.getFlag("c2d10", "locked")) {
+      if (event.type === "click") {
+        this.actor.modifyResource(1, res);
+      } else {
+        this.actor.modifyResource(-1, res);
+      }
     } else {
-      this.actor.modifyResource(-1, res);
+      ui.notifications.error("Unlock your sheet before attempting to edit it!");
     }
+  }
 
-    const chatData = {
-      speaker: ChatMessage.getSpeaker(),
-      content: `${ChatMessage.getSpeaker().alias} modified ${res.replace(/^\w/, c => c.toUpperCase())}`
-    };
-
-    /* Print results to chatlog. */
-    // ChatMessage.create(chatData);
+  _toggleEditLock(event) {
+    event.preventDefault();
+    const setFlag = !this.actor.getFlag("c2d10", "locked");
+    this.actor.setFlag("c2d10", "locked", setFlag);
   }
 }
