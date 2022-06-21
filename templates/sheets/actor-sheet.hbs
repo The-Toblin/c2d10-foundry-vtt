@@ -1,14 +1,14 @@
 <form class="{{cssClass}}" autocomplete="off">
     <div class="sheet-main-content c2d10-section flex-col flex-start">
-        {{#unless actor.flags.c2d10.locked}}
-        <div class="edit-lock green">
-            <i class="fas fa-lock-open"></i>
-        </div>
-        {{else}}
+        {{#if locked}}
         <div class="edit-lock red">
             <i class="fas fa-lock"></i>
         </div>
-        {{/unless}}
+        {{else}}
+        <div class="edit-lock green">
+            <i class="fas fa-lock-open"></i>
+        </div>
+        {{/if}}
         <h1>
             {{localize "c2d10.sheet.info"}}
         </h1>
