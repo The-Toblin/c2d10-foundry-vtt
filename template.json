@@ -46,5 +46,8 @@
             "technology": 0
         }
     },
-    "Item": {}
+    "Item": {
+        "quality": 0,
+        "wealth": 0
+    }
 }
