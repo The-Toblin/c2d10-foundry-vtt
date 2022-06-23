@@ -1,6 +1,6 @@
 import { c2d10 } from "./module/config.js";
-import C2D10Item from "./module/C2D10Item.js";
-import C2D10ItemSheet from "./module/sheets/C2D10ItemSheet.js";
+import C2D10Asset from "./module/C2D10Asset.js";
+import C2D10AssetSheet from "./module/sheets/C2D10AssetSheet.js";
 import C2D10Actor from "./module/C2D10Actor.js";
 import C2D10ActorSheet from "./module/sheets/C2D10ActorSheet.js";
 
@@ -33,12 +33,12 @@ Hooks.once("init", function() {
 
   /* Setup Config */
   CONFIG.c2d10 = c2d10;
-  CONFIG.Item.documentClass = C2D10Item;
+  CONFIG.Item.documentClass = C2D10Asset;
   CONFIG.Actor.documentClass = C2D10Actor;
 
   /* Register Sheets */
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("c2d10", C2D10ItemSheet, {
+  Items.registerSheet("c2d10", C2D10AssetSheet, {
     makeDefault: true,
     label: "C2D10 Item Sheet"
   });

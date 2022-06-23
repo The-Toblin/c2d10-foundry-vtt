@@ -1,4 +1,4 @@
-export default class C2D10Item extends Item {
+export default class C2D10Asset extends Item {
 
 
   async showDescription() {
