@@ -8,7 +8,13 @@ import C2D10ActorSheet from "./module/sheets/C2D10ActorSheet.js";
  * Loads HandleBars templates for use in the system.
  */
 async function preloadHandlebarsTemplates() {
-  const templatePaths= [];
+  const templatePaths= [
+    "systems/c2d10/templates/partials/sheet-tabs/actor-info.hbs",
+    "systems/c2d10/templates/partials/sheet-tabs/actor-talents.hbs",
+    "systems/c2d10/templates/partials/sheet-tabs/actor-skills.hbs",
+    "systems/c2d10/templates/partials/sheet-tabs/actor-assets-tab.hbs",
+    "systems/c2d10/templates/partials/sheet-tabs/actor-powers-tab.hbs"
+  ];
 
   return loadTemplates(templatePaths);
 }
@@ -40,7 +46,7 @@ Hooks.once("init", function() {
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("c2d10", C2D10AssetSheet, {
     makeDefault: true,
-    label: "C2D10 Item Sheet"
+    label: "C2D10 Asset Sheet"
   });
 
   Actors.unregisterSheet("core", ActorSheet);

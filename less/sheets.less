@@ -8,14 +8,26 @@
         background-size: cover;
     }
 
+    input {
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        color: inherit !important;
+    }
+
+    .align-right {
+        text-align: right;
+    }
+
     .edit-lock {
         position: absolute;
-        top: 45px;
+        top: 48px;
         right: 15px;
     }
 
     img {
         max-height: 145px;
+        border: none;
     }
 
     h1 {
@@ -32,6 +44,18 @@
         color: @colors[green];
         font-family: @h1;
         font-size: @size[large];
+        text-shadow: none;
+    }
+
+    .label-box {
+        padding: 3px 2px 2px 2px;
+    }
+
+    label {
+        border: none !important;
+        color: @colors[green];
+        font-family: @h1;
+        font-size: @size[normal];
         text-shadow: none;
     }
 
@@ -58,7 +82,67 @@
 
     .d10-dot-full,
     .d10-dot-empty {
-        min-width: 15px;
-        min-height: 15px;
+        min-width: 20px;
+        min-height: 20px;
+        max-width: 20px;
+        max-height: 20px;
+        border: none !important;
+        padding: 2px;
+    }
+
+    .sheet-tabs {
+        .green-border();
+        .inset-shadow();
+        color: @colors[green];
+        writing-mode: vertical-lr;
+        position: relative;
+        top: 32px;
+        height: 895px;
+        margin-right: 5px;
+    }
+
+    .item {
+        padding: 15px 2px;
+        text-orientation: mixed;
+        transform: rotate(-180deg);
+    }
+
+    .item.active {
+        .white-border() !important;
+        color: @colors[ghost] !important;
+    }
+
+    .sheet-body {
+        .w-100();
+    }
+
+    .c2d10-sheet-header-box {
+        max-height: 80px;
+    }
+
+    .c2d10-asset-textarea {
+        textarea {
+            .c2d10-basic-text();
+            color: inherit;
+            border: none;
+            background: none;
+
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+
+            &:focus {
+                .green-border();
+            }
+
+            &::-webkit-scrollbar-thumb {
+                border-color: @colors[main] !important;
+                background-color: @colors[green-d] !important;
+            }
+        }
+    }
+
+    .value-box {
+        min-width: 220px;
     }
 }

@@ -13,7 +13,9 @@
         "sheet": {
             "info": "Information",
             "talents": "Talents",
-            "skills": "Skills"
+            "skills": "Skills",
+            "assets": "Assets",
+            "powers": "Powers"
         },
         "talents": {
             "physical": "Physical",
@@ -57,6 +59,13 @@
             "stealth": "Stealth",
             "survival": "Survival",
             "technology": "Technology"
+        },
+        "asset": {
+            "name": "Name",
+            "description": "Description",
+            "assetType": "Type",
+            "value": "Value",
+            "quality": "Quality"
         }
     },
     "SETTINGS": {

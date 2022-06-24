@@ -8,6 +8,10 @@
     ghost: #e5e5ec;
 }
 
+.c2d10-alert {
+    color: @colors[alert] !important;
+}
+
 // Fonts
 @font-face {
     font-family: Quantum;
@@ -76,6 +80,7 @@
     padding: 10px;
     margin: 2px;
     margin-bottom: 10px;
+    height: 100%;
 }
 
 .c2d10-contentbox {
@@ -124,7 +129,15 @@
     small: 0.9rem;
     normal: 1.0rem;
     large: 1.25rem;
-    giant: 1.75rem;
+    giant: 2.5rem;
+}
+
+.c2d10-basic-text {
+    color: @colors[ghost];
+    font-family: @m2;
+    font-size: @size[normal];
+    font-weight: 200;
+    letter-spacing: 1px;
 }
 
 // Basic Functions
@@ -237,23 +250,23 @@
 }
 
 .w-20 {
-    width: 20%
+    width: 19%
 }
 
 .w-40 {
-    width: 40%;
+    width: 39%;
 }
 
 .w-50 {
-    width: 50%;
+    width: 49%;
 }
 
 .w-60 {
-    width: 60%;
+    width: 59%;
 }
 
 .w-80 {
-    width: 80%;
+    width: 79%;
 }
 
 .w-fit {
@@ -270,6 +283,7 @@
 
 table {
     border: none;
+    background: none;
     border-collapse: separate;
     border-spacing: 5px;
 

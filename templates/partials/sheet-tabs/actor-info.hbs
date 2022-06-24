@@ -1,0 +1,84 @@
+<section>
+    <h3>
+        {{localize "c2d10.sheet.info"}}
+    </h3>
+    <div class="content-box c2d10-subsection flex-row flex-between">
+        <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} w-fit">
+            <div class="image-box">
+                <img class="actor-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="145px" />
+            </div>
+        </div>
+        <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} w-100">
+            <table>
+                <tr>
+                    <th>
+                        {{localize "c2d10.character.name"}}
+                    </th>
+                    <td>
+                        <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "
+                            c2d10.character.name"}}" />
+                    </td>
+                    <th>
+                        {{localize "c2d10.character.campaign"}}
+                    </th>
+                    <td>
+                        <input name="data.campaign" type="text" value="{{actor.data.data.campaign}}"
+                            placeholder="{{localize " c2d10.character.campaign"}}" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        {{localize "c2d10.character.concept"}}
+                    </th>
+                    <td>
+                        <input name="data.concept" type="text" value="{{actor.data.data.concept}}"
+                            placeholder="{{localize " c2d10.character.concept"}}" />
+                    </td>
+                    <th>
+                        {{localize "c2d10.character.ambition"}}
+                    </th>
+                    <td>
+                        <input name="data.ambition" type="text" value="{{actor.data.data.ambition}}"
+                            placeholder="{{localize " c2d10.character.ambition"}}" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        {{localize "c2d10.character.species"}}
+                    </th>
+                    <td>
+                        <input name="data.species" type="text" value="{{actor.data.data.species}}"
+                            placeholder="{{localize " c2d10.character.species"}}" />
+                    </td>
+                    <th>
+                        {{localize "c2d10.character.faction"}}
+                    </th>
+                    <td>
+                        <input name="data.faction" type="text" value="{{actor.data.data.faction}}"
+                            placeholder="{{localize " c2d10.character.faction"}}" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="w-20 flex-col">
+            <div class="flex-col flex-between c2d10-contentbox h-100">
+                <h3>
+                    {{localize "c2d10.character.wounds"}}
+                </h3>
+                <div class="flex-row flex-center resource-row" data-value="{{actor.data.data.wounds}}" data-id="wounds"
+                    data-pass="true">
+                    {{#dots actor.data.data.wounds}}{{/dots}}
+                </div>
+            </div>
+            <div class="flex-col flex-between c2d10-contentbox h-100">
+                <h3>
+                    {{localize "c2d10.character.stress"}}
+                </h3>
+                <div class="flex-row flex-center resource-row" data-value="{{actor.data.data.stress}}" data-id="stress"
+                    data-pass="true">
+                    {{#dots actor.data.data.stress}}{{/dots}}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

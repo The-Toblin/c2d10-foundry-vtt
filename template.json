@@ -47,7 +47,14 @@
         }
     },
     "Item": {
-        "quality": 0,
-        "wealth": 0
+        "types": [
+            "asset"
+        ],
+        "asset": {
+            "assetType": "",
+            "description": "",
+            "quality": 0,
+            "value": 0
+        }
     }
 }
