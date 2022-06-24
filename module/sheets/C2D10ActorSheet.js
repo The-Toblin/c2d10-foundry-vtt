@@ -53,7 +53,7 @@ export default class C2D10ActorSheet extends ActorSheet {
       name: game.i18n.localize("c2d10.sheet.edit"),
       icon: '<i class="fas fa-edit"></i>',
       callback: element => {
-        const itemId = element.closest(".asset-item")[0].dataset.id;
+        const itemId = element[0].dataset.id;
         const item = this.actor.items.get(itemId);
 
         item.sheet.render(true);
@@ -63,7 +63,7 @@ export default class C2D10ActorSheet extends ActorSheet {
       name: game.i18n.localize("c2d10.sheet.description"),
       icon: '<i class="fas fa-sticky-note"></i>',
       callback: element => {
-        const itemId = element.closest(".asset-item")[0].dataset.id;
+        const itemId = element[0].dataset.id;
         const item = this.actor.items.get(itemId);
 
         item.roll();
@@ -73,7 +73,7 @@ export default class C2D10ActorSheet extends ActorSheet {
       name: game.i18n.localize("c2d10.sheet.remove"),
       icon: '<i class="fas fa-trash"></i>',
       callback: element => {
-        const itemId = element.closest(".asset-item")[0].dataset.id;
+        const itemId = element[0].dataset.id;
         this.actor.deleteEmbeddedDocuments("Item", [itemId]);
       }
     }
