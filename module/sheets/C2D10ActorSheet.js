@@ -74,7 +74,7 @@ export default class C2D10ActorSheet extends ActorSheet {
       icon: '<i class="fas fa-trash"></i>',
       callback: element => {
         const itemId = element.closest(".asset-item")[0].dataset.id;
-        this.actor.deleteEmbeddedDocuments("Item", itemId);
+        this.actor.deleteEmbeddedDocuments("Item", [itemId]);
       }
     }
   ];
