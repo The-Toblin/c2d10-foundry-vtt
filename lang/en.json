@@ -60,6 +60,14 @@
             "survival": "Survival",
             "technology": "Technology"
         },
+        "powers": {
+            "none": "none",
+            "beguilement": "Beguilement",
+            "bodhi": "Bodhi",
+            "energokinesis": "Energokinesis",
+            "mentaleclipse": "Mental Eclipse",
+            "quickening": "Quickening"
+        },
         "asset": {
             "name": "Name",
             "description": "Description",

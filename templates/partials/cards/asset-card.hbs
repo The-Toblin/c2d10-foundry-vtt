@@ -1,0 +1,19 @@
+{{log this.data}}
+<tr>
+    <td class="c2d10-contentbox">
+        {{name}}
+    </td>
+    <td class="c2d10-contentbox">
+        {{data.assetType}}
+    </td>
+    <td class="c2d10-contentbox">
+        <div class="flex-row" data-id="quality">
+            {{#dots data.quality}}{{/dots}}
+        </div>
+    </td>
+    <td class="c2d10-contentbox">
+        <div class="flex-row" data-id="value">
+            {{#dots data.value}}{{/dots}}
+        </div>
+    </td>
+</tr>

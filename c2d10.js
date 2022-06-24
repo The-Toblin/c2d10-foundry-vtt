@@ -13,7 +13,8 @@ async function preloadHandlebarsTemplates() {
     "systems/c2d10/templates/partials/sheet-tabs/actor-talents.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/actor-skills.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/actor-assets-tab.hbs",
-    "systems/c2d10/templates/partials/sheet-tabs/actor-powers-tab.hbs"
+    "systems/c2d10/templates/partials/sheet-tabs/actor-powers-tab.hbs",
+    "systems/c2d10/templates/partials/cards/asset-card.hbs"
   ];
 
   return loadTemplates(templatePaths);

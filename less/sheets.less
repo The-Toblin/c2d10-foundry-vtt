@@ -96,15 +96,17 @@
         color: @colors[green];
         writing-mode: vertical-lr;
         position: relative;
-        top: 32px;
-        height: 895px;
+        top: 24px;
+        height: 879px;
         margin-right: 5px;
     }
 
     .item {
+        .green-border();
         padding: 15px 2px;
         text-orientation: mixed;
         transform: rotate(-180deg);
+        margin: 2px 5px 2px 5px;
     }
 
     .item.active {
@@ -144,5 +146,12 @@
 
     .value-box {
         min-width: 220px;
+    }
+
+    .c2d10-asset-card-table {
+        th,td {
+            .c2d10-basic-text();
+            text-align: center;
+        }
     }
 }
