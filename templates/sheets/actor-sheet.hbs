@@ -1,19 +1,29 @@
 <form class="{{cssClass}}" autocomplete="off">
     <div class="sheet-main-content c2d10-section flex-row flex-start">
         {{#if locked}}
-        <div class="edit-lock red">
-            <i class="fas fa-lock"></i>
-        </div>
+            <div class="edit-lock red">
+                <i class="fas fa-lock"></i>
+            </div>
         {{else}}
-        <div class="edit-lock green">
-            <i class="fas fa-lock-open"></i>
-        </div>
+            <div class="edit-lock green">
+                <i class="fas fa-lock-open"></i>
+            </div>
         {{/if}}
         <section class="nav-tabs">
             <nav class="sheet-tabs tabs" data-group="primary">
                 <a class="item" data-tab="info">{{localize "c2d10.sheet.info"}}</a>
-                <a class="item" data-tab="assets">{{localize "c2d10.sheet.assets"}}</a>
-                <a class="item" data-tab="powers">{{localize "c2d10.sheet.powers"}}</a>
+                {{#if focus}}
+                    <a class="item" data-tab="focus">{{localize "c2d10.sheet.focus"}}</a>
+                {{/if}}
+                {{#if traits}}
+                    <a class="item" data-tab="traits">{{localize "c2d10.sheet.traits"}}</a>
+                {{/if}}
+                {{#if assets}}
+                    <a class="item" data-tab="assets">{{localize "c2d10.sheet.assets"}}</a>
+                {{/if}}
+                {{#if powers}}
+                    <a class="item" data-tab="powers">{{localize "c2d10.sheet.powers"}}</a>
+                {{/if}}
             </nav>
         </section>
         <section id="tabs" class="sheet-body">
@@ -23,14 +33,30 @@
                 {{> "systems/c2d10/templates/partials/sheet-tabs/actor-talents.hbs"}}
                 {{> "systems/c2d10/templates/partials/sheet-tabs/actor-skills.hbs"}}
             </div>
+            {{!-- Focus Tab --}}
+            {{#if focus}}
+                <div class="tab sheet-focus" data-group="primary" data-tab="focus">
+                    {{> "systems/c2d10/templates/partials/sheet-tabs/actor-focus-tab.hbs"}}
+                </div>
+            {{/if}}
+            {{!-- Traits Tab --}}
+            {{#if traits}}
+                <div class="tab sheet-traits" data-group="primary" data-tab="traits">
+                    {{> "systems/c2d10/templates/partials/sheet-tabs/actor-traits-tab.hbs"}}
+                </div>
+            {{/if}}
             {{!-- Assets Tab --}}
-            <div class="tab sheet-assets" data-group="primary" data-tab="assets">
-                {{> "systems/c2d10/templates/partials/sheet-tabs/actor-assets-tab.hbs"}}
-            </div>
+            {{#if assets}}
+                <div class="tab sheet-assets" data-group="primary" data-tab="assets">
+                    {{> "systems/c2d10/templates/partials/sheet-tabs/actor-assets-tab.hbs"}}
+                </div>
+            {{/if}}
             {{!-- Powers Tab --}}
-            <div class="tab sheet-powers" data-group="primary" data-tab="powers">
-                {{> "systems/c2d10/templates/partials/sheet-tabs/actor-powers-tab.hbs"}}
-            </div>
+            {{#if powers}}
+                <div class="tab sheet-powers" data-group="primary" data-tab="powers">
+                    {{> "systems/c2d10/templates/partials/sheet-tabs/actor-powers-tab.hbs"}}
+                </div>
+            {{/if}}
         </section>
     </div>
 </form>

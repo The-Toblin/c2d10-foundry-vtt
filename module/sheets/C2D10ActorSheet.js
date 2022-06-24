@@ -31,7 +31,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     sheetData.data = sheetData.data.data;
 
     /* Assets */
-    sheetData.assets = sheetData.items.filter(p => p.type === "asset");
+    sheetData.assets = this.actor.items.filter(p => p.type === "asset");
 
     /* Make system settings available for sheets to use for rendering */
     sheetData.showEffects = game.settings.get("c2d10", "showEffects");
@@ -46,6 +46,41 @@ export default class C2D10ActorSheet extends ActorSheet {
   }
 
   /**
+   * Generic item context menu. Edit, post and remove.
+   */
+  itemContextMenu = [
+    {
+      name: game.i18n.localize("c2d10.sheet.edit"),
+      icon: '<i class="fas fa-edit"></i>',
+      callback: element => {
+        const itemId = element.closest(".asset-item")[0].dataset.id;
+        const item = this.actor.items.get(itemId);
+
+        item.sheet.render(true);
+      }
+    },
+    {
+      name: game.i18n.localize("c2d10.sheet.description"),
+      icon: '<i class="fas fa-sticky-note"></i>',
+      callback: element => {
+        const itemId = element.closest(".asset-item")[0].dataset.id;
+        const item = this.actor.items.get(itemId);
+
+        item.roll();
+      }
+    },
+    {
+      name: game.i18n.localize("c2d10.sheet.remove"),
+      icon: '<i class="fas fa-trash"></i>',
+      callback: element => {
+        const itemId = element.closest(".asset-item")[0].dataset.id;
+        this.actor.deleteEmbeddedDocuments("Item", itemId);
+      }
+    }
+  ];
+
+
+  /**
    * Makes sure the listeners are active on the sheet. They monitor mouse-movements and clicks on the sheet
    * and trigger the necessary functions.
    * @param {html} html The sheet HTML.
@@ -53,6 +88,8 @@ export default class C2D10ActorSheet extends ActorSheet {
   activateListeners(html) {
     html.find(".dot-container").on("click contextmenu", this._onResourceChange.bind(this));
     html.find(".edit-lock").click(this._toggleEditLock.bind(this));
+
+    new ContextMenu(html, ".asset", this.itemContextMenu);
 
     super.activateListeners(html);
   }

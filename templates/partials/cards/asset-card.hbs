@@ -1,19 +1,18 @@
-{{log this}}
-<tr>
+<tr class="asset-item asset" data-id="{{_id}}">
     <td class="c2d10-contentbox">
         {{name}}
     </td>
     <td class="c2d10-contentbox">
-        {{data.assetType}}
+        {{data.data.assetType}}
     </td>
     <td class="c2d10-contentbox">
-        <div class="flex-row" data-id="quality">
-            {{#dots data.quality}}{{/dots}}
+        <div class="flex-row">
+            {{#dots data.data.quality}}{{/dots}}
         </div>
     </td>
     <td class="c2d10-contentbox">
-        <div class="flex-row" data-id="value">
-            {{#dots data.value}}{{/dots}}
+        <div class="flex-row">
+            {{#dots data.data.value}}{{/dots}}
         </div>
     </td>
 </tr>

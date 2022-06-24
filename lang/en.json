@@ -15,7 +15,10 @@
             "talents": "Talents",
             "skills": "Skills",
             "assets": "Assets",
-            "powers": "Powers"
+            "powers": "Powers",
+            "edit": "Edit",
+            "description": "Post description",
+            "remove": "Remove"
         },
         "talents": {
             "physical": "Physical",
