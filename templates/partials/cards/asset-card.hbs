@@ -1,4 +1,3 @@
-{{log this}}
 <tr class="asset-item" data-id="{{id}}">
     <td class="c2d10-contentbox asset">
         {{name}}
@@ -8,12 +7,12 @@
     </td>
     <td class="c2d10-contentbox asset">
         <div class="flex-row">
-            {{#dots data.data.quality}}{{/dots}}
+            {{#dots data.data.quality 5}}{{/dots}}
         </div>
     </td>
     <td class="c2d10-contentbox asset">
         <div class="flex-row">
-            {{#dots data.data.value}}{{/dots}}
+            {{#dots data.data.value 5}}{{/dots}}
         </div>
     </td>
 </tr>

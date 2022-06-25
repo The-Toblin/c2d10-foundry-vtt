@@ -12,7 +12,8 @@
                 "faction": ""
             },
             "health": {
-                "wounds": 0,
+                "crisis": 0,
+                "strain": 0,
                 "stress": 0
             },
             "talents": {

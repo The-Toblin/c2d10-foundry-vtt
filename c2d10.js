@@ -63,27 +63,45 @@ Hooks.once("init", function() {
   /* Register all system settings for C2D10 */
   registerSystemSettings();
 
-  Handlebars.registerHelper("dots", function(n) {
+  Handlebars.registerHelper("dots", function(n, max) {
     /* Handlebars helper to render dots on sheets. */
 
-    const max = 5;
+    const full =
+    `<div class="dot-container full">
+      <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp"/>
+    </div>`;
+
+    const empty =
+    `<div class="dot-container empty">
+      <img class="d10-dot-empty" src="/systems/c2d10/assets/d10-white-empty.webp"/>
+    </div>`;
+
+    const space =
+    `<div class="space">
+      <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp"/>
+    </div>`;
+
+    const crisis =
+    `<div class="dot-container full">
+      <img class="d10-dot-full" src="/systems/c2d10/assets/d10-crisis-full.webp"/>
+    </div>`;
+
     let res = "";
     if (n > 0) {
       for (let i = 0; i < n; ++i) {
-        res +=
-      `<div class="dot-container full">
-        <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp"/>
-      </div>`;
+        if (i === 5) {
+          res += space;
+        }
+        res += max === 10 ? crisis : full;
       }
     }
 
     for (let i = n; i < max; ++i) {
-      res +=
-        `<div class="dot-container empty">
-        <img class="d10-dot-empty" src="/systems/c2d10/assets/d10-white-empty.webp"/>
-        </div>`;
+      if (i === 5) {
+        res += space;
+      }
+      res += empty;
     }
-
     return res;
   });
 });

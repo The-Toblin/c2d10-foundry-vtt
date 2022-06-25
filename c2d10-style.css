@@ -266,7 +266,7 @@
   font-size: 1rem;
   font-weight: 200;
   letter-spacing: 1px;
-  padding: 10px;
+  padding: 5px;
   margin: 2px;
   position: relative;
 }
@@ -471,7 +471,7 @@ table input {
   font-size: 1rem;
   font-weight: 200;
   letter-spacing: 1px;
-  padding: 10px;
+  padding: 5px;
   margin: 2px;
   position: relative;
   padding: 13px 15px 50px 11px;
@@ -645,7 +645,7 @@ table input {
   writing-mode: vertical-lr;
   position: relative;
   top: 24px;
-  height: 879px;
+  height: 900px;
   margin-right: 5px;
 }
 .c2d10.sheet .item {
@@ -702,4 +702,13 @@ table input {
   font-weight: 200;
   letter-spacing: 1px;
   text-align: center;
+}
+.c2d10.sheet .space {
+  visibility: hidden;
+}
+.c2d10.sheet .crisis-box {
+  padding-top: 10px;
+}
+.c2d10.sheet .crisis-box h3 {
+  margin-right: 10px;
 }

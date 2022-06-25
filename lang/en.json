@@ -7,11 +7,12 @@
             "ambition": "Ambition",
             "species": "Species",
             "faction": "Faction",
-            "wounds": "Wounds",
+            "strain": "Strain",
             "stress": "Stress"
         },
         "sheet": {
             "info": "Information",
+            "crisis": "Crisis",
             "talents": "Talents",
             "skills": "Skills",
             "assets": "Assets",
