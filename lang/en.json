@@ -12,6 +12,8 @@
         },
         "sheet": {
             "info": "Information",
+            "focus": "Focus",
+            "traits": "Traits",
             "crisis": "Crisis",
             "talents": "Talents",
             "skills": "Skills",
