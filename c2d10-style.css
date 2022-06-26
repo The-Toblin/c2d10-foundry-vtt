@@ -752,7 +752,7 @@ table input {
 .c2d10-hero-points.hide,
 .c2d10-villain-points.hide,
 .c2d10-difficulty.hide {
-  display: none;
+  display: none !important;
 }
 .c2d10-hero-points::after,
 .c2d10-villain-points::after,
@@ -789,6 +789,11 @@ table input {
   left: calc(100% + 7px);
   width: 40px;
   height: 86px;
+}
+.c2d10-hero-points .keeper-controls.hide,
+.c2d10-villain-points .keeper-controls.hide,
+.c2d10-difficulty .keeper-controls.hide {
+  display: none !important;
 }
 .c2d10-hero-points .hp-control,
 .c2d10-villain-points .hp-control,

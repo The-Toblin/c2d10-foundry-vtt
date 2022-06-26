@@ -20,7 +20,7 @@
   width: 84px;
 
   &.hide {
-    display: none;
+    display: none !important;
   }
 
   &::after {
@@ -50,6 +50,10 @@
     left: calc(100% + 7px);
     width: 40px;
     height: 86px;
+
+    &.hide {
+      display: none !important;
+    }
   }
 
   .hp-control,
