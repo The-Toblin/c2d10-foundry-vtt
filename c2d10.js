@@ -77,7 +77,7 @@ Hooks.once("ready", () => {
   let DC = C2D10Difficulty.getDC();
   const hide = !game.users.current.isGM ? "hide" : "";
 
-  $("body").append(`<div class="c2d10-hero-points"><div class="hp-control-numbers">${HP}</div><div class="keeper-controls"><button class="hp-control hp-plus">+</button><button class="hp-control hp-minus">-</button></div></div>`);
+  $("body").append(`<div class="c2d10-hero-points"><div class="hp-control-numbers">${HP}</div><div class="keeper-controls ${hide}"><button class="hp-control hp-plus">+</button><button class="hp-control hp-minus ">-</button></div></div>`);
   $("body").append(`<div class="c2d10-villain-points ${hide}"><div class="vp-control-numbers">${VP}</div><div class="keeper-controls"><button class="vp-control vp-plus">+</button><button class="vp-control vp-minus">-</button></div></div>`);
   $("body").append(`<div class="c2d10-difficulty ${hide}"><div class="dc-control-numbers">${DC}</div><div class="keeper-controls"><button class="dc-control dc-plus">+</button><button class="dc-control dc-minus">-</button></div></div>`);
 
