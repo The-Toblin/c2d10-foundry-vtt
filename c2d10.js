@@ -59,6 +59,10 @@ function registerSystemSettings() {
     default: 0,
     onChange: value => $(".vp-control-numbers").text(value)
   });
+
+  /**
+   * Add setting for tracking global DC.
+   */
   game.settings.register("c2d10", "DC", {
     config: false,
     scope: "world",
@@ -76,6 +80,8 @@ Hooks.once("ready", () => {
   let VP = C2D10VillainPoints.getPoints();
   let DC = C2D10Difficulty.getDC();
   const hide = !game.users.current.isGM ? "hide" : "";
+
+  // FIXME: Create a single variable with variable inputs for vp, dc and hp to save space. Use string interpolation.
 
   $("body").append(`<div class="c2d10-hero-points"><div class="hp-control-numbers">${HP}</div><div class="keeper-controls ${hide}"><button class="hp-control hp-plus">+</button><button class="hp-control hp-minus ">-</button></div></div>`);
   $("body").append(`<div class="c2d10-villain-points ${hide}"><div class="vp-control-numbers">${VP}</div><div class="keeper-controls"><button class="vp-control vp-plus">+</button><button class="vp-control vp-minus">-</button></div></div>`);
