@@ -1,6 +1,6 @@
 import { c2d10 } from "./module/config.js";
-import C2D10Asset from "./module/C2D10Asset.js";
-import C2D10AssetSheet from "./module/sheets/C2D10AssetSheet.js";
+import C2D10Item from "./module/C2D10Item.js";
+import C2D10ItemSheet from "./module/sheets/C2D10ItemSheet.js";
 import C2D10Actor from "./module/C2D10Actor.js";
 import C2D10ActorSheet from "./module/sheets/C2D10ActorSheet.js";
 
@@ -13,8 +13,10 @@ async function preloadHandlebarsTemplates() {
     "systems/c2d10/templates/partials/sheet-tabs/actor-talents.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/actor-skills.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/actor-assets-tab.hbs",
+    "systems/c2d10/templates/partials/sheet-tabs/actor-traits-tab.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/actor-powers-tab.hbs",
-    "systems/c2d10/templates/partials/cards/asset-card.hbs"
+    "systems/c2d10/templates/partials/cards/asset-card.hbs",
+    "systems/c2d10/templates/partials/cards/trait-card.hbs"
   ];
 
   return loadTemplates(templatePaths);
@@ -40,14 +42,15 @@ Hooks.once("init", function() {
 
   /* Setup Config */
   CONFIG.c2d10 = c2d10;
-  CONFIG.Item.documentClass = C2D10Asset;
+  CONFIG.Item.documentClass = C2D10Item;
   CONFIG.Actor.documentClass = C2D10Actor;
 
   /* Register Sheets */
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("c2d10", C2D10AssetSheet, {
+  Items.registerSheet("c2d10", C2D10ItemSheet, {
     makeDefault: true,
-    label: "C2D10 Asset Sheet"
+    types: ["asset", "trait"],
+    label: "C2D10 Item Sheet"
   });
 
   Actors.unregisterSheet("core", ActorSheet);

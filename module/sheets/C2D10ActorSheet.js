@@ -33,6 +33,8 @@ export default class C2D10ActorSheet extends ActorSheet {
     /* Assets */
     sheetData.assets = this.actor.items.filter(p => p.type === "asset");
 
+    sheetData.traits = this.actor.items.filter(p => p.type === "trait");
+
     /* Make system settings available for sheets to use for rendering */
     sheetData.showEffects = game.settings.get("c2d10", "showEffects");
     sheetData.locked = this.actor.getFlag("c2d10", "locked");

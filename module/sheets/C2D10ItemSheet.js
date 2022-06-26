@@ -1,20 +1,24 @@
-export default class C2D10AssetSheet extends ItemSheet {
+export default class C2D10ItemSheet extends ItemSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       width: 700,
       height: 460,
-      classes: ["c2d10", "sheet", "asset"]
+      classes: ["c2d10", "sheet", "item"]
     });
   }
 
   get template() {
-    return "systems/c2d10/templates/sheets/asset-sheet.hbs";
+    return `systems/c2d10/templates/sheets/${this.item.type}-sheet.hbs`;
   }
 
   getData() {
     const sheetData = super.getData();
     sheetData.config = CONFIG.cd10;
     sheetData.data = sheetData.data.data;
+    sheetData.virtueVice = {
+      virtue: "c2d10.trait.virtue",
+      vice: "c2d10.trait.vice"
+    };
 
     /* Make system settings available for sheets to use for rendering */
     sheetData.showEffects = game.settings.get("c2d10", "showEffects");

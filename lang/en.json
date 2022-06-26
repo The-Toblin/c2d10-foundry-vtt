@@ -80,6 +80,14 @@
             "assetType": "Type",
             "value": "Value",
             "quality": "Quality"
+        },
+        "trait": {
+            "name": "Name",
+            "description": "Description",
+            "traitType": "Type",
+            "level": "Level",
+            "virtue": "Virtue",
+            "vice": "Vice"
         }
     },
     "SETTINGS": {

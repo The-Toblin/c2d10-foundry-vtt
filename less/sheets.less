@@ -80,16 +80,6 @@
         color: green !important;
     }
 
-    .d10-dot-full,
-    .d10-dot-empty {
-        min-width: 20px;
-        min-height: 20px;
-        max-width: 20px;
-        max-height: 20px;
-        border: none !important;
-        padding: 2px;
-    }
-
     .sheet-tabs {
         .green-border();
         .inset-shadow();
@@ -167,5 +157,20 @@
         h3 {
             margin-right: 10px;
         }
+    }
+
+    select {
+        border: none;
+        color: @colors[main];
+        background: linear-gradient(0deg, @colors[bkg], 55%, fade(@colors[bkg], 85%));
+        font-family: @m2;
+        font-size: @size[large];
+        padding: 5px 10px;
+    }
+
+    select option {
+        background-color: @colors[bkg];
+        font-family: @m2;
+        font-size: @size[large]
     }
 }
