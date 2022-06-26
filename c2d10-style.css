@@ -728,3 +728,131 @@ table input {
   font-family: VT323, monospace;
   font-size: 1.25rem;
 }
+.c2d10-hero-points,
+.c2d10-villain-points,
+.c2d10-difficulty {
+  background: rgba(2, 17, 9, 0.5);
+  border: 1px solid #021109;
+  border-radius: 5px;
+  bottom: 67px;
+  box-shadow: 0 0 10px #021109;
+  box-sizing: content-box;
+  color: #e5e5ec;
+  font-family: VT323, monospace;
+  font-size: 60px;
+  height: 84px;
+  right: 655px;
+  bottom: 5px;
+  line-height: 1.2;
+  margin: 0 0 8px;
+  position: fixed;
+  text-align: center;
+  width: 84px;
+}
+.c2d10-hero-points.hide,
+.c2d10-villain-points.hide,
+.c2d10-difficulty.hide {
+  display: none;
+}
+.c2d10-hero-points::after,
+.c2d10-villain-points::after,
+.c2d10-difficulty::after {
+  bottom: 2px;
+  content: 'Difficulty';
+  font-family: VT323, monospace;
+  font-size: 12px;
+  left: 50%;
+  line-height: 1;
+  position: absolute;
+  transform: translateX(-50%);
+  width: 80px;
+}
+.c2d10-hero-points .hp-control-numbers,
+.c2d10-villain-points .hp-control-numbers,
+.c2d10-difficulty .hp-control-numbers,
+.c2d10-hero-points .vp-control-numbers,
+.c2d10-villain-points .vp-control-numbers,
+.c2d10-difficulty .vp-control-numbers,
+.c2d10-hero-points .dc-control-numbers,
+.c2d10-villain-points .dc-control-numbers,
+.c2d10-difficulty .dc-control-numbers {
+  pointer-events: none;
+}
+.c2d10-hero-points .keeper-controls,
+.c2d10-villain-points .keeper-controls,
+.c2d10-difficulty .keeper-controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  top: -1px;
+  left: calc(100% + 7px);
+  width: 40px;
+  height: 86px;
+}
+.c2d10-hero-points .hp-control,
+.c2d10-villain-points .hp-control,
+.c2d10-difficulty .hp-control,
+.c2d10-hero-points .vp-control,
+.c2d10-villain-points .vp-control,
+.c2d10-difficulty .vp-control,
+.c2d10-hero-points .dc-control,
+.c2d10-villain-points .dc-control,
+.c2d10-difficulty .dc-control {
+  display: block;
+  width: 40px;
+  height: 40px;
+  font-size: 40px;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  background: #021109;
+  border: 1px solid #021109;
+  border-radius: 5px;
+  bottom: 67px;
+  box-shadow: 0 0 10px #021109;
+  color: #e5e5ec;
+}
+.c2d10-hero-points .hp-control:hover,
+.c2d10-villain-points .hp-control:hover,
+.c2d10-difficulty .hp-control:hover,
+.c2d10-hero-points .vp-control:hover,
+.c2d10-villain-points .vp-control:hover,
+.c2d10-difficulty .vp-control:hover,
+.c2d10-hero-points .dc-control:hover,
+.c2d10-villain-points .dc-control:hover,
+.c2d10-difficulty .dc-control:hover,
+.c2d10-hero-points .hp-control:active,
+.c2d10-villain-points .hp-control:active,
+.c2d10-difficulty .hp-control:active,
+.c2d10-hero-points .vp-control:active,
+.c2d10-villain-points .vp-control:active,
+.c2d10-difficulty .vp-control:active,
+.c2d10-hero-points .dc-control:active,
+.c2d10-villain-points .dc-control:active,
+.c2d10-difficulty .dc-control:active {
+  box-shadow: 0 0 5px #e0f287;
+}
+.c2d10-hero-points .hp-control:active,
+.c2d10-villain-points .hp-control:active,
+.c2d10-difficulty .hp-control:active,
+.c2d10-hero-points .vp-control:active,
+.c2d10-villain-points .vp-control:active,
+.c2d10-difficulty .vp-control:active,
+.c2d10-hero-points .dc-control:active,
+.c2d10-villain-points .dc-control:active,
+.c2d10-difficulty .dc-control:active {
+  background: #29a253;
+}
+.c2d10-hero-points {
+  right: 370px;
+}
+.c2d10-hero-points::after {
+  content: 'Hero Points';
+}
+.c2d10-villain-points {
+  right: 510px;
+}
+.c2d10-villain-points::after {
+  content: 'Villain Points';
+}

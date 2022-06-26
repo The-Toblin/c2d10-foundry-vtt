@@ -94,6 +94,18 @@
         "showEffects": {
             "name": "Show fancy CSS effects",
             "label": "Show CRT-filters and text glow on sheets. Defaults to disabled for accessibility reasons."
+        },
+        "heroPoints": {
+            "name": "Hero Points",
+            "label": "The number of hero points the party currently possesses."
+        },
+        "villainPoints": {
+            "name": "Villain Points",
+            "label": "The number of villain points held by the Keeper of Tales."
+        },
+        "DC": {
+            "name": "DC",
+            "label": "Setting difficulty for tests taken. All rolls will be matched against this."
         }
     }
 }
