@@ -32,8 +32,8 @@ export default class C2D10ActorSheet extends ActorSheet {
 
     /* Assets */
     sheetData.assets = this.actor.items.filter(p => p.type === "asset");
-
     sheetData.traits = this.actor.items.filter(p => p.type === "trait");
+    sheetData.variants = this.actor.items.filter(p => p.type === "variant");
 
     /* Make system settings available for sheets to use for rendering */
     sheetData.showEffects = game.settings.get("c2d10", "showEffects");
@@ -97,7 +97,8 @@ export default class C2D10ActorSheet extends ActorSheet {
   }
 
   /**
-   * Function to increase or decrease a resource on the sheet.
+   * Function to increase or decrease a resource on the sheet. Allows modification of health resources
+   * in spite of sheet lock. Otherwise prevents editing if the sheet is locked.
    * @param {object} event The clicked event-data.
    */
   _onResourceChange(event) {
@@ -118,6 +119,10 @@ export default class C2D10ActorSheet extends ActorSheet {
     }
   }
 
+  /**
+   * Locks or unlocks the sheet for editing, using a flag on the actor.
+   * @param {object} event Eventdata from the click.
+   */
   _toggleEditLock(event) {
     event.preventDefault();
     const setFlag = !this.actor.getFlag("c2d10", "locked");
