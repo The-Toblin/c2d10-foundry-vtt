@@ -5,72 +5,82 @@
         ],
         "templates": {
             "info": {
-                "concept": "",
-                "species": "",
-                "campaign": "",
-                "ambition": "",
-                "faction": ""
+                "info": {
+                    "concept": "",
+                    "species": "",
+                    "campaign": "",
+                    "ambition": "",
+                    "faction": ""
+                }
             },
             "health": {
-                "crisis": 0,
-                "strain": 0,
-                "stress": 0
+                "health": {
+                    "crisis": 0,
+                    "strain": 0,
+                    "stress": 0
+                }
             },
             "talents": {
-                "physical": {
-                    "agility": 1,
-                    "endurance": 1,
-                    "strength": 1
-                },
-                "social": {
-                    "charm": 1,
-                    "empathy": 1,
-                    "manipulation": 1
-                },
-                "mental": {
-                    "logic": 1,
-                    "reason": 1,
-                    "willpower": 1
+                "talents": {
+                    "physical": {
+                        "agility": 1,
+                        "endurance": 1,
+                        "strength": 1
+                    },
+                    "social": {
+                        "charm": 1,
+                        "empathy": 1,
+                        "manipulation": 1
+                    },
+                    "mental": {
+                        "logic": 1,
+                        "reason": 1,
+                        "willpower": 1
+                    }
                 }
             },
             "skills": {
-                "physical": {
-                    "acrobatics": 0,
-                    "athletics": 0,
-                    "brawl": 0,
-                    "burglary": 0,
-                    "crafts": 0,
-                    "driving": 0,
-                    "firearms": 0,
-                    "melee": 0
-                },
-                "social": {
-                    "carousing": 0,
-                    "insight": 0,
-                    "intimidation": 0,
-                    "leadership": 0,
-                    "persuasion": 0,
-                    "politics": 0,
-                    "streetsmarts": 0,
-                    "subterfuge": 0
-                },
-                "mental": {
-                    "academia": 0,
-                    "awareness": 0,
-                    "investigation": 0,
-                    "medicine": 0,
-                    "science": 0,
-                    "stealth": 0,
-                    "survival": 0,
-                    "technology": 0
+                "skills": {
+                    "physical": {
+                        "acrobatics": 0,
+                        "athletics": 0,
+                        "brawl": 0,
+                        "burglary": 0,
+                        "crafts": 0,
+                        "driving": 0,
+                        "firearms": 0,
+                        "melee": 0
+                    },
+                    "social": {
+                        "carousing": 0,
+                        "insight": 0,
+                        "intimidation": 0,
+                        "leadership": 0,
+                        "persuasion": 0,
+                        "politics": 0,
+                        "streetsmarts": 0,
+                        "subterfuge": 0
+                    },
+                    "mental": {
+                        "academia": 0,
+                        "awareness": 0,
+                        "investigation": 0,
+                        "medicine": 0,
+                        "science": 0,
+                        "stealth": 0,
+                        "survival": 0,
+                        "technology": 0
+                    }
                 }
             },
             "powers": {
-                "beguilement": 0,
-                "bodhi": 0,
-                "energokinesis": 0,
-                "mentaleclipse": 0,
-                "quickening": 0
+                "powers": {
+                    "beguilement": 0,
+                    "bodhi": 0,
+                    "energokinesis": 0,
+                    "mentaleclipse": 0,
+                    "quickening": 0
+                }
             }
         },
         "actor": {
