@@ -12,7 +12,7 @@
     <section>
         <div class="c2d10-subsection flex-row flex-between">
             <div class="w-80 c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} c2d10-asset-textarea">
-                <textarea name="data.description">{{item.data.data.description}}</textarea>
+                <textarea name="data.description">{{system.description}}</textarea>
             </div>
             <div class="flex-col flex-start">
                 <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} w-fit">
@@ -27,7 +27,7 @@
                                 {{localize "c2d10.trait.level"}}
                             </th>
                             <td class="flex-row table-no-border resource-row" data-id="value">
-                                {{#dots item.data.data.value 5}}{{/dots}}
+                                {{#dots system.value 5}}{{/dots}}
                             </td>
                         </tr>
                     </table>

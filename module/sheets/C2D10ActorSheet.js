@@ -28,7 +28,7 @@ export default class C2D10ActorSheet extends ActorSheet {
   getData() {
     const sheetData = super.getData();
     sheetData.config = CONFIG.cd10;
-    sheetData.data = sheetData.data.data;
+    sheetData.system = sheetData.data.data;
 
     /* Assets */
     sheetData.assets = this.actor.items.filter(p => p.type === "asset");
