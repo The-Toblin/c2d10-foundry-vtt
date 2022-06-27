@@ -70,12 +70,16 @@
             "technology": "Technology"
         },
         "powers": {
+            "description": "Description",
             "none": "none",
             "beguilement": "Beguilement",
             "bodhi": "Bodhi",
             "energokinesis": "Energokinesis",
             "mentaleclipse": "Mental Eclipse",
-            "quickening": "Quickening"
+            "quickening": "Quickening",
+            "level": "Level",
+            "parent": "Parent Power",
+            "name": "Name"
         },
         "asset": {
             "name": "Name",

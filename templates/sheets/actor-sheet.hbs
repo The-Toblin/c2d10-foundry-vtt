@@ -21,7 +21,7 @@
                 {{#if assets}}
                     <a class="item" data-tab="assets">{{localize "c2d10.sheet.assets"}}</a>
                 {{/if}}
-                {{#if powers}}
+                {{#if variants}}
                     <a class="item" data-tab="powers">{{localize "c2d10.sheet.powers"}}</a>
                 {{/if}}
             </nav>
@@ -52,7 +52,7 @@
                 </div>
             {{/if}}
             {{!-- Powers Tab --}}
-            {{#if powers}}
+            {{#if variants}}
                 <div class="tab sheet-powers" data-group="primary" data-tab="powers">
                     {{> "systems/c2d10/templates/partials/sheet-tabs/actor-powers-tab.hbs"}}
                 </div>

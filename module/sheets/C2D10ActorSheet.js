@@ -38,6 +38,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     /* Make system settings available for sheets to use for rendering */
     sheetData.showEffects = game.settings.get("c2d10", "showEffects");
     sheetData.locked = this.actor.getFlag("c2d10", "locked");
+    console.log(sheetData);
     return sheetData;
   }
 
@@ -105,14 +106,16 @@ export default class C2D10ActorSheet extends ActorSheet {
     event.preventDefault();
 
     const element = event.currentTarget;
+    const type = element.closest(".resource-row").dataset.type;
+    const group = element.closest(".resource-row").dataset.group;
     const res = element.closest(".resource-row").dataset.id;
     const pass = element.closest(".resource-row").dataset.pass;
 
     if (pass || !this.actor.getFlag("c2d10", "locked")) {
       if (event.type === "click") {
-        this.actor.modifyResource(1, res);
+        this.actor.modifyResource(1, type, group, res);
       } else {
-        this.actor.modifyResource(-1, res);
+        this.actor.modifyResource(-1, type, group, res);
       }
     } else {
       ui.notifications.error("Unlock your sheet before attempting to edit it!");

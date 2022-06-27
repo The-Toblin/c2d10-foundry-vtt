@@ -22,7 +22,7 @@
                             {{localize "c2d10.character.campaign"}}
                         </th>
                         <td>
-                            <input name="data.campaign" type="text" value="{{system.info.campaign}}" placeholder="{{localize "c2d10.character.campaign"}}" />
+                            <input name="data.info.campaign" type="text" value="{{system.info.campaign}}" placeholder="{{localize "c2d10.character.campaign"}}" />
                         </td>
                     </tr>
                     <tr>
@@ -30,13 +30,13 @@
                             {{localize "c2d10.character.concept"}}
                         </th>
                         <td>
-                            <input name="data.concept" type="text" value="{{system.info.concept}}" placeholder="{{localize "c2d10.character.concept"}}" />
+                            <input name="data.info.concept" type="text" value="{{system.info.concept}}" placeholder="{{localize "c2d10.character.concept"}}" />
                         </td>
                         <th>
                             {{localize "c2d10.character.ambition"}}
                         </th>
                         <td>
-                            <input name="data.ambition" type="text" value="{{system.info.ambition}}" placeholder="{{localize "c2d10.character.ambition"}}" />
+                            <input name="data.info.ambition" type="text" value="{{system.info.ambition}}" placeholder="{{localize "c2d10.character.ambition"}}" />
                         </td>
                     </tr>
                     <tr>
@@ -44,13 +44,13 @@
                             {{localize "c2d10.character.species"}}
                         </th>
                         <td>
-                            <input name="data.species" type="text" value="{{system.info.species}}" placeholder="{{localize "c2d10.character.species"}}" />
+                            <input name="data.info.species" type="text" value="{{system.info.species}}" placeholder="{{localize "c2d10.character.species"}}" />
                         </td>
                         <th>
                             {{localize "c2d10.character.faction"}}
                         </th>
                         <td>
-                            <input name="data.faction" type="text" value="{{system.info.faction}}" placeholder="{{localize "c2d10.character.faction"}}" />
+                            <input name="data.info.faction" type="text" value="{{system.info.faction}}" placeholder="{{localize "c2d10.character.faction"}}" />
                         </td>
                     </tr>
                 </table>
@@ -60,16 +60,16 @@
                     <h3>
                         {{localize "c2d10.resources.strain"}}
                     </h3>
-                    <div class="flex-row flex-center resource-row" data-value="{{system.health.strain}}" data-id="strain" data-pass="true">
-                        {{#dots system.strain 5}}{{/dots}}
+                    <div class="flex-row flex-center resource-row" data-value="{{system.health.strain}}" data-type="health" data-id="strain" data-pass="true">
+                        {{#dots system.health.strain 5}}{{/dots}}
                     </div>
                 </div>
                 <div class="flex-col flex-between c2d10-contentbox h-100">
                     <h3>
                         {{localize "c2d10.resources.stress"}}
                     </h3>
-                    <div class="flex-row flex-center resource-row" data-value="{{system.health.stress}}" data-id="stress" data-pass="true">
-                        {{#dots system.stress 5}}{{/dots}}
+                    <div class="flex-row flex-center resource-row" data-value="{{system.health.stress}}" data-type="health" data-id="stress" data-pass="true">
+                        {{#dots system.health.stress 5}}{{/dots}}
                     </div>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                 {{localize "c2d10.resources.crisis"}}
             </h3>
             <div class="flex-row flex-between">
-                <div class="flex-row resource-row" data-id="crisis" data-pass="true">
+                <div class="flex-row resource-row" data-type="health" data-id="crisis" data-pass="true">
                     {{#dots system.health.crisis 10}}{{/dots}}
                 </div>
             </div>

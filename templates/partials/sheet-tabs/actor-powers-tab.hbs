@@ -6,23 +6,23 @@
         <div class="flex-col flex-start w-100">
             <table class="c2d10-asset-card-table">
                 <colgroup>
+                    <col class="w-20">
+                    <col class="w-20">
                     <col class="w-60">
-                    <col class="w-20">
-                    <col class="w-20">
                 </colgroup>
                 <tr>
                     <th class="table-no-border">
-                        {{localize "c2d10.power.name"}}
+                        {{localize "c2d10.powers.name"}}
                     </th>
                     <th class="table-no-border">
-                        {{localize "c2d10.variant.power"}}
+                        {{localize "c2d10.powers.parent"}}
                     </th>
                     <th class="table-no-border">
-                        {{localize "c2d10.power.level"}}
+                        {{localize "c2d10.powers.description"}}
                     </th>
                 </tr>
                 {{#each variants as |item id|}}
-                {{> "systems/c2d10/templates/partials/cards/variant-card.hbs"}}
+                {{> "systems/c2d10/templates/partials/list-items/variant-list-item.hbs"}}
                 {{/each}}
             </table>
         </div>
