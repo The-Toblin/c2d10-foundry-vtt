@@ -4,7 +4,27 @@
     </h3>
     <div class="content-box c2d10-subsection flex-row flex-between">
         <div class="flex-col flex-start w-100">
-        
+            <table class="c2d10-asset-card-table">
+                <colgroup>
+                    <col class="w-60">
+                    <col class="w-20">
+                    <col class="w-20">
+                </colgroup>
+                <tr>
+                    <th class="table-no-border">
+                        {{localize "c2d10.power.name"}}
+                    </th>
+                    <th class="table-no-border">
+                        {{localize "c2d10.variant.power"}}
+                    </th>
+                    <th class="table-no-border">
+                        {{localize "c2d10.power.level"}}
+                    </th>
+                </tr>
+                {{#each variants as |item id|}}
+                {{> "systems/c2d10/templates/partials/cards/variant-card.hbs"}}
+                {{/each}}
+            </table>
         </div>
     </div>
 </section>
