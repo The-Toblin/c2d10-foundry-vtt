@@ -70,7 +70,7 @@
                         "stealth": 0,
                         "survival": 0,
                         "technology": 0
-                    }
+                    },"focus": []
                 }
             },
             "powers": {
@@ -107,12 +107,17 @@
         },
         "variant": {
             "power": "",
-            "value": 1,
+            "description": "",
+            "duration": "",
+            "duration-denominator": "",
+            "range": "",
+            "range-denominator": "",
+            "level": 1,
             "cost": 0,
             "cost-resource": "Stress"
         },
         "trait": {
-            "value": 0,
+            "level": 0,
             "traitType": "virtue"
         }
     }
