@@ -95,7 +95,12 @@
             "quality": 0,
             "value": 0
         },
-        "variant": {},
+        "variant": {
+            "power": "",
+            "value": 1,
+            "cost": 0,
+            "cost-resource": "Stress"
+        },
         "trait": {
             "value": 0,
             "traitType": "virtue"

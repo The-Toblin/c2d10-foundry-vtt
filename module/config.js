@@ -8,3 +8,14 @@ c2d10.powers = {
   mentaleclipse: "c2d10.powers.mentaleclipse",
   quickening: "c2d10.powers.quickening"
 };
+
+c2d10.resources = {
+  stress: "c2d10.resources.stress",
+  strain: "c2d10.resources.strain",
+  crisis: "c2d10.resources.crisis"
+};
+
+c2d10.virtueVice = {
+  virtue: "c2d10.trait.virtue",
+  vice: "c2d10.trait.vice"
+};

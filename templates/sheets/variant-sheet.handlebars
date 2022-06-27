@@ -1,11 +1,11 @@
 <form class="sheet-main-content c2d10 sheet flex-col flex-start">
     <section class="c2d10-sheet-header-box">
         <h1>
-            <input name="name" type="text" value="{{item.name}}" placeholder="{{localize "c2d10.trait.name"}}" />
+            <input name="name" type="text" value="{{item.name}}" placeholder="{{localize "c2d10.variant.name"}}" />
         </h1>
         <h3 class="c2d10-alert">
-            <select name="data.traitType">
-                {{selectOptions config.virtueVice selected=data.traitType localize=true}}
+            <select name="data.power">
+                {{selectOptions config.powers selected=data.power localize=true}}
             </select>
         </h3>
     </section>
@@ -24,7 +24,7 @@
                     <table>
                         <tr>
                             <th class="table-no-border">
-                                {{localize "c2d10.trait.level"}}
+                                {{localize "c2d10.variant.level"}}
                             </th>
                             <td class="flex-row table-no-border resource-row" data-id="value">
                                 {{#dots item.data.data.value 5}}{{/dots}}

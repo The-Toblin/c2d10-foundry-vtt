@@ -1,14 +1,17 @@
 {
     "c2d10": {
+        "resources": {
+            "stress": "Stress",
+            "strain": "Strain",
+            "crisis": "Crisis"
+        },
         "character": {
             "name": "Name",
             "campaign": "Campaign",
             "concept": "Concept",
             "ambition": "Ambition",
             "species": "Species",
-            "faction": "Faction",
-            "strain": "Strain",
-            "stress": "Stress"
+            "faction": "Faction"
         },
         "sheet": {
             "info": "Information",

@@ -13,12 +13,8 @@ export default class C2D10ItemSheet extends ItemSheet {
 
   getData() {
     const sheetData = super.getData();
-    sheetData.config = CONFIG.cd10;
+    sheetData.config = CONFIG.c2d10;
     sheetData.data = sheetData.data.data;
-    sheetData.virtueVice = {
-      virtue: "c2d10.trait.virtue",
-      vice: "c2d10.trait.vice"
-    };
 
     /* Make system settings available for sheets to use for rendering */
     sheetData.showEffects = game.settings.get("c2d10", "showEffects");
