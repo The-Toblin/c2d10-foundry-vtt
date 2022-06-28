@@ -10,21 +10,18 @@
                     <col class="w-20">
                     <col class="w-60">
                 </colgroup>
-                <tr>
-                    <th class="table-no-border">
-                        {{localize "c2d10.powers.name"}}
-                    </th>
-                    <th class="table-no-border">
-                        {{localize "c2d10.powers.parent"}}
-                    </th>
-                    <th class="table-no-border">
-                        {{localize "c2d10.powers.description"}}
-                    </th>
-                </tr>
+                {{#each system.powers as |level name|}}
+                    <tr>
+                        <th class="table-no-border">{{localize name}}</th>
+                        <td class="flex-row table-no-border resource-row" data-type="power" data-id="{{name}}">
+                            {{#dots level 5}}{{/dots}}
+                        </td>
+                    </tr>
+                {{/each}}
+                </table>
                 {{#each variants as |item id|}}
                 {{> "systems/c2d10/templates/partials/list-items/variant-list-item.hbs"}}
                 {{/each}}
-            </table>
         </div>
     </div>
 </section>
