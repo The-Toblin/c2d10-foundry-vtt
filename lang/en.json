@@ -36,11 +36,15 @@
             "crisis": "Crisis",
             "talents": "Talents",
             "skills": "Skills",
+            "skill": "Skill",
             "assets": "Assets",
             "powers": "Powers",
             "edit": "Edit",
             "description": "Post description",
-            "remove": "Remove"
+            "remove": "Remove",
+            "addFocus": "Add a focus",
+            "removeFocus": "Remove a focus",
+            "parent": "Parent skill"
         },
         "talents": {
             "physical": "Physical",
@@ -57,6 +61,7 @@
             "willpower": "Willpower"
         },
         "skills": {
+            "name": "Focus name",
             "physical": "Physical",
             "social": "Social",
             "mental": "Mental",

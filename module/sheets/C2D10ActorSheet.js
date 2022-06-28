@@ -27,7 +27,7 @@ export default class C2D10ActorSheet extends ActorSheet {
 
   getData() {
     const sheetData = super.getData();
-    sheetData.config = CONFIG.cd10;
+    sheetData.config = CONFIG.c2d10;
     sheetData.system = sheetData.data.data;
 
     /* Assets */
@@ -90,6 +90,8 @@ export default class C2D10ActorSheet extends ActorSheet {
   activateListeners(html) {
     html.find(".dot-container").on("click contextmenu", this._onResourceChange.bind(this));
     html.find(".edit-lock").click(this._toggleEditLock.bind(this));
+    html.find(".add-focus").click(this._addFocus.bind(this));
+    html.find(".remove-focus").click(this._removeFocus.bind(this));
 
     new ContextMenu(html, ".asset", this.itemContextMenu);
 
@@ -129,5 +131,59 @@ export default class C2D10ActorSheet extends ActorSheet {
     event.preventDefault();
     const setFlag = !this.actor.getFlag("c2d10", "locked");
     this.actor.setFlag("c2d10", "locked", setFlag);
+  }
+
+  /**
+   * Adds a focus to the character.
+   * @param {object} event Eventdata from the click.
+   */
+  async _addFocus(event) {
+    event.preventDefault();
+
+    const dialogOptions = {
+      classes: ["c2d10-dialog", "addFocus"],
+      top: 300,
+      left: 400
+    };
+    new Dialog(
+      {
+        title: "Add a focus",
+        content: await renderTemplate("systems/c2d10/templates/partials/add-focus-dialog.hbs", this.getData()),
+        buttons: {
+          roll: {
+            label: "Add!",
+            callback: html => { this._doAddFocus(html);
+
+            }
+          }
+        }
+      },
+      dialogOptions
+    ).render(true);
+  }
+
+  async _doAddFocus(html) {
+    const currentArray = this.actor.data.data.skills.focus;
+    currentArray.push({
+      name: html.find("input#focus-name").val(),
+      parent: html.find("select#focus-skill").val()
+    });
+
+    const updateData = {};
+    updateData["data.skills.focus"] = currentArray;
+
+    await this.actor.update(updateData);
+  }
+
+  async _removeFocus(event) {
+    const name = event.currentTarget.closest(".focus").dataset.name;
+    const currentArray = this.actor.data.data.skills.focus;
+
+    currentArray.splice(currentArray.findIndex(v => v.name === name), 1);
+
+    const updateData = {};
+    updateData["data.skills.focus"] = currentArray;
+
+    await this.actor.update(updateData);
   }
 }

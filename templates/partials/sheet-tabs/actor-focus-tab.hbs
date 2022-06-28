@@ -1,0 +1,35 @@
+<section>
+    <h3>
+        {{localize "c2d10.sheet.focus"}}
+    </h3>
+    <div class="c2d10-subsection">
+        <div class="c2d10-contentbox">
+            <table>
+                <colgroup class="w-50">
+                    <colgroup class="w-50">
+                    <tr>
+                        <th class="align-left table-no-border">
+                            <a class="add-focus" title="{{localize " c2d10.sheet.addFocus"}}">
+                                <i class="fas fa-square-plus"></i>
+                            </a>
+                            {{localize "c2d10.sheet.focus"}}
+                        </th>
+                        <th class="align-left table-no-border">{{localize "c2d10.sheet.parent"}}</th>
+                    </tr>
+                    {{#each system.skills.focus as | focus |}}
+                <tr>
+                    <td class="align-left focus table-no-border" data-name="{{focus.name}}">
+                        <a class="remove-focus" title="{{localize " c2d10.sheet.removeFocus"}}">
+                            <i class="fas fa-square-minus"></i>
+                        </a>
+                        {{focus.name}}
+                    </td>
+                    <td class="align-left focus table-no-border">
+                        {{localize (concat "c2d10.skills." focus.parent)}}
+                    </td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+    </div>
+</section>

@@ -16,6 +16,33 @@ c2d10.resources = {
   crisis: "c2d10.resources.crisis"
 };
 
+c2d10.allSkills = {
+  academia: "Academia",
+  acrobatics: "Acrobatics",
+  athletics: "Athletics",
+  awareness: "Awareness",
+  brawl: "Brawl",
+  burglary: "Burglary",
+  carousing: "Carousing",
+  crafts: "Crafts",
+  driving: "Driving",
+  firearms: "Firearms",
+  insight: "Insight",
+  intimidation: "Intimidation",
+  investigation: "Investigation",
+  leadership: "Leadership",
+  medicine: "Medicine",
+  melee: "Melee",
+  persuasion: "Persuasion",
+  politics: "Politics",
+  science: "Science",
+  stealth: "Stealth",
+  streetsmarts: "Street-smarts",
+  subterfuge: "Subterfuge",
+  survival: "Survival",
+  technology: "Technology"
+};
+
 c2d10.virtueVice = {
   virtue: "c2d10.trait.virtue",
   vice: "c2d10.trait.vice"

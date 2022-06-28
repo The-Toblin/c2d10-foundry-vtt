@@ -16,9 +16,11 @@ async function preloadHandlebarsTemplates() {
     "systems/c2d10/templates/partials/sheet-tabs/actor-assets-tab.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/actor-traits-tab.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/actor-powers-tab.hbs",
+    "systems/c2d10/templates/partials/sheet-tabs/actor-focus-tab.hbs",
     "systems/c2d10/templates/partials/list-items/asset-list-item.hbs",
     "systems/c2d10/templates/partials/list-items/trait-list-item.hbs",
-    "systems/c2d10/templates/partials/list-items/variant-list-item.hbs"
+    "systems/c2d10/templates/partials/list-items/variant-list-item.hbs",
+    "systems/c2d10/templates/partials/add-focus-dialog.hbs"
   ];
 
   return loadTemplates(templatePaths);
