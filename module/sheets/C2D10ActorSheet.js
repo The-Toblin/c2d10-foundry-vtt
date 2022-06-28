@@ -38,7 +38,6 @@ export default class C2D10ActorSheet extends ActorSheet {
     /* Make system settings available for sheets to use for rendering */
     sheetData.showEffects = game.settings.get("c2d10", "showEffects");
     sheetData.locked = this.actor.getFlag("c2d10", "locked");
-    console.log(sheetData);
     return sheetData;
   }
 

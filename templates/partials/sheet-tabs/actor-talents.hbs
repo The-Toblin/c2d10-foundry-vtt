@@ -14,8 +14,10 @@
                         <col class="w-40">
                     </colgroup>
                     {{#each system.talents.physical as |level name|}}
-                        {{log level}}
-                        {{log name}}
+                        <tr>
+                            <th>{{name}}</th>
+                            <td>{{level}}</td>
+                        </tr>
                     {{/each}}
                     <tr>
                         <th class="table-no-border">{{localize "c2d10.talents.agility"}}</th>
