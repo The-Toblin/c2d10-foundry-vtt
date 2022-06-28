@@ -78,6 +78,7 @@
             "mentaleclipse": "Mental Eclipse",
             "quickening": "Quickening",
             "level": "Level",
+            "level-req": "Required level",
             "parent": "Parent Power",
             "name": "Name"
         },

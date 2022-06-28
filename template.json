@@ -112,7 +112,7 @@
             "duration-denominator": "",
             "range": "",
             "range-denominator": "",
-            "level": 1,
+            "level-req": 1,
             "cost": 0,
             "cost-resource": "Stress"
         },
