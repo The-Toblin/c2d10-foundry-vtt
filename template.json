@@ -7,6 +7,7 @@
             "info": {
                 "info": {
                     "concept": "",
+                    "experience": 0,
                     "species": "",
                     "campaign": "",
                     "ambition": "",
@@ -108,13 +109,15 @@
         "variant": {
             "power": "",
             "description": "",
-            "duration": "",
-            "duration-denominator": "",
-            "range": "",
-            "range-denominator": "",
+            "duration": 0,
+            "duration-denominator": "None",
+            "range": 0,
+            "range-denominator": "None",
             "level-req": 1,
             "cost": 0,
-            "cost-resource": "Stress"
+            "cost-resource": "None",
+            "pool": "None",
+            "opposed": "None"
         },
         "trait": {
             "level": 0,

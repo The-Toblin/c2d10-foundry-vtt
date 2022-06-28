@@ -5,6 +5,22 @@
             "strain": "Strain",
             "crisis": "Crisis"
         },
+        "duration": {
+            "second": "Second",
+            "minute": "Minute",
+            "action": "Action",
+            "turn": "Turn",
+            "round": "Round",
+            "scene": "Scene",
+            "hour": "Hour",
+            "permanent": "Permanent"
+        },
+        "range": {
+            "meter": "Meter",
+            "eye": "Eye contact",
+            "sight": "Sight",
+            "close": "Close"
+        },
         "character": {
             "name": "Name",
             "campaign": "Campaign",
@@ -80,7 +96,12 @@
             "level": "Level",
             "level-req": "Required level",
             "parent": "Parent Power",
-            "name": "Name"
+            "name": "Name",
+            "duration": "Duration",
+            "range": "Range",
+            "cost": "Cost",
+            "pool": "Pool",
+            "opposed": "Opposed"
         },
         "asset": {
             "name": "Name",

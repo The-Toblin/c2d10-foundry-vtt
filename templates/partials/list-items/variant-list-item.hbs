@@ -1,11 +1,35 @@
-<div class="variant-item asset-item" data-id="{{id}}">
-    <divclass="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} asset">
+<tr class="variant-item asset-item " data-id="{{id}}">
+    <td class="align-left resource-row c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
         {{name}}
-    </div>
-    <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} asset c2d10-capitalize">
-        {{system.power}}
-    </div>
-    <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} asset">
-        {{system.description}}
-    </div>
-</div>
+    </td>
+    <td class="align-left resource-row c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
+        {{#unless (eq "None" system.power)}}
+            {{localize (concat "c2d10.powers." system.power)}}
+        {{/unless}}
+    </td>
+    <td class="align-left resource-row c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
+        {{#unless (eq "None" system.pool)}}
+            {{system.pool}}
+        {{/unless}}
+    </td>
+    <td class="align-left resource-row c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
+        {{#unless (eq "None" system.cost)}}
+            {{system.cost}} {{localize (concat "c2d10.resources." system.cost-resource)}}
+        {{/unless}}
+    </td>
+    <td class="align-left resource-row c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
+        {{#unless (eq "None" system.range)}}
+            {{system.range}} {{localize (concat "c2d10.range." system.range-denominator)}}
+        {{/unless}}
+    </td>
+    <td class="align-left resource-row c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
+        {{#unless (eq "None" system.opposed)}}
+            {{system.opposed}}
+        {{/unless}}
+    </td>
+    <td class="align-left resource-row c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
+        {{#unless (eq "None" system.duration)}}
+            {{system.duration}} {{localize (concat "c2d10.duration." system.duration-denominator)}}
+        {{/unless}}
+    </td>
+</tr>

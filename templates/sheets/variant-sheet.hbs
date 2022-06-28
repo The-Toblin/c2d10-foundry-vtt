@@ -1,7 +1,7 @@
 <form class="sheet-main-content c2d10 sheet flex-col flex-start">
     <section class="c2d10-sheet-header-box">
         <h1>
-            <input name="name" type="text" value="{{item.name}}" placeholder="{{localize "c2d10.power.name"}}" />
+            <input name="name" type="text" value="{{item.name}}" placeholder="{{localize " c2d10.powers.name"}}"/>
         </h1>
         <h3 class="c2d10-alert">
             <select name="data.power">
@@ -17,20 +17,61 @@
             <div class="flex-col flex-start">
                 <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} w-fit">
                     <div class="image-box flex-row flex-center">
-                        <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" height="145px" />
+                        <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" height="145px"/>
                     </div>
                 </div>
-                <div class="flex-col flex-start w-20 value-box c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
+                <div
+                     class="flex-col flex-start w-20 value-box c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
                     <table>
                         <tr>
                             <th class="table-no-border">
                                 {{localize "c2d10.powers.level-req"}}
                             </th>
-                            <td class="flex-row table-no-border resource-row" data-id="level">
+                            <td class="flex-row table-no-border resource-row" data-id="level-req">
                                 {{#dots system.level-req 5}}{{/dots}}
                             </td>
                         </tr>
                     </table>
+                    <div class="flex-row flex-between">
+                        <div>
+                            <input name="data.pool" type="text" value="{{data.data.pool}}" placeholder="{{localize "c2d10.powers.pool"}}" />
+                        </div>
+                    </div>
+                    <div class="flex-row flex-between">
+                        <div>
+                            <input name="data.cost" type="text" value="{{data.data.cost}}" placeholder="{{localize "c2d10.powers.cost"}}" />
+                        </div>
+                        <div>
+                            <select name="data.cost-resource">
+                                {{selectOptions config.resources selected=data.data.cost-resource localize=true}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex-row flex-between">
+                        <div>
+                            <input name="data.range" type="text" value="{{data.data.range}}" placeholder="{{localize "c2d10.powers.range"}}" />
+                        </div>
+                        <div>
+                            <select name="data.range-denominator">
+                                {{selectOptions config.range selected=data.data.range-denominator localize=true}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex-row flex-between">
+                        <div>
+                            <input name="data.opposed" type="text" value="{{data.data.opposed}}" placeholder="{{localize "c2d10.powers.opposed"}}" />
+                        </div>
+                    </div>
+                    <div class="flex-row flex-between">
+                        <div>
+                            <input name="data.duration" type="text" value="{{data.data.duration}}" placeholder="{{localize "c2d10.powers.duration"}}" />
+                        </div>
+                        <div>
+                            <select name="data.duration-denominator">
+                                {{selectOptions config.duration selected=data.data.duration-denominator localize=true}}
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

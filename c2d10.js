@@ -148,6 +148,17 @@ Hooks.once("init", function() {
   /* Register all system settings for C2D10 */
   registerSystemSettings();
 
+  Handlebars.registerHelper("concat", function() {
+    let outStr = "";
+
+    for (let arg in arguments) {
+      if (typeof arguments[arg] != "object") {
+        outStr += arguments[arg];
+      }
+    }
+    return outStr;
+  });
+
   Handlebars.registerHelper("dots", function(n, max) {
     /* Handlebars helper to render dots on sheets. */
 

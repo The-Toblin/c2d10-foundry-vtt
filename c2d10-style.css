@@ -419,6 +419,12 @@
 .c2d10-capitalize {
   text-transform: capitalize;
 }
+.align-left {
+  text-align: left !important;
+}
+.align-right {
+  text-align: right !important;
+}
 .d10-dot-full,
 .d10-dot-empty {
   min-width: 20px;
@@ -448,7 +454,7 @@ table td {
   background: none;
   border: none;
   vertical-align: middle;
-  padding: 4px 5px 4px 5px;
+  padding: 4px 5px 4px 5px !important;
   color: inherit;
   border-radius: 3px;
   border: 2px solid;

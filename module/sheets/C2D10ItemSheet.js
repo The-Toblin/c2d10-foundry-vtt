@@ -2,7 +2,7 @@ export default class C2D10ItemSheet extends ItemSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       width: 700,
-      height: 460,
+      height: 550,
       classes: ["c2d10", "sheet", "item"]
     });
   }

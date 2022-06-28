@@ -1,0 +1,65 @@
+<div class="variant-item asset-item flex-row flex-between" data-id="{{id}}">
+    <div class="flex-col flex-start w-20" style="margin-right: 5px;">
+        <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} asset">
+            {{name}}
+        </div>
+        <div class="c2d10-contentbox c2d10-alert {{#if showEffects}}fancy-effects{{/if}} asset">
+            {{localize (concat "c2d10.powers." system.power)}}
+        </div>
+        {{#unless (eq "None" system.pool)}}
+        <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} asset flex-row flex-between">
+            <div>
+                {{localize "c2d10.powers.pool"}}
+            </div>
+            <div class="align-right">
+                {{system.pool}}
+            </div>
+        </div>
+        {{/unless}}
+        {{#unless (eq "None" system.cost)}}
+        <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} asset flex-row flex-between">
+            <div>
+                {{localize "c2d10.powers.cost"}}
+            </div>
+            <div class="align-right">
+                {{system.cost}} {{localize (concat "c2d10.resources." system.cost-resource)}}
+            </div>
+        </div>
+        {{/unless}}
+        {{#unless (eq "None" system.range)}}
+        <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} asset flex-row flex-between">
+            <div>
+                {{localize "c2d10.powers.range"}}
+            </div>
+            <div class="align-right">
+                {{system.range}} {{localize (concat "c2d10.range." system.range-denominator)}}
+            </div>
+        </div>
+        {{/unless}}
+        {{#unless (eq "None" system.opposed)}}
+        <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} asset flex-row flex-between">
+            <div>
+                {{localize "c2d10.powers.opposed"}}
+            </div>
+            <div class="align-right">
+                {{system.opposed}}
+            </div>
+        </div>
+        {{/unless}}
+        {{#unless (eq "None" system.duration)}}
+        <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} asset flex-row flex-between">
+            <div>
+                {{localize "c2d10.powers.duration"}}
+            </div>
+            <div class="align-right">
+                {{system.duration}} {{localize (concat "c2d10.duration." system.duration-denominator)}}
+            </div>
+        </div>
+        {{/unless}}
+    </div>
+    <div class="w-80">
+        <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} asset">
+            {{system.description}}
+        </div>
+    </div>
+</div>
