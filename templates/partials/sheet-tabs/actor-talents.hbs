@@ -13,6 +13,10 @@
                         <col class="w-60">
                         <col class="w-40">
                     </colgroup>
+                    {{log this}}
+                    {{#each this.talents as |talent id|}}
+                        {{log this}}
+                    {{/each}}
                     <tr>
                         <th class="table-no-border">{{localize "c2d10.talents.agility"}}</th>
                         <td class="flex-row table-no-border resource-row" data-type="talents" data-group="physical" data-id="agility">
