@@ -74,13 +74,15 @@
                 </div>
             </div>
         </div>
-        <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} crisis-box flex-row flex-center">
-            <h3>
-                {{localize "c2d10.resources.crisis"}}
-            </h3>
-            <div class="flex-row flex-between">
-                <div class="flex-row resource-row" data-type="health" data-id="crisis" data-pass="true">
-                    {{#dots system.health.crisis 10}}{{/dots}}
+        <div class="flew-row flex-between">
+            <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} crisis-box flex-row flex-center">
+                <h3>
+                    {{localize "c2d10.resources.crisis"}}
+                </h3>
+                <div class="flex-row flex-between">
+                    <div class="flex-row resource-row" data-type="health" data-id="crisis" data-pass="true">
+                        {{#dots system.health.crisis 10}}{{/dots}}
+                    </div>
                 </div>
             </div>
         </div>

@@ -30,6 +30,7 @@
             "faction": "Faction"
         },
         "sheet": {
+            "experience": "XP",
             "info": "Information",
             "focus": "Focus",
             "traits": "Traits",

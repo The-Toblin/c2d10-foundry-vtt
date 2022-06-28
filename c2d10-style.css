@@ -648,6 +648,15 @@ table input {
 .c2d10.sheet .green {
   color: green !important;
 }
+.c2d10.sheet .xp-box {
+  width: 40px;
+}
+.c2d10.sheet .xp-box h3 {
+  font-size: small;
+}
+.c2d10.sheet .xp-box input {
+  text-align: center !important;
+}
 .c2d10.sheet .sheet-tabs {
   border-radius: 3px;
   border: 2px solid;
@@ -656,8 +665,9 @@ table input {
   color: #29a253;
   writing-mode: vertical-lr;
   position: relative;
-  top: 24px;
-  height: 900px;
+  top: 0px;
+  height: 862px;
+  width: 40px;
   margin-right: 5px;
 }
 .c2d10.sheet .item {

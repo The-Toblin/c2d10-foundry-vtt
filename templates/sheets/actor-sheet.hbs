@@ -10,6 +10,14 @@
             </div>
         {{/if}}
         <section class="nav-tabs">
+            <div class="xp-box c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}} flex-col flex-start">
+                <h3>
+                    {{localize "c2d10.sheet.experience"}}
+                </h3>
+                <div>
+                    <input name="data.info.experience" type="text" value="{{system.info.experience}}" placeholder="{{localize "c2d10.sheet.experience"}}" />
+                </div>
+            </div>
             <nav class="sheet-tabs tabs" data-group="primary">
                 <a class="item" data-tab="info">{{localize "c2d10.sheet.info"}}</a>
                 <a class="item" data-tab="focus">{{localize "c2d10.sheet.focus"}}</a>
