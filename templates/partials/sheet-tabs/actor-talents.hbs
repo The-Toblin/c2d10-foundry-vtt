@@ -13,9 +13,8 @@
                         <col class="w-60">
                         <col class="w-40">
                     </colgroup>
-                    {{#each system.talents as |talent id|}}
+                    {{#each system.talents.physical as |talent value|}}
                         {{log talent}}
-                        {{log id}}
                         {{log this}}
                     {{/each}}
                     <tr>
