@@ -90,6 +90,7 @@ export default class C2D10ActorSheet extends ActorSheet {
   activateListeners(html) {
     html.find(".dot-container").on("click contextmenu", this._onResourceChange.bind(this));
     html.find(".edit-lock").click(this._toggleEditLock.bind(this));
+    html.find(".delete-item").click(this._deleteItem.bind(this));
     html.find(".add-focus").click(this._addFocus.bind(this));
     html.find(".remove-focus").click(this._removeFocus.bind(this));
 
@@ -176,6 +177,7 @@ export default class C2D10ActorSheet extends ActorSheet {
   }
 
   async _removeFocus(event) {
+    event.preventDefault();
     const name = event.currentTarget.closest(".focus").dataset.name;
     const currentArray = this.actor.data.data.skills.focus;
 
@@ -185,5 +187,11 @@ export default class C2D10ActorSheet extends ActorSheet {
     updateData["data.skills.focus"] = currentArray;
 
     await this.actor.update(updateData);
+  }
+
+  async _deleteItem(event) {
+    event.preventDefault();
+    const itemId = event.currentTarget.closest(".asset-item").dataset.id;
+    await this.actor.deleteEmbeddedDocuments("Item", [itemId]);
   }
 }

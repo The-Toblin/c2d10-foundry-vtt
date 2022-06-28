@@ -44,7 +44,8 @@
             "remove": "Remove",
             "addFocus": "Add a focus",
             "removeFocus": "Remove a focus",
-            "parent": "Parent skill"
+            "parent": "Parent skill",
+            "delete": "Delete item"
         },
         "talents": {
             "physical": "Physical",
