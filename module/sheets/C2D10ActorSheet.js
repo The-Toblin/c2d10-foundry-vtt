@@ -56,7 +56,7 @@ export default class C2D10ActorSheet extends ActorSheet {
         item.sheet.render(true);
       }
     },
-    {
+    /* {
       name: game.i18n.localize("c2d10.sheet.description"),
       icon: '<i class="fas fa-sticky-note"></i>',
       callback: element => {
@@ -65,7 +65,7 @@ export default class C2D10ActorSheet extends ActorSheet {
 
         item.roll();
       }
-    },
+    },*/
     {
       name: game.i18n.localize("c2d10.sheet.remove"),
       icon: '<i class="fas fa-trash"></i>',
