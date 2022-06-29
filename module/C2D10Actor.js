@@ -8,9 +8,7 @@ export default class C2D10Actor extends Actor {
   }
 
   prepareDerivedData() {
-    if (this.getFlag("c2d10", "locked") === undefined) {
-      this.actor.setFlag("c2d10", "locked", true);
-    }
+
   }
 
   async modifyResource(n, type, group, res) {

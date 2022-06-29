@@ -1,5 +1,5 @@
 /**
- * Base Actor sheet. This holds all functions available to actor sheets and is extended by
+ * Base Actor sheet. This holds all functions available to actor sheets and can be extended by
  * actor types for specific data.
  */
 
