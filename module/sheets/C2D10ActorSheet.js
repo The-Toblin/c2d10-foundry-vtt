@@ -20,11 +20,6 @@ export default class C2D10ActorSheet extends ActorSheet {
     });
   }
 
-  constructor(actor, options) {
-    super(actor, options);
-    this.actor.setFlag("c2d10", "locked", true);
-  }
-
   getData() {
     const sheetData = super.getData();
     sheetData.config = CONFIG.c2d10;
