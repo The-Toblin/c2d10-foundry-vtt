@@ -78,46 +78,68 @@ function registerSystemSettings() {
 }
 
 Hooks.once("ready", () => {
-
-  let HP = C2D10HeroPoints.getPoints();
-  let VP = C2D10VillainPoints.getPoints();
-  let DC = C2D10Difficulty.getDC();
+  /**
+   * Add the necessary Keeper controls to the view, hide everything but Hero points for players.
+   */
+  const HP = C2D10HeroPoints.getPoints();
+  const VP = C2D10VillainPoints.getPoints();
+  const DC = C2D10Difficulty.getDC();
   const hide = !game.users.current.isGM ? "hide" : "";
 
-  // FIXME: Create a single variable with variable inputs for vp, dc and hp to save space. Use string interpolation.
-
-  $("body").append(`<div class="c2d10-hero-points"><div class="hp-control-numbers">${HP}</div><div class="keeper-controls ${hide}"><button class="hp-control hp-plus">+</button><button class="hp-control hp-minus ">-</button></div></div>`);
-  $("body").append(`<div class="c2d10-villain-points ${hide}"><div class="vp-control-numbers">${VP}</div><div class="keeper-controls"><button class="vp-control vp-plus">+</button><button class="vp-control vp-minus">-</button></div></div>`);
-  $("body").append(`<div class="c2d10-difficulty ${hide}"><div class="dc-control-numbers">${DC}</div><div class="keeper-controls"><button class="dc-control dc-plus">+</button><button class="dc-control dc-minus">-</button></div></div>`);
-
+  $("body").append(`
+    <div class="c2d10-hero-points">
+      <div class="hp-control-numbers">
+        ${HP}
+      </div>
+      <div class="keeper-controls ${hide}">
+        <button class="hp-control hp-plus">+</button>
+        <button class="hp-control hp-minus ">-</button>
+      </div>
+    </div>`
+  );
+  if (game.users.current.isGM) {
+    $("body").append(`
+      <div class="c2d10-villain-points">
+        <div class="vp-control-numbers">
+          ${VP}
+        </div>
+        <div class="keeper-controls">
+          <button class="vp-control vp-plus">+</button>
+          <button class="vp-control vp-minus">-</button>
+        </div>
+      </div>`
+    );
+    $("body").append(`
+      <div class="c2d10-difficulty">
+        <div class="dc-control-numbers">
+          ${DC}
+        </div>
+          <div class="keeper-controls">
+            <button class="dc-control dc-plus">+</button>
+            <button class="dc-control dc-minus">-</button>
+          </div>
+      </div>`
+    );
+  }
   // Add click events for heropoints.
   $("body").on("click", ".hp-control", event => {
     const $self = $(event.currentTarget);
-    if ($self.hasClass("hp-plus")) {
-      C2D10HeroPoints.changePoints(true);
-    } else {
-      C2D10HeroPoints.changePoints(false);
-    }
+    const isIncrease = $self.hasClass("hp-plus");
+    C2D10HeroPoints.changePoints(isIncrease);
   });
 
   // Add click events for villainpoints.
   $("body").on("click", ".vp-control", event => {
     const $self = $(event.currentTarget);
-    if ($self.hasClass("vp-plus")) {
-      C2D10VillainPoints.changePoints(true);
-    } else {
-      C2D10VillainPoints.changePoints(false);
-    }
+    const isIncrease = $self.hasClass("vp-plus");
+    C2D10VillainPoints.changePoints(isIncrease);
   });
 
   // Add click events for difficulty.
   $("body").on("click", ".dc-control", event => {
     const $self = $(event.currentTarget);
-    if ($self.hasClass("dc-plus")) {
-      C2D10Difficulty.changeDC(true);
-    } else {
-      C2D10Difficulty.changeDC(false);
-    }
+    const isIncrease = $self.hasClass("dc-plus");
+    C2D10Difficulty.changeDC(isIncrease);
   });
 });
 
@@ -150,6 +172,10 @@ Hooks.once("init", function() {
   /* Register all system settings for C2D10 */
   registerSystemSettings();
 
+  /**
+   * Concat handlebars helper for building localization strings from variables
+   */
+  // FIXME: Retire this helper and recode for using Foundry's built in concat helper.
   Handlebars.registerHelper("concat", function() {
     let outStr = "";
 
@@ -161,9 +187,10 @@ Hooks.once("init", function() {
     return outStr;
   });
 
+  /**
+   * Handlebars helper for rendering resource dots
+   */
   Handlebars.registerHelper("dots", function(n, max) {
-    /* Handlebars helper to render dots on sheets. */
-
     const full =
     `<div class="dot-container full">
       <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp"/>
