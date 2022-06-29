@@ -1,11 +1,13 @@
 {
     "c2d10": {
         "resources": {
+            "none": "None",
             "stress": "Stress",
             "strain": "Strain",
             "crisis": "Crisis"
         },
         "duration": {
+            "none": "None",
             "second": "Second",
             "minute": "Minute",
             "action": "Action",
@@ -13,13 +15,16 @@
             "round": "Round",
             "scene": "Scene",
             "hour": "Hour",
-            "permanent": "Permanent"
+            "permanent": "Permanent",
+            "passive": "Passive"
         },
         "range": {
+            "none": "None",
             "meter": "Meter",
             "eye": "Eye contact",
             "sight": "Sight",
-            "close": "Close"
+            "close": "Close",
+            "touch": "Touch"
         },
         "character": {
             "name": "Name",

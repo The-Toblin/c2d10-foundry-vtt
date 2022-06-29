@@ -57,7 +57,8 @@ c2d10.duration = {
   round: "c2d10.duration.round",
   scene: "c2d10.duration.scene",
   hour: "c2d10.duration.hour",
-  permanent: "c2d10.duration.permanent"
+  permanent: "c2d10.duration.permanent",
+  passive: "c2d10.duration.passive"
 };
 
 c2d10.range = {
@@ -65,5 +66,6 @@ c2d10.range = {
   meter: "c2d10.range.meter",
   eye: "c2d10.range.eye",
   sight: "c2d10.range.sight",
-  close: "c2d10.range.close"
+  close: "c2d10.range.close",
+  touch: "c2d10.range.touch"
 };
