@@ -217,6 +217,7 @@ export default class C2D10ActorSheet extends ActorSheet {
 
   async _doEditFocus(html, focusContent) {
     const currentArray = this.actor.data.data.skills.focus;
+    console.log(html.find("input#focus-name"));
     const newName = html.find("input#focus-name").val();
     const newParent= html.find("select#focus-skill").val();
     const index = currentArray.findIndex(p => p.name === focusContent.name);
