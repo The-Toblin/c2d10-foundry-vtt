@@ -11,7 +11,8 @@
                     "species": "",
                     "campaign": "",
                     "ambition": "",
-                    "faction": ""
+                    "faction": "",
+                    "wealth": 2
                 }
             },
             "health": {
@@ -71,7 +72,8 @@
                         "stealth": 0,
                         "survival": 0,
                         "technology": 0
-                    },"focus": []
+                    },
+                    "focus": []
                 }
             },
             "powers": {

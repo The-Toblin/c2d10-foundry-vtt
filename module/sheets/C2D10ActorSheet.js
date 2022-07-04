@@ -88,6 +88,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     html.find(".delete-item").click(this._deleteItem.bind(this));
     html.find(".add-focus").click(this._addFocus.bind(this));
     html.find(".remove-focus").click(this._removeFocus.bind(this));
+    html.find(".focus").click(this._editFocus.bind(this));
 
     new ContextMenu(html, ".asset", this.itemContextMenu);
 
@@ -134,7 +135,7 @@ export default class C2D10ActorSheet extends ActorSheet {
    * @param {object} event Eventdata from the click.
    */
   async _addFocus(event) {
-    event.preventDefault();
+    if (event) event.preventDefault();
 
     const dialogOptions = {
       classes: ["c2d10-dialog", "addFocus"],
@@ -177,6 +178,52 @@ export default class C2D10ActorSheet extends ActorSheet {
     const currentArray = this.actor.data.data.skills.focus;
 
     currentArray.splice(currentArray.findIndex(v => v.name === name), 1);
+
+    const updateData = {};
+    updateData["data.skills.focus"] = currentArray;
+
+    await this.actor.update(updateData);
+  }
+
+  async _editFocus(event) {
+    event.preventDefault();
+
+    const name = event.currentTarget.closest(".focus").dataset.name;
+    const parent = event.currentTarget.closest(".focus").dataset.parent;
+    const dialogData = this.getData();
+    dialogData.focusContent = {name, parent};
+
+    const dialogOptions = {
+      classes: ["c2d10-dialog", "editFocus"],
+      top: 300,
+      left: 400
+    };
+    new Dialog(
+      {
+        title: "Edit a focus",
+        content: await renderTemplate("systems/c2d10/templates/partials/add-focus-dialog.hbs", dialogData),
+        buttons: {
+          roll: {
+            label: "Edit!",
+            callback: html => { this._doEditFocus(html, dialogData.focusContent);
+
+            }
+          }
+        }
+      },
+      dialogOptions
+    ).render(true);
+  }
+
+  async _doEditFocus(html, focusContent) {
+    const currentArray = this.actor.data.data.skills.focus;
+    const newName = html.find("input#focus-name").val();
+    const newParent= html.find("select#focus-skill").val();
+    const index = currentArray.findIndex(p => p.name === focusContent.name);
+    currentArray[index] = {
+      name: newName,
+      parent: newParent
+    };
 
     const updateData = {};
     updateData["data.skills.focus"] = currentArray;
