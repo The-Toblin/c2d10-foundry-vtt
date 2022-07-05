@@ -581,16 +581,16 @@ table input {
   background-image: url(assets/hidden-chat-top.webp), url(assets/hidden-chat-bottom.webp), url(assets/hidden-chat-middle.webp) !important;
 }
 .d10.crit {
-  background-image: url(assets/d10-green) !important;
+  background-image: url(assets/d10-green.webp) !important;
 }
 .d10.mess {
-  background-image: url(assets/d10-orange) !important;
+  background-image: url(assets/d10-orange.webp) !important;
 }
 .d10.crisis {
-  background-image: url(assets/d10-purple) !important;
+  background-image: url(assets/d10-purple.webp) !important;
 }
 .d10.complication {
-  background-image: url(assets/d10-red) !important;
+  background-image: url(assets/d10-red.webp) !important;
 }
 .c2d10.sheet {
   background: linear-gradient(0deg, #021109, 15%, rgba(2, 17, 9, 0.85));
