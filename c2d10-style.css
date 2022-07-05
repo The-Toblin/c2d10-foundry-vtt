@@ -481,6 +481,11 @@ table input {
   color: #29a253;
   box-shadow: 0 0 50px 5px #000 inset;
 }
+#chat-log h1,
+#chat-log h2,
+#chat-log h3 {
+  border: none;
+}
 #chat-log .chat-message,
 #chat-log .chat-message.whisper {
   border-radius: 3px;
