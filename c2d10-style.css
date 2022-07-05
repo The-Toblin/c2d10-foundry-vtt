@@ -580,6 +580,18 @@ table input {
 #chat-log .chat-message.whisper {
   background-image: url(assets/hidden-chat-top.webp), url(assets/hidden-chat-bottom.webp), url(assets/hidden-chat-middle.webp) !important;
 }
+#chat-log .dice-tooltip .dice-rolls .roll.d10 .roll.crit {
+  background-image: url(assets/d10-green) !important;
+}
+#chat-log .dice-tooltip .dice-rolls .roll.d10 .roll.mess {
+  background-image: url(assets/d10-orange) !important;
+}
+#chat-log .dice-tooltip .dice-rolls .roll.d10 .roll.crisis {
+  background-image: url(assets/d10-purple) !important;
+}
+#chat-log .dice-tooltip .dice-rolls .roll.d10 .roll.complication {
+  background-image: url(assets/d10-red) !important;
+}
 .c2d10.sheet {
   background: linear-gradient(0deg, #021109, 15%, rgba(2, 17, 9, 0.85));
 }
