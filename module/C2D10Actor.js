@@ -11,6 +11,16 @@ export default class C2D10Actor extends Actor {
 
   }
 
+  async resetHealth(pass, res) {
+    const updateData = {};
+    updateData[`data.health.${res}`] = 0;
+
+    if (pass === "Fail!") {
+      this.modifyResource(1, "health", null, "crisis");
+    }
+    await this.update(updateData);
+  }
+
   async modifyResource(n, type, group, res) {
     const updateData = {};
     const system = this.data.data;
@@ -33,7 +43,6 @@ export default class C2D10Actor extends Actor {
     } else {
       updateData[`data.${type}.${group}.${res}`] = newValue;
     }
-
     await this.update(updateData);
   }
 }

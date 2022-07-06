@@ -1,3 +1,5 @@
+import * as Roll from "../C2D10Dice.js";
+
 /**
  * Base Actor sheet. This holds all functions available to actor sheets and can be extended by
  * actor types for specific data.
@@ -29,6 +31,28 @@ export default class C2D10ActorSheet extends ActorSheet {
     sheetData.assets = this.actor.items.filter(p => p.type === "asset");
     sheetData.traits = this.actor.items.filter(p => p.type === "trait");
     sheetData.variants = this.actor.items.filter(p => p.type === "variant");
+
+    sheetData.talents = {};
+    for (const entry of Object.entries(sheetData.system.talents.physical)) {
+      sheetData.talents[entry[0]] = entry[1];
+    }
+    for (const entry of Object.entries(sheetData.system.talents.social)) {
+      sheetData.talents[entry[0]] = entry[1];
+    }
+    for (const entry of Object.entries(sheetData.system.talents.mental)) {
+      sheetData.talents[entry[0]] = entry[1];
+    }
+
+    sheetData.skills = {};
+    for (const entry of Object.entries(sheetData.system.skills.physical)) {
+      sheetData.skills[entry[0]] = entry[1];
+    }
+    for (const entry of Object.entries(sheetData.system.skills.social)) {
+      sheetData.skills[entry[0]] = entry[1];
+    }
+    for (const entry of Object.entries(sheetData.system.skills.mental)) {
+      sheetData.skills[entry[0]] = entry[1];
+    }
 
     /* Make system settings available for sheets to use for rendering */
     sheetData.showEffects = game.settings.get("c2d10", "showEffects");
@@ -89,6 +113,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     html.find(".add-focus").click(this._addFocus.bind(this));
     html.find(".remove-focus").click(this._removeFocus.bind(this));
     html.find(".focus").click(this._editFocus.bind(this));
+    html.find(".c2d10-test").click(this._basicTest.bind(this));
 
     new ContextMenu(html, ".asset", this.itemContextMenu);
 
@@ -145,7 +170,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     new Dialog(
       {
         title: "Add a focus",
-        content: await renderTemplate("systems/c2d10/templates/partials/add-focus-dialog.hbs", this.getData()),
+        content: await renderTemplate("systems/c2d10/templates/dialogs/add-focus-dialog.hbs", this.getData()),
         buttons: {
           roll: {
             label: "Add!",
@@ -160,7 +185,7 @@ export default class C2D10ActorSheet extends ActorSheet {
   }
 
   async _doAddFocus(html) {
-    const currentArray = this.actor.data.data.skills.focus;
+    const currentArray = this.getData().system.skills.focus;
     currentArray.push({
       name: html.find("input#focus-name").val(),
       parent: html.find("select#focus-skill").val()
@@ -175,7 +200,7 @@ export default class C2D10ActorSheet extends ActorSheet {
   async _removeFocus(event) {
     event.preventDefault();
     const name = event.currentTarget.closest(".focus").dataset.name;
-    const currentArray = this.actor.data.data.skills.focus;
+    const currentArray = this.getData().system.skills.focus;
 
     currentArray.splice(currentArray.findIndex(v => v.name === name), 1);
 
@@ -201,7 +226,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     new Dialog(
       {
         title: "Edit a focus",
-        content: await renderTemplate("systems/c2d10/templates/partials/add-focus-dialog.hbs", dialogData),
+        content: await renderTemplate("systems/c2d10/templates/dialogs/add-focus-dialog.hbs", dialogData),
         buttons: {
           roll: {
             label: "Edit!",
@@ -216,7 +241,7 @@ export default class C2D10ActorSheet extends ActorSheet {
   }
 
   async _doEditFocus(html, focusContent) {
-    const currentArray = this.actor.data.data.skills.focus;
+    const currentArray = this.getData().system.skills.focus;
     const newName = html.find("input#focus-name").val();
     const newParent= html.find("select#focus-skill").val();
     const index = currentArray.findIndex(p => p.name === focusContent.name);
@@ -235,5 +260,21 @@ export default class C2D10ActorSheet extends ActorSheet {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".asset-item").dataset.id;
     await this.actor.deleteEmbeddedDocuments("Item", [itemId]);
+  }
+
+  async _basicTest(event) {
+    event.preventDefault();
+    const dataset = event.currentTarget.closest(".c2d10-test").dataset;
+    const rollData = {
+      crisis: this.getData().system.health.crisis,
+      strain: this.getData().system.health.strain,
+      stress: this.getData().system.health.stress,
+      talents: this.getData().talents,
+      skills: this.getData().skills,
+      item: dataset.id,
+      id: this.actor.id
+    };
+
+    Roll.Test(rollData);
   }
 }

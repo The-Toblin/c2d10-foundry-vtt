@@ -15,32 +15,42 @@ c2d10.resources = {
   strain: "c2d10.resources.strain",
   crisis: "c2d10.resources.crisis"
 };
-
+c2d10.allTalents = {
+  agility: "c2d10.talents.agility",
+  endurance: "c2d10.talents.endurance",
+  strength: "c2d10.talents.strength",
+  charm: "c2d10.talents.charm",
+  empathy: "c2d10.talents.empathy",
+  manipulation: "c2d10.talents.manipulation",
+  logic: "c2d10.talents.logic",
+  reason: "c2d10.talents.reason",
+  willpower: "c2d10.talents.willpower"
+};
 c2d10.allSkills = {
-  academia: "Academia",
-  acrobatics: "Acrobatics",
-  athletics: "Athletics",
-  awareness: "Awareness",
-  brawl: "Brawl",
-  burglary: "Burglary",
-  carousing: "Carousing",
-  crafts: "Crafts",
-  driving: "Driving",
-  firearms: "Firearms",
-  insight: "Insight",
-  intimidation: "Intimidation",
-  investigation: "Investigation",
-  leadership: "Leadership",
-  medicine: "Medicine",
-  melee: "Melee",
-  persuasion: "Persuasion",
-  politics: "Politics",
-  science: "Science",
-  stealth: "Stealth",
-  streetsmarts: "Street-smarts",
-  subterfuge: "Subterfuge",
-  survival: "Survival",
-  technology: "Technology"
+  academia: "c2d10.skills.academia",
+  acrobatics: "c2d10.skills.acrobatics",
+  athletics: "c2d10.skills.athletics",
+  awareness: "c2d10.skills.awareness",
+  brawl: "c2d10.skills.brawl",
+  burglary: "c2d10.skills.burglary",
+  carousing: "c2d10.skills.carousing",
+  crafts: "c2d10.skills.crafts",
+  driving: "c2d10.skills.driving",
+  firearms: "c2d10.skills.firearms",
+  insight: "c2d10.skills.insight",
+  intimidation: "c2d10.skills.intimidation",
+  investigation: "c2d10.skills.investigation",
+  leadership: "c2d10.skills.leadership",
+  medicine: "c2d10.skills.medicine",
+  melee: "c2d10.skills.melee",
+  persuasion: "c2d10.skills.Persuasion",
+  politics: "c2d10.skills.politics",
+  science: "c2d10.skills.science",
+  stealth: "c2d10.skills.stealth",
+  streetsmarts: "c2d10.skills.streetsmarts",
+  subterfuge: "c2d10.skills.subterfuge",
+  survival: "c2d10.skills.survival",
+  technology: "c2d10.skills.technology"
 };
 
 c2d10.virtueVice = {

@@ -1,6 +1,10 @@
 <section>
-    <h3 class="align-center">
-        Roll
+    <h3 class="align-center c2d10-capitalize">
+        [{{localize "c2d10.chat.DC"}}{{DC}}]
+        {{#if parentName}}
+            {{parentName}} + 
+        {{/if}}
+        {{skillName}}
     </h3>
     {{{roll}}}
 </section>

@@ -15,7 +15,7 @@
                     </colgroup>
                     {{#each system.skills.physical as |level name|}}
                         <tr>
-                            <th class="table-no-border">{{localize (concat "c2d10.skills." name)}}</th>
+                            <th class="c2d10-test table-no-border" data-type="skills" data-group="physical" data-id="{{name}}">{{localize (concat "c2d10.skills." name)}}</th>
                             <td class="flex-row table-no-border resource-row" data-type="skills" data-group="physical" data-id="{{name}}">
                                 {{#dots level 5}}{{/dots}}
                             </td>
@@ -36,7 +36,7 @@
                     </colgroup>
                     {{#each system.skills.social as |level name|}}
                         <tr>
-                            <th class="table-no-border">{{localize (concat "c2d10.skills." name)}}</th>
+                            <th class="c2d10-test table-no-border" data-type="skills" data-group="social" data-id="{{name}}">{{localize (concat "c2d10.skills." name)}}</th>
                             <td class="flex-row table-no-border resource-row" data-type="skills" data-group="social" data-id="{{name}}">
                                 {{#dots level 5}}{{/dots}}
                             </td>
@@ -57,7 +57,7 @@
                     </colgroup>
                     {{#each system.skills.mental as |level name|}}
                         <tr>
-                            <th class="table-no-border">{{localize (concat "c2d10.skills." name)}}</th>
+                            <th class="c2d10-test table-no-border" data-type="skills" data-group="mental" data-id="{{name}}">{{localize (concat "c2d10.skills." name)}}</th>
                             <td class="flex-row table-no-border resource-row" data-type="skills" data-group="mental" data-id="{{name}}">
                                 {{#dots level 5}}{{/dots}}
                             </td>

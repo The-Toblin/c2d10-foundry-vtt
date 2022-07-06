@@ -3,7 +3,8 @@ import C2D10Item from "./module/C2D10Item.js";
 import C2D10ItemSheet from "./module/sheets/C2D10ItemSheet.js";
 import C2D10Actor from "./module/C2D10Actor.js";
 import C2D10ActorSheet from "./module/sheets/C2D10ActorSheet.js";
-import { C2D10HeroPoints, C2D10VillainPoints, C2D10Difficulty } from "./module/C2D10Utility.js";
+import {getHeroPoints, getVillainPoints, getDice, changeHeroPoints, changeVillainPoints, changeDC, buyDice} from "./module/C2D10Utility.js";
+import getDC from "./module/C2D10Utility.js";
 
 /**
  * Loads HandleBars templates for use in the system.
@@ -20,7 +21,8 @@ async function preloadHandlebarsTemplates() {
     "systems/c2d10/templates/partials/list-items/asset-list-item.hbs",
     "systems/c2d10/templates/partials/list-items/trait-list-item.hbs",
     "systems/c2d10/templates/partials/list-items/variant-list-item.hbs",
-    "systems/c2d10/templates/partials/add-focus-dialog.hbs"
+    "systems/c2d10/templates/dialogs/add-focus-dialog.hbs",
+    "systems/c2d10/templates/dialogs/roll-test-dialog.hbs"
   ];
 
   return loadTemplates(templatePaths);
@@ -75,15 +77,29 @@ function registerSystemSettings() {
     default: 2,
     onChange: value => $(".dc-control-numbers").text(value)
   });
+
+  /**
+   * Allow players to buy additional dice.
+   */
+  game.settings.register("c2d10", "bonusDice", {
+    config: false,
+    scope: "world",
+    name: "SETTINGS.bonusDice.name",
+    hint: "SETTINGS.bonusDice.label",
+    type: Number,
+    default: 0,
+    onChange: value => $(".bonus-control-numbers").text(value)
+  });
 }
 
 Hooks.once("ready", () => {
   /**
    * Add the necessary Keeper controls to the view, hide everything but Hero points for players.
    */
-  const HP = C2D10HeroPoints.getPoints();
-  const VP = C2D10VillainPoints.getPoints();
-  const DC = C2D10Difficulty.getDC();
+  const HP = getHeroPoints();
+  const VP = getVillainPoints();
+  const DC = getDC();
+  const bonusDice = getDice();
   const hide = !game.users.current.isGM ? "hide" : "";
 
   $("body").append(`
@@ -94,6 +110,15 @@ Hooks.once("ready", () => {
       <div class="keeper-controls ${hide}">
         <button class="hp-control hp-plus">+</button>
         <button class="hp-control hp-minus ">-</button>
+      </div>
+    </div>
+    <div class="c2d10-bonus-dice">
+      <div class="bonus-control-numbers">
+        ${bonusDice}
+      </div>
+      <div class="keeper-controls">
+        <button class="bonus-control bonus-plus">+</button>
+        <button class="bonus-control bonus-minus">-</button>
       </div>
     </div>`
   );
@@ -125,21 +150,29 @@ Hooks.once("ready", () => {
   $("body").on("click", ".hp-control", event => {
     const $self = $(event.currentTarget);
     const isIncrease = $self.hasClass("hp-plus");
-    C2D10HeroPoints.changePoints(isIncrease);
+    changeHeroPoints(isIncrease);
   });
 
   // Add click events for villainpoints.
   $("body").on("click", ".vp-control", event => {
     const $self = $(event.currentTarget);
     const isIncrease = $self.hasClass("vp-plus");
-    C2D10VillainPoints.changePoints(isIncrease);
+    changeVillainPoints(isIncrease);
   });
 
   // Add click events for difficulty.
   $("body").on("click", ".dc-control", event => {
     const $self = $(event.currentTarget);
     const isIncrease = $self.hasClass("dc-plus");
-    C2D10Difficulty.changeDC(isIncrease);
+    changeDC(isIncrease);
+  });
+
+  // Add click events for difficulty.
+  $("body").on("click", ".bonus-control", event => {
+    const $self = $(event.currentTarget);
+    const isIncrease = $self.hasClass("bonus-plus");
+    const isPlayer = !game.users.current.isGM;
+    buyDice(isIncrease, isPlayer);
   });
 });
 

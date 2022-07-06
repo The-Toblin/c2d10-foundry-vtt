@@ -1,6 +1,7 @@
 .c2d10-hero-points,
 .c2d10-villain-points,
-.c2d10-difficulty {
+.c2d10-difficulty,
+.c2d10-bonus-dice {
   background: fade(@colors[bkg], 50%);
   border: 1px solid @colors[bkg];
   border-radius: 5px;
@@ -11,7 +12,7 @@
   font-family: @m2;
   font-size: 60px;
   height: 84px;
-  right: 655px;
+  right: 510px;
   bottom: 5px;
   line-height: 1.2;
   margin: 0 0 8px;
@@ -37,7 +38,8 @@
 
   .hp-control-numbers,
   .vp-control-numbers,
-  .dc-control-numbers {
+  .dc-control-numbers,
+  .bonus-control-numbers {
     pointer-events: none;
   }
 
@@ -58,7 +60,8 @@
 
   .hp-control,
   .vp-control,
-  .dc-control {
+  .dc-control,
+  .bonus-control {
     display: block;
     width: 40px;
     height: 40px;
@@ -93,8 +96,17 @@
 
 }
 
+.c2d10-bonus-dice {
+  right: 370px;
+  bottom: 100px;
+
+  &::after {
+    content: 'Bonus Dice'
+  }
+}
+
 .c2d10-villain-points {
-  right: 510px;
+  bottom: 100px;
 
   &::after {
     content: 'Villain Points'
