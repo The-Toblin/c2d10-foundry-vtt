@@ -32,7 +32,8 @@
             "concept": "Concept",
             "ambition": "Ambition",
             "species": "Species",
-            "faction": "Faction"
+            "faction": "Faction",
+            "wealth": "Wealth"
         },
         "sheet": {
             "experience": "XP",
