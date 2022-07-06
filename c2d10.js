@@ -116,7 +116,7 @@ Hooks.once("ready", () => {
       <div class="bonus-control-numbers">
         ${bonusDice}
       </div>
-      <div class="keeper-controls">
+      <div class="keeper-controls ${hide}">
         <button class="bonus-control bonus-plus">+</button>
         <button class="bonus-control bonus-minus">-</button>
       </div>
