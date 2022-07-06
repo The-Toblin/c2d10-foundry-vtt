@@ -84,7 +84,7 @@ export async function buyDice(isIncrease, isPlayer) {
   if (newPoints <= max && newPoints >= 0) {
     if (newValue <= 5 && newValue >= 0) {
       await game.settings.set("c2d10", "bonusDice", newValue);
-      await game.settings.set("c2d10", target, newPoints );
+      // TODO: Convert this to sockets some day. await game.settings.set("c2d10", target, newPoints );
     }
   }
 }
