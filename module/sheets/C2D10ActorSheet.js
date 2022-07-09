@@ -1,4 +1,4 @@
-import * as Roll from "../C2D10Dice.js";
+import {Test as Roll} from "../C2D10Dice.js";
 
 /**
  * Base Actor sheet. This holds all functions available to actor sheets and can be extended by

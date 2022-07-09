@@ -15,7 +15,7 @@ export function getVillainPoints() {
 /**
  * Returns the the current game DC.
  */
-export default function getDC() {
+export function getDC() {
   return game.settings.get("c2d10", "DC");
 }
 

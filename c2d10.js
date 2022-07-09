@@ -3,8 +3,7 @@ import C2D10Item from "./module/C2D10Item.js";
 import C2D10ItemSheet from "./module/sheets/C2D10ItemSheet.js";
 import C2D10Actor from "./module/C2D10Actor.js";
 import C2D10ActorSheet from "./module/sheets/C2D10ActorSheet.js";
-import {getHeroPoints, getVillainPoints, getDice, changeHeroPoints, changeVillainPoints, changeDC, buyDice} from "./module/C2D10Utility.js";
-import getDC from "./module/C2D10Utility.js";
+import * as Roll from "./module/C2D10Utility.js";
 
 /**
  * Loads HandleBars templates for use in the system.
@@ -96,10 +95,10 @@ Hooks.once("ready", () => {
   /**
    * Add the necessary Keeper controls to the view, hide everything but Hero points for players.
    */
-  const HP = getHeroPoints();
-  const VP = getVillainPoints();
-  const DC = getDC();
-  const bonusDice = getDice();
+  const HP = Roll.getHeroPoints();
+  const VP = Roll.getVillainPoints();
+  const DC = Roll.getDC();
+  const bonusDice = Roll.getDice();
   const hide = !game.users.current.isGM ? "hide" : "";
 
   $("body").append(`
@@ -150,21 +149,21 @@ Hooks.once("ready", () => {
   $("body").on("click", ".hp-control", event => {
     const $self = $(event.currentTarget);
     const isIncrease = $self.hasClass("hp-plus");
-    changeHeroPoints(isIncrease);
+    Roll.changeHeroPoints(isIncrease);
   });
 
   // Add click events for villainpoints.
   $("body").on("click", ".vp-control", event => {
     const $self = $(event.currentTarget);
     const isIncrease = $self.hasClass("vp-plus");
-    changeVillainPoints(isIncrease);
+    Roll.changeVillainPoints(isIncrease);
   });
 
   // Add click events for difficulty.
   $("body").on("click", ".dc-control", event => {
     const $self = $(event.currentTarget);
     const isIncrease = $self.hasClass("dc-plus");
-    changeDC(isIncrease);
+    Roll.changeDC(isIncrease);
   });
 
   // Add click events for difficulty.
@@ -172,7 +171,7 @@ Hooks.once("ready", () => {
     const $self = $(event.currentTarget);
     const isIncrease = $self.hasClass("bonus-plus");
     const isPlayer = !game.users.current.isGM;
-    buyDice(isIncrease, isPlayer);
+    Roll.buyDice(isIncrease, isPlayer);
   });
 });
 
