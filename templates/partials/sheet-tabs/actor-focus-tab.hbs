@@ -16,13 +16,13 @@
                         </th>
                         <th class="align-left table-no-border">{{localize "c2d10.sheet.parent"}}</th>
                     </tr>
-                    {{#each system.skills.focus as | focus |}}
+                    {{#each focus as | focus |}}
                 <tr>
-                    <td class="align-left table-no-border" data-name="{{focus.name}}" data-parent="{{focus.parent}}">
+                    <td class="align-left focus table-no-border flex-row" data-name="{{focus.name}}" data-parent="{{focus.parent}}">
                         <a class="remove-focus" title="{{localize "c2d10.sheet.removeFocus"}}">
                             <i class="far fa-minus-square"></i>
                         </a>
-                        <div class="focus">
+                        <div class="focus-edit">
                             {{focus.name}}
                         </div>
                     </td>
