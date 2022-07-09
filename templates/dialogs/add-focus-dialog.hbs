@@ -1,7 +1,7 @@
 <form>
-    <input id="focus-name" type="text" value="{{focusContent.name}}" placeholder="{{localize "c2d10.skills.name"}}" />
+    <input id="focus-name" type="text" value="{{name}}" placeholder="{{localize "c2d10.skills.name"}}" />
     <select id="focus-skill">
-        {{selectOptions config.allSkills selected=focusContent.parent localize=true}}
+        {{selectOptions config.allSkills selected=parent localize=true}}
     </select>
 </form>
 
