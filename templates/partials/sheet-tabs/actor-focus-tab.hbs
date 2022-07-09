@@ -18,11 +18,13 @@
                     </tr>
                     {{#each system.skills.focus as | focus |}}
                 <tr>
-                    <td class="align-left focus table-no-border" data-name="{{focus.name}}" data-parent="{{focus.parent}}">
+                    <td class="align-left table-no-border" data-name="{{focus.name}}" data-parent="{{focus.parent}}">
                         <a class="remove-focus" title="{{localize "c2d10.sheet.removeFocus"}}">
                             <i class="far fa-minus-square"></i>
                         </a>
-                        {{focus.name}}
+                        <div class="focus">
+                            {{focus.name}}
+                        </div>
                     </td>
                     <td class="align-left focus table-no-border">
                         {{localize (concat "c2d10.skills." focus.parent)}}

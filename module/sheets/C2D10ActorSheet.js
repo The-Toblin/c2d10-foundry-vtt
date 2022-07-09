@@ -26,11 +26,12 @@ export default class C2D10ActorSheet extends ActorSheet {
     const sheetData = super.getData();
     sheetData.config = CONFIG.c2d10;
     sheetData.system = sheetData.data.data;
+    sheetData.items = this.actor.items;
 
     /* Assets */
-    sheetData.assets = this.actor.items.filter(p => p.type === "asset");
-    sheetData.traits = this.actor.items.filter(p => p.type === "trait");
-    sheetData.variants = this.actor.items.filter(p => p.type === "variant");
+    sheetData.assets = sheetData.items.filter(p => p.type === "asset");
+    sheetData.traits = sheetData.items.filter(p => p.type === "trait");
+    sheetData.variants = sheetData.items.filter(p => p.type === "variant");
 
     sheetData.talents = {};
     for (const entry of Object.entries(sheetData.system.talents.physical)) {
@@ -80,6 +81,7 @@ export default class C2D10ActorSheet extends ActorSheet {
         item.sheet.render(true);
       }
     },
+    // TODO: Reimplement this functionality at some point.
     /* {
       name: game.i18n.localize("c2d10.sheet.description"),
       icon: '<i class="fas fa-sticky-note"></i>',
