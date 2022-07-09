@@ -217,7 +217,7 @@ export default class C2D10ActorSheet extends ActorSheet {
 
     const name = event.currentTarget.closest(".focus").dataset.name;
     const parent = event.currentTarget.closest(".focus").dataset.parent;
-    const dialogData = [];
+    const dialogData = this.getData();
     dialogData.focusContent = {name, parent};
 
     const dialogOptions = {
