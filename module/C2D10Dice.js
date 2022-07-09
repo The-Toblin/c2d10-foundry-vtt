@@ -59,7 +59,7 @@ const evaluateSuccesses = async (rolledResults, DC, crisis = 0) => {
  * Function to build the rendered list of rolls, marking dice accordingly.
  * @param {Array} diceRolls  List of the rolled results.
  * @param {number} crisis     The character's current crisis.
- * @returns
+ * @returns {object}
  */
 const diceList = async (diceRolls, crisis = 0) => {
   const results = {
@@ -282,7 +282,7 @@ const checkIfTalent = async (name, talents) => {
  *  Base test function. Performs a test with a talent or skill.
  * @param {object} rollData The provided rollData from the sheet.
  */
-export const Test = async rollData => {
+export default async function rollBasicTest(rollData) {
 
   if (await checkIfHealth(rollData.item)) {
     rollData.DC = rollData.item === "strain" ? rollData.strain : rollData.stress;
@@ -295,8 +295,12 @@ export const Test = async rollData => {
     rollData.DC = game.settings.get("c2d10", "DC");
 
     doRoll(rollData);
-  }
-  else {
+  } else if (rollData.item === "wealth") {
+    rollData.pool = rollData.wealth;
+    rollData.DC = game.settings.get("c2d10", "DC");
+
+    doRoll(rollData);
+  } else {
     rollData.talentsList = c2d10.allTalents;
     rollData.pool = rollData.skills[rollData.item];
 
@@ -324,4 +328,4 @@ export const Test = async rollData => {
       },
       dialogOptions
     ).render(true);
-  }};
+  }}

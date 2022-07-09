@@ -1,4 +1,4 @@
-import {Test as Roll} from "../C2D10Dice.js";
+import rollBasicTest from "../C2D10Dice.js";
 
 /**
  * Base Actor sheet. This holds all functions available to actor sheets and can be extended by
@@ -271,12 +271,13 @@ export default class C2D10ActorSheet extends ActorSheet {
       crisis: this.getData().system.health.crisis,
       strain: this.getData().system.health.strain,
       stress: this.getData().system.health.stress,
+      wealth: this.getData().system.info.wealth,
       talents: this.getData().talents,
       skills: this.getData().skills,
       item: dataset.id,
       id: this.actor.id
     };
 
-    Roll.Test(rollData);
+    rollBasicTest(rollData);
   }
 }
