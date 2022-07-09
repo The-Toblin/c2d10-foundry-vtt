@@ -114,7 +114,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     html.find(".delete-item").click(this._deleteItem.bind(this));
     html.find(".add-focus").click(this._addFocus.bind(this));
     html.find(".remove-focus").click(this._removeFocus.bind(this));
-    html.find(".edit-focus").click(this._editFocus.bind(this));
+    html.find(".focus-edit").click(this._editFocus.bind(this));
     html.find(".c2d10-test").click(this._basicTest.bind(this));
 
     new ContextMenu(html, ".asset", this.itemContextMenu);
