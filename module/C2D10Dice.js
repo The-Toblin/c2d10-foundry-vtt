@@ -9,11 +9,11 @@ import { getDice } from "./C2D10Utility.js";
 
 
 /**
- *
- * @param {*} rolledResults
- * @param {*} DC
- * @param {*} crisis
- * @returns
+ *  Counts successes, zeroes, determines messups and complications.
+ * @param {object}    rolledResults  an array holding the rolled results from the dice roll.
+ * @param {number}    DC             a number, showing the DC for the test.
+ * @param {number}    crisis         a character's current crisis for the test.
+ * @returns {object}  evaluation results in an object.
  */
 const evaluateSuccesses = async (rolledResults, DC, crisis = 0) => {
   let numOfSuccess = 0;
@@ -56,9 +56,9 @@ const evaluateSuccesses = async (rolledResults, DC, crisis = 0) => {
 };
 
 /**
- *
- * @param {*} diceRolls
- * @param {*} crisis
+ * Function to build the rendered list of rolls, marking dice accordingly.
+ * @param {Array} diceRolls  List of the rolled results.
+ * @param {number} crisis     The character's current crisis.
  * @returns
  */
 const diceList = async (diceRolls, crisis = 0) => {
@@ -91,14 +91,13 @@ const diceList = async (diceRolls, crisis = 0) => {
 };
 
 /**
- *
- * @param formula
- * @param diceRolls
- * @param evaluation
- * @param crisis
+ * Build the rendered roll template for chat.
+ * @param {string} formula      The rollformula, so it can be presented.
+ * @param {string} listContents A rendered HTML string showing all dice rolls.
+ * @param {object} evaluation   Evaluated roll object. Contains pass, DC, number of successes etc.
+ * @param {number} crisis       A character's current crisis.
  */
-const renderRoll = async (formula, diceRolls, evaluation, crisis) => {
-  const listContents = await diceList(diceRolls, crisis);
+const renderRoll = async (formula, listContents, evaluation, crisis) => {
   let outcome = "";
 
   if (evaluation.pass === "Pass!") {
@@ -188,8 +187,7 @@ const renderRoll = async (formula, diceRolls, evaluation, crisis) => {
 };
 
 /**
- *  Setup, prepare and perform the roll.
- * @param {object} html     Form data from the dialog
+ * Setup, prepare and perform the roll.
  * @param {object} rollData The rolldata delivered from the sheet.
  */
 const doRoll = async rollData => {
@@ -213,9 +211,16 @@ const doRoll = async rollData => {
     theRoll.terms[0].results[i].result -= 1;
   }
 
+  // Evaluate the roll
   const evaluation = await evaluateSuccesses(theRoll.terms[0].results, DC, crisis);
-  const renderedRoll = await renderRoll(rollFormula, theRoll.terms[0].results, evaluation, crisis);
 
+  // Create a rendered HTML object holding the dice rolls to present in chat.
+  const renderedList = await diceList(theRoll.terms[0].results, crisis);
+
+  // Render the actual chat message
+  const renderedRoll = await renderRoll(rollFormula, renderedList, evaluation, crisis);
+
+  // Create the chat message object
   let templateContext = {
     DC: DC,
     skillName: rollData.item,
@@ -235,8 +240,11 @@ const doRoll = async rollData => {
     type: CONST.CHAT_MESSAGE_TYPES.ROLL
   };
 
+  // Post chat message to chat.
   ChatMessage.create(chatData);
 
+
+  // If the roll was a strain or stress test, clear the respective stat.
   if (rollData.item === "strain" || rollData.item === "stress") {
     const actor = game.actors.get(rollData.id);
     try {
@@ -246,6 +254,7 @@ const doRoll = async rollData => {
     }
   }
 
+  // If bonus dice were used, clear the bonus tracker.
   if (bonusDice > 0) {
     game.settings.set("c2d10", "bonusDice", 0);
   }

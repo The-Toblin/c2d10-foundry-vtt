@@ -43,7 +43,7 @@ c2d10.allSkills = {
   leadership: "c2d10.skills.leadership",
   medicine: "c2d10.skills.medicine",
   melee: "c2d10.skills.melee",
-  persuasion: "c2d10.skills.Persuasion",
+  persuasion: "c2d10.skills.persuasion",
   politics: "c2d10.skills.politics",
   science: "c2d10.skills.science",
   stealth: "c2d10.skills.stealth",
