@@ -224,6 +224,7 @@ const _doRoll = async rollData => {
 
   // Create the chat message object
   let templateContext = {
+    name: ChatMessage.getSpeakerActor(),
     DC: DC,
     skillName: rollData.item,
     skillLevel: rollData.pool,
