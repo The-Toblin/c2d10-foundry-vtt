@@ -1,10 +1,12 @@
 import {c2d10} from "./config.js";
 import { getDice } from "./C2D10Utility.js";
 /**
- * Core dice roller class for handling all types of test.
+ * Core dice roller file for handling all types of test.
  * Contains helper functions for resolving things necessary for tests.
  *
- * Exports three functions for handling basic skill tests, strain and stress tests.
+ * Exports the rollBasicTest function that allows performing C2D10 tests.
+ * This utility file contains a number of internal helper functions saved as constants.
+ * Only a single function is exported for use, and it is found at the end of this file.
  */
 
 
@@ -15,7 +17,7 @@ import { getDice } from "./C2D10Utility.js";
  * @param {number}    crisis         a character's current crisis for the test.
  * @returns {object}  evaluation results in an object.
  */
-const evaluateSuccesses = async (rolledResults, DC, crisis = 0) => {
+const _evaluateSuccesses = async (rolledResults, DC, crisis = 0) => {
   let numOfSuccess = 0;
   let complication = false;
   let mess = false;
@@ -61,7 +63,7 @@ const evaluateSuccesses = async (rolledResults, DC, crisis = 0) => {
  * @param {number} crisis     The character's current crisis.
  * @returns {object}
  */
-const diceList = async (diceRolls, crisis = 0) => {
+const _diceList = async (diceRolls, crisis = 0) => {
   const results = {
     0: '<li class="roll die d10 failure">',
     7: '<li class="roll die d10 success">',
@@ -97,7 +99,7 @@ const diceList = async (diceRolls, crisis = 0) => {
  * @param {object} evaluation   Evaluated roll object. Contains pass, DC, number of successes etc.
  * @param {number} crisis       A character's current crisis.
  */
-const renderRoll = async (formula, listContents, evaluation, crisis) => {
+const _renderRoll = async (formula, listContents, evaluation, crisis) => {
   let outcome = "";
 
   if (evaluation.pass === "Pass!") {
@@ -188,9 +190,9 @@ const renderRoll = async (formula, listContents, evaluation, crisis) => {
 
 /**
  * Setup, prepare and perform the roll.
- * @param {object} rollData The rolldata delivered from the sheet.
+ * @param {object} rollData The rolldata delivered from the base function.
  */
-const doRoll = async rollData => {
+const _doRoll = async rollData => {
   const messageTemplate = "systems/c2d10/templates/partials/chat-templates/roll.hbs";
   const parentLevel = rollData.parent ? rollData.talents[rollData.parent] : 0;
   const bonusDice = getDice();
@@ -212,13 +214,13 @@ const doRoll = async rollData => {
   }
 
   // Evaluate the roll
-  const evaluation = await evaluateSuccesses(theRoll.terms[0].results, DC, crisis);
+  const evaluation = await _evaluateSuccesses(theRoll.terms[0].results, DC, crisis);
 
   // Create a rendered HTML object holding the dice rolls to present in chat.
-  const renderedList = await diceList(theRoll.terms[0].results, crisis);
+  const renderedList = await _diceList(theRoll.terms[0].results, crisis);
 
   // Render the actual chat message
-  const renderedRoll = await renderRoll(rollFormula, renderedList, evaluation, crisis);
+  const renderedRoll = await _renderRoll(rollFormula, renderedList, evaluation, crisis);
 
   // Create the chat message object
   let templateContext = {
@@ -260,80 +262,99 @@ const doRoll = async rollData => {
   }
 };
 
-const checkIfHealth = async name => {
-  const health = ["strain", "stress"];
+/**
+ * Perform a Wealth test, rolling just with Wealth and nothing else. Takes Crisis into account.
+ * @param {number} crisis  The character's current value in Crisis.
+ * @param {number} pool    The Wealth rank to produce a pool of dice.
+ */
+export async function wealthTest(crisis, pool) {
+  const rollData = {};
 
-  for (const healthName of health) {
-    if (healthName === name) return true;
-  }
-  return false;
-};
+  rollData.crisis = crisis;
+  rollData.item = "wealth";
+  rollData.pool = pool;
+  rollData.DC = rollData.DC = game.settings.get("c2d10", "DC");
+  rollData.type = "wealth";
+  _doRoll(rollData);
 
-const checkIfTalent = async (name, talents) => {
-  const tal = Object.keys(talents);
-
-  for (const talName of tal) {
-    if (talName === name) return true;
-  }
-  return false;
-};
-
-const checkIfWealth = async name => {
-  if (name === "wealth") return true;
-  return false;
-};
+}
 
 /**
- *  Base test function. Performs a test with a talent or skill.
- * @param {object} rollData The provided rollData from the sheet.
+ * Perform a Health test (Strain or Stress). Takes Crisis into account.
+ * @param {number}  crisis    The character's current value in Crisis.
+ * @param {boolean} strain    If it's Strain to roll for. If not, defaults to Stress.
+ * @param {number}  pool      The value of the relevant Talent (Endurance or Willpower)
+ * @param {number}  DC        The amount of Strain or Stress the character has, setting difficulty for the test.
+ * @param {string}  actorId   The actor's Id, used to call the resethealth function.
  */
-export default async function rollBasicTest(rollData) {
+export async function healthTest(crisis, strain, pool, DC, actorId) {
+  const rollData = {};
 
-  // Determine if it's a talent test, strain/stress test or a skill test.
-  if (await checkIfHealth(rollData.item)) {
-    rollData.DC = rollData.item === "strain" ? rollData.strain : rollData.stress;
-    rollData.pool = rollData.item === "strain" ? rollData.talents.endurance : rollData.talents.willpower;
+  rollData.crisis = crisis;
+  rollData.item = strain ? "strain" : "stress";
+  rollData.pool = pool;
+  rollData.DC = DC;
+  rollData.id = actorId;
+  rollData.type = "health";
+  _doRoll(rollData);
 
-    doRoll(rollData);
+}
 
-  } else if (await checkIfTalent(rollData.item, rollData.talents)) {
-    rollData.pool = rollData.talents[rollData.item];
-    rollData.talentsList = false;
-    rollData.DC = game.settings.get("c2d10", "DC");
+/**
+ * Perform a blank Talent test, rolling just with the Talent and nothing else. Takes Crisis into account.
+ * @param {number} crisis  The character's current value in Crisis.
+ * @param {string} item    The name of the item to roll for.
+ * @param {number} pool    The Talent rank to produce a pool of dice.
+ */
+export async function talentTest(crisis, item, pool) {
+  const rollData = {};
+  rollData.crisis = crisis;
+  rollData.item = item;
+  rollData.pool = pool;
+  rollData.DC = game.settings.get("c2d10", "DC");
+  rollData.type = "talent";
+  _doRoll(rollData);
+}
 
-    doRoll(rollData);
+/**
+ * Perform a Skill test. Will open a dialog to choose parent Talent. Takes Crisis into account.
+ * @param {number} crisis  The character's current value in Crisis.
+ * @param {string} item    The name of the item to roll for.
+ * @param {number} pool    The Talent rank to produce a pool of dice.
+ * @param {object} talents An object holding all the talents and ranks for the character.
+ */
+export async function skillTest(crisis, item, pool, talents) {
+  const rollData = {};
 
-  } else if (await checkIfWealth(rollData.item)) {
-    rollData.pool = rollData.wealth;
-    rollData.DC = game.settings.get("c2d10", "DC");
+  rollData.talentsList = c2d10.allTalents;
+  rollData.pool = pool;
+  rollData.item = item;
+  rollData.crisis = crisis;
+  rollData.DC = game.settings.get("c2d10", "DC");
+  rollData.type = "skill";
+  rollData.talents = talents;
 
-    doRoll(rollData);
-  } else {
-    rollData.talentsList = c2d10.allTalents;
-    rollData.pool = rollData.skills[rollData.item];
+  const dialogOptions = {
+    classes: ["c2d10-dialog", "roll"],
+    top: 300,
+    left: 400
+  };
 
-    const dialogOptions = {
-      classes: ["c2d10-dialog", "roll"],
-      top: 300,
-      left: 400
-    };
-
-    new Dialog(
-      {
-        title: `Make ${rollData.item} test`,
-        content: await renderTemplate("systems/c2d10/templates/dialogs/roll-test-dialog.hbs", rollData),
-        buttons: {
-          roll: {
-            label: "Roll!",
-            callback: html => {
-              rollData.pool = html.find("input#pool").val() <= 5 ? parseInt(html.find("input#pool").val()) : 5;
-              rollData.crisis = html.find("input#crisis").val();
-              rollData.parent = html.find("select#parent").val();
-              rollData.DC = game.settings.get("c2d10", "DC");
-              doRoll(rollData);}
-          }
+  new Dialog(
+    {
+      title: `Make ${item} test`,
+      content: await renderTemplate("systems/c2d10/templates/dialogs/roll-test-dialog.hbs", rollData),
+      buttons: {
+        roll: {
+          label: "Roll!",
+          callback: html => {
+            rollData.pool = html.find("input#pool").val() <= 5 ? parseInt(html.find("input#pool").val()) : 5;
+            rollData.crisis = html.find("input#crisis").val();
+            rollData.parent = html.find("select#parent").val();
+            _doRoll(rollData);}
         }
-      },
-      dialogOptions
-    ).render(true);
-  }}
+      }
+    },
+    dialogOptions
+  ).render(true);
+}

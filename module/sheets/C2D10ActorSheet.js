@@ -1,4 +1,4 @@
-import rollBasicTest from "../C2D10Dice.js";
+import {wealthTest, healthTest, talentTest, skillTest} from "../C2D10Dice.js";
 
 /**
  * Base Actor sheet. This holds all functions available to actor sheets and can be extended by
@@ -115,7 +115,10 @@ export default class C2D10ActorSheet extends ActorSheet {
     html.find(".add-focus").click(this._addFocus.bind(this));
     html.find(".remove-focus").click(this._removeFocus.bind(this));
     html.find(".focus-edit").click(this._editFocus.bind(this));
-    html.find(".c2d10-test").click(this._basicTest.bind(this));
+    html.find(".c2d10-health-test").click(this._doHealthTest.bind(this));
+    html.find(".c2d10-wealth-test").click(this._doWealthTest.bind(this));
+    html.find(".c2d10-talent-test").click(this._doTalentTest.bind(this));
+    html.find(".c2d10-skill-test").click(this._doSkillTest.bind(this));
 
     new ContextMenu(html, ".asset", this.itemContextMenu);
 
@@ -264,20 +267,57 @@ export default class C2D10ActorSheet extends ActorSheet {
     await this.actor.deleteEmbeddedDocuments("Item", [itemId]);
   }
 
-  async _basicTest(event) {
+  /**
+   * Perform a wealth test.
+   * @param {html} event html click event data, including dataset.
+   */
+  async _doWealthTest(event) {
+    event.preventDefault();
+    const sys = this.getData().system;
+
+    await wealthTest(sys.health.crisis, sys.info.wealth);
+  }
+
+  /**
+   * Perform a Health test.
+   * @param {html} event html click event data, including dataset.
+   */
+  async _doHealthTest(event) {
     event.preventDefault();
     const dataset = event.currentTarget.closest(".c2d10-test").dataset;
-    const rollData = {
-      crisis: this.getData().system.health.crisis,
-      strain: this.getData().system.health.strain,
-      stress: this.getData().system.health.stress,
-      wealth: this.getData().system.info.wealth,
-      talents: this.getData().talents,
-      skills: this.getData().skills,
-      item: dataset.id,
-      id: this.actor.id
-    };
+    const sys = this.getData().system;
+    const strain = dataset.id === "strain";
+    const pool = strain ? sys.talents.physical.endurance : sys.talents.mental.willpower;
+    const DC = strain ? sys.health.strain : sys.health.stress;
+    const actorId = this.actor.id;
 
-    rollBasicTest(rollData);
+    await healthTest(sys.health.crisis, strain, pool, DC, actorId);
+  }
+
+  /**
+   * Perform a Talent test.
+   * @param {html} event html click event data, including dataset.
+   */
+  async _doTalentTest(event) {
+    event.preventDefault();
+    const dataset = event.currentTarget.closest(".c2d10-test").dataset;
+    const sys = this.getData().system;
+    const pool = sys.talents[dataset.group][dataset.id];
+
+    await talentTest(sys.health.crisis, dataset.id, pool);
+  }
+
+  /**
+   * Perform a Skill test.
+   * @param {html} event html click event data, including dataset.
+   */
+  async _doSkillTest(event) {
+    event.preventDefault();
+    const dataset = event.currentTarget.closest(".c2d10-test").dataset;
+    const sys = this.getData().system;
+    const pool = sys.skills[dataset.group][dataset.id];
+    const talents = this.getData().talents;
+
+    await skillTest(sys.health.crisis, dataset.id, pool, talents);
   }
 }

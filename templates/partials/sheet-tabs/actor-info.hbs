@@ -57,7 +57,7 @@
             </div>
             <div class="w-20 flex-col">
                 <div class="flex-col flex-between c2d10-contentbox h-100">
-                    <h3 class="c2d10-test" data-type="health" data-id="strain">
+                    <h3 class="c2d10-test c2d10-health-test" data-type="health" data-id="strain">
                         {{localize "c2d10.resources.strain"}}
                     </h3>
                     <div class="flex-row flex-center resource-row" data-value="{{system.health.strain}}" data-type="health" data-id="strain" data-pass="true">
@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <div class="flex-col flex-between c2d10-contentbox h-100">
-                    <h3 class="c2d10-test" data-type="health" data-id="stress">
+                    <h3 class="c2d10-test c2d10-health-test" data-type="health" data-id="stress">
                         {{localize "c2d10.resources.stress"}}
                     </h3>
                     <div class="flex-row flex-center resource-row" data-value="{{system.health.stress}}" data-type="health" data-id="stress" data-pass="true">
@@ -86,7 +86,7 @@
                 </div>
             </div>
             <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} w-50 crisis-box flex-row flex-center">
-                <h3 class="c2d10-test" data-type="info" data-id="wealth">
+                <h3 class="c2d10-test c2d10-wealth-test" data-type="info" data-id="wealth">
                     {{localize "c2d10.character.wealth"}}
                 </h3>
                 <div class="flex-row flex-between">
