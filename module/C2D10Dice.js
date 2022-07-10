@@ -224,7 +224,7 @@ const _doRoll = async rollData => {
 
   // Create the chat message object
   let templateContext = {
-    name: ChatMessage.getSpeakerActor(),
+    name: game.actors.get(rollData.id).name,
     DC: DC,
     skillName: rollData.item,
     skillLevel: rollData.pool,
@@ -267,13 +267,15 @@ const _doRoll = async rollData => {
  * Perform a Wealth test, rolling just with Wealth and nothing else. Takes Crisis into account.
  * @param {number} crisis  The character's current value in Crisis.
  * @param {number} pool    The Wealth rank to produce a pool of dice.
+ * @param {string} actorId The actor's Id.
  */
-export async function wealthTest(crisis, pool) {
+export async function wealthTest(crisis, pool, actorId) {
   const rollData = {};
 
   rollData.crisis = crisis;
   rollData.item = "wealth";
   rollData.pool = pool;
+  rollData.id = actorId;
   rollData.DC = rollData.DC = game.settings.get("c2d10", "DC");
   rollData.type = "wealth";
   _doRoll(rollData);
@@ -306,12 +308,14 @@ export async function healthTest(crisis, strain, pool, DC, actorId) {
  * @param {number} crisis  The character's current value in Crisis.
  * @param {string} item    The name of the item to roll for.
  * @param {number} pool    The Talent rank to produce a pool of dice.
+ * @param {string} actorId The actor's Id.
  */
-export async function talentTest(crisis, item, pool) {
+export async function talentTest(crisis, item, pool, actorId) {
   const rollData = {};
   rollData.crisis = crisis;
   rollData.item = item;
   rollData.pool = pool;
+  rollData.id = actorId;
   rollData.DC = game.settings.get("c2d10", "DC");
   rollData.type = "talent";
   _doRoll(rollData);
@@ -323,14 +327,16 @@ export async function talentTest(crisis, item, pool) {
  * @param {string} item    The name of the item to roll for.
  * @param {number} pool    The Talent rank to produce a pool of dice.
  * @param {object} talents An object holding all the talents and ranks for the character.
+ * @param {string} actorId The actor's Id.
  */
-export async function skillTest(crisis, item, pool, talents) {
+export async function skillTest(crisis, item, pool, talents, actorId) {
   const rollData = {};
 
   rollData.talentsList = c2d10.allTalents;
   rollData.pool = pool;
   rollData.item = item;
   rollData.crisis = crisis;
+  rollData.id = actorId;
   rollData.DC = game.settings.get("c2d10", "DC");
   rollData.type = "skill";
   rollData.talents = talents;
