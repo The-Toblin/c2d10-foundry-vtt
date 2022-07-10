@@ -278,24 +278,32 @@ const checkIfTalent = async (name, talents) => {
   return false;
 };
 
+const checkIfWealth = async name => {
+  if (name === "wealth") return true;
+  return false;
+};
+
 /**
  *  Base test function. Performs a test with a talent or skill.
  * @param {object} rollData The provided rollData from the sheet.
  */
 export default async function rollBasicTest(rollData) {
 
+  // Determine if it's a talent test, strain/stress test or a skill test.
   if (await checkIfHealth(rollData.item)) {
     rollData.DC = rollData.item === "strain" ? rollData.strain : rollData.stress;
     rollData.pool = rollData.item === "strain" ? rollData.talents.endurance : rollData.talents.willpower;
 
     doRoll(rollData);
+
   } else if (await checkIfTalent(rollData.item, rollData.talents)) {
     rollData.pool = rollData.talents[rollData.item];
     rollData.talentsList = false;
     rollData.DC = game.settings.get("c2d10", "DC");
 
     doRoll(rollData);
-  } else if (rollData.item === "wealth") {
+
+  } else if (await checkIfWealth(rollData.item)) {
     rollData.pool = rollData.wealth;
     rollData.DC = game.settings.get("c2d10", "DC");
 
