@@ -101,6 +101,7 @@ Hooks.once("ready", () => {
   const bonusDice = Roll.getDice();
   const hide = !game.users.current.isGM ? "hide" : "";
 
+  // TODO: Wrap these in their own container so they can be placed with a single CSS class.
   $("body").append(`
     <div class="c2d10-hero-points">
       <div class="hp-control-numbers">
