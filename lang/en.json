@@ -156,8 +156,12 @@
             "label": "The number of villain points held by the Keeper of Tales."
         },
         "DC": {
-            "name": "DC",
-            "label": "Setting difficulty for tests taken. All rolls will be matched against this."
+            "name": "Difficulty",
+            "label": "Setting difficulty for tests taken. Most tests performed will be matched against this."
+        },
+        "bonusDice": {
+            "name": "Bonus Dice Purchase",
+            "label": "Store and manage the amount of bonus dice a character has purchased using narrative points. "
         }
     }
 }
