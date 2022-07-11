@@ -277,7 +277,7 @@ export async function wealthTest(crisis, pool, actorId) {
   rollData.pool = pool;
   rollData.id = actorId;
   rollData.DC = rollData.DC = game.settings.get("c2d10", "DC");
-  rollData.type = "wealth";
+
   _doRoll(rollData);
 
 }
@@ -298,7 +298,7 @@ export async function healthTest(crisis, strain, pool, DC, actorId) {
   rollData.pool = pool;
   rollData.DC = DC;
   rollData.id = actorId;
-  rollData.type = "health";
+
   _doRoll(rollData);
 
 }
@@ -317,7 +317,7 @@ export async function talentTest(crisis, item, pool, actorId) {
   rollData.pool = pool;
   rollData.id = actorId;
   rollData.DC = game.settings.get("c2d10", "DC");
-  rollData.type = "talent";
+
   _doRoll(rollData);
 }
 
@@ -338,7 +338,6 @@ export async function skillTest(crisis, item, pool, talents, actorId) {
   rollData.crisis = crisis;
   rollData.id = actorId;
   rollData.DC = game.settings.get("c2d10", "DC");
-  rollData.type = "skill";
   rollData.talents = talents;
 
   const dialogOptions = {

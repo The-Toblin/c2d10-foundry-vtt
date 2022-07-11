@@ -9,7 +9,7 @@ import * as C2D10Utility from "./module/C2D10Utility.js";
  * Loads HandleBars templates for use in the system.
  */
 async function preloadHandlebarsTemplates() {
-  const templatePaths= [
+  const templatePaths = [
     "systems/c2d10/templates/partials/sheet-tabs/actor-info.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/actor-talents.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/actor-skills.hbs",
