@@ -3,7 +3,7 @@ import C2D10Item from "./module/C2D10Item.js";
 import C2D10ItemSheet from "./module/sheets/C2D10ItemSheet.js";
 import C2D10Actor from "./module/C2D10Actor.js";
 import C2D10ActorSheet from "./module/sheets/C2D10ActorSheet.js";
-import * as Roll from "./module/C2D10Utility.js";
+import * as C2D10Utility from "./module/C2D10Utility.js";
 
 /**
  * Loads HandleBars templates for use in the system.
@@ -95,10 +95,10 @@ Hooks.once("ready", () => {
   /**
    * Add the necessary Keeper controls to the view, hide everything but Hero points for players.
    */
-  const HP = Roll.getHeroPoints();
-  const VP = Roll.getVillainPoints();
-  const DC = Roll.getDC();
-  const bonusDice = Roll.getDice();
+  const HP = C2D10Utility.getHeroPoints();
+  const VP = C2D10Utility.getVillainPoints();
+  const DC = C2D10Utility.getDC();
+  const bonusDice = C2D10Utility.getDice();
   const hide = !game.users.current.isGM ? "hide" : "";
 
   // TODO: Wrap these in their own container so they can be placed with a single CSS class.
@@ -150,21 +150,21 @@ Hooks.once("ready", () => {
   $("body").on("click", ".hp-control", event => {
     const $self = $(event.currentTarget);
     const isIncrease = $self.hasClass("hp-plus");
-    Roll.changeHeroPoints(isIncrease);
+    C2D10Utility.changeHeroPoints(isIncrease);
   });
 
   // Add click events for villainpoints.
   $("body").on("click", ".vp-control", event => {
     const $self = $(event.currentTarget);
     const isIncrease = $self.hasClass("vp-plus");
-    Roll.changeVillainPoints(isIncrease);
+    C2D10Utility.changeVillainPoints(isIncrease);
   });
 
   // Add click events for difficulty.
   $("body").on("click", ".dc-control", event => {
     const $self = $(event.currentTarget);
     const isIncrease = $self.hasClass("dc-plus");
-    Roll.changeDC(isIncrease);
+    C2D10Utility.changeDC(isIncrease);
   });
 
   // Add click events for difficulty.
@@ -172,7 +172,7 @@ Hooks.once("ready", () => {
     const $self = $(event.currentTarget);
     const isIncrease = $self.hasClass("bonus-plus");
     const isPlayer = !game.users.current.isGM;
-    Roll.buyDice(isIncrease, isPlayer);
+    C2D10Utility.buyDice(isIncrease, isPlayer);
   });
 });
 
