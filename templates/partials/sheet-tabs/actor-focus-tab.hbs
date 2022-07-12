@@ -3,7 +3,7 @@
         {{localize "c2d10.sheet.focus"}}
     </h3>
     <div class="c2d10-subsection">
-        <table class="c2d10-asset-card-table">
+        <table class="c2d10-asset-card-table align-center">
             <colgroup>
                 <col style="width: 5%;">
                 <col class="w-50">
@@ -15,22 +15,22 @@
                         <i class="far fa-plus-square"></i>
                     </a>
                 </th>
-                <th class="table-no-border align-center">{{localize "c2d10.sheet.focus"}}</th>
-                <th class="table-no-border align-center">{{localize "c2d10.sheet.parent"}}</th>
+                <th class="table-no-border">{{localize "c2d10.sheet.focus"}}</th>
+                <th class="table-no-border">{{localize "c2d10.sheet.parent"}}</th>
             </tr>
             {{#each system.skills.focus as | focus |}}
             <tr>
-                <td class="align-center focus c2d10-contentbox" data-name="{{focus.name}}" data-parent="{{focus.parent}}">
+                <td class="focus c2d10-contentbox" data-name="{{focus.name}}" data-parent="{{focus.parent}}">
                     <a class="remove-focus" title="{{localize "c2d10.sheet.removeFocus"}}">
                         <i class="far fa-minus-square"></i>
                     </a>
                 </td>
-                <td class="align-left focus c2d10-contentbox">
+                <td class="focus c2d10-contentbox">
                     <div class="focus-edit" style="margin-left: 2px;">
                         {{focus.name}}
                     </div>
                 </td>
-                <td class="align-left focus c2d10-contentbox">
+                <td class="focus c2d10-contentbox">
                     {{localize (concat "c2d10.skills." focus.parent)}}
                 </td>
             </tr>
