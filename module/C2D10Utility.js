@@ -71,12 +71,13 @@ export function changeDC(isIncrease) {
  * @param {boolean} isPlayer  Whether to modify heropoints or villainpoints.
  */
 export async function buyDice(isIncrease, isPlayer) {
+  // TODO: Convert this to sockets some day. Commented items need to be recoded for sockets.
   const currentValue = getDice();
   const max = isPlayer ? 10 : 20;
   let cost = isIncrease ? parseInt(currentValue + 1) : currentValue;
   if (!isIncrease) cost *= -1;
 
-  const target = isPlayer ? "heroPoints" : "villainPoints";
+  // Const target = isPlayer ? "heroPoints" : "villainPoints";
   const newValue = isIncrease ? currentValue + 1 : currentValue - 1;
   const currentNarrativePoints = isPlayer ? getHeroPoints() : getVillainPoints();
   const newPoints = currentNarrativePoints - cost;
@@ -84,7 +85,7 @@ export async function buyDice(isIncrease, isPlayer) {
   if (newPoints <= max && newPoints >= 0) {
     if (newValue <= 5 && newValue >= 0) {
       await game.settings.set("c2d10", "bonusDice", newValue);
-      // TODO: Convert this to sockets some day. await game.settings.set("c2d10", target, newPoints );
+      // Await game.settings.set("c2d10", target, newPoints );
     }
   }
 }
