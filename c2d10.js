@@ -31,7 +31,7 @@ async function preloadHandlebarsTemplates() {
  * Register all system settings necessary.
  */
 function registerSystemSettings() {
-  // Whether or not to show fancy effects in the system.
+  // Whether or not to show fancy CSS effects in the system. Disabled by default for accessibility reasons.
   game.settings.register("c2d10", "showEffects", {
     config: true,
     scope: "client",

@@ -767,6 +767,9 @@ table input {
 .c2d10.sheet .c2d10-test:hover {
   text-shadow: 0 0 10px #e5e5ec;
 }
+.c2d10.sheet table {
+  margin: 0px;
+}
 .c2d10-hero-points,
 .c2d10-villain-points,
 .c2d10-difficulty,
