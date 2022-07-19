@@ -12,7 +12,15 @@
                     "campaign": "",
                     "ambition": "",
                     "faction": "",
-                    "wealth": 2
+                    "wealth": 2,
+                    "playerName": "",
+                    "title": "",
+                    "age": 0,
+                    "sex": "",
+                    "gender": "",
+                    "appearance": "",
+                    "description": "",
+                    "family": ""
                 }
             },
             "health": {

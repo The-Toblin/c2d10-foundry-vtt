@@ -11,6 +11,7 @@ import * as C2D10Utility from "./module/C2D10Utility.js";
 async function preloadHandlebarsTemplates() {
   const templatePaths = [
     "systems/c2d10/templates/partials/sheet-tabs/actor-info.hbs",
+    "systems/c2d10/templates/partials/sheet-tabs/actor-bio.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/actor-talents.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/actor-skills.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/actor-assets-tab.hbs",
@@ -241,7 +242,7 @@ Hooks.once("init", function() {
 
     const crisis =
     `<div class="dot-container full">
-      <img class="d10-dot-full" src="/systems/c2d10/assets/d10-crisis-full.webp"/>
+      <img class="d10-dot-full" src="/systems/c2d10/assets/d10-crisis.webp"/>
     </div>`;
 
     let res = "";

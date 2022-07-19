@@ -1,0 +1,77 @@
+<section>
+    <h3>
+        {{localize "c2d10.sheet.bio"}}
+    </h3>
+    <div class="c2d10-subsection">
+        <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} w-100">
+            <table>
+                <tr>
+                    <th class="cd10-header">
+                        {{localize "c2d10.sheet.playerName"}}
+                    </th>
+                    <td>
+                        <input name="data.info.playerName" type="text" value="{{system.info.playerName}}" placeholder="{{localize "c2d10.sheet.playerName"}}" />
+                    </td>
+                    <th class="cd10-header">
+                        {{localize "c2d10.sheet.title"}}
+                    </th>
+                    <td>
+                        <input name="data.info.title" type="text" value="{{system.info.title}}" placeholder="{{localize "c2d10.sheet.title"}}" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="cd10-header">
+                        {{localize "c2d10.sheet.age"}}
+                    </th>
+                    <td>
+                        <input name="data.info.age" type="text" value="{{system.info.age}}" placeholder="{{localize "c2d10.sheet.age"}}" />
+                    </td>
+                    <th class="cd10-header">
+                        {{localize "c2d10.sheet.species"}}
+                    </th>
+                    <td>
+                        {{system.info.species}}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="cd10-header">
+                        {{localize "c2d10.sheet.sex"}}
+                    </th>
+                    <td>
+                        <input name="data.info.sex" type="text" value="{{system.info.sex}}" placeholder="{{localize "c2d10.sheet.sex"}}" />
+                    </td>
+                    <th class="cd10-header">
+                        {{localize "c2d10.sheet.gender"}}
+                    </th>
+                    <td>
+                        <input name="data.info.gender" type="text" value="{{system.info.gender}}" placeholder="{{localize "c2d10.sheet.gender"}}" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <h3>
+        {{localize "c2d10.sheet.appearance"}}
+    </h3>
+    <div class="c2d10-subsection {{#if showEffects}}fancy-effects{{/if}} w-100">
+        <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} c2d10-asset-textarea">
+            <textarea name="data.info.appearance">{{system.info.appearance}}</textarea>
+        </div>
+    </div>
+    <h3>
+        {{localize "c2d10.sheet.personality"}}
+    </h3>
+    <div class="c2d10-subsection {{#if showEffects}}fancy-effects{{/if}} w-100">
+        <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} c2d10-asset-textarea">
+            <textarea name="data.info.personality">{{system.info.personality}}</textarea>
+        </div>
+    </div>
+    <h3>
+        {{localize "c2d10.sheet.family"}}
+    </h3>
+    <div class="c2d10-subsection {{#if showEffects}}fancy-effects{{/if}} w-100">
+        <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} c2d10-asset-textarea">
+            <textarea name="data.info.family">{{system.info.family}}</textarea>
+        </div>
+    </div>
+</section>

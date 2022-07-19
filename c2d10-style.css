@@ -253,7 +253,7 @@
   background: linear-gradient(0deg, #005c20, 15%, rgba(0, 92, 32, 0.85));
   padding: 10px;
   margin: 2px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   height: 100%;
 }
 .c2d10-contentbox {
@@ -592,7 +592,7 @@ table input {
   background-image: url(assets/d10-purple.webp) !important;
 }
 .d10.crisis {
-  background-image: url(assets/d10-orange.webp) !important;
+  background-image: url(assets/d10-yellow.webp) !important;
 }
 .d10.complication {
   background-image: url(assets/d10-red.webp) !important;
@@ -666,7 +666,7 @@ table input {
   color: green !important;
 }
 .c2d10.sheet .xp-box {
-  width: 40px;
+  width: 36px;
 }
 .c2d10.sheet .xp-box h3 {
   font-size: small;
@@ -683,7 +683,7 @@ table input {
   writing-mode: vertical-lr;
   position: relative;
   top: 0px;
-  height: 825px;
+  height: 819px;
   width: 40px;
   margin-right: 5px;
 }

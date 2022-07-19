@@ -10,7 +10,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     return mergeObject(super.defaultOptions, {
       template: "systems/c2d10/templates/sheets/actor-sheet.hbs",
       classes: ["c2d10", "sheet"],
-      height: 950,
+      height: 936,
       width: 895,
       tabs: [
         {
@@ -33,6 +33,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     sheetData.traits = sheetData.items.filter(p => p.type === "trait");
     sheetData.variants = sheetData.items.filter(p => p.type === "variant");
 
+    // Create list objects to use for dialogs.
     sheetData.talents = {};
     for (const entry of Object.entries(sheetData.system.talents.physical)) {
       sheetData.talents[entry[0]] = entry[1];
@@ -54,6 +55,31 @@ export default class C2D10ActorSheet extends ActorSheet {
     for (const entry of Object.entries(sheetData.system.skills.mental)) {
       sheetData.skills[entry[0]] = entry[1];
     }
+
+    // Sort character focus.
+    sheetData.system.skills.focus.sort(function(a, b) {
+      let nameA = a.name.toUpperCase(); // Ignore upper and lowercase
+      let nameB = b.name.toUpperCase(); // Ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1; // NameA comes first
+      }
+      if (nameA > nameB) {
+        return 1; // NameB comes first
+      }
+      return 0;  // Names must be equal
+    });
+
+    sheetData.system.skills.focus.sort(function(a, b) {
+      let nameA = a.parent.toUpperCase(); // Ignore upper and lowercase
+      let nameB = b.parent.toUpperCase(); // Ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1; // NameA comes first
+      }
+      if (nameA > nameB) {
+        return 1; // NameB comes first
+      }
+      return 0;  // Names must be equal
+    });
 
     /* Make system settings available for sheets to use for rendering */
     sheetData.showEffects = game.settings.get("c2d10", "showEffects");
