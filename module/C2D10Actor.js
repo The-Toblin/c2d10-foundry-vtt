@@ -7,7 +7,7 @@ export default class C2D10Actor extends Actor {
 
   }
 
-  prepareDerivedData() {
+  async prepareDerivedData() {
 
   }
 

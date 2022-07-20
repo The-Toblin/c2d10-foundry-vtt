@@ -10,10 +10,13 @@
     <h3 class="align-center c2d10-capitalize">
         {{item}} {{localize "c2d10.test-dialog.pool"}}
     </h3>
-    <input class="align-center" id="pool" type="text" value="{{pool}}" placeholder="{{localize "c2d10.test-dialog.pool"}}" autofocus />
+    <div class="flex-row">
+        <h4>{{localize "c2d10.sheet.focus"}}?</h4>
+        <input id="focus" name="focus" type="checkbox" value="off" />
+        <input class="align-center" id="pool" type="text" value="{{pool}}" placeholder="{{localize "c2d10.test-dialog.pool"}}" autofocus />
+    </div>
     <h3 class="align-center">
         {{localize "c2d10.test-dialog.crisis"}}
     </h3>
         <input class="align-center" id="crisis" type="text" value="{{crisis}}" placeholder="{{localize "c2d10.test-dialog.crisis"}}"/>
 </form>
-// TODO: Add focus ticker.

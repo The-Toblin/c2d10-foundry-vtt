@@ -197,6 +197,7 @@ const _doRoll = async rollData => {
   const parentLevel = rollData.parent ? rollData.talents[rollData.parent] : 0;
   const bonusDice = getDice();
   let pool = rollData.parent ? parseInt(rollData.pool + parentLevel + bonusDice) : rollData.pool + bonusDice;
+  if (rollData.focus) pool += 1;
   if (pool > 10) pool = 10;
   const crisis = rollData.crisis > pool ? pool : rollData.crisis;
   const targetNumber = 7;
@@ -357,6 +358,7 @@ export async function skillTest(crisis, item, pool, talents, actorId) {
             rollData.pool = html.find("input#pool").val() <= 5 ? parseInt(html.find("input#pool").val()) : 5;
             rollData.crisis = html.find("input#crisis").val();
             rollData.parent = html.find("select#parent").val();
+            rollData.focus = html.find("input#focus")[0].checked;
             _doRoll(rollData);}
         }
       }

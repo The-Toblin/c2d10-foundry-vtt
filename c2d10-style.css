@@ -731,6 +731,10 @@ table input {
   border-color: #88f2ad !important;
   background-color: #005c20 !important;
 }
+.c2d10.sheet .c2d10-bio-textarea {
+  height: 148px;
+  max-height: 200px;
+}
 .c2d10.sheet .value-box {
   min-width: 220px;
 }
