@@ -3,7 +3,7 @@
     "title": "Celenia D10 Roleplaying System - 2nd Edition V9 Branch",
     "version": 0.30,
     "minimumCoreVersion": "9",
-    "compatibleVersion": "9",
+    "compatibleVersion": "9.269",
     "author": "The Toblin",
     "esmodules": [
         "c2d10.js"
