@@ -26,7 +26,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     const sheetData = super.getData();
     sheetData.config = CONFIG.c2d10;
     sheetData.items = this.actor.items;
-    sheetData.system = this.actor.system;
+    sheetData.system = this.actor.data.data;
 
     /* Assets */
     sheetData.assets = sheetData.items.filter(p => p.type === "asset");
@@ -224,7 +224,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     });
 
     const updateData = {};
-    updateData["system.skills.focus"] = currentArray;
+    updateData["data.skills.focus"] = currentArray;
 
     await this.actor.update(updateData);
   }
@@ -237,7 +237,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     currentArray.splice(currentArray.findIndex(v => v.name === name), 1);
 
     const updateData = {};
-    updateData["system.skills.focus"] = currentArray;
+    updateData["data.skills.focus"] = currentArray;
 
     await this.actor.update(updateData);
   }
@@ -283,7 +283,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     };
 
     const updateData = {};
-    updateData["system.skills.focus"] = currentArray;
+    updateData["data.skills.focus"] = currentArray;
 
     await this.actor.update(updateData);
   }

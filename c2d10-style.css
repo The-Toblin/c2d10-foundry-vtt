@@ -413,6 +413,7 @@
 }
 .w-fit {
   min-width: fit-content;
+  width: 100%;
 }
 .h-100 {
   height: 100%;
@@ -601,41 +602,49 @@ table input {
 .d10.complication {
   background-image: url(assets/d10-red.webp) !important;
 }
-.c2d10.sheet {
+.c2d10.sheet,
+.c2d10.item-sheet {
   background: linear-gradient(0deg, #021109, 15%, rgba(2, 17, 9, 0.85));
 }
-.c2d10.sheet .window-content {
+.c2d10.sheet .window-content,
+.c2d10.item-sheet .window-content {
   background: inherit;
   background-image: url(assets/backgrounds/circuit_green.webp);
   background-position: center;
   background-size: cover;
 }
-.c2d10.sheet input {
+.c2d10.sheet input,
+.c2d10.item-sheet input {
   background: none !important;
   border: none !important;
   box-shadow: none !important;
   color: inherit !important;
 }
-.c2d10.sheet .align-right {
+.c2d10.sheet .align-right,
+.c2d10.item-sheet .align-right {
   text-align: right;
 }
-.c2d10.sheet .edit-lock {
+.c2d10.sheet .edit-lock,
+.c2d10.item-sheet .edit-lock {
   position: absolute;
   top: 48px;
   right: 15px;
 }
-.c2d10.sheet img {
+.c2d10.sheet img,
+.c2d10.item-sheet img {
   max-height: 145px;
   border: none;
 }
-.c2d10.sheet h1 {
+.c2d10.sheet h1,
+.c2d10.item-sheet h1 {
   border: none !important;
   text-align: center;
   color: #29a253;
   font-family: Quantum, sans-serif;
   font-size: 2.5rem;
 }
-.c2d10.sheet h3 {
+.c2d10.sheet h3,
+.c2d10.item-sheet h3 {
   border: none !important;
   text-align: center;
   color: #29a253;
@@ -643,42 +652,53 @@ table input {
   font-size: 1.25rem;
   text-shadow: none;
 }
-.c2d10.sheet .label-box {
+.c2d10.sheet .label-box,
+.c2d10.item-sheet .label-box {
   padding: 3px 2px 2px 2px;
 }
-.c2d10.sheet label {
+.c2d10.sheet label,
+.c2d10.item-sheet label {
   border: none !important;
   color: #29a253;
   font-family: Quantum, sans-serif;
   font-size: 1rem;
   text-shadow: none;
 }
-.c2d10.sheet #no-marker {
+.c2d10.sheet #no-marker,
+.c2d10.item-sheet #no-marker {
   list-style-type: none;
 }
-.c2d10.sheet .table-no-border {
+.c2d10.sheet .table-no-border,
+.c2d10.item-sheet .table-no-border {
   border: none !important;
 }
-.c2d10.sheet .warning {
+.c2d10.sheet .warning,
+.c2d10.item-sheet .warning {
   color: #e0f287 !important;
 }
-.c2d10.sheet .red {
+.c2d10.sheet .red,
+.c2d10.item-sheet .red {
   color: red !important;
   animation: textShadow 2s infinite !important;
 }
-.c2d10.sheet .green {
+.c2d10.sheet .green,
+.c2d10.item-sheet .green {
   color: green !important;
 }
-.c2d10.sheet .xp-box {
+.c2d10.sheet .xp-box,
+.c2d10.item-sheet .xp-box {
   width: 36px;
 }
-.c2d10.sheet .xp-box h3 {
+.c2d10.sheet .xp-box h3,
+.c2d10.item-sheet .xp-box h3 {
   font-size: small;
 }
-.c2d10.sheet .xp-box input {
+.c2d10.sheet .xp-box input,
+.c2d10.item-sheet .xp-box input {
   text-align: center !important;
 }
-.c2d10.sheet .sheet-tabs {
+.c2d10.sheet .sheet-tabs,
+.c2d10.item-sheet .sheet-tabs {
   border-radius: 3px;
   border: 2px solid;
   border-color: #29a253 !important;
@@ -691,7 +711,8 @@ table input {
   width: 40px;
   margin-right: 5px;
 }
-.c2d10.sheet .item {
+.c2d10.sheet .item,
+.c2d10.item-sheet .item {
   border-radius: 3px;
   border: 2px solid;
   border-color: #29a253 !important;
@@ -700,19 +721,23 @@ table input {
   transform: rotate(-180deg);
   margin: 2px 5px 2px 5px;
 }
-.c2d10.sheet .item.active {
+.c2d10.sheet .item.active,
+.c2d10.item-sheet .item.active {
   border-radius: 3px !important;
   border: 2px solid !important;
   border-color: #e5e5ec !important;
   color: #e5e5ec !important;
 }
-.c2d10.sheet .sheet-body {
+.c2d10.sheet .sheet-body,
+.c2d10.item-sheet .sheet-body {
   width: 100%;
 }
-.c2d10.sheet .c2d10-sheet-header-box {
+.c2d10.sheet .c2d10-sheet-header-box,
+.c2d10.item-sheet .c2d10-sheet-header-box {
   max-height: 80px;
 }
-.c2d10.sheet .c2d10-asset-textarea textarea {
+.c2d10.sheet .c2d10-asset-textarea textarea,
+.c2d10.item-sheet .c2d10-asset-textarea textarea {
   color: #e5e5ec;
   font-family: VT323, monospace;
   font-size: 1rem;
@@ -725,24 +750,31 @@ table input {
   height: 100%;
   box-sizing: border-box;
 }
-.c2d10.sheet .c2d10-asset-textarea textarea:focus {
+.c2d10.sheet .c2d10-asset-textarea textarea:focus,
+.c2d10.item-sheet .c2d10-asset-textarea textarea:focus {
   border-radius: 3px;
   border: 2px solid;
   border-color: #29a253 !important;
 }
-.c2d10.sheet .c2d10-asset-textarea textarea::-webkit-scrollbar-thumb {
+.c2d10.sheet .c2d10-asset-textarea textarea::-webkit-scrollbar-thumb,
+.c2d10.item-sheet .c2d10-asset-textarea textarea::-webkit-scrollbar-thumb {
   border-color: #88f2ad !important;
   background-color: #005c20 !important;
 }
-.c2d10.sheet .c2d10-bio-textarea {
+.c2d10.sheet .c2d10-bio-textarea,
+.c2d10.item-sheet .c2d10-bio-textarea {
   height: 148px;
   max-height: 200px;
 }
-.c2d10.sheet .value-box {
+.c2d10.sheet .value-box,
+.c2d10.item-sheet .value-box {
   min-width: 220px;
+  width: 100%;
 }
 .c2d10.sheet .c2d10-asset-card-table th,
-.c2d10.sheet .c2d10-asset-card-table td {
+.c2d10.item-sheet .c2d10-asset-card-table th,
+.c2d10.sheet .c2d10-asset-card-table td,
+.c2d10.item-sheet .c2d10-asset-card-table td {
   color: #e5e5ec;
   font-family: VT323, monospace;
   font-size: 1rem;
@@ -750,16 +782,20 @@ table input {
   letter-spacing: 1px;
   text-align: center;
 }
-.c2d10.sheet .space {
+.c2d10.sheet .space,
+.c2d10.item-sheet .space {
   visibility: hidden;
 }
-.c2d10.sheet .crisis-box {
+.c2d10.sheet .crisis-box,
+.c2d10.item-sheet .crisis-box {
   padding-top: 10px;
 }
-.c2d10.sheet .crisis-box h3 {
+.c2d10.sheet .crisis-box h3,
+.c2d10.item-sheet .crisis-box h3 {
   margin-right: 10px;
 }
-.c2d10.sheet select {
+.c2d10.sheet select,
+.c2d10.item-sheet select {
   border: none;
   color: #88f2ad;
   background: linear-gradient(0deg, #021109, 55%, rgba(2, 17, 9, 0.85));
@@ -767,16 +803,26 @@ table input {
   font-size: 1.25rem;
   padding: 5px 10px;
 }
-.c2d10.sheet select option {
+.c2d10.sheet select option,
+.c2d10.item-sheet select option {
   background-color: #021109;
   font-family: VT323, monospace;
   font-size: 1.25rem;
 }
-.c2d10.sheet .c2d10-test:hover {
+.c2d10.sheet .c2d10-test:hover,
+.c2d10.item-sheet .c2d10-test:hover {
   text-shadow: 0 0 10px #e5e5ec;
 }
-.c2d10.sheet table {
+.c2d10.sheet table,
+.c2d10.item-sheet table {
   margin: 0px;
+}
+.c2d10.sheet .c2d10-fit-content,
+.c2d10.item-sheet .c2d10-fit-content {
+  height: fit-content !important;
+}
+.c2d10.item-sheet {
+  height: fit-content !important;
 }
 .c2d10-hero-points,
 .c2d10-villain-points,

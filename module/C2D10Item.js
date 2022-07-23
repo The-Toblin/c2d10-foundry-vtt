@@ -26,7 +26,8 @@ export default class C2D10Item extends Item {
 
   async modifyResource(n, res) {
     const updateData = {};
-    const currentValue = this.system[res];
+    const system = this.data.data;
+    const currentValue = system[res];
     const max = 5;
 
     if (currentValue === max && n > 0) {
@@ -39,7 +40,7 @@ export default class C2D10Item extends Item {
       return;
     }
 
-    updateData[`system.${res}`] = newValue;
+    updateData[`data.${res}`] = newValue;
 
     await this.update(updateData);
   }

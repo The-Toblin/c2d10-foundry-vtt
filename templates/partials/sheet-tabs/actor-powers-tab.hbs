@@ -4,7 +4,7 @@
     </h3>
     <div class="content-box c2d10-subsection flex-row flex-between">
         <div class="flex-col flex-start w-100">
-            <table class="c2d10-asset-card-table c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
+            <table class="c2d10-asset-card-table c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}" style="margin-bottom: 5px;">
                 <colgroup>
                     <col class="w-60">
                     <col class="w-40">
@@ -18,15 +18,15 @@
                     </tr>
                 {{/each}}
             </table>
-            <table>
+            <table class="c2d10-asset-card-table c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
                 <tr>
-                    <th class="c2d10-contentbox align-left {{#if showEffects}}fancy-effects{{/if}}">{{localize "c2d10.powers.name"}}</th>
-                    <th class="c2d10-contentbox align-left {{#if showEffects}}fancy-effects{{/if}}">{{localize "c2d10.powers.parent"}}</th>
-                    <th class="c2d10-contentbox align-left {{#if showEffects}}fancy-effects{{/if}}">{{localize "c2d10.powers.pool"}}</th>
-                    <th class="c2d10-contentbox align-left {{#if showEffects}}fancy-effects{{/if}}">{{localize "c2d10.powers.cost"}}</th>
-                    <th class="c2d10-contentbox align-left {{#if showEffects}}fancy-effects{{/if}}">{{localize "c2d10.powers.range"}}</th>
-                    <th class="c2d10-contentbox align-left {{#if showEffects}}fancy-effects{{/if}}">{{localize "c2d10.powers.opposed"}}</th>
-                    <th class="c2d10-contentbox align-left {{#if showEffects}}fancy-effects{{/if}}">{{localize "c2d10.powers.duration"}}</th>
+                    <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.name"}}</th>
+                    <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.parent"}}</th>
+                    <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.pool"}}</th>
+                    <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.cost"}}</th>
+                    <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.range"}}</th>
+                    <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.opposed"}}</th>
+                    <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.duration"}}</th>
                 </tr>
                 {{#each variants as |item id|}}
                     {{> "systems/c2d10/templates/partials/list-items/variant-list-item.hbs"}}
