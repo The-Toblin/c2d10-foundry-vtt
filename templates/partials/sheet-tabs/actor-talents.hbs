@@ -15,7 +15,7 @@
                     </colgroup>
                     {{#each system.talents.physical as |level name|}}
                         <tr>
-                            <th class="c2d10-test c2d10-talent-test table-no-border" data-type="talents" data-group="physical" data-id="{{name}}">{{localize (concat "c2d10.talents." name)}}</th>
+                            <th class="c2d10-test c2d10-talent-test table-no-border description" data-tooltip="{{localize (concat "c2d10.descriptions." name)}}<p>Left click to roll, right click for description.<p>" data-type="talents" data-group="physical" data-id="{{name}}">{{localize (concat "c2d10.talents." name)}}</th>
                             <td class="flex-row table-no-border resource-row" data-type="talents" data-group="physical" data-id="{{name}}">
                                 {{#dots level 5}}{{/dots}}
                             </td>
@@ -36,7 +36,7 @@
                     </colgroup>
                     {{#each system.talents.social as |level name|}}
                         <tr>
-                            <th class="c2d10-test c2d10-talent-test table-no-border" data-type="talents" data-group="social" data-id="{{name}}">{{localize (concat "c2d10.talents." name)}}</th>
+                            <th class="c2d10-test c2d10-talent-test table-no-border description" data-tooltip="{{localize (concat "c2d10.descriptions." name)}}<p>Left click to roll, right click for description.<p>" data-type="talents" data-group="social" data-id="{{name}}">{{localize (concat "c2d10.talents." name)}}</th>
                             <td class="flex-row table-no-border resource-row" data-type="talents" data-group="social" data-id="{{name}}">
                                 {{#dots level 5}}{{/dots}}
                             </td>
@@ -57,7 +57,7 @@
                     </colgroup>
                     {{#each system.talents.mental as |level name|}}
                         <tr>
-                            <th class="c2d10-test c2d10-talent-test table-no-border" data-type="talents" data-group="mental" data-id="{{name}}">{{localize (concat "c2d10.talents." name)}}</th>
+                            <th class="c2d10-test c2d10-talent-test table-no-border description" data-tooltip="{{localize (concat "c2d10.descriptions." name)}}<p>Left click to roll, right click for description.<p>" data-type="talents" data-group="mental" data-id="{{name}}">{{localize (concat "c2d10.talents." name)}}</th>
                             <td class="flex-row table-no-border resource-row" data-type="talents" data-group="mental" data-id="{{name}}">
                                 {{#dots level 5}}{{/dots}}
                             </td>

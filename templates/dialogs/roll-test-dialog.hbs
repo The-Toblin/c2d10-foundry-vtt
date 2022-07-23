@@ -1,22 +1,46 @@
-<form class="flex-col flex-start">
-    <h3 class="align-center">
-        {{localize "c2d10.test-dialog.parent"}}
-    </h3>
-    {{#if talentsList}}
-    <select id="parent">
-        {{selectOptions talentsList selected=parent localize=true}}
-    </select>
-    {{/if}}
-    <h3 class="align-center c2d10-capitalize">
-        {{item}} {{localize "c2d10.test-dialog.pool"}}
-    </h3>
-    <div class="flex-row">
-        <h4>{{localize "c2d10.sheet.focus"}}?</h4>
-        <input id="focus" name="focus" type="checkbox" value="off" />
-        <input class="align-center" id="pool" type="text" value="{{pool}}" placeholder="{{localize "c2d10.test-dialog.pool"}}" autofocus />
+<form class="flex-col flex-start c2d10-dialog">
+    <div class="c2d10-subsection">
+        <h3 class="align-center">
+            {{localize "c2d10.test-dialog.parent"}}
+        </h3>
+        <div class="c2d10-contentbox">
+            {{#if talentsList}}
+                <select id="parent">
+                    {{selectOptions talentsList selected=highest localize=true}}
+                </select>
+            {{/if}}
+        </div>
     </div>
-    <h3 class="align-center">
-        {{localize "c2d10.test-dialog.crisis"}}
-    </h3>
-        <input class="align-center" id="crisis" type="text" value="{{crisis}}" placeholder="{{localize "c2d10.test-dialog.crisis"}}"/>
+    <div class="c2d10-subsection">
+        <h3 class="align-center c2d10-capitalize">
+            {{item}} {{localize "c2d10.test-dialog.pool"}}
+        </h3>
+        <div class="c2d10-contentbox flex-row">
+            <input class="align-center"
+                id="pool"
+                type="text"
+                value="{{pool}}"
+                placeholder="{{localize "c2d10.test-dialog.pool"}}"
+                autofocus
+             />
+        </div>
+    </div>
+    <div class="c2d10-subsection">
+        <h3 class="align-center c2d10-capitalize">
+            {{localize "c2d10.sheet.focus"}}
+        </h3>
+        <div class="c2d10-contentbox flex-row flex-center c2d10-dark-background">
+            <div style="position: relative;">
+                <input id="focus" name="focus" type="checkbox" value="off"/>
+            </div>
+        </div>
+    </div>
+    <div class="c2d10-subsection">
+        <h3 class="align-center">
+            {{localize "c2d10.test-dialog.crisis"}}
+        </h3>
+        <div class="c2d10-contentbox">
+            <input class="align-center" id="crisis" type="text" value="{{crisis}}" placeholder="{{localize "c2d10.test-dialog.crisis"}}" />
+        </div>
+    </div>
 </form>

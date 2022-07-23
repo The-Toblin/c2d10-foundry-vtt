@@ -6,13 +6,13 @@ export default class C2D10Item extends Item {
 
   async showDescription() {
     const chatData = {
-      user: game.user.data._id,
+      user: game.user.id,
       speaker: ChatMessage.getSpeaker()
     };
 
     const cardData = {
       ...this.data,
-      owner: this.actor.data._id
+      owner: this.actor.id
     };
 
     chatData.content = await renderTemplate(
@@ -26,7 +26,7 @@ export default class C2D10Item extends Item {
 
   async modifyResource(n, res) {
     const updateData = {};
-    const currentValue = this.data.data[res];
+    const currentValue = this.system[res];
     const max = 5;
 
     if (currentValue === max && n > 0) {
@@ -39,20 +39,20 @@ export default class C2D10Item extends Item {
       return;
     }
 
-    updateData[`data.${res}`] = newValue;
+    updateData[`system.${res}`] = newValue;
 
     await this.update(updateData);
   }
 
   async roll() {
     let chatData = {
-      user: game.user.data._id,
+      user: game.user.id,
       speaker: ChatMessage.getSpeaker()
     };
 
     let cardData = {
       ...this.data,
-      owner: this.actor.data._id
+      owner: this.actor.id
     };
 
     chatData.content = await renderTemplate(

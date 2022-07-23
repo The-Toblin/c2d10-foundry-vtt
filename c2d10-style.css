@@ -271,6 +271,9 @@
   margin: 2px;
   position: relative;
 }
+.c2d10-dark-background {
+  background: linear-gradient(0deg, #021109, 55%, rgba(2, 17, 9, 0.85));
+}
 .white-border {
   border-radius: 3px;
   border: 2px solid;
@@ -954,4 +957,61 @@ table input {
 }
 .c2d10-villain-points::after {
   content: 'Villain Points';
+}
+.c2d10-dialog {
+  background: linear-gradient(0deg, #021109, 15%, rgba(2, 17, 9, 0.85));
+}
+.c2d10-dialog .window-content {
+  background: inherit;
+  background-image: url(assets/backgrounds/circuit_green.webp);
+  background-position: center;
+  background-size: cover;
+}
+.c2d10-dialog input {
+  background: linear-gradient(0deg, #021109, 55%, rgba(2, 17, 9, 0.85));
+  border: none !important;
+  box-shadow: none !important;
+  color: inherit !important;
+  height: 35px !important;
+  font-size: 1.25rem;
+}
+.c2d10-dialog select {
+  border: none;
+  color: #88f2ad;
+  background: linear-gradient(0deg, #021109, 55%, rgba(2, 17, 9, 0.85));
+  font-family: VT323, monospace;
+  font-size: 1.25rem;
+  padding: 5px 10px;
+  width: 100%;
+  height: 35px !important;
+}
+.c2d10-dialog select option {
+  background-color: #021109;
+  font-family: VT323, monospace;
+  font-size: 1.25rem;
+}
+.c2d10-dialog h1 {
+  border: none !important;
+  text-align: center;
+  color: #29a253;
+  font-family: Quantum, sans-serif;
+  font-size: 2.5rem;
+}
+.c2d10-dialog h3 {
+  border: none !important;
+  text-align: center;
+  color: #29a253;
+  font-family: Quantum, sans-serif;
+  font-size: 1.25rem;
+  text-shadow: none;
+}
+.c2d10-dialog .label-box {
+  padding: 3px 2px 2px 2px;
+}
+.c2d10-dialog label {
+  border: none !important;
+  color: #29a253;
+  font-family: Quantum, sans-serif;
+  font-size: 1rem;
+  text-shadow: none;
 }

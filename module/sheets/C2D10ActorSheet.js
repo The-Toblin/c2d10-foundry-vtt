@@ -25,8 +25,8 @@ export default class C2D10ActorSheet extends ActorSheet {
   getData() {
     const sheetData = super.getData();
     sheetData.config = CONFIG.c2d10;
-    sheetData.system = sheetData.data.data;
     sheetData.items = this.actor.items;
+    sheetData.system = this.actor.system;
 
     /* Assets */
     sheetData.assets = sheetData.items.filter(p => p.type === "asset");
@@ -136,6 +136,7 @@ export default class C2D10ActorSheet extends ActorSheet {
    */
   activateListeners(html) {
     html.find(".dot-container").on("click contextmenu", this._onResourceChange.bind(this));
+    html.find(".description").on("contextmenu", this._postDescription.bind(this));
     html.find(".edit-lock").click(this._toggleEditLock.bind(this));
     html.find(".delete-item").click(this._deleteItem.bind(this));
     html.find(".add-focus").click(this._addFocus.bind(this));
@@ -223,7 +224,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     });
 
     const updateData = {};
-    updateData["data.skills.focus"] = currentArray;
+    updateData["system.skills.focus"] = currentArray;
 
     await this.actor.update(updateData);
   }
@@ -236,7 +237,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     currentArray.splice(currentArray.findIndex(v => v.name === name), 1);
 
     const updateData = {};
-    updateData["data.skills.focus"] = currentArray;
+    updateData["system.skills.focus"] = currentArray;
 
     await this.actor.update(updateData);
   }
@@ -282,7 +283,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     };
 
     const updateData = {};
-    updateData["data.skills.focus"] = currentArray;
+    updateData["system.skills.focus"] = currentArray;
 
     await this.actor.update(updateData);
   }
@@ -347,6 +348,22 @@ export default class C2D10ActorSheet extends ActorSheet {
     const talents = this.getData().talents;
     const actorId = this.actor.id;
 
-    await skillTest(sys.health.crisis, dataset.id, pool, talents, actorId);
+    await skillTest(sys.health.crisis, dataset.id, pool, talents, actorId, dataset.group);
+  }
+
+  async _postDescription(event) {
+    event.preventDefault();
+    const id = event.currentTarget.closest(".description").dataset.id;
+    const messageTemplate = "systems/c2d10/templates/partials/chat-templates/description.hbs";
+    const messageContext = {
+      description: game.i18n.localize(`c2d10.descriptions.${id}`),
+      title: id
+    };
+    const chatData = {
+      speaker: ChatMessage.getSpeaker(),
+      content: await renderTemplate(messageTemplate, messageContext)
+    };
+
+    ChatMessage.create(chatData);
   }
 }

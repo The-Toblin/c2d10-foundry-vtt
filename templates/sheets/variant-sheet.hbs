@@ -4,7 +4,7 @@
             <input name="name" type="text" value="{{item.name}}" placeholder="{{localize "c2d10.powers.name"}}"/>
         </h1>
         <h3 class="c2d10-alert">
-            <select name="data.power">
+            <select name="system.power">
                 {{selectOptions config.powers selected=system.power localize=true}}
             </select>
         </h3>
@@ -12,7 +12,7 @@
     <section>
         <div class="c2d10-subsection flex-row flex-between">
             <div class="w-80 c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} c2d10-asset-textarea">
-                <textarea name="data.description">{{system.description}}</textarea>
+                <textarea name="system.description">{{system.description}}</textarea>
             </div>
             <div class="flex-col flex-start">
                 <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} w-fit">
@@ -34,41 +34,41 @@
                     </table>
                     <div class="flex-row flex-between">
                         <div>
-                            <input name="data.pool" type="text" value="{{data.data.pool}}" placeholder="{{localize "c2d10.powers.pool"}}" />
+                            <input name="system.pool" type="text" value="{{system.pool}}" placeholder="{{localize "c2d10.powers.pool"}}" />
                         </div>
                     </div>
                     <div class="flex-row flex-between">
                         <div>
-                            <input name="data.cost" type="text" value="{{data.data.cost}}" placeholder="{{localize "c2d10.powers.cost"}}" />
+                            <input name="system.cost" type="text" value="{{system.cost}}" placeholder="{{localize "c2d10.powers.cost"}}" />
                         </div>
                         <div>
-                            <select name="data.cost-resource">
-                                {{selectOptions config.resources selected=data.data.cost-resource localize=true}}
+                            <select name="system.cost-resource">
+                                {{selectOptions config.resources selected=system.cost-resource localize=true}}
                             </select>
                         </div>
                     </div>
                     <div class="flex-row flex-between">
                         <div>
-                            <input name="data.range" type="text" value="{{data.data.range}}" placeholder="{{localize "c2d10.powers.range"}}" />
+                            <input name="system.range" type="text" value="{{system.range}}" placeholder="{{localize "c2d10.powers.range"}}" />
                         </div>
                         <div>
-                            <select name="data.range-denominator">
-                                {{selectOptions config.range selected=data.data.range-denominator localize=true}}
+                            <select name="system.range-denominator">
+                                {{selectOptions config.range selected=system.range-denominator localize=true}}
                             </select>
                         </div>
                     </div>
                     <div class="flex-row flex-between">
                         <div>
-                            <input name="data.opposed" type="text" value="{{data.data.opposed}}" placeholder="{{localize "c2d10.powers.opposed"}}" />
+                            <input name="system.opposed" type="text" value="{{system.opposed}}" placeholder="{{localize "c2d10.powers.opposed"}}" />
                         </div>
                     </div>
                     <div class="flex-row flex-between">
                         <div>
-                            <input name="data.duration" type="text" value="{{data.data.duration}}" placeholder="{{localize "c2d10.powers.duration"}}" />
+                            <input name="system.duration" type="text" value="{{system.duration}}" placeholder="{{localize "c2d10.powers.duration"}}" />
                         </div>
                         <div>
-                            <select name="data.duration-denominator">
-                                {{selectOptions config.duration selected=data.data.duration-denominator localize=true}}
+                            <select name="system.duration-denominator">
+                                {{selectOptions config.duration selected=system.duration-denominator localize=true}}
                             </select>
                         </div>
                     </div>

@@ -241,7 +241,8 @@ const _doRoll = async rollData => {
     speaker: ChatMessage.getSpeaker(),
     roll: theRoll,
     content: await renderTemplate(messageTemplate, templateContext),
-    type: CONST.CHAT_MESSAGE_TYPES.ROLL
+    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+    sound: CONFIG.sounds.dice
   };
 
   // Post chat message to chat.
@@ -329,10 +330,16 @@ export async function talentTest(crisis, item, pool, actorId) {
  * @param {number} pool    The Talent rank to produce a pool of dice.
  * @param {object} talents An object holding all the talents and ranks for the character.
  * @param {string} actorId The actor's Id.
+ * @param {string} group   The group the skill belongs to.
  */
-export async function skillTest(crisis, item, pool, talents, actorId) {
+export async function skillTest(crisis, item, pool, talents, actorId, group) {
   const rollData = {};
 
+  // Determine which talent is highest in the group, so we can preselect it when opening the dialog.
+  const talentObject = game.actors.get(actorId).system.talents[group];
+  const highest = Object.keys(talentObject).reduce((a, b) => talentObject[a] > talentObject[b] ? a : b);
+
+  // Populate the needed rolldata
   rollData.talentsList = c2d10.allTalents;
   rollData.pool = pool;
   rollData.item = item;
@@ -340,7 +347,9 @@ export async function skillTest(crisis, item, pool, talents, actorId) {
   rollData.id = actorId;
   rollData.DC = game.settings.get("c2d10", "DC");
   rollData.talents = talents;
+  rollData.highest = highest;
 
+  // Create the dialog
   const dialogOptions = {
     classes: ["c2d10-dialog", "roll"],
     top: 300,
@@ -359,6 +368,7 @@ export async function skillTest(crisis, item, pool, talents, actorId) {
             rollData.crisis = html.find("input#crisis").val();
             rollData.parent = html.find("select#parent").val();
             rollData.focus = html.find("input#focus")[0].checked;
+            // Call the roll function
             _doRoll(rollData);}
         }
       }

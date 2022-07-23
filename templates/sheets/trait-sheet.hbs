@@ -4,7 +4,7 @@
             <input name="name" type="text" value="{{item.name}}" placeholder="{{localize "c2d10.trait.name"}}" />
         </h1>
         <h3 class="c2d10-alert">
-            <select name="data.traitType">
+            <select name="system.traitType">
                 {{selectOptions config.virtueVice selected=system.traitType localize=true}}
             </select>
         </h3>
@@ -12,7 +12,7 @@
     <section>
         <div class="c2d10-subsection flex-row flex-between">
             <div class="w-80 c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} c2d10-asset-textarea">
-                <textarea name="data.description">{{system.description}}</textarea>
+                <textarea name="system.description">{{system.description}}</textarea>
             </div>
             <div class="flex-col flex-start">
                 <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} w-fit">
