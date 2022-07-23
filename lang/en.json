@@ -185,7 +185,11 @@
             "science": "<p><While technically an area of academia, the sciences involve themselves most with nature rather than arts and people. Chemistry, physics, math and other related areas are covered by this skill./p>",
             "stealth": "<p>Stealth is both the understanding of and performance of moving slowly, quietly and staying out of people’s prying eyes. Stealth can be used in any situation where one must move without rousing suspicion or hide somewhere.</p>",
             "survival": "<p>When caught in a situation without water, food or shelter, it’s a good thing you know how to find what you need, yes? Survival, no matter the location, is a matter of knowledge of where to find resources. It can be used to find food, water, shelter for the night or other matters of survival in any kind of terrain or settlement.</p>",
-            "technology": "<p>Technology varies between locations, but most of it works in a similar way. If you know one gadget, you can probably figure out how to use another. Technology covers everything from doing less legal activities on a terminal to repairing cybertech. Engineering, programming, cybersecurity is all covered under this skill.</p>"
+            "technology": "<p>Technology varies between locations, but most of it works in a similar way. If you know one gadget, you can probably figure out how to use another. Technology covers everything from doing less legal activities on a terminal to repairing cybertech. Engineering, programming, cybersecurity is all covered under this skill.</p>",
+            "crisis": "<p>Crisis is a measure of how debilitated a character is both mentally and physically. Causes your pools to accumulate Crisis Dice.</p>",
+            "strain": "<p>In-scene measure of physical strain. Provides +1DC for an Endurance test at the end of the scene. Fail to pass the test and you suffer 1 point of Crisis.</p><p>Click to perform the strain test.</p>",
+            "stress": "<p>In-scene measure of mental strain. Provides +1DC for a Willpower test at the end of the scene. Fail to pass the test and you suffer 1 point of Crisis.</p><p>Click to perform the stress test.</p>",
+            "wealth": "<p>Your character's wealth class. Defaults to 2 ranks.</p><p>Click to perform a wealth test.</p>"
         }
     },
     "SETTINGS": {

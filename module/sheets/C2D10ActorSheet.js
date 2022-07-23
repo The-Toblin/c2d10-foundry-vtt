@@ -141,7 +141,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     html.find(".delete-item").click(this._deleteItem.bind(this));
     html.find(".add-focus").click(this._addFocus.bind(this));
     html.find(".remove-focus").click(this._removeFocus.bind(this));
-    html.find(".focus-edit").click(this._editFocus.bind(this));
+    html.find(".focus-edit").on("click contextmenu", this._editFocus.bind(this));
     html.find(".c2d10-health-test").click(this._doHealthTest.bind(this));
     html.find(".c2d10-wealth-test").click(this._doWealthTest.bind(this));
     html.find(".c2d10-talent-test").click(this._doTalentTest.bind(this));
@@ -244,9 +244,9 @@ export default class C2D10ActorSheet extends ActorSheet {
 
   async _editFocus(event) {
     event.preventDefault();
-
-    const name = event.currentTarget.closest(".focus").dataset.name;
-    const parent = event.currentTarget.closest(".focus").dataset.parent;
+    const dataset = event.currentTarget.closest(".focusdata").dataset;
+    const name = dataset.name;
+    const parent = dataset.parent;
     const dialogData = this.getData();
     dialogData.focusContent = {name, parent};
 
@@ -261,7 +261,7 @@ export default class C2D10ActorSheet extends ActorSheet {
         content: await renderTemplate("systems/c2d10/templates/dialogs/add-focus-dialog.hbs", dialogData),
         buttons: {
           roll: {
-            label: "Edit!",
+            label: "Save!",
             callback: html => { this._doEditFocus(html, dialogData.focusContent);
 
             }
