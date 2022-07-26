@@ -1,35 +1,35 @@
-<tr class="variant-item asset-item " data-id="{{id}}">
+<tr class="variant-item asset-item" data-id="{{id}}">
     <td class="align-left resource-row c2d10-contentbox asset {{#if showEffects}}fancy-effects{{/if}}">
         {{name}}
     </td>
     <td class="align-left resource-row c2d10-contentbox asset {{#if showEffects}}fancy-effects{{/if}}">
-        {{#unless (eq "None" system.power)}}
-            {{localize (concat "c2d10.powers." system.power)}}
+        {{#unless (eq "None" data.data.power)}} {{! // FIXME: V10 update. }}
+            {{localize (concat "c2d10.powers." data.data.power)}} {{! // FIXME: V10 update. }}
         {{/unless}}
     </td>
     <td class="align-left resource-row c2d10-contentbox asset {{#if showEffects}}fancy-effects{{/if}}">
-        {{#unless (eq "None" system.pool)}}
-            {{system.pool}}
+        {{#unless (eq "None" data.data.pool)}} {{! // FIXME: V10 update. }}
+            {{data.data.pool}} {{! // FIXME: V10 update. }}
         {{/unless}}
     </td>
     <td class="align-left resource-row c2d10-contentbox asset {{#if showEffects}}fancy-effects{{/if}}">
-        {{#unless (eq "None" system.cost)}}
-            {{system.cost}} {{localize (concat "c2d10.resources." system.cost-resource)}}
+        {{#unless (eq "None" data.data.cost)}} {{! // FIXME: V10 update. }}
+            {{data.data.cost}} {{localize (concat "c2d10.resources." data.data.cost-resource)}} {{! // FIXME: V10 update. }}
         {{/unless}}
     </td>
     <td class="align-left resource-row c2d10-contentbox asset {{#if showEffects}}fancy-effects{{/if}}">
-        {{#unless (eq "None" system.range)}}
-            {{system.range}} {{localize (concat "c2d10.range." system.range-denominator)}}
+        {{#unless (eq "None" data.data.range)}} {{! // FIXME: V10 update. }}
+            {{data.data.range}} {{localize (concat "c2d10.range." data.data.range-denominator)}} {{! // FIXME: V10 update. }}
         {{/unless}}
     </td>
     <td class="align-left resource-row c2d10-contentbox asset {{#if showEffects}}fancy-effects{{/if}}">
-        {{#unless (eq "None" system.opposed)}}
-            {{system.opposed}}
+        {{#unless (eq "None" data.data.opposed)}} {{! // FIXME: V10 update. }}
+            {{data.data.opposed}} {{! // FIXME: V10 update. }}
         {{/unless}}
     </td>
     <td class="align-left resource-row c2d10-contentbox asset {{#if showEffects}}fancy-effects{{/if}}">
-        {{#unless (eq "None" system.duration)}}
-            {{system.duration}} {{localize (concat "c2d10.duration." system.duration-denominator)}}
+        {{#unless (eq "None" data.data.duration)}} {{! // FIXME: V10 update. }}
+            {{data.data.duration}} {{localize (concat "c2d10.duration." data.data.duration-denominator)}} {{! // FIXME: V10 update. }}
         {{/unless}}
     </td>
 </tr>

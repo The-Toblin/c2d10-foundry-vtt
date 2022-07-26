@@ -71,21 +71,29 @@ export function changeDC(isIncrease) {
  * @param {boolean} isPlayer  Whether to modify heropoints or villainpoints.
  */
 export async function buyDice(isIncrease, isPlayer) {
-  // TODO: Convert this to sockets some day. Commented items need to be recoded for sockets.
   const currentValue = getDice();
+  const newValue = isIncrease ? currentValue + 1 : currentValue - 1;
+
+  if (newValue <= 5 && newValue >= 0) {
+    await game.settings.set("c2d10", "bonusDice", newValue);
+  }
+
+  /* // TODO: Convert this to work with sockets so players can buy dice.
   const max = isPlayer ? 10 : 20;
   let cost = isIncrease ? parseInt(currentValue + 1) : currentValue;
   if (!isIncrease) cost *= -1;
-
-  // Const target = isPlayer ? "heroPoints" : "villainPoints";
-  const newValue = isIncrease ? currentValue + 1 : currentValue - 1;
+  const target = isPlayer ? "heroPoints" : "villainPoints";
   const currentNarrativePoints = isPlayer ? getHeroPoints() : getVillainPoints();
   const newPoints = currentNarrativePoints - cost;
 
-  if (newPoints <= max && newPoints >= 0) {
+  If (newPoints <= max && newPoints >= 0) {
     if (newValue <= 5 && newValue >= 0) {
       await game.settings.set("c2d10", "bonusDice", newValue);
-      // Await game.settings.set("c2d10", target, newPoints );
+      await game.settings.set("c2d10", target, newPoints );
     }
+  } else {
+    const pointName = isPlayer ? "hero points" : "villain points";
+    ui.notifications.error(`You do not have enough ${pointName} to buy extra dice!`);
   }
+  */
 }

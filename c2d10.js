@@ -104,49 +104,45 @@ Hooks.once("ready", () => {
 
   // TODO: Wrap these in their own container so they can be placed with a single CSS class.
   $("body").append(`
-    <div class="c2d10-hero-points">
-      <div class="hp-control-numbers">
-        ${HP}
-      </div>
-      <div class="keeper-controls ${hide}">
-        <button class="hp-control hp-plus">+</button>
-        <button class="hp-control hp-minus ">-</button>
-      </div>
-    </div>
-    <div class="c2d10-bonus-dice">
-      <div class="bonus-control-numbers">
-        ${bonusDice}
-      </div>
-      <div class="keeper-controls ${hide}">
-        <button class="bonus-control bonus-plus">+</button>
-        <button class="bonus-control bonus-minus">-</button>
-      </div>
-    </div>`
-  );
-  if (game.users.current.isGM) {
-    $("body").append(`
-      <div class="c2d10-villain-points">
-        <div class="vp-control-numbers">
+  <div class="keeper-control-box">
+    <div class="c2d10-villain-points">
+      <div class="vp-control-numbers">
           ${VP}
-        </div>
-        <div class="keeper-controls">
+      </div>
+      <div class="keeper-controls ${hide}">
           <button class="vp-control vp-plus">+</button>
           <button class="vp-control vp-minus">-</button>
-        </div>
-      </div>`
-    );
-    $("body").append(`
-      <div class="c2d10-difficulty">
+      </div>
+    </div>
+    <div class="c2d10-difficulty">
         <div class="dc-control-numbers">
-          ${DC}
+            ${DC}
         </div>
-          <div class="keeper-controls">
+        <div class="keeper-controls ${hide}">
             <button class="dc-control dc-plus">+</button>
             <button class="dc-control dc-minus">-</button>
-          </div>
-      </div>`
-    );
-  }
+        </div>
+    </div>
+    <div class="c2d10-bonus-dice">
+        <div class="bonus-control-numbers">
+            ${bonusDice}
+        </div>
+        <div class="keeper-controls ${hide}">
+            <button class="bonus-control bonus-plus">+</button>
+            <button class="bonus-control bonus-minus">-</button>
+        </div>
+    </div>
+    <div class="c2d10-hero-points">
+        <div class="hp-control-numbers">
+            ${HP}
+        </div>
+        <div class="keeper-controls ${hide}">
+            <button class="hp-control hp-plus">+</button>
+            <button class="hp-control hp-minus ">-</button>
+        </div>
+    </div>
+  </div>
+  `);
   // Add click events for heropoints.
   $("body").on("click", ".hp-control", event => {
     const $self = $(event.currentTarget);

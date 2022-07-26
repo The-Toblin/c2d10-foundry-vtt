@@ -27,7 +27,7 @@
             "touch": "Touch"
         },
         "character": {
-            "name": "Name",
+            "name": "Nickname",
             "campaign": "Campaign",
             "concept": "Concept",
             "ambition": "Ambition",
@@ -50,6 +50,7 @@
             "parent": "Parent skill",
             "personality": "Personality",
             "powers": "Powers",
+            "realName": "Real name",
             "remove": "Remove",
             "removeFocus": "Remove a focus",
             "skill": "Skill",
@@ -125,7 +126,7 @@
             "range": "Range",
             "cost": "Cost",
             "pool": "Pool",
-            "opposed": "Opposed"
+            "opposed": "Opposed pool"
         },
         "asset": {
             "name": "Name",
