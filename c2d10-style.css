@@ -823,10 +823,21 @@ table input {
 .c2d10.item-sheet {
   height: fit-content !important;
 }
-.c2d10-hero-points,
-.c2d10-villain-points,
-.c2d10-difficulty,
-.c2d10-bonus-dice {
+.keeper-control-box {
+  position: absolute;
+  bottom: 0%;
+  right: 325px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 235px;
+  height: 200px;
+}
+.keeper-control-box .c2d10-hero-points,
+.keeper-control-box .c2d10-villain-points,
+.keeper-control-box .c2d10-difficulty,
+.keeper-control-box .c2d10-bonus-dice {
   background: rgba(2, 17, 9, 0.5);
   border: 1px solid #021109;
   border-radius: 5px;
@@ -837,87 +848,74 @@ table input {
   font-family: VT323, monospace;
   font-size: 60px;
   height: 84px;
-  right: 510px;
-  bottom: 5px;
   line-height: 1.2;
-  margin: 0 0 8px;
-  position: fixed;
+  margin: 0 55px 10px 0;
   text-align: center;
   width: 84px;
 }
-.c2d10-hero-points.hide,
-.c2d10-villain-points.hide,
-.c2d10-difficulty.hide,
-.c2d10-bonus-dice.hide {
-  display: none !important;
-}
-.c2d10-hero-points::after,
-.c2d10-villain-points::after,
-.c2d10-difficulty::after,
-.c2d10-bonus-dice::after {
-  bottom: 2px;
-  content: 'Difficulty';
+.keeper-control-box .c2d10-hero-points::after,
+.keeper-control-box .c2d10-villain-points::after,
+.keeper-control-box .c2d10-difficulty::after,
+.keeper-control-box .c2d10-bonus-dice::after {
   font-family: VT323, monospace;
   font-size: 12px;
-  left: 50%;
   line-height: 1;
   position: absolute;
-  transform: translateX(-50%);
   width: 80px;
 }
-.c2d10-hero-points .hp-control-numbers,
-.c2d10-villain-points .hp-control-numbers,
-.c2d10-difficulty .hp-control-numbers,
-.c2d10-bonus-dice .hp-control-numbers,
-.c2d10-hero-points .vp-control-numbers,
-.c2d10-villain-points .vp-control-numbers,
-.c2d10-difficulty .vp-control-numbers,
-.c2d10-bonus-dice .vp-control-numbers,
-.c2d10-hero-points .dc-control-numbers,
-.c2d10-villain-points .dc-control-numbers,
-.c2d10-difficulty .dc-control-numbers,
-.c2d10-bonus-dice .dc-control-numbers,
-.c2d10-hero-points .bonus-control-numbers,
-.c2d10-villain-points .bonus-control-numbers,
-.c2d10-difficulty .bonus-control-numbers,
-.c2d10-bonus-dice .bonus-control-numbers {
+.keeper-control-box .c2d10-hero-points .hp-control-numbers,
+.keeper-control-box .c2d10-villain-points .hp-control-numbers,
+.keeper-control-box .c2d10-difficulty .hp-control-numbers,
+.keeper-control-box .c2d10-bonus-dice .hp-control-numbers,
+.keeper-control-box .c2d10-hero-points .vp-control-numbers,
+.keeper-control-box .c2d10-villain-points .vp-control-numbers,
+.keeper-control-box .c2d10-difficulty .vp-control-numbers,
+.keeper-control-box .c2d10-bonus-dice .vp-control-numbers,
+.keeper-control-box .c2d10-hero-points .dc-control-numbers,
+.keeper-control-box .c2d10-villain-points .dc-control-numbers,
+.keeper-control-box .c2d10-difficulty .dc-control-numbers,
+.keeper-control-box .c2d10-bonus-dice .dc-control-numbers,
+.keeper-control-box .c2d10-hero-points .bonus-control-numbers,
+.keeper-control-box .c2d10-villain-points .bonus-control-numbers,
+.keeper-control-box .c2d10-difficulty .bonus-control-numbers,
+.keeper-control-box .c2d10-bonus-dice .bonus-control-numbers {
   pointer-events: none;
 }
-.c2d10-hero-points .keeper-controls,
-.c2d10-villain-points .keeper-controls,
-.c2d10-difficulty .keeper-controls,
-.c2d10-bonus-dice .keeper-controls {
+.keeper-control-box .c2d10-hero-points .keeper-controls,
+.keeper-control-box .c2d10-villain-points .keeper-controls,
+.keeper-control-box .c2d10-difficulty .keeper-controls,
+.keeper-control-box .c2d10-bonus-dice .keeper-controls {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: absolute;
-  top: -1px;
-  left: calc(100% + 7px);
+  position: relative;
+  top: -73px;
+  right: calc(100% + -36px);
   width: 40px;
   height: 86px;
 }
-.c2d10-hero-points .keeper-controls.hide,
-.c2d10-villain-points .keeper-controls.hide,
-.c2d10-difficulty .keeper-controls.hide,
-.c2d10-bonus-dice .keeper-controls.hide {
+.keeper-control-box .c2d10-hero-points .keeper-controls.hide,
+.keeper-control-box .c2d10-villain-points .keeper-controls.hide,
+.keeper-control-box .c2d10-difficulty .keeper-controls.hide,
+.keeper-control-box .c2d10-bonus-dice .keeper-controls.hide {
   display: none !important;
 }
-.c2d10-hero-points .hp-control,
-.c2d10-villain-points .hp-control,
-.c2d10-difficulty .hp-control,
-.c2d10-bonus-dice .hp-control,
-.c2d10-hero-points .vp-control,
-.c2d10-villain-points .vp-control,
-.c2d10-difficulty .vp-control,
-.c2d10-bonus-dice .vp-control,
-.c2d10-hero-points .dc-control,
-.c2d10-villain-points .dc-control,
-.c2d10-difficulty .dc-control,
-.c2d10-bonus-dice .dc-control,
-.c2d10-hero-points .bonus-control,
-.c2d10-villain-points .bonus-control,
-.c2d10-difficulty .bonus-control,
-.c2d10-bonus-dice .bonus-control {
+.keeper-control-box .c2d10-hero-points .hp-control,
+.keeper-control-box .c2d10-villain-points .hp-control,
+.keeper-control-box .c2d10-difficulty .hp-control,
+.keeper-control-box .c2d10-bonus-dice .hp-control,
+.keeper-control-box .c2d10-hero-points .vp-control,
+.keeper-control-box .c2d10-villain-points .vp-control,
+.keeper-control-box .c2d10-difficulty .vp-control,
+.keeper-control-box .c2d10-bonus-dice .vp-control,
+.keeper-control-box .c2d10-hero-points .dc-control,
+.keeper-control-box .c2d10-villain-points .dc-control,
+.keeper-control-box .c2d10-difficulty .dc-control,
+.keeper-control-box .c2d10-bonus-dice .dc-control,
+.keeper-control-box .c2d10-hero-points .bonus-control,
+.keeper-control-box .c2d10-villain-points .bonus-control,
+.keeper-control-box .c2d10-difficulty .bonus-control,
+.keeper-control-box .c2d10-bonus-dice .bonus-control {
   display: block;
   width: 40px;
   height: 40px;
@@ -932,76 +930,77 @@ table input {
   box-shadow: 0 0 10px #021109;
   color: #e5e5ec;
 }
-.c2d10-hero-points .hp-control:hover,
-.c2d10-villain-points .hp-control:hover,
-.c2d10-difficulty .hp-control:hover,
-.c2d10-bonus-dice .hp-control:hover,
-.c2d10-hero-points .vp-control:hover,
-.c2d10-villain-points .vp-control:hover,
-.c2d10-difficulty .vp-control:hover,
-.c2d10-bonus-dice .vp-control:hover,
-.c2d10-hero-points .dc-control:hover,
-.c2d10-villain-points .dc-control:hover,
-.c2d10-difficulty .dc-control:hover,
-.c2d10-bonus-dice .dc-control:hover,
-.c2d10-hero-points .bonus-control:hover,
-.c2d10-villain-points .bonus-control:hover,
-.c2d10-difficulty .bonus-control:hover,
-.c2d10-bonus-dice .bonus-control:hover,
-.c2d10-hero-points .hp-control:active,
-.c2d10-villain-points .hp-control:active,
-.c2d10-difficulty .hp-control:active,
-.c2d10-bonus-dice .hp-control:active,
-.c2d10-hero-points .vp-control:active,
-.c2d10-villain-points .vp-control:active,
-.c2d10-difficulty .vp-control:active,
-.c2d10-bonus-dice .vp-control:active,
-.c2d10-hero-points .dc-control:active,
-.c2d10-villain-points .dc-control:active,
-.c2d10-difficulty .dc-control:active,
-.c2d10-bonus-dice .dc-control:active,
-.c2d10-hero-points .bonus-control:active,
-.c2d10-villain-points .bonus-control:active,
-.c2d10-difficulty .bonus-control:active,
-.c2d10-bonus-dice .bonus-control:active {
+.keeper-control-box .c2d10-hero-points .hp-control:hover,
+.keeper-control-box .c2d10-villain-points .hp-control:hover,
+.keeper-control-box .c2d10-difficulty .hp-control:hover,
+.keeper-control-box .c2d10-bonus-dice .hp-control:hover,
+.keeper-control-box .c2d10-hero-points .vp-control:hover,
+.keeper-control-box .c2d10-villain-points .vp-control:hover,
+.keeper-control-box .c2d10-difficulty .vp-control:hover,
+.keeper-control-box .c2d10-bonus-dice .vp-control:hover,
+.keeper-control-box .c2d10-hero-points .dc-control:hover,
+.keeper-control-box .c2d10-villain-points .dc-control:hover,
+.keeper-control-box .c2d10-difficulty .dc-control:hover,
+.keeper-control-box .c2d10-bonus-dice .dc-control:hover,
+.keeper-control-box .c2d10-hero-points .bonus-control:hover,
+.keeper-control-box .c2d10-villain-points .bonus-control:hover,
+.keeper-control-box .c2d10-difficulty .bonus-control:hover,
+.keeper-control-box .c2d10-bonus-dice .bonus-control:hover,
+.keeper-control-box .c2d10-hero-points .hp-control:active,
+.keeper-control-box .c2d10-villain-points .hp-control:active,
+.keeper-control-box .c2d10-difficulty .hp-control:active,
+.keeper-control-box .c2d10-bonus-dice .hp-control:active,
+.keeper-control-box .c2d10-hero-points .vp-control:active,
+.keeper-control-box .c2d10-villain-points .vp-control:active,
+.keeper-control-box .c2d10-difficulty .vp-control:active,
+.keeper-control-box .c2d10-bonus-dice .vp-control:active,
+.keeper-control-box .c2d10-hero-points .dc-control:active,
+.keeper-control-box .c2d10-villain-points .dc-control:active,
+.keeper-control-box .c2d10-difficulty .dc-control:active,
+.keeper-control-box .c2d10-bonus-dice .dc-control:active,
+.keeper-control-box .c2d10-hero-points .bonus-control:active,
+.keeper-control-box .c2d10-villain-points .bonus-control:active,
+.keeper-control-box .c2d10-difficulty .bonus-control:active,
+.keeper-control-box .c2d10-bonus-dice .bonus-control:active {
   box-shadow: 0 0 5px #e0f287;
 }
-.c2d10-hero-points .hp-control:active,
-.c2d10-villain-points .hp-control:active,
-.c2d10-difficulty .hp-control:active,
-.c2d10-bonus-dice .hp-control:active,
-.c2d10-hero-points .vp-control:active,
-.c2d10-villain-points .vp-control:active,
-.c2d10-difficulty .vp-control:active,
-.c2d10-bonus-dice .vp-control:active,
-.c2d10-hero-points .dc-control:active,
-.c2d10-villain-points .dc-control:active,
-.c2d10-difficulty .dc-control:active,
-.c2d10-bonus-dice .dc-control:active,
-.c2d10-hero-points .bonus-control:active,
-.c2d10-villain-points .bonus-control:active,
-.c2d10-difficulty .bonus-control:active,
-.c2d10-bonus-dice .bonus-control:active {
+.keeper-control-box .c2d10-hero-points .hp-control:active,
+.keeper-control-box .c2d10-villain-points .hp-control:active,
+.keeper-control-box .c2d10-difficulty .hp-control:active,
+.keeper-control-box .c2d10-bonus-dice .hp-control:active,
+.keeper-control-box .c2d10-hero-points .vp-control:active,
+.keeper-control-box .c2d10-villain-points .vp-control:active,
+.keeper-control-box .c2d10-difficulty .vp-control:active,
+.keeper-control-box .c2d10-bonus-dice .vp-control:active,
+.keeper-control-box .c2d10-hero-points .dc-control:active,
+.keeper-control-box .c2d10-villain-points .dc-control:active,
+.keeper-control-box .c2d10-difficulty .dc-control:active,
+.keeper-control-box .c2d10-bonus-dice .dc-control:active,
+.keeper-control-box .c2d10-hero-points .bonus-control:active,
+.keeper-control-box .c2d10-villain-points .bonus-control:active,
+.keeper-control-box .c2d10-difficulty .bonus-control:active,
+.keeper-control-box .c2d10-bonus-dice .bonus-control:active {
   background: #29a253;
 }
-.c2d10-hero-points {
-  right: 370px;
-}
-.c2d10-hero-points::after {
+.keeper-control-box .c2d10-hero-points::after {
+  bottom: 20px;
+  right: 11px;
   content: 'Hero Points';
 }
-.c2d10-bonus-dice {
-  right: 370px;
-  bottom: 100px;
-}
-.c2d10-bonus-dice::after {
+.keeper-control-box .c2d10-bonus-dice::after {
+  top: 65px;
+  right: 11px;
   content: 'Bonus Dice';
 }
-.c2d10-villain-points {
-  bottom: 100px;
-}
-.c2d10-villain-points::after {
+.keeper-control-box .c2d10-villain-points::after {
   content: 'Villain Points';
+  top: 65px;
+  left: 4px;
+}
+.keeper-control-box .c2d10-difficulty::after {
+  bottom: 20px;
+  left: 2px;
+  content: 'Difficulty';
 }
 .c2d10-dialog {
   background: linear-gradient(0deg, #021109, 15%, rgba(2, 17, 9, 0.85));

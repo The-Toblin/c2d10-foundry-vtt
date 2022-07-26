@@ -23,7 +23,7 @@ export default class C2D10Actor extends Actor {
 
   async modifyResource(n, type, group, res) {
     const updateData = {};
-    const system = this.data.data;
+    const system = this.data.data; // FIXME: V10 update.
 
     const currentValue = !group ? system[type][res] : system[type][group][res];
     const max = res === "crisis" ? 10 : 5;

@@ -14,7 +14,7 @@ export default class C2D10ItemSheet extends ItemSheet {
   getData() {
     const sheetData = super.getData();
     sheetData.config = CONFIG.c2d10;
-    sheetData.system = this.item.data.data;
+    sheetData.system = this.item.data.data; // FIXME: V10 update.
 
     /* Make system settings available for sheets to use for rendering */
     sheetData.showEffects = game.settings.get("c2d10", "showEffects");

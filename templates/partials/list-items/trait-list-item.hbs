@@ -8,11 +8,11 @@
         {{name}}
     </td>
     <td class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} asset c2d10-capitalize">
-        {{data.data.traitType}}
+        {{data.data.traitType}} {{! // FIXME: V10 update. }}
     </td>
     <td class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} asset">
         <div class="flex-row flex-center">
-            {{#dots data.data.level 5}}{{/dots}}
+            {{#dots data.data.level 5}}{{/dots}} {{! // FIXME: V10 update. }}
         </div>
     </td>
 </tr>

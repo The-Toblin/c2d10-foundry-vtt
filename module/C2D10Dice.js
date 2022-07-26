@@ -336,7 +336,7 @@ export async function skillTest(crisis, item, pool, talents, actorId, group) {
   const rollData = {};
 
   // Determine which talent is highest in the group, so we can preselect it when opening the dialog.
-  const talentObject = game.actors.get(actorId).data.data.talents[group];
+  const talentObject = game.actors.get(actorId).data.data.talents[group]; // FIXME: V10 update.
   const highest = Object.keys(talentObject).reduce((a, b) => talentObject[a] > talentObject[b] ? a : b);
 
   // Populate the needed rolldata

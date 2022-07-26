@@ -26,7 +26,7 @@ export default class C2D10Item extends Item {
 
   async modifyResource(n, res) {
     const updateData = {};
-    const system = this.data.data;
+    const system = this.data.data; // FIXME: V10 update.
     const currentValue = system[res];
     const max = 5;
 

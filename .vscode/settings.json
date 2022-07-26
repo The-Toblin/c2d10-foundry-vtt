@@ -3,5 +3,6 @@
     "main": ["c2d10-style.less", "c2d10-tinymce.less"],
     "out": "../",
     "compress": false
-  }
+  },
+  "todo-tree.tree.scanMode": "workspace only"
 }
