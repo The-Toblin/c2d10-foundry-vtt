@@ -26,7 +26,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     const sheetData = super.getData();
     sheetData.config = CONFIG.c2d10;
     sheetData.items = this.actor.items;
-    sheetData.system = this.actor.data.data; // FIXME: V10 update.
+    sheetData.system = this.actor.system;
 
     /* Assets */
     sheetData.assets = sheetData.items.filter(p => p.type === "asset");
@@ -107,17 +107,6 @@ export default class C2D10ActorSheet extends ActorSheet {
         item.sheet.render(true);
       }
     },
-    // TODO: Reimplement this functionality at some point.
-    /* {
-      name: game.i18n.localize("c2d10.sheet.description"),
-      icon: '<i class="fas fa-sticky-note"></i>',
-      callback: element => {
-        const itemId = element.closest(".asset-item")[0].dataset.id;
-        const item = this.actor.items.get(itemId);
-
-        item.roll();
-      }
-    },*/
     {
       name: game.i18n.localize("c2d10.sheet.remove"),
       icon: '<i class="fas fa-trash"></i>',
@@ -224,7 +213,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     });
 
     const updateData = {};
-    updateData["data.skills.focus"] = currentArray;
+    updateData["system.skills.focus"] = currentArray;
 
     await this.actor.update(updateData);
   }
@@ -237,7 +226,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     currentArray.splice(currentArray.findIndex(v => v.name === name), 1);
 
     const updateData = {};
-    updateData["data.skills.focus"] = currentArray;
+    updateData["system.skills.focus"] = currentArray;
 
     await this.actor.update(updateData);
   }
@@ -283,7 +272,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     };
 
     const updateData = {};
-    updateData["data.skills.focus"] = currentArray;
+    updateData["system.skills.focus"] = currentArray;
 
     await this.actor.update(updateData);
   }
