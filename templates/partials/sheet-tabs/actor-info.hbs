@@ -56,7 +56,7 @@
                 </table>
             </div>
             <div class="w-20 flex-col">
-                <div class="flex-col flex-between c2d10-contentbox h-100">
+                <div class="flex-col flex-between c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}  h-100">
                     <h3 class="c2d10-test c2d10-health-test description" data-tooltip="{{localize "c2d10.descriptions.strain"}}" data-type="health" data-id="strain">
                         {{localize "c2d10.resources.strain"}}
                     </h3>
@@ -64,7 +64,7 @@
                         {{#dots system.health.strain 5}}{{/dots}}
                     </div>
                 </div>
-                <div class="flex-col flex-between c2d10-contentbox h-100">
+                <div class="flex-col flex-between c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} h-100">
                     <h3 class="c2d10-test c2d10-health-test description" data-tooltip="{{localize "c2d10.descriptions.stress"}}" data-type="health" data-id="stress">
                         {{localize "c2d10.resources.stress"}}
                     </h3>

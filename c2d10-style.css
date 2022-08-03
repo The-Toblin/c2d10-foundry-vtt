@@ -589,14 +589,30 @@ table input {
 #chat-log .chat-message.whisper {
   background-image: url(assets/hidden-chat-top.webp), url(assets/hidden-chat-bottom.webp), url(assets/hidden-chat-middle.webp) !important;
 }
+.dice-roll .c2d10-contentbox {
+  margin-bottom: 10px !important;
+}
+.dice-roll ol.centered-list {
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  list-style-position: inside;
+}
+.dice-roll .force-2px-padding {
+  padding-left: 2px !important;
+  padding-right: 2px !important;
+}
+.d10.regular {
+  background-image: url(assets/d10-gray.webp) !important;
+}
+.d10.crisis {
+  background-image: url(assets/d10-yellow.webp) !important;
+}
 .d10.crit {
   background-image: url(assets/d10-green.webp) !important;
 }
 .d10.mess {
   background-image: url(assets/d10-purple.webp) !important;
-}
-.d10.crisis {
-  background-image: url(assets/d10-yellow.webp) !important;
 }
 .d10.complication {
   background-image: url(assets/d10-red.webp) !important;
@@ -715,7 +731,6 @@ table input {
   border-radius: 3px;
   border: 2px solid;
   border-color: #29a253 !important;
-  padding: 15px 2px;
   text-orientation: mixed;
   transform: rotate(-180deg);
   margin: 2px 5px 2px 5px;
@@ -819,6 +834,11 @@ table input {
 .c2d10.sheet .c2d10-fit-content,
 .c2d10.item-sheet .c2d10-fit-content {
   height: fit-content !important;
+}
+.c2d10.sheet nav.sheet-tabs .item,
+.c2d10.item-sheet nav.sheet-tabs .item {
+  padding: 10px 4px;
+  margin: 4px;
 }
 .c2d10.item-sheet {
   height: fit-content !important;

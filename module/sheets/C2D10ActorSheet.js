@@ -81,6 +81,8 @@ export default class C2D10ActorSheet extends ActorSheet {
       return 0;  // Names must be equal
     });
 
+    sheetData.focus = sheetData.system.skills.focus;
+
     /* Make system settings available for sheets to use for rendering */
     sheetData.showEffects = game.settings.get("c2d10", "showEffects");
     sheetData.locked = this.actor.getFlag("c2d10", "locked");
@@ -289,6 +291,10 @@ export default class C2D10ActorSheet extends ActorSheet {
    */
   async _doWealthTest(event) {
     event.preventDefault();
+    if (event.shiftKey) {
+      this._postDescription(event);
+      return;
+    }
     const sys = this.getData().system;
     const actorId = this.actor.id;
 
@@ -300,6 +306,10 @@ export default class C2D10ActorSheet extends ActorSheet {
    * @param {html} event html click event data, including dataset.
    */
   async _doHealthTest(event) {
+    if (event.shiftKey) {
+      this._postDescription(event);
+      return;
+    }
     event.preventDefault();
     const dataset = event.currentTarget.closest(".c2d10-test").dataset;
     const sys = this.getData().system;
@@ -308,7 +318,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     const DC = strain ? sys.health.strain : sys.health.stress;
     const actorId = this.actor.id;
 
-    await healthTest(sys.health.crisis, strain, pool, DC, actorId);
+    await healthTest(strain, pool, DC, actorId);
   }
 
   /**
@@ -317,6 +327,10 @@ export default class C2D10ActorSheet extends ActorSheet {
    */
   async _doTalentTest(event) {
     event.preventDefault();
+    if (event.shiftKey) {
+      this._postDescription(event);
+      return;
+    }
     const dataset = event.currentTarget.closest(".c2d10-test").dataset;
     const sys = this.getData().system;
     const pool = sys.talents[dataset.group][dataset.id];
@@ -331,6 +345,10 @@ export default class C2D10ActorSheet extends ActorSheet {
    */
   async _doSkillTest(event) {
     event.preventDefault();
+    if (event.shiftKey) {
+      this._postDescription(event);
+      return;
+    }
     const dataset = event.currentTarget.closest(".c2d10-test").dataset;
     const sys = this.getData().system;
     const pool = sys.skills[dataset.group][dataset.id];
