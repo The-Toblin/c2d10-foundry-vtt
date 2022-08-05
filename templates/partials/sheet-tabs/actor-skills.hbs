@@ -13,6 +13,8 @@
                         <col class="w-60">
                         <col class="w-40">
                     </colgroup>
+                    {{! -- Somewhat overengineered structure. This writes out each physical skill, but also checks for the presence of a focus
+                    and if one is found, append an asterisk to the name, to indicate to the player that they have a focus to use.}}
                     {{#each system.skills.physical as |level name|}}
                         <tr>
                             <th class="c2d10-test c2d10-skill-test table-no-border description"
@@ -26,8 +28,7 @@
                                         {{#if (eq content.parent name)}} *{{/if}}
                                     {{/each}}
                             </th>
-                            <td class="flex-row table-no-border resource-row" data-type="skills" data-group="physical"
-                                data-id="{{name}}">
+                            <td class="flex-row table-no-border resource-row" data-type="skills" data-group="physical" data-id="{{name}}" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
                                 {{#dots level 5}}{{/dots}}
                             </td>
                         </tr>
@@ -45,6 +46,8 @@
                         <col class="w-60">
                         <col class="w-40">
                     </colgroup>
+                    {{! -- Somewhat overengineered structure. This writes out each social skill, but also checks for the presence of a focus
+                    and if one is found, append an asterisk to the name, to indicate to the player that they have a focus to use.}}
                     {{#each system.skills.social as |level name|}}
                         <tr>
                             <th class="c2d10-test c2d10-skill-test table-no-border description"
@@ -58,8 +61,7 @@
                                         {{#if (eq content.parent name)}} *{{/if}}
                                     {{/each}}
                             </th>
-                            <td class="flex-row table-no-border resource-row" data-type="skills" data-group="social"
-                                data-id="{{name}}">
+                            <td class="flex-row table-no-border resource-row" data-type="skills" data-group="social" data-id="{{name}}" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
                                 {{#dots level 5}}{{/dots}}
                             </td>
                         </tr>
@@ -77,6 +79,8 @@
                         <col class="w-60">
                         <col class="w-40">
                     </colgroup>
+                    {{! -- Somewhat overengineered structure. This writes out each mental skill, but also checks for the presence of a focus
+                    and if one is found, append an asterisk to the name, to indicate to the player that they have a focus to use.}}
                     {{#each system.skills.mental as |level name|}}
                         <tr>
                             <th class="c2d10-test c2d10-skill-test table-no-border description"
@@ -90,8 +94,7 @@
                                         {{#if (eq content.parent name)}} *{{/if}}
                                     {{/each}}
                             </th>
-                            <td class="flex-row table-no-border resource-row" data-type="skills" data-group="mental"
-                                data-id="{{name}}">
+                            <td class="flex-row table-no-border resource-row" data-type="skills" data-group="mental" data-id="{{name}}" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
                                 {{#dots level 5}}{{/dots}}
                             </td>
                         </tr>

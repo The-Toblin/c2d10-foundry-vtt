@@ -68,7 +68,8 @@
             "playerName": "Player name",
             "sex": "Sex",
             "title": "Title",
-            "species": "Species"
+            "species": "Species",
+            "dot-tooltip": "<p>Left click to increase, right click or shift+left click, to reduce.</p>"
         },
         "talents": {
             "physical": "Physical",

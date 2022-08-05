@@ -108,23 +108,27 @@ const _diceList = async (diceRolls, crisis = 0) => {
     return 0;
   });
 
-  const pxPadding = crisisDice < 1 || crisisDice === 10 ? " force-2px-padding" : ""; // If ten dice show in a row, reduce left/right padding.
-  // FIXME Make sure the "pool dice" box is hidden if crisis is 10.
-  let sortedList = `
-  <div class="c2d10-contentbox${pxPadding}">
+  let sortedList = "";
+
+  if (crisisDice !== 10) {
+    sortedList +=`
+  <div class="c2d10-contentbox force-2px-padding">
     <h3>${game.i18n.localize("c2d10.chat.pool")}</h3>
     <ol class="dice-rolls centered-list">`;
 
-  for (let i = 0; i < reArray.length; i++) {
-    const content = reArray[i];
-    if (content.includes("regular")) sortedList += content;
+    for (let i = 0; i < reArray.length; i++) {
+      const content = reArray[i];
+      if (content.includes("regular")) sortedList += content;
+    }
+
+    sortedList +=`
+      </ol>
+    </div>`;
   }
 
   if (crisisDice > 0) {
-    sortedList += `
-      </ol>
-    </div>
-    <div class="c2d10-contentbox${pxPadding}">
+    sortedList += `     
+    <div class="c2d10-contentbox force-2px-padding">
       <h3>${game.i18n.localize("c2d10.chat.crisis")}</h3>
       <ol class="dice-rolls centered-list">`;
 
@@ -132,11 +136,13 @@ const _diceList = async (diceRolls, crisis = 0) => {
       const content = reArray[i];
       if (content.includes("crisis")) sortedList += content;
     }
+
+    sortedList +=`
+      </ol>
+    </div>`;
   }
 
-  sortedList += `
-    </ol>
-  </div>`;
+
   return sortedList;
 };
 

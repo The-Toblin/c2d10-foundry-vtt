@@ -187,6 +187,9 @@ export default class C2D10ActorSheet extends ActorSheet {
   /**
    * Function to increase or decrease a resource on the sheet. Allows modification of health resources
    * in spite of sheet lock. Otherwise prevents editing if the sheet is locked.
+   *
+   *  Left click increases an attribute and right click, or shift-left click (for chromebook support)
+   * reduces it.
    * @param {object} event The clicked event-data.
    */
   _onResourceChange(event) {
@@ -199,9 +202,9 @@ export default class C2D10ActorSheet extends ActorSheet {
     const pass = element.closest(".resource-row").dataset.pass;
 
     if (pass || !this.actor.getFlag("c2d10", "locked")) {
-      if (event.type === "click") {
+      if (event.type === "click" && !event.shiftKey) {
         this.actor.modifyResource(1, type, group, res);
-      } else {
+      } else if (event.type === "contextmenu" || event.shiftKey) {
         this.actor.modifyResource(-1, type, group, res);
       }
     } else {
