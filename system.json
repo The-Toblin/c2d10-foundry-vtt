@@ -1,7 +1,7 @@
 {
     "id": "c2d10",
     "title": "Celenia D10 Roleplaying System - 2nd Edition",
-    "version": 0.43,
+    "version": 0.45,
     "compatibility": {
         "minimum": "10",
         "verified": "10.276",
@@ -42,8 +42,8 @@
     ],
     "socket": false,
     "url": "https://github.com/The-Toblin/c2d10-foundry-vtt/",
-    "update": "https://raw.githubusercontent.com/The-Toblin/c2d10-foundry-vtt/V10/system.json",
-    "download": "https://github.com/The-Toblin/c2d10-foundry-vtt/archive/refs/heads/V10.zip",
+    "manifest": "https://raw.githubusercontent.com/The-Toblin/c2d10-foundry-vtt/main/system.json",
+    "download": "https://github.com/The-Toblin/c2d10-foundry-vtt/archive/refs/heads/main.zip",
     "protected": false,
     "gridDistance": "1.5",
     "gridUnits": "m",
