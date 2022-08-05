@@ -1,9 +1,9 @@
-<section>
-    <h3>
-        {{localize "c2d10.sheet.traits"}}
-    </h3>
-    <div class="content-box c2d10-subsection flex-row flex-between">
-        <div class="flex-col flex-start w-100">
+<section class="content-box flex-col flex-between">
+    <div class="flex-col">
+        <h3>
+        {{localize "c2d10.sheet.virtues"}}
+        </h3>
+        <div class="flex-col flex-start c2d10-subsection w-100">
             <table class="c2d10-asset-card-table">
                 <colgroup>
                     <col style="width: 5%;">
@@ -23,7 +23,37 @@
                         {{localize "c2d10.trait.level"}}
                     </th>
                 </tr>
-                {{#each traits as |item id|}}
+                {{#each virtues as |item id|}}
+                {{> "systems/c2d10/templates/partials/list-items/trait-list-item.hbs"}}
+                {{/each}}
+            </table>
+        </div>
+    </div>
+    <div class="flex-col">
+        <h3>
+        {{localize "c2d10.sheet.vices"}}
+        </h3>
+        <div class="flex-col flex-start c2d10-subsection  w-100">
+            <table class="c2d10-asset-card-table">
+                <colgroup>
+                    <col style="width: 5%;">
+                    <col class="w-60">
+                    <col class="w-20">
+                    <col class="w-20">
+                </colgroup>
+                <tr>
+                    <th class="table-no-border"></th>
+                    <th class="table-no-border">
+                        {{localize "c2d10.trait.name"}}
+                    </th>
+                    <th class="table-no-border">
+                        {{localize "c2d10.trait.traitType"}}
+                    </th>
+                    <th class="table-no-border">
+                        {{localize "c2d10.trait.level"}}
+                    </th>
+                </tr>
+                {{#each vices as |item id|}}
                 {{> "systems/c2d10/templates/partials/list-items/trait-list-item.hbs"}}
                 {{/each}}
             </table>

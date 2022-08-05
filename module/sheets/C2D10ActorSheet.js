@@ -28,12 +28,22 @@ export default class C2D10ActorSheet extends ActorSheet {
     sheetData.items = this.actor.items;
     sheetData.system = this.actor.system;
 
-    /* Assets */
+    /**
+     * Items
+     */
     sheetData.assets = sheetData.items.filter(p => p.type === "asset");
-    sheetData.traits = sheetData.items.filter(p => p.type === "trait");
+    sheetData.virtues = sheetData.items.filter(p => p.type === "trait" && p.system.traitType === "virtue");
+    sheetData.vices = sheetData.items.filter(p => p.type === "trait" && p.system.traitType === "vice");
     sheetData.variants = sheetData.items.filter(p => p.type === "variant");
 
-    // Create list objects to use for dialogs.
+    /**
+     * Set a flag to allow the traits tab to be shown if traits are present.
+     */
+    if (sheetData.vices || sheetData.virtues) sheetData.traits = true;
+
+    /**
+     * Create list objects to use for dialogs.
+     */
     sheetData.talents = {};
     for (const entry of Object.entries(sheetData.system.talents.physical)) {
       sheetData.talents[entry[0]] = entry[1];
@@ -56,7 +66,9 @@ export default class C2D10ActorSheet extends ActorSheet {
       sheetData.skills[entry[0]] = entry[1];
     }
 
-    // Sort character focus.
+    /**
+     * Sort character focus.
+     */
     sheetData.system.skills.focus.sort(function(a, b) {
       let nameA = a.name.toUpperCase(); // Ignore upper and lowercase
       let nameB = b.name.toUpperCase(); // Ignore upper and lowercase
@@ -83,7 +95,36 @@ export default class C2D10ActorSheet extends ActorSheet {
 
     sheetData.focus = sheetData.system.skills.focus;
 
-    /* Make system settings available for sheets to use for rendering */
+    /**
+     * Sort character's traits
+     */
+    sheetData.virtues.sort(function(a, b) {
+      let nameA = a.name.toUpperCase(); // Ignore upper and lowercase
+      let nameB = b.name.toUpperCase(); // Ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1; // NameA comes first
+      }
+      if (nameA > nameB) {
+        return 1; // NameB comes first
+      }
+      return 0;  // Names must be equal
+    });
+
+    sheetData.vices.sort(function(a, b) {
+      let nameA = a.name.toUpperCase(); // Ignore upper and lowercase
+      let nameB = b.name.toUpperCase(); // Ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1; // NameA comes first
+      }
+      if (nameA > nameB) {
+        return 1; // NameB comes first
+      }
+      return 0;  // Names must be equal
+    });
+
+    /**
+     * Make system settings available for sheets to use for rendering
+     */
     sheetData.showEffects = game.settings.get("c2d10", "showEffects");
     sheetData.locked = this.actor.getFlag("c2d10", "locked");
     return sheetData;
