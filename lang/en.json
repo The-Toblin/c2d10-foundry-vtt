@@ -57,6 +57,10 @@
             "skills": "Skills",
             "talents": "Talents",
             "traits": "Traits",
+            "virtue": "Virtue",
+            "vice": "Vice",
+            "virtues": "Virtues",
+            "vices": "Vices",
             "age": "Age",
             "bio": "Biography",
             "faith": "Faith",
@@ -64,7 +68,8 @@
             "playerName": "Player name",
             "sex": "Sex",
             "title": "Title",
-            "species": "Species"
+            "species": "Species",
+            "dot-tooltip": "<p>Left click to increase, right click or shift+left click, to reduce.</p>"
         },
         "talents": {
             "physical": "Physical",
@@ -151,7 +156,9 @@
         "chat": {
             "roll": "Roll",
             "test": "Test",
-            "DC": "DC"
+            "DC": "DC",
+            "pool": "Pool Dice",
+            "crisis": "Crisis Dice"
         },
         "descriptions": {
             "agility": "<p>A measure of a character's ability to coordinate their body and a general measure of their flexibility and control of fine motorics.</p>",
@@ -183,7 +190,7 @@
             "awareness": "<p>A sum of the character’s ability to notice, study and perceive things. This covers all the senses, such as hearing, smelling, feeling and seeing. It is also a measure of how well trained in general attentiveness this character is.</p>",
             "investigation": "<p>Investigation is the skill of adding up one and one to get two, the profession of putting patterns together, putting the puzzle together and solving the case. Investigation is used to search a location for clues, for items of interest or even for long-form sleuthing.</p>",
             "medicine": "<p>Being trained in the arts of medicine means that one can perform critical trauma care, first aid and even identify and diagnose the most common diseases or make educated guesses about rarer diseases. Medicine also involves post-mortal events such as determining time and cause of death of a deceased person. Higher levels of knowledge also involves the ability to identify medical substances and prescribe them for ailments.</p>",
-            "science": "<p><While technically an area of academia, the sciences involve themselves most with nature rather than arts and people. Chemistry, physics, math and other related areas are covered by this skill./p>",
+            "science": "<p>While technically an area of academia, the sciences involve themselves most with nature rather than arts and people. Chemistry, physics, math and other related areas are covered by this skill.</p>",
             "stealth": "<p>Stealth is both the understanding of and performance of moving slowly, quietly and staying out of people’s prying eyes. Stealth can be used in any situation where one must move without rousing suspicion or hide somewhere.</p>",
             "survival": "<p>When caught in a situation without water, food or shelter, it’s a good thing you know how to find what you need, yes? Survival, no matter the location, is a matter of knowledge of where to find resources. It can be used to find food, water, shelter for the night or other matters of survival in any kind of terrain or settlement.</p>",
             "technology": "<p>Technology varies between locations, but most of it works in a similar way. If you know one gadget, you can probably figure out how to use another. Technology covers everything from doing less legal activities on a terminal to repairing cybertech. Engineering, programming, cybersecurity is all covered under this skill.</p>",

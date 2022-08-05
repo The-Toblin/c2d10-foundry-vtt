@@ -64,32 +64,86 @@ const _evaluateSuccesses = async (rolledResults, DC, crisis = 0) => {
  * @returns {object}
  */
 const _diceList = async (diceRolls, crisis = 0) => {
+  const crisisDice = parseInt(crisis); // Make sure crisis is interpreted as a number, not string.
   const results = {
-    0: '<li class="roll die d10 failure">',
-    7: '<li class="roll die d10 success">',
-    8: '<li class="roll die d10 success">',
-    9: '<li class="roll die d10 crit">'
+    0: '<li class="roll die d10 failure regular">',
+    7: '<li class="roll die d10 success regular">',
+    8: '<li class="roll die d10 success regular">',
+    9: '<li class="roll die d10 crit regular">'
   };
 
   const crisisResults = {
-    0: '<li class="roll die d10 complication">',
-    7: '<li class="roll die d10 success">',
-    8: '<li class="roll die d10 success">',
-    9: '<li class="roll die d10 mess">'
+    0: '<li class="roll die d10 complication crisis">',
+    7: '<li class="roll die d10 success crisis">',
+    8: '<li class="roll die d10 success crisis">',
+    9: '<li class="roll die d10 mess crisis">'
   };
 
   let rolledList = "";
 
 
-  for (let i = 0; i < diceRolls.length - crisis; i++) {
-    rolledList += `${results[diceRolls[i].result] || '<li class="roll die d10">'} ${diceRolls[i].result} </li>`;
+  for (let i = 0; i < diceRolls.length - crisisDice; i++) {
+    rolledList += `${results[diceRolls[i].result] || '<li class="roll die d10 blank regular">'} ${diceRolls[i].result} </li>`;
   }
 
-  for (let i = diceRolls.length - crisis; i < diceRolls.length; i++) {
-    rolledList += `${crisisResults[diceRolls[i].result] || '<li class="roll die crisis d10">'} ${diceRolls[i].result} </li>`;
+  for (let i = diceRolls.length - crisisDice; i < diceRolls.length; i++) {
+    rolledList += `${crisisResults[diceRolls[i].result] || '<li class="roll die d10 blank crisis">'} ${diceRolls[i].result} </li>`;
   }
 
-  return rolledList;
+  /* Sort the list of rolls according to results, starting from zeroes and up.
+  * Finally, split the array in two and sort crisis dice for themselves at the end,
+  * if crisis is greater than 0.
+  */
+  const re = /<li class="roll die d10 [a-z]{4,12} (crisis|regular)"> [0-9] <\/li>/g;
+  const reArray = rolledList.match(re);
+
+  reArray.sort(function(a, b) {
+    const re = /> [0-9] </g;
+    if (a.match(re) < b.match(re)) {
+      return -1;
+    }
+    if (a.match(re) > b.match(re)) {
+      return 1;
+    }
+    return 0;
+  });
+
+  let sortedList = "";
+
+  if (crisisDice !== 10) {
+    sortedList +=`
+  <div class="c2d10-contentbox force-2px-padding">
+    <h3>${game.i18n.localize("c2d10.chat.pool")}</h3>
+    <ol class="dice-rolls centered-list">`;
+
+    for (let i = 0; i < reArray.length; i++) {
+      const content = reArray[i];
+      if (content.includes("regular")) sortedList += content;
+    }
+
+    sortedList +=`
+      </ol>
+    </div>`;
+  }
+
+  if (crisisDice > 0) {
+    sortedList += `     
+    <div class="c2d10-contentbox force-2px-padding">
+      <h3>${game.i18n.localize("c2d10.chat.crisis")}</h3>
+      <ol class="dice-rolls centered-list">`;
+
+    for (let i = 0; i < reArray.length; i++) {
+      const content = reArray[i];
+      if (content.includes("crisis")) sortedList += content;
+    }
+
+    sortedList +=`
+      </ol>
+    </div>`;
+  }
+
+
+  return sortedList;
 };
 
 /**
@@ -142,20 +196,14 @@ const _renderRoll = async (formula, listContents, evaluation, crisis) => {
   const renderedRoll =
       `<div class="dice-roll">
         <div class="dice-result">
-          <div class="dice-formula">
-            ${formula}
-          </div>
-          <div class="dice-tooltip expanded">
+          <div class="dice-tooltip expanded align-center">
             <section class="tooltip-part">
               <div class="dice">
-                <ol class="dice-rolls">
-                  ${listContents}
-                </ol>
+                ${listContents}
               </div>
             </section>
           </div>
-          <hr>
-          <div class="flex-col flex-start">
+          <div class="flex-col flex-start c2d10-contentbox">
             <div class="flex-row flex-between">
               <div class="stat-box">
                 Successes
@@ -183,7 +231,9 @@ const _renderRoll = async (formula, listContents, evaluation, crisis) => {
           </div>
         </div>
       </div>
+      <div class="c2d10-contentbox">
         ${outcome}
+      </div>
       </div>`;
   return renderedRoll;
 };
@@ -286,16 +336,15 @@ export async function wealthTest(crisis, pool, actorId) {
 
 /**
  * Perform a Health test (Strain or Stress). Takes Crisis into account.
- * @param {number}  crisis    The character's current value in Crisis.
  * @param {boolean} strain    If it's Strain to roll for. If not, defaults to Stress.
  * @param {number}  pool      The value of the relevant Talent (Endurance or Willpower)
  * @param {number}  DC        The amount of Strain or Stress the character has, setting difficulty for the test.
  * @param {string}  actorId   The actor's Id, used to call the resethealth function.
  */
-export async function healthTest(crisis, strain, pool, DC, actorId) {
+export async function healthTest(strain, pool, DC, actorId) {
   const rollData = {};
 
-  rollData.crisis = crisis;
+  rollData.crisis = 0; // Crisis is ignored for this test.
   rollData.item = strain ? "strain" : "stress";
   rollData.pool = pool;
   rollData.DC = DC;
@@ -336,7 +385,7 @@ export async function skillTest(crisis, item, pool, talents, actorId, group) {
   const rollData = {};
 
   // Determine which talent is highest in the group, so we can preselect it when opening the dialog.
-  const talentObject = game.actors.get(actorId).data.data.talents[group]; // FIXME: V10 update.
+  const talentObject = game.actors.get(actorId).system.talents[group];
   const highest = Object.keys(talentObject).reduce((a, b) => talentObject[a] > talentObject[b] ? a : b);
 
   // Populate the needed rolldata

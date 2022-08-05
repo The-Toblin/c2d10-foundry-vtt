@@ -26,14 +26,24 @@ export default class C2D10ActorSheet extends ActorSheet {
     const sheetData = super.getData();
     sheetData.config = CONFIG.c2d10;
     sheetData.items = this.actor.items;
-    sheetData.system = this.actor.data.data; // FIXME: V10 update.
+    sheetData.system = this.actor.system;
 
-    /* Assets */
+    /**
+     * Items
+     */
     sheetData.assets = sheetData.items.filter(p => p.type === "asset");
-    sheetData.traits = sheetData.items.filter(p => p.type === "trait");
+    sheetData.virtues = sheetData.items.filter(p => p.type === "trait" && p.system.traitType === "virtue");
+    sheetData.vices = sheetData.items.filter(p => p.type === "trait" && p.system.traitType === "vice");
     sheetData.variants = sheetData.items.filter(p => p.type === "variant");
 
-    // Create list objects to use for dialogs.
+    /**
+     * Set a flag to allow the traits tab to be shown if traits are present.
+     */
+    if (sheetData.vices || sheetData.virtues) sheetData.traits = true;
+
+    /**
+     * Create list objects to use for dialogs.
+     */
     sheetData.talents = {};
     for (const entry of Object.entries(sheetData.system.talents.physical)) {
       sheetData.talents[entry[0]] = entry[1];
@@ -56,7 +66,9 @@ export default class C2D10ActorSheet extends ActorSheet {
       sheetData.skills[entry[0]] = entry[1];
     }
 
-    // Sort character focus.
+    /**
+     * Sort character focus.
+     */
     sheetData.system.skills.focus.sort(function(a, b) {
       let nameA = a.name.toUpperCase(); // Ignore upper and lowercase
       let nameB = b.name.toUpperCase(); // Ignore upper and lowercase
@@ -81,7 +93,38 @@ export default class C2D10ActorSheet extends ActorSheet {
       return 0;  // Names must be equal
     });
 
-    /* Make system settings available for sheets to use for rendering */
+    sheetData.focus = sheetData.system.skills.focus;
+
+    /**
+     * Sort character's traits
+     */
+    sheetData.virtues.sort(function(a, b) {
+      let nameA = a.name.toUpperCase(); // Ignore upper and lowercase
+      let nameB = b.name.toUpperCase(); // Ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1; // NameA comes first
+      }
+      if (nameA > nameB) {
+        return 1; // NameB comes first
+      }
+      return 0;  // Names must be equal
+    });
+
+    sheetData.vices.sort(function(a, b) {
+      let nameA = a.name.toUpperCase(); // Ignore upper and lowercase
+      let nameB = b.name.toUpperCase(); // Ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1; // NameA comes first
+      }
+      if (nameA > nameB) {
+        return 1; // NameB comes first
+      }
+      return 0;  // Names must be equal
+    });
+
+    /**
+     * Make system settings available for sheets to use for rendering
+     */
     sheetData.showEffects = game.settings.get("c2d10", "showEffects");
     sheetData.locked = this.actor.getFlag("c2d10", "locked");
     return sheetData;
@@ -107,17 +150,6 @@ export default class C2D10ActorSheet extends ActorSheet {
         item.sheet.render(true);
       }
     },
-    // TODO: Reimplement this functionality at some point.
-    /* {
-      name: game.i18n.localize("c2d10.sheet.description"),
-      icon: '<i class="fas fa-sticky-note"></i>',
-      callback: element => {
-        const itemId = element.closest(".asset-item")[0].dataset.id;
-        const item = this.actor.items.get(itemId);
-
-        item.roll();
-      }
-    },*/
     {
       name: game.i18n.localize("c2d10.sheet.remove"),
       icon: '<i class="fas fa-trash"></i>',
@@ -155,6 +187,9 @@ export default class C2D10ActorSheet extends ActorSheet {
   /**
    * Function to increase or decrease a resource on the sheet. Allows modification of health resources
    * in spite of sheet lock. Otherwise prevents editing if the sheet is locked.
+   *
+   *  Left click increases an attribute and right click, or shift-left click (for chromebook support)
+   * reduces it.
    * @param {object} event The clicked event-data.
    */
   _onResourceChange(event) {
@@ -167,9 +202,9 @@ export default class C2D10ActorSheet extends ActorSheet {
     const pass = element.closest(".resource-row").dataset.pass;
 
     if (pass || !this.actor.getFlag("c2d10", "locked")) {
-      if (event.type === "click") {
+      if (event.type === "click" && !event.shiftKey) {
         this.actor.modifyResource(1, type, group, res);
-      } else {
+      } else if (event.type === "contextmenu" || event.shiftKey) {
         this.actor.modifyResource(-1, type, group, res);
       }
     } else {
@@ -224,7 +259,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     });
 
     const updateData = {};
-    updateData["data.skills.focus"] = currentArray;
+    updateData["system.skills.focus"] = currentArray;
 
     await this.actor.update(updateData);
   }
@@ -237,7 +272,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     currentArray.splice(currentArray.findIndex(v => v.name === name), 1);
 
     const updateData = {};
-    updateData["data.skills.focus"] = currentArray;
+    updateData["system.skills.focus"] = currentArray;
 
     await this.actor.update(updateData);
   }
@@ -283,7 +318,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     };
 
     const updateData = {};
-    updateData["data.skills.focus"] = currentArray;
+    updateData["system.skills.focus"] = currentArray;
 
     await this.actor.update(updateData);
   }
@@ -300,6 +335,10 @@ export default class C2D10ActorSheet extends ActorSheet {
    */
   async _doWealthTest(event) {
     event.preventDefault();
+    if (event.shiftKey) {
+      this._postDescription(event);
+      return;
+    }
     const sys = this.getData().system;
     const actorId = this.actor.id;
 
@@ -311,6 +350,10 @@ export default class C2D10ActorSheet extends ActorSheet {
    * @param {html} event html click event data, including dataset.
    */
   async _doHealthTest(event) {
+    if (event.shiftKey) {
+      this._postDescription(event);
+      return;
+    }
     event.preventDefault();
     const dataset = event.currentTarget.closest(".c2d10-test").dataset;
     const sys = this.getData().system;
@@ -319,7 +362,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     const DC = strain ? sys.health.strain : sys.health.stress;
     const actorId = this.actor.id;
 
-    await healthTest(sys.health.crisis, strain, pool, DC, actorId);
+    await healthTest(strain, pool, DC, actorId);
   }
 
   /**
@@ -328,6 +371,10 @@ export default class C2D10ActorSheet extends ActorSheet {
    */
   async _doTalentTest(event) {
     event.preventDefault();
+    if (event.shiftKey) {
+      this._postDescription(event);
+      return;
+    }
     const dataset = event.currentTarget.closest(".c2d10-test").dataset;
     const sys = this.getData().system;
     const pool = sys.talents[dataset.group][dataset.id];
@@ -342,6 +389,10 @@ export default class C2D10ActorSheet extends ActorSheet {
    */
   async _doSkillTest(event) {
     event.preventDefault();
+    if (event.shiftKey) {
+      this._postDescription(event);
+      return;
+    }
     const dataset = event.currentTarget.closest(".c2d10-test").dataset;
     const sys = this.getData().system;
     const pool = sys.skills[dataset.group][dataset.id];

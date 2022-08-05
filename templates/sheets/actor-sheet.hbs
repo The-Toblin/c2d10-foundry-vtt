@@ -15,7 +15,7 @@
                     {{localize "c2d10.sheet.experience"}}
                 </h3>
                 <div>
-                    <input name="data.info.experience" type="text" value="{{system.info.experience}}" placeholder="{{localize "c2d10.sheet.experience"}}" />
+                    <input name="system.info.experience" type="text" value="{{system.info.experience}}" placeholder="{{localize "c2d10.sheet.experience"}}" />
                 </div>
             </div>
             <nav class="sheet-tabs tabs" data-group="primary">
@@ -50,7 +50,7 @@
                 {{> "systems/c2d10/templates/partials/sheet-tabs/actor-focus-tab.hbs"}}
             </div>
             {{!-- Traits Tab --}}
-            {{#if traits}}
+            {{#if traits }}
                 <div class="tab sheet-traits" data-group="primary" data-tab="traits">
                     {{> "systems/c2d10/templates/partials/sheet-tabs/actor-traits-tab.hbs"}}
                 </div>

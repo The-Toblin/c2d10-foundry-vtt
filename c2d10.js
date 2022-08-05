@@ -102,7 +102,6 @@ Hooks.once("ready", () => {
   const bonusDice = C2D10Utility.getDice();
   const hide = !game.users.current.isGM ? "hide" : "";
 
-  // TODO: Wrap these in their own container so they can be placed with a single CSS class.
   $("body").append(`
   <div class="keeper-control-box">
     <div class="c2d10-villain-points">

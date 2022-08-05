@@ -1,10 +1,24 @@
 {
-    "name": "c2d10",
-    "title": "Celenia D10 Roleplaying System - 2nd Edition V9 Branch",
-    "version": 0.32,
-    "minimumCoreVersion": "9",
-    "compatibleVersion": "9.269",
-    "author": "The Toblin",
+    "id": "c2d10",
+    "title": "Celenia D10 Roleplaying System - 2nd Edition",
+    "version": 0.43,
+    "compatibility": {
+        "minimum": "10",
+        "verified": "10.276",
+        "maximum": "10.277"
+    },
+    "authors": [
+        {
+            "name": "The Toblin",
+            "url": "http://www.celenia.se",
+            "email": "tobias@celenia.se",
+            "discord": "Toblin#2367"
+        }
+    ],
+    "relationships": {
+        "systems": [],
+        "requires": []
+    },
     "esmodules": [
         "c2d10.js"
     ],
@@ -26,9 +40,6 @@
             "url": "https://www.worldanvil.com/media/cache/cover/uploads/images/0cf18b9b9afa7979c1555bb8d8713da2.webp"
         }
     ],
-    "packs": [],
-    "system": [],
-    "dependencies": [],
     "socket": false,
     "url": "https://github.com/The-Toblin/c2d10-foundry-vtt/",
     "manifest": "https://raw.githubusercontent.com/The-Toblin/c2d10-foundry-vtt/main/system.json",

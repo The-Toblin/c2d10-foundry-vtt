@@ -12,7 +12,7 @@
                 {{#each system.powers as |level name|}}
                     <tr>
                         <th class="table-no-border">{{localize (concat "c2d10.powers." name)}}</th>
-                        <td class="flex-row table-no-border resource-row" data-type="powers" data-id="{{name}}">
+                        <td class="flex-row table-no-border resource-row" data-type="powers" data-id="{{name}}" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
                             {{#dots level 5}}{{/dots}}
                         </td>
                     </tr>

@@ -3,7 +3,9 @@
     color: @colors[green];
     box-shadow: 0 0 50px 5px #000 inset;
 
-    h1,h2,h3 {
+    h1,
+    h2,
+    h3 {
         border: none;
     }
 
@@ -79,6 +81,31 @@
 
 }
 
+.dice-roll {
+    .c2d10-contentbox {
+        margin-bottom: 10px !important;
+    }
+
+    ol.centered-list {
+        display: table;
+        margin-left: auto;
+        margin-right: auto;
+        list-style-position: inside;
+    }
+
+    .force-2px-padding {
+        padding-left: 2px !important;
+        padding-right: 2px !important;
+    }
+}
+
+.d10.regular {
+    background-image: url(./assets/d10-gray.webp) !important;
+}
+
+.d10.crisis {
+    background-image: url(./assets/d10-yellow.webp) !important;
+}
 
 .d10.crit {
     background-image: url(./assets/d10-green.webp) !important;
@@ -86,10 +113,6 @@
 
 .d10.mess {
     background-image: url(./assets/d10-purple.webp) !important;
-}
-
-.d10.crisis {
-    background-image: url(./assets/d10-yellow.webp) !important;
 }
 
 .d10.complication {
