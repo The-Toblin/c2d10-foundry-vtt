@@ -197,7 +197,7 @@
             "crisis": "<p>Crisis is a measure of how debilitated a character is both mentally and physically. Causes your pools to accumulate Crisis Dice.</p>",
             "strain": "<p>In-scene measure of physical strain. Provides +1DC for an Endurance test at the end of the scene. Fail to pass the test and you suffer 1 point of Crisis.</p><p>Click to perform the strain test.</p>",
             "stress": "<p>In-scene measure of mental strain. Provides +1DC for a Willpower test at the end of the scene. Fail to pass the test and you suffer 1 point of Crisis.</p><p>Click to perform the stress test.</p>",
-            "wealth": "<p>Your character's wealth class. Defaults to 2 ranks.</p><p>Click to perform a wealth test.</p>"
+            "wealth": "<p>Your character's wealth class.</p><p>Click to perform a wealth test.</p>"
         }
     },
     "SETTINGS": {
