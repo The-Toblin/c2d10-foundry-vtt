@@ -219,7 +219,7 @@ Hooks.once("init", function() {
   /**
    * Handlebars helper for rendering resource dots
    */
-  Handlebars.registerHelper("dots", function(n, max) {
+  Handlebars.registerHelper("dots", function(n = 0, max = 5) {
     const full =
     `<div class="dot-container full">
       <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp"/>

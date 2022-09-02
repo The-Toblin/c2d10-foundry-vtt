@@ -201,7 +201,14 @@ export default class C2D10ActorSheet extends ActorSheet {
     const res = element.closest(".resource-row").dataset.id;
     const pass = element.closest(".resource-row").dataset.pass;
 
-    if (pass || !this.actor.getFlag("c2d10", "locked")) {
+    if (type === "health") {
+      if (event.type === "click" && !event.shiftKey) {
+        this.actor.modifyHealth(1, res);
+      } else if (event.type === "contextmenu" || event.shiftKey) {
+        this.actor.modifyHealth(-1, res);
+      }
+    }
+    else if (pass || !this.actor.getFlag("c2d10", "locked")) {
       if (event.type === "click" && !event.shiftKey) {
         this.actor.modifyResource(1, type, group, res);
       } else if (event.type === "contextmenu" || event.shiftKey) {

@@ -26,9 +26,23 @@
             },
             "health": {
                 "health": {
-                    "crisis": 0,
-                    "strain": 0,
-                    "stress": 0
+                    "crisis": {
+                        "min": 0,
+                        "max": 10,
+                        "value": 0
+                    },
+                    "strain": {
+                        "min": 0,
+                        "max": 10,
+                        "value": 0,
+                        "critical": 0
+                    },
+                    "stress": {
+                        "min": 0,
+                        "max": 10,
+                        "value": 0,
+                        "critical": 0
+                    }
                 }
             },
             "talents": {

@@ -8,7 +8,15 @@ export default class C2D10Actor extends Actor {
   }
 
   async prepareDerivedData() {
+    const maxStrain = parseInt(this.system.talents.physical.endurance + 3);
+    const maxStress = parseInt(this.system.talents.mental.willpower + this.system.talents.mental.reason);
 
+    const updateData = [];
+    updateData["system.health.strain.max"] = maxStrain;
+    updateData["system.health.stress.max"] = maxStress;
+    updateData["system.health.crisis.max"] = 10;
+
+    await this.update(updateData);
   }
 
   async resetHealth(pass, res) {
@@ -24,9 +32,8 @@ export default class C2D10Actor extends Actor {
   async modifyResource(n, type, group, res) {
     const updateData = {};
     const system = this.system;
-
     const currentValue = !group ? system[type][res] : system[type][group][res];
-    const max = res === "crisis" ? 10 : 5;
+    const max = 5;
 
     if (currentValue === max && n > 0) {
       return;
@@ -43,6 +50,28 @@ export default class C2D10Actor extends Actor {
     } else {
       updateData[`system.${type}.${group}.${res}`] = newValue;
     }
+    await this.update(updateData);
+  }
+
+  async modifyHealth(n, res) {
+    const updateData = {};
+    const system = this.system;
+
+    console.log("Triggered:", n, res);
+    const currentValue = system.health[res].value;
+    const max = this.system.health[res].max;
+
+    if (currentValue === max && n > 0) {
+      return;
+    }
+
+    const newValue = currentValue + n;
+
+    if (newValue < 0) {
+      return;
+    }
+
+    updateData[`system.health.${res}.value`] = newValue;
     await this.update(updateData);
   }
 }
