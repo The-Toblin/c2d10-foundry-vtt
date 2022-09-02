@@ -86,7 +86,7 @@
                     {{localize "c2d10.resources.strain"}}
                 </h3>
                 <div class="flex-row flex-center resource-row" data-value="{{system.health.strain.value}}" data-type="health" data-id="strain" data-pass="true" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
-                    {{#dots system.health.strain.value system.health.strain.max}}{{/dots}}
+                    {{#healthdots system.health.strain.value system.health.strain.critical system.health.strain.max}}{{/dots}}
                 </div>
             </div>
             <div class="flex-row flex-between c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} crisis-box w-50 h-100">
@@ -94,7 +94,7 @@
                     {{localize "c2d10.resources.stress"}}
                 </h3>
                 <div class="flex-row flex-center resource-row" data-value="{{system.health.stress.value}}" data-type="health" data-id="stress" data-pass="true" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
-                    {{#dots system.health.stress.value system.health.stress.max}}{{/dots}}
+                    {{#healthdots system.health.stress.value system.health.stress.critical system.health.stress.max}}{{/dots}}
                 </div>
             </div>
         </div>

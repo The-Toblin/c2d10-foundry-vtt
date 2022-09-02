@@ -219,7 +219,8 @@ Hooks.once("init", function() {
   /**
    * Handlebars helper for rendering resource dots
    */
-  Handlebars.registerHelper("dots", function(n = 0, max = 5) {
+  Handlebars.registerHelper("dots", function(value, max, context, content) {
+    // TODO: Update this one with a better template, then make a copy for health specifically.
     const full =
     `<div class="dot-container full">
       <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp"/>
@@ -241,8 +242,8 @@ Hooks.once("init", function() {
     </div>`;
 
     let res = "";
-    if (n > 0) {
-      for (let i = 0; i < n; ++i) {
+    if (value > 0) {
+      for (let i = 0; i < value; ++i) {
         if (i === 5) {
           res += space;
         }
@@ -250,7 +251,7 @@ Hooks.once("init", function() {
       }
     }
 
-    for (let i = n; i < max; ++i) {
+    for (let i = value; i < max; ++i) {
       if (i === 5) {
         res += space;
       }
