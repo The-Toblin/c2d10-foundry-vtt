@@ -349,7 +349,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     const sys = this.getData().system;
     const actorId = this.actor.id;
 
-    await wealthTest(sys.health.crisis, sys.info.wealth, actorId);
+    await wealthTest(sys.health.crisis.value, sys.info.wealth, actorId);
   }
 
   /**
@@ -387,7 +387,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     const pool = sys.talents[dataset.group][dataset.id];
     const actorId = this.actor.id;
 
-    await talentTest(sys.health.crisis, dataset.id, pool, actorId);
+    await talentTest(sys.health.crisis.value, dataset.id, pool, actorId);
   }
 
   /**
@@ -406,7 +406,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     const talents = this.getData().talents;
     const actorId = this.actor.id;
 
-    await skillTest(sys.health.crisis, dataset.id, pool, talents, actorId, dataset.group);
+    await skillTest(sys.health.crisis.value, dataset.id, pool, talents, actorId, dataset.group);
   }
 
   async _postDescription(event) {

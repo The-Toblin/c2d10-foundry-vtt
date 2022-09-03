@@ -101,7 +101,6 @@ export default class C2D10Actor extends Actor {
 
     let updateData = [];
     const full = parseInt(currentValue + critical) >= max;
-    console.log(full);
 
     if (isCrit) {
       updateData = handleCrit(isIncrease, res, critical, currentValue, max, full);
@@ -115,7 +114,5 @@ export default class C2D10Actor extends Actor {
     }
 
     if (typeof updateData !== "undefined") await this.update(updateData);
-    console.log(updateData);
-    console.log("Health:", system.health[res].value, "Crit:", system.health[res].critical);
   }
 }
