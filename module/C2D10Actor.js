@@ -53,25 +53,69 @@ export default class C2D10Actor extends Actor {
     await this.update(updateData);
   }
 
-  async modifyHealth(n, res) {
-    const updateData = {};
+  async modifyHealth(isIncrease, isCrit, res) {
     const system = this.system;
-
-    console.log("Triggered:", n, res);
     const currentValue = system.health[res].value;
-    const max = this.system.health[res].max;
+    const critical = system.health[res].critical;
+    const total = parseInt(critical + currentValue);
+    const max = system.health[res].max;
 
-    if (currentValue === max && n > 0) {
+    /**
+     * If the tracker is maxed out with critical damage, and we're not reducing, do nothing
+     */
+    if (critical === max && isIncrease) {
       return;
     }
 
-    const newValue = currentValue + n;
+    /**
+     * Function for handling complex critical damage conversions.
+     * @param {boolean} isIncrease    Whether to increase or not.
+     * @param {string}  res           Name of the resource.
+     * @param {number}  critical      The critical damage the character currently has.
+     * @param {number}  superficial   The superficial damage the character currently has.
+     * @param {number}  max           Max health on the tracker.
+     * @param {boolean} full          If the tracker is full, convert superficial to crit.
+     */
+    function handleCrit(isIncrease, res, critical, superficial, max, full = false) {
+      const updateData = [];
+      const newValue = isIncrease ? critical + 1 : critical - 1;
 
-    if (newValue < 0) {
-      return;
+      if (newValue < 0) return;
+
+      /**
+       * If we're reducing crit, convert to superficial.
+       */
+      if (!isIncrease) updateData[`system.health.${res}.value`] = superficial + 1;
+
+      /**
+       * If the tracker is full, convert a superficial to crit.
+       */
+      if (full && isIncrease) updateData[`system.health.${res}.value`] = superficial - 1;
+
+      /**
+       * Finally, update the crit tracker.
+       */
+      updateData[`system.health.${res}.critical`] = newValue;
+      return updateData;
     }
 
-    updateData[`system.health.${res}.value`] = newValue;
-    await this.update(updateData);
+    let updateData = [];
+    const full = parseInt(currentValue + critical) >= max;
+    console.log(full);
+
+    if (isCrit) {
+      updateData = handleCrit(isIncrease, res, critical, currentValue, max, full);
+    } else if (full && isIncrease) {
+      updateData = handleCrit(isIncrease, res, critical, currentValue, max, full);
+    } else {
+      const newValue = isIncrease ? currentValue + 1 : currentValue - 1;
+
+      if (newValue < 0) return;
+      updateData[`system.health.${res}.value`] = newValue;
+    }
+
+    if (typeof updateData !== "undefined") await this.update(updateData);
+    console.log(updateData);
+    console.log("Health:", system.health[res].value, "Crit:", system.health[res].critical);
   }
 }

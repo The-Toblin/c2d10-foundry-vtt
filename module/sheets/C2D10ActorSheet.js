@@ -194,7 +194,6 @@ export default class C2D10ActorSheet extends ActorSheet {
    */
   _onResourceChange(event) {
     event.preventDefault();
-
     const element = event.currentTarget;
     const type = element.closest(".resource-row").dataset.type;
     const group = element.closest(".resource-row").dataset.group;
@@ -203,11 +202,12 @@ export default class C2D10ActorSheet extends ActorSheet {
 
     if (type === "health") {
       if (event.type === "click" && !event.shiftKey) {
-        this.actor.modifyHealth(1, res);
+        this.actor.modifyHealth(true, event.ctrlKey, res);
       } else if (event.type === "contextmenu" || event.shiftKey) {
-        this.actor.modifyHealth(-1, res);
+        this.actor.modifyHealth(false, event.ctrlKey, res);
       }
     }
+
     else if (pass || !this.actor.getFlag("c2d10", "locked")) {
       if (event.type === "click" && !event.shiftKey) {
         this.actor.modifyResource(1, type, group, res);

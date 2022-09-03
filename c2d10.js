@@ -219,26 +219,14 @@ Hooks.once("init", function() {
   /**
    * Handlebars helper for rendering resource dots
    */
-  Handlebars.registerHelper("dots", function(value, max, context, content) {
-    // TODO: Update this one with a better template, then make a copy for health specifically.
+  Handlebars.registerHelper("dots", function(value, max, content) {
     const full =
     `<div class="dot-container full">
       <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp"/>
     </div>`;
-
     const empty =
     `<div class="dot-container empty">
-      <img class="d10-dot-empty" src="/systems/c2d10/assets/d10-white-empty.webp"/>
-    </div>`;
-
-    const space =
-    `<div class="space">
-      <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp"/>
-    </div>`;
-
-    const crisis =
-    `<div class="dot-container full">
-      <img class="d10-dot-full" src="/systems/c2d10/assets/d10-crisis.webp"/>
+      <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp"/>
     </div>`;
 
     let res = "";
@@ -247,7 +235,7 @@ Hooks.once("init", function() {
         if (i === 5) {
           res += space;
         }
-        res += max === 10 ? crisis : full;
+        res += full;
       }
     }
 
@@ -258,6 +246,58 @@ Hooks.once("init", function() {
       res += empty;
     }
     return res;
+  });
+
+  Handlebars.registerHelper("healthdots", function(superficial, critical, max, context, content) {
+    const critdie =
+    `<div class="dot-container full">
+      <img class="d10-dot-full" src="/systems/c2d10/assets/d10-red.webp"/>
+    </div>`;
+    const full =
+    `<div class="dot-container full">
+      <img class="d10-dot-full" src="/systems/c2d10/assets/d10-yellow.webp"/>
+    </div>`;
+    const empty =
+    `<div class="dot-container empty">
+      <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp"/>
+    </div>`;
+
+    const space =
+    `<div class="space">
+      <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp"/>
+    </div>`;
+
+    let result = "";
+    let res = [];
+    const maximum = parseInt(critical + superficial);
+
+    if (critical > 0) {
+      for (let i = 0; i < critical; ++i) {
+        res.push(critdie);
+      }
+    }
+
+    if (superficial > 0) {
+      for (let i = 0; i < superficial; ++i) {
+        res.push(full);
+      }
+    }
+
+    for (let i = maximum; i < max; ++i) {
+      res.push(empty);
+    }
+
+    for (let i = 0; i < res.length; i++) {
+      const element = res[i];
+
+      if (i === 5) {
+        result += space;
+        result += element;
+      } else {
+        result += element;
+      }
+    }
+    return result;
   });
 });
 
