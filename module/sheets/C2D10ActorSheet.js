@@ -194,14 +194,21 @@ export default class C2D10ActorSheet extends ActorSheet {
    */
   _onResourceChange(event) {
     event.preventDefault();
-
     const element = event.currentTarget;
     const type = element.closest(".resource-row").dataset.type;
     const group = element.closest(".resource-row").dataset.group;
     const res = element.closest(".resource-row").dataset.id;
     const pass = element.closest(".resource-row").dataset.pass;
 
-    if (pass || !this.actor.getFlag("c2d10", "locked")) {
+    if (type === "health") {
+      if (event.type === "click" && !event.shiftKey) {
+        this.actor.modifyHealth(true, event.ctrlKey, res);
+      } else if (event.type === "contextmenu" || event.shiftKey) {
+        this.actor.modifyHealth(false, event.ctrlKey, res);
+      }
+    }
+
+    else if (pass || !this.actor.getFlag("c2d10", "locked")) {
       if (event.type === "click" && !event.shiftKey) {
         this.actor.modifyResource(1, type, group, res);
       } else if (event.type === "contextmenu" || event.shiftKey) {
@@ -342,7 +349,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     const sys = this.getData().system;
     const actorId = this.actor.id;
 
-    await wealthTest(sys.health.crisis, sys.info.wealth, actorId);
+    await wealthTest(sys.health.crisis.value, sys.info.wealth, actorId);
   }
 
   /**
@@ -380,7 +387,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     const pool = sys.talents[dataset.group][dataset.id];
     const actorId = this.actor.id;
 
-    await talentTest(sys.health.crisis, dataset.id, pool, actorId);
+    await talentTest(sys.health.crisis.value, dataset.id, pool, actorId);
   }
 
   /**
@@ -399,7 +406,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     const talents = this.getData().talents;
     const actorId = this.actor.id;
 
-    await skillTest(sys.health.crisis, dataset.id, pool, talents, actorId, dataset.group);
+    await skillTest(sys.health.crisis.value, dataset.id, pool, talents, actorId, dataset.group);
   }
 
   async _postDescription(event) {

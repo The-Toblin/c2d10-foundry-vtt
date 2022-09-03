@@ -808,6 +808,24 @@ table input {
 .c2d10.item-sheet .crisis-box h3 {
   margin-right: 10px;
 }
+.c2d10.sheet .crisis-number,
+.c2d10.item-sheet .crisis-number {
+  text-align: center;
+  font-family: Quantum, sans-serif;
+  justify-content: center;
+}
+.c2d10.sheet .crisis-fine,
+.c2d10.item-sheet .crisis-fine {
+  color: #e5e5ec !important;
+}
+.c2d10.sheet .crisis-alert,
+.c2d10.item-sheet .crisis-alert {
+  color: #e0f287;
+}
+.c2d10.sheet .crisis-bad,
+.c2d10.item-sheet .crisis-bad {
+  color: red !important;
+}
 .c2d10.sheet select,
 .c2d10.item-sheet select {
   border: none;
