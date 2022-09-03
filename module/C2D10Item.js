@@ -40,7 +40,7 @@ export default class C2D10Item extends Item {
       return;
     }
 
-    updateData[`data.${res}`] = newValue;
+    updateData[`system.${res}`] = newValue;
 
     await this.update(updateData);
   }
