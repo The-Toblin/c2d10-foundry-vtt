@@ -26,11 +26,6 @@
             },
             "health": {
                 "health": {
-                    "crisis": {
-                        "min": 0,
-                        "max": 10,
-                        "value": 0
-                    },
                     "strain": {
                         "min": 0,
                         "max": 10,
