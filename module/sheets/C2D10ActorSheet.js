@@ -174,7 +174,8 @@ export default class C2D10ActorSheet extends ActorSheet {
     html.find(".add-focus").click(this._addFocus.bind(this));
     html.find(".remove-focus").click(this._removeFocus.bind(this));
     html.find(".focus-edit").on("click contextmenu", this._editFocus.bind(this));
-    html.find(".c2d10-health-test").click(this._doHealthTest.bind(this));
+    // TODO: Remove the below listener once it's guaranteed nothing breaks.
+    // Html.find(".c2d10-health-test").click(this._doHealthTest.bind(this)); Deprecated following health changes.
     html.find(".c2d10-wealth-test").click(this._doWealthTest.bind(this));
     html.find(".c2d10-talent-test").click(this._doTalentTest.bind(this));
     html.find(".c2d10-skill-test").click(this._doSkillTest.bind(this));
@@ -352,8 +353,9 @@ export default class C2D10ActorSheet extends ActorSheet {
     await wealthTest(sys.health.crisis.value, sys.info.wealth, actorId);
   }
 
+  // TODO: Deprecate and remove the healthtest function once it's assured nothing breaks.
   /**
-   * Perform a Health test.
+   * Perform a Health test. (Deprecated test following health system changes.)
    * @param {html} event html click event data, including dataset.
    */
   async _doHealthTest(event) {
@@ -384,7 +386,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     }
     const dataset = event.currentTarget.closest(".c2d10-test").dataset;
     const sys = this.getData().system;
-    const pool = sys.talents[dataset.group][dataset.id];
+    const pool = parseInt(sys.talents[dataset.group][dataset.id] * 2);
     const actorId = this.actor.id;
 
     await talentTest(sys.health.crisis.value, dataset.id, pool, actorId);

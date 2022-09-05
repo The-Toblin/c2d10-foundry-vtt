@@ -298,17 +298,6 @@ const _doRoll = async rollData => {
   // Post chat message to chat.
   ChatMessage.create(chatData);
 
-
-  // If the roll was a strain or stress test, clear the respective stat.
-  if (rollData.item === "strain" || rollData.item === "stress") {
-    const actor = game.actors.get(rollData.id);
-    try {
-      await actor.resetHealth(evaluation.pass, rollData.item);
-    } catch(err) {
-      console.error("Updating actor failed!", err);
-    }
-  }
-
   // If bonus dice were used, clear the bonus tracker.
   if (bonusDice > 0) {
     game.settings.set("c2d10", "bonusDice", 0);
@@ -335,13 +324,14 @@ export async function wealthTest(crisis, pool, actorId) {
 }
 
 /**
- * Perform a Health test (Strain or Stress). Takes Crisis into account.
+ * Perform a Health test (Strain or Stress). Takes Crisis into account. (Deprecated following health changes)
  * @param {boolean} strain    If it's Strain to roll for. If not, defaults to Stress.
  * @param {number}  pool      The value of the relevant Talent (Endurance or Willpower)
  * @param {number}  DC        The amount of Strain or Stress the character has, setting difficulty for the test.
- * @param {string}  actorId   The actor's Id, used to call the resethealth function.
+ * @param {string}  actorId   The actor's Id.
  */
 export async function healthTest(strain, pool, DC, actorId) {
+  // TODO: Remove this entire function.
   const rollData = {};
 
   rollData.crisis = 0; // Crisis is ignored for this test.
@@ -350,15 +340,14 @@ export async function healthTest(strain, pool, DC, actorId) {
   rollData.DC = DC;
   rollData.id = actorId;
 
-  _doRoll(rollData);
-
+  // _doRoll(rollData);
 }
 
 /**
  * Perform a blank Talent test, rolling just with the Talent and nothing else. Takes Crisis into account.
  * @param {number} crisis  The character's current value in Crisis.
  * @param {string} item    The name of the item to roll for.
- * @param {number} pool    The Talent rank to produce a pool of dice.
+ * @param {number} pool    The Talent rank to produce a pool of dice. For blank talent tests it to be 2x the talent.
  * @param {string} actorId The actor's Id.
  */
 export async function talentTest(crisis, item, pool, actorId) {

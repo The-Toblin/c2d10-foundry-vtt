@@ -27,16 +27,6 @@ export default class C2D10Actor extends Actor {
     await this.update(updateData);
   }
 
-  async resetHealth(pass, res) {
-    const updateData = {};
-    updateData[`system.health.${res}`] = 0;
-
-    if (pass === "Fail!") {
-      this.modifyResource(1, "health", null, "crisis");
-    }
-    await this.update(updateData);
-  }
-
   async modifyResource(n, type, group, res) {
     const updateData = {};
     const system = this.system;
