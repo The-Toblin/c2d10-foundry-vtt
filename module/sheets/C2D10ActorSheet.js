@@ -350,7 +350,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     const sys = this.getData().system;
     const actorId = this.actor.id;
 
-    await wealthTest(sys.health.crisis.value, sys.info.wealth, actorId);
+    await wealthTest(sys.health.crisis.mental, sys.info.wealth, actorId);
   }
 
   // TODO: Deprecate and remove the healthtest function once it's assured nothing breaks.
