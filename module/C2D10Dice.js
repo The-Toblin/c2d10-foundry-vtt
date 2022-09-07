@@ -324,26 +324,6 @@ export async function wealthTest(crisis, pool, actorId) {
 }
 
 /**
- * Perform a Health test (Strain or Stress). Takes Crisis into account. (Deprecated following health changes)
- * @param {boolean} strain    If it's Strain to roll for. If not, defaults to Stress.
- * @param {number}  pool      The value of the relevant Talent (Endurance or Willpower)
- * @param {number}  DC        The amount of Strain or Stress the character has, setting difficulty for the test.
- * @param {string}  actorId   The actor's Id.
- */
-export async function healthTest(strain, pool, DC, actorId) {
-  // TODO: Remove this entire function.
-  const rollData = {};
-
-  rollData.crisis = 0; // Crisis is ignored for this test.
-  rollData.item = strain ? "strain" : "stress";
-  rollData.pool = pool;
-  rollData.DC = DC;
-  rollData.id = actorId;
-
-  // _doRoll(rollData);
-}
-
-/**
  * Perform a blank Talent test, rolling just with the Talent and nothing else. Takes Crisis into account.
  * @param {number} crisis  The character's current value in Crisis.
  * @param {string} item    The name of the item to roll for.

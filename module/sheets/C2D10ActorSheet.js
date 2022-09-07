@@ -1,4 +1,4 @@
-import {wealthTest, healthTest, talentTest, skillTest} from "../C2D10Dice.js";
+import {wealthTest, talentTest, skillTest} from "../C2D10Dice.js";
 
 /**
  * Base Actor sheet. This holds all functions available to actor sheets and can be extended by
@@ -351,27 +351,6 @@ export default class C2D10ActorSheet extends ActorSheet {
     const actorId = this.actor.id;
 
     await wealthTest(sys.health.crisis.mental, sys.info.wealth, actorId);
-  }
-
-  // TODO: Deprecate and remove the healthtest function once it's assured nothing breaks.
-  /**
-   * Perform a Health test. (Deprecated test following health system changes.)
-   * @param {html} event html click event data, including dataset.
-   */
-  async _doHealthTest(event) {
-    if (event.shiftKey) {
-      this._postDescription(event);
-      return;
-    }
-    event.preventDefault();
-    const dataset = event.currentTarget.closest(".c2d10-test").dataset;
-    const sys = this.getData().system;
-    const strain = dataset.id === "strain";
-    const pool = strain ? sys.talents.physical.endurance : sys.talents.mental.willpower;
-    const DC = strain ? sys.health.strain : sys.health.stress;
-    const actorId = this.actor.id;
-
-    await healthTest(strain, pool, DC, actorId);
   }
 
   /**
