@@ -11,68 +11,6 @@ export default class C2D10Actor extends Actor {
     const maxStrain = parseInt(this.system.talents.physical.endurance + 3);
     const maxStress = parseInt(this.system.talents.mental.willpower + this.system.talents.social.poise);
     const updateData = [];
-    /**
-     * Populate empty values on old characters, as well as update talents and skills.
-     * Populate max values for health trackers.
-     */
-
-    /**
-     *  Return the XP value for a resource.
-     * @param {number} rank    The rank of the resource
-     * @param {number} baseXP  Base XP cost for the resource (5 for talents, 3 for skills etc)
-     */
-    function returnXP(rank, baseXP) {
-
-      const xp = rank * (baseXP + parseInt( baseXP * rank ))/2;
-
-      return parseInt(xp - baseXP);
-    }
-
-    if (typeof this.system.health.strain.value === "undefined") {
-      updateData["system.health.strain.value"] = this.system.health.strain;
-    }
-    if (typeof this.system.health.stress.value === "undefined") {
-      updateData["system.health.stress.value"] = this.system.health.stress;
-    }
-
-    if (this.system.talents.social.empathy > 1) {
-      const rank = this.system.talents.social.empathy;
-      const returnedXP = returnXP(rank, 5);
-      const currentXP = this.system.info.experience;
-      const newXP = parseInt(currentXP + returnedXP);
-
-      updateData["system.info.experience"] = newXP;
-
-      if (typeof newXP !== "number") {
-        ui.errors("CRITICAL!");
-        return;
-      }
-
-      console.error(`${this.name} has ${rank} points in Empathy. Refunding ${returnedXP} XP!`);
-    }
-
-    if (this.system.talents.mental.reason > 1) {
-      const rank = this.system.talents.mental.reason;
-      const returnedXP = parseInt(returnXP(rank, 5));
-      const currentXP = parseInt(this.system.info.experience);
-      const newXP = parseInt(currentXP + returnedXP);
-
-      if (typeof newXP !== "number") {
-        ui.errors("CRITICAL!");
-        return;
-      }
-
-      updateData["system.info.experience"] = parseInt(newXP);
-
-      console.error(`${this.name} has ${rank} points in Reason. Refunding ${returnedXP} XP!`);
-    }
-
-    updateData["system.-=experience"] = null; // Fixing an oopsie.
-    updateData["system.talents.social.-=empathy"] = null;
-    updateData["system.talents.mental.-=reason"] = null;
-    updateData["system.skills.mental.-=science"] = null;
-    updateData["system.talents.social.poise"] = 1;
-    updateData["system.talents.mental.intuition"] = 1;
 
     updateData["system.health.crisis.physical"] = parseInt(this.system.health.strain.critical);
     updateData["system.health.crisis.mental"] = parseInt(this.system.health.stress.critical);
@@ -80,6 +18,7 @@ export default class C2D10Actor extends Actor {
     updateData["system.health.stress.max"] = maxStress;
     updateData["system.health.crisis.max"] = 10;
 
+    console.log("Running prepareDerivedData");
     await this.update(updateData);
   }
 
