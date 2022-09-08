@@ -18,6 +18,7 @@ export default class C2D10Actor extends Actor {
     updateData["system.health.stress.max"] = maxStress;
     updateData["system.health.crisis.max"] = 10;
 
+    console.log("Running prepareDerivedData");
     await this.update(updateData);
   }
 
