@@ -10,11 +10,23 @@ export default class C2D10Actor extends Actor {
   async prepareDerivedData() {
     const maxStrain = parseInt(this.system.talents.physical.endurance + 3);
     const maxStress = parseInt(this.system.talents.mental.willpower + this.system.talents.social.poise);
-
     /**
      * Populate empty values on old characters, as well as update talents and skills.
      * Populate max values for health trackers.
      */
+
+    /**
+     *  Return the XP value for a resource.
+     * @param rank    The rank of the resrouce
+     * @param baseXP  Base XP cost for the resource (5 for talents, 3 for skills etc)
+     */
+    function returnXP(rank, baseXP) {
+
+      const xp = rank * (baseXP + parseInt( baseXP * rank ))/2;
+
+      return xp;
+    }
+
     const updateData = [];
     if (typeof this.system.health.strain.value === "undefined") {
       updateData["system.health.strain.value"] = this.system.health.strain;
@@ -32,9 +44,9 @@ export default class C2D10Actor extends Actor {
     updateData["system.talents.mental.intuition"] = 1;
      */
 
-    if (this.system.talents.social.empathy > 1) console.error(`${this.name} has ${this.system.talents.social.empathy} points in Empathy. Refund XP!`);
-    if (this.system.talents.mental.reason > 1) console.error(`${this.name} has ${this.system.talents.mental.reason} points in Reason. Refund XP!`);
-    if (this.system.skills.mental.science > 1) console.error(`${this.name} has ${this.system.skills.mental.science} points in Science. Refund XP!`);
+    if (this.system.talents.social.empathy > 1) console.error(`${this.name} has ${this.system.talents.social.empathy} points in Empathy. Refund ${returnXP(this.system.talents.social.empathy, 5)} XP!`);
+    if (this.system.talents.mental.reason > 1) console.error(`${this.name} has ${this.system.talents.mental.reason} points in Reason. Refund ${returnXP(this.system.talents.mental.reason, 5)} XP!`);
+    if (this.system.skills.mental.science > 1) console.error(`${this.name} has ${this.system.skills.mental.science} points in Science. Refund ${returnXP(this.system.talents.mental.science, 5)} XP!`);
 
     updateData["system.health.crisis.physical"] = parseInt(this.system.health.strain.critical);
     updateData["system.health.crisis.mental"] = parseInt(this.system.health.stress.critical);
