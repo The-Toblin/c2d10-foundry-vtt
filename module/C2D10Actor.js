@@ -41,24 +41,36 @@ export default class C2D10Actor extends Actor {
       const currentXP = this.system.info.experience;
       const newXP = parseInt(currentXP + returnedXP);
 
-      updateData["system.experience"] = newXP;
+      updateData["system.info.experience"] = newXP;
+
+      if (typeof newXP !== "number") {
+        ui.errors("CRITICAL!");
+        return;
+      }
 
       console.error(`${this.name} has ${rank} points in Empathy. Refunding ${returnedXP} XP!`);
     }
 
     if (this.system.talents.mental.reason > 1) {
       const rank = this.system.talents.mental.reason;
-      const returnedXP = returnXP(rank, 5);
-      const currentXP = this.system.info.experience;
+      const returnedXP = parseInt(returnXP(rank, 5));
+      const currentXP = parseInt(this.system.info.experience);
       const newXP = parseInt(currentXP + returnedXP);
 
-      updateData["system.experience"] = newXP;
+      if (typeof newXP !== "number") {
+        ui.errors("CRITICAL!");
+        return;
+      }
+
+      updateData["system.info.experience"] = parseInt(newXP);
 
       console.error(`${this.name} has ${rank} points in Reason. Refunding ${returnedXP} XP!`);
     }
 
+    updateData["system.-=experience"] = null; // Fixing an oopsie.
     updateData["system.talents.social.-=empathy"] = null;
     updateData["system.talents.mental.-=reason"] = null;
+    updateData["system.skills.mental.-=science"] = null;
     updateData["system.talents.social.poise"] = 1;
     updateData["system.talents.mental.intuition"] = 1;
 
