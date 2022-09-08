@@ -33,7 +33,7 @@ export default class C2D10Actor extends Actor {
      */
 
     if (this.system.talents.social.empathy > 1) console.error(`${this.name} has ${this.system.talents.social.empathy} points in Empathy. Refund XP!`);
-    if (this.system.talents.mental.reasono > 1) console.error(`${this.name} has ${this.system.talents.mental.reason} points in Reason. Refund XP!`);
+    if (this.system.talents.mental.reason > 1) console.error(`${this.name} has ${this.system.talents.mental.reason} points in Reason. Refund XP!`);
     if (this.system.skills.mental.science > 1) console.error(`${this.name} has ${this.system.skills.mental.science} points in Science. Refund XP!`);
 
     updateData["system.health.crisis.physical"] = parseInt(this.system.health.strain.critical);
