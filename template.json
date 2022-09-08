@@ -49,12 +49,12 @@
                     },
                     "social": {
                         "charm": 1,
-                        "empathy": 1,
-                        "manipulation": 1
+                        "manipulation": 1,
+                        "poise": 1
                     },
                     "mental": {
+                        "intuition": 1,
                         "logic": 1,
-                        "reason": 1,
                         "willpower": 1
                     }
                 }
@@ -69,7 +69,8 @@
                         "crafts": 0,
                         "driving": 0,
                         "firearms": 0,
-                        "melee": 0
+                        "melee": 0,
+                        "mechanics": 0
                     },
                     "social": {
                         "carousing": 0,
@@ -77,6 +78,7 @@
                         "intimidation": 0,
                         "leadership": 0,
                         "persuasion": 0,
+                        "performance": 0,
                         "politics": 0,
                         "streetsmarts": 0,
                         "subterfuge": 0
@@ -84,9 +86,10 @@
                     "mental": {
                         "academia": 0,
                         "awareness": 0,
+                        "electronics": 0,
                         "investigation": 0,
                         "medicine": 0,
-                        "science": 0,
+                        "mysticism": 0,
                         "stealth": 0,
                         "survival": 0,
                         "technology": 0
