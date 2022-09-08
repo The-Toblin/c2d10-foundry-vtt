@@ -10,6 +10,11 @@ export default class C2D10Actor extends Actor {
   async prepareDerivedData() {
     const maxStrain = parseInt(this.system.talents.physical.endurance + 3);
     const maxStress = parseInt(this.system.talents.mental.willpower + this.system.talents.social.poise);
+
+    /**
+     * Populate empty values on old characters, as well as update talents and skills.
+     * Populate max values for health trackers.
+     */
     const updateData = [];
     if (typeof this.system.health.strain.value === "undefined") {
       updateData["system.health.strain.value"] = this.system.health.strain;
@@ -17,6 +22,18 @@ export default class C2D10Actor extends Actor {
     if (typeof this.system.health.stress.value === "undefined") {
       updateData["system.health.stress.value"] = this.system.health.stress;
     }
+
+    /**
+     *
+     *
+    UpdateData["system.talents.social.-=empathy"] = null;
+    updateData["system.talents.mental.-=reason"] = null;
+    updateData["system.talents.social.poise"] = 1;
+    updateData["system.talents.mental.intuition"] = 1;
+     */
+
+    console.warn(`${this.name} has ${system.talents.social.empathy} points in Empathy and ${system.talents.mental.reason} in Reason. Refund XP!`);
+    console.warn(`${this.name} has ${system.skills.mental.science} points in Science. Refund XP!`);
     updateData["system.health.crisis.physical"] = parseInt(this.system.health.strain.critical);
     updateData["system.health.crisis.mental"] = parseInt(this.system.health.stress.critical);
     updateData["system.health.strain.max"] = maxStrain;
