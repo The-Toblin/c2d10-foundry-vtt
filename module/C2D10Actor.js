@@ -9,7 +9,7 @@ export default class C2D10Actor extends Actor {
 
   async prepareDerivedData() {
     const maxStrain = parseInt(this.system.talents.physical.endurance + 3);
-    const maxStress = parseInt(this.system.talents.mental.willpower + this.system.talents.mental.reason);
+    const maxStress = parseInt(this.system.talents.mental.willpower + this.system.talents.social.poise);
     const updateData = [];
     if (typeof this.system.health.strain.value === "undefined") {
       updateData["system.health.strain.value"] = this.system.health.strain;
