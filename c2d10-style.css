@@ -461,7 +461,7 @@ table td {
   background: none;
   border: none;
   vertical-align: middle;
-  padding: 4px 5px 4px 5px !important;
+  padding: 4px 5px;
   color: inherit;
   border-radius: 3px;
   border: 2px solid;
@@ -686,6 +686,7 @@ table input {
 .c2d10.sheet .table-no-border,
 .c2d10.item-sheet .table-no-border {
   border: none !important;
+  padding: 2px;
 }
 .c2d10.sheet .warning,
 .c2d10.item-sheet .warning {
@@ -722,7 +723,7 @@ table input {
   writing-mode: vertical-lr;
   position: relative;
   top: 0px;
-  height: 847px;
+  height: 771px;
   width: 40px;
   margin-right: 5px;
 }
