@@ -10,7 +10,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     return mergeObject(super.defaultOptions, {
       template: "systems/c2d10/templates/sheets/actor-sheet.hbs",
       classes: ["c2d10", "sheet"],
-      height: 965,
+      height: 890,
       width: 910,
       tabs: [
         {
@@ -174,8 +174,6 @@ export default class C2D10ActorSheet extends ActorSheet {
     html.find(".add-focus").click(this._addFocus.bind(this));
     html.find(".remove-focus").click(this._removeFocus.bind(this));
     html.find(".focus-edit").on("click contextmenu", this._editFocus.bind(this));
-    // TODO: Remove the below listener once it's guaranteed nothing breaks.
-    // Html.find(".c2d10-health-test").click(this._doHealthTest.bind(this)); Deprecated following health changes.
     html.find(".c2d10-wealth-test").click(this._doWealthTest.bind(this));
     html.find(".c2d10-talent-test").click(this._doTalentTest.bind(this));
     html.find(".c2d10-skill-test").click(this._doSkillTest.bind(this));

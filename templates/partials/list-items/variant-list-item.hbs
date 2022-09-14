@@ -3,11 +3,6 @@
         {{name}}
     </td>
     <td class="align-left resource-row c2d10-contentbox asset {{#if showEffects}}fancy-effects{{/if}}">
-        {{#unless (eq "None" system.power)}} 
-            {{localize (concat "c2d10.powers." system.power)}} 
-        {{/unless}}
-    </td>
-    <td class="align-left resource-row c2d10-contentbox asset {{#if showEffects}}fancy-effects{{/if}}">
         {{#unless (eq "None" system.pool)}} 
             {{system.pool}} 
         {{/unless}}

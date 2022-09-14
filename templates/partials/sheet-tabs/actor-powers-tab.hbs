@@ -1,37 +1,32 @@
-<section>
+<section class="flex-col">
     <h3>
         {{localize "c2d10.sheet.powers"}}
     </h3>
-    <div class="content-box c2d10-subsection flex-row flex-between">
-        <div class="flex-col flex-start w-100">
-            <table class="c2d10-asset-card-table c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}" style="margin-bottom: 5px;">
-                <colgroup>
-                    <col class="w-60">
-                    <col class="w-40">
-                </colgroup>
-                {{#each system.powers as |level name|}}
-                    <tr>
-                        <th class="table-no-border">{{localize (concat "c2d10.powers." name)}}</th>
-                        <td class="flex-row table-no-border resource-row" data-type="powers" data-id="{{name}}" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
-                            {{#dots level 5}}{{/dots}}
-                        </td>
-                    </tr>
-                {{/each}}
-            </table>
-            <table class="c2d10-asset-card-table c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
-                <tr>
-                    <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.name"}}</th>
-                    <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.parent"}}</th>
-                    <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.pool"}}</th>
-                    <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.cost"}}</th>
-                    <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.range"}}</th>
-                    <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.opposed"}}</th>
-                    <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.duration"}}</th>
-                </tr>
-                {{#each variants as |item id|}}
-                    {{> "systems/c2d10/templates/partials/list-items/variant-list-item.hbs"}}
-                {{/each}}
-            </table>
+    {{#each system.powers as |level name|}}
+    <div class="flex-col flex-center content-box c2d10-subsection">
+        <div class="flex-row flex-around">
+            <h3 style="margin-right: 10px;">{{localize (concat "c2d10.powers." name)}}</h3>
+            <div class="flex-row table-no-border resource-row" data-type="powers" data-id="{{name}}" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
+                {{#dots level 5}}{{/dots}}
+            </div>
         </div>
+        {{#if (gt level 0)}}
+        <table class="c2d10-asset-card-table {{#if showEffects}}fancy-effects{{/if}}">
+            <tr>
+                <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.name"}}</th>
+                <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.pool"}}</th>
+                <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.cost"}}</th>
+                <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.range"}}</th>
+                <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.opposed"}}</th>
+                <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.duration"}}</th>
+            </tr>
+            {{#each ../variants as |item id|}}
+                {{#if (eq this.system.power name)}}
+                {{> "systems/c2d10/templates/partials/list-items/variant-list-item.hbs"}}
+                {{/if}}
+            {{/each}}
+        </table>
+        {{/if}}
     </div>
+     {{/each}}
 </section>
