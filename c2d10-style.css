@@ -657,6 +657,7 @@ table input {
   color: #29a253;
   font-family: Quantum, sans-serif;
   font-size: 2.5rem;
+  height: fit-content;
 }
 .c2d10.sheet h3,
 .c2d10.item-sheet h3 {
@@ -666,6 +667,7 @@ table input {
   font-family: Quantum, sans-serif;
   font-size: 1.25rem;
   text-shadow: none;
+  height: fit-content;
 }
 .c2d10.sheet .label-box,
 .c2d10.item-sheet .label-box {
@@ -835,6 +837,7 @@ table input {
   font-family: VT323, monospace;
   font-size: 1.25rem;
   padding: 5px 10px;
+  height: fit-content;
 }
 .c2d10.sheet select option,
 .c2d10.item-sheet select option {
