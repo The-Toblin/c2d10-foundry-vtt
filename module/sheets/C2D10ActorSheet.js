@@ -11,7 +11,7 @@ export default class C2D10ActorSheet extends ActorSheet {
       template: "systems/c2d10/templates/sheets/actor-sheet.hbs",
       classes: ["c2d10", "sheet"],
       height: 965,
-      width: 895,
+      width: 910,
       tabs: [
         {
           navSelector: ".sheet-tabs",
