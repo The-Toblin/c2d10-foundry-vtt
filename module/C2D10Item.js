@@ -15,10 +15,9 @@ export default class C2D10Item extends Item {
 
         updateData["system.powerId"] = powerId;
 
-        this.updateSource(updateData);
+        await this.updateSource(updateData);
       }
     }
-
     return await super._preCreate(data, options, user);
   }
 

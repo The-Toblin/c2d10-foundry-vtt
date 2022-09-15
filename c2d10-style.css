@@ -853,6 +853,10 @@ table input {
 .c2d10.item-sheet table {
   margin: 0px;
 }
+.c2d10.sheet table td:first-child,
+.c2d10.item-sheet table td:first-child {
+  padding-left: 5px;
+}
 .c2d10.sheet .c2d10-fit-content,
 .c2d10.item-sheet .c2d10-fit-content {
   height: fit-content !important;
@@ -861,6 +865,10 @@ table input {
 .c2d10.item-sheet nav.sheet-tabs .item {
   padding: 10px 4px;
   margin: 4px;
+}
+.c2d10.sheet .remove-power,
+.c2d10.item-sheet .remove-power {
+  color: #e5e5ec;
 }
 .c2d10.item-sheet {
   height: fit-content !important;

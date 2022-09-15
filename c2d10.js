@@ -184,7 +184,7 @@ Hooks.once("init", function() {
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("c2d10", C2D10ItemSheet, {
     makeDefault: true,
-    types: ["asset", "trait", "variant"],
+    types: ["asset", "power", "trait", "variant"],
     label: "C2D10 Item Sheet"
   });
 

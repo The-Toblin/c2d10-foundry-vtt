@@ -3,6 +3,9 @@
         <h1>
             <input name="name" type="text" value="{{item.name}}" placeholder="{{localize "c2d10.powers.name"}}" />
         </h1>
+        <h3 class="c2d10-alert">
+            {{item.type}}
+        </h3>
     </section>
     <section>
         <div class="c2d10-subsection flex-row flex-between">
@@ -14,6 +17,18 @@
                     <div class="image-box flex-row flex-center">
                         <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" height="145px" />
                     </div>
+                </div>
+                <div class="flex-col flex-start w-20 value-box c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
+                    <table>
+                        <tr>
+                            <th class="table-no-border">
+                                {{localize "c2d10.powers.level"}}
+                            </th>
+                            <td class="flex-row table-no-border resource-row" data-id="level" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
+                                {{#dots system.level 5}}{{/dots}}
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>

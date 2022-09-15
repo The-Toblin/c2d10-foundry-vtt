@@ -2,15 +2,19 @@
     <h3>
         {{localize "c2d10.sheet.powers"}}
     </h3>
-    {{#each system.powers as |level name|}}
+    {{#each powers as |power|}}
     <div class="flex-col flex-center content-box c2d10-subsection">
-        <div class="flex-row flex-around">
-            <h3 style="margin-right: 10px;">{{localize (concat "c2d10.powers." name)}}</h3>
-            <div class="flex-row table-no-border resource-row" data-type="powers" data-id="{{name}}" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
-                {{#dots level 5}}{{/dots}}
+        <div class="flex-row flex-between">
+            <div class="flex-row flex-start">
+                <a class="remove-power delete-item asset-item" data-id="{{power._id}}" title="{{localize "c2d10.sheet.removePower"}}">
+                    <i class="far fa-minus-square" style="margin-right: 5px"></i>
+                </a>
+                <h3 class="power-description" data-id="{{power._id}}" style="margin-right: 10px;">{{power.name}}</h3>
+            </div>
+            <div class="flex-row table-no-border power-resource-row" data-res="level" data-type="powers" data-id="{{power._id}}" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
+                {{#dots power.system.level 5}}{{/dots}}
             </div>
         </div>
-        {{#if (gt level 0)}}
         <table class="c2d10-asset-card-table {{#if showEffects}}fancy-effects{{/if}}">
             <tr>
                 <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.variant"}}</th>
@@ -20,13 +24,12 @@
                 <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.opposed"}}</th>
                 <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.duration"}}</th>
             </tr>
-            {{#each ../variants as |item id|}}
-                {{#if (eq this.system.power name)}}
+            {{#each ../variants as |variant|}}
+            {{#if (eq power.system.powerId variant.system.power)}}
                 {{> "systems/c2d10/templates/partials/list-items/variant-list-item.hbs"}}
-                {{/if}}
+            {{/if}}
             {{/each}}
         </table>
-        {{/if}}
     </div>
      {{/each}}
 </section>

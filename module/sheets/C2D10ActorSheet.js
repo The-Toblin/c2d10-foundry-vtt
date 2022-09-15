@@ -34,6 +34,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     sheetData.assets = sheetData.items.filter(p => p.type === "asset");
     sheetData.virtues = sheetData.items.filter(p => p.type === "trait" && p.system.traitType === "virtue");
     sheetData.vices = sheetData.items.filter(p => p.type === "trait" && p.system.traitType === "vice");
+    sheetData.powers = sheetData.items.filter(p => p.type === "power");
     sheetData.variants = sheetData.items.filter(p => p.type === "variant");
 
     /**
@@ -122,6 +123,30 @@ export default class C2D10ActorSheet extends ActorSheet {
       return 0;  // Names must be equal
     });
 
+    sheetData.powers.sort(function(a, b) {
+      let nameA = a.name.toUpperCase(); // Ignore upper and lowercase
+      let nameB = b.name.toUpperCase(); // Ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1; // NameA comes first
+      }
+      if (nameA > nameB) {
+        return 1; // NameB comes first
+      }
+      return 0;  // Names must be equal
+    });
+
+    sheetData.variants.sort(function(a, b) {
+      let nameA = a.name.toUpperCase(); // Ignore upper and lowercase
+      let nameB = b.name.toUpperCase(); // Ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1; // NameA comes first
+      }
+      if (nameA > nameB) {
+        return 1; // NameB comes first
+      }
+      return 0;  // Names must be equal
+    });
+
     /**
      * Make system settings available for sheets to use for rendering
      */
@@ -169,6 +194,7 @@ export default class C2D10ActorSheet extends ActorSheet {
   activateListeners(html) {
     html.find(".dot-container").on("click contextmenu", this._onResourceChange.bind(this));
     html.find(".description").on("contextmenu", this._postDescription.bind(this));
+    html.find(".power-description").on("contextmenu", this._postPowerDescription.bind(this));
     html.find(".edit-lock").click(this._toggleEditLock.bind(this));
     html.find(".delete-item").click(this._deleteItem.bind(this));
     html.find(".add-focus").click(this._addFocus.bind(this));
@@ -194,6 +220,21 @@ export default class C2D10ActorSheet extends ActorSheet {
   _onResourceChange(event) {
     event.preventDefault();
     const element = event.currentTarget;
+
+    if (element.closest(".power-resource-row") !== null) {
+      const dataset = element.closest(".power-resource-row").dataset;
+      const item = this.actor.items.get(dataset.id);
+      const res = dataset.res;
+
+      if (event.type === "click" && !event.shiftKey) {
+        item.modifyResource(1, res);
+      } else if (event.type === "contextmenu" || event.shiftKey) {
+        item.modifyResource(-1, res);
+      }
+
+      return;
+    }
+
     const type = element.closest(".resource-row").dataset.type;
     const group = element.closest(".resource-row").dataset.group;
     const res = element.closest(".resource-row").dataset.id;
@@ -397,6 +438,23 @@ export default class C2D10ActorSheet extends ActorSheet {
     const messageContext = {
       description: game.i18n.localize(`c2d10.descriptions.${id}`),
       title: id
+    };
+    const chatData = {
+      speaker: ChatMessage.getSpeaker(),
+      content: await renderTemplate(messageTemplate, messageContext)
+    };
+
+    ChatMessage.create(chatData);
+  }
+
+  async _postPowerDescription(event) {
+    event.preventDefault();
+    const id = event.currentTarget.closest(".power-description").dataset.id;
+    const item = this.actor.items.get(id);
+    const messageTemplate = "systems/c2d10/templates/partials/chat-templates/description.hbs";
+    const messageContext = {
+      description: item.system.description,
+      title: item.name
     };
     const chatData = {
       speaker: ChatMessage.getSpeaker(),

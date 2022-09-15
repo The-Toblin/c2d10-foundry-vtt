@@ -96,15 +96,6 @@
                     },
                     "focus": []
                 }
-            },
-            "powers": {
-                "powers": {
-                    "beguilement": 0,
-                    "bodhi": 0,
-                    "energokinesis": 0,
-                    "mentaleclipse": 0,
-                    "quickening": 0
-                }
             }
         },
         "actor": {
@@ -112,8 +103,7 @@
                 "info",
                 "health",
                 "talents",
-                "skills",
-                "powers"
+                "skills"
             ]
         }
     },
@@ -132,7 +122,8 @@
         },
         "power": {
             "description": "",
-            "powerId": ""
+            "powerId": "",
+            "level": 0
         },
         "variant": {
             "power": "",
