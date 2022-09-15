@@ -96,15 +96,6 @@
                     },
                     "focus": []
                 }
-            },
-            "powers": {
-                "powers": {
-                    "beguilement": 0,
-                    "bodhi": 0,
-                    "energokinesis": 0,
-                    "mentaleclipse": 0,
-                    "quickening": 0
-                }
             }
         },
         "actor": {
@@ -112,14 +103,14 @@
                 "info",
                 "health",
                 "talents",
-                "skills",
-                "powers"
+                "skills"
             ]
         }
     },
     "Item": {
         "types": [
             "asset",
+            "power",
             "variant",
             "trait"
         ],
@@ -128,6 +119,11 @@
             "description": "",
             "quality": 0,
             "value": 0
+        },
+        "power": {
+            "description": "",
+            "powerId": "",
+            "level": 0
         },
         "variant": {
             "power": "",

@@ -37,6 +37,7 @@
         color: @colors[green];
         font-family: @h1;
         font-size: @size[giant];
+        height: fit-content;
     }
 
     h3 {
@@ -46,6 +47,7 @@
         font-family: @h1;
         font-size: @size[large];
         text-shadow: none;
+        height: fit-content;
     }
 
     .label-box {
@@ -205,6 +207,7 @@
         font-family: @m2;
         font-size: @size[large];
         padding: 5px 10px;
+        height: fit-content;
     }
 
     select option {
@@ -221,6 +224,10 @@
 
     table {
         margin: 0px;
+
+        td:first-child {
+            padding-left: 5px;
+        }
     }
 
     .c2d10-fit-content {
@@ -230,6 +237,10 @@
     nav.sheet-tabs .item {
         padding: 10px 4px;
         margin: 4px;
+    }
+
+    .remove-power {
+        color: @colors[ghost];
     }
 }
 
