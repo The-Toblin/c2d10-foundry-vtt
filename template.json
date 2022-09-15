@@ -120,6 +120,7 @@
     "Item": {
         "types": [
             "asset",
+            "power",
             "variant",
             "trait"
         ],
@@ -128,6 +129,10 @@
             "description": "",
             "quality": 0,
             "value": 0
+        },
+        "power": {
+            "description": "",
+            "powerId": ""
         },
         "variant": {
             "power": "",

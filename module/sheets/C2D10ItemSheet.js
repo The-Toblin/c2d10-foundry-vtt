@@ -8,6 +8,7 @@ export default class C2D10ItemSheet extends ItemSheet {
   }
 
   get template() {
+    console.log(this.item.type);
     return `systems/c2d10/templates/sheets/${this.item.type}-sheet.hbs`;
   }
 
@@ -15,6 +16,20 @@ export default class C2D10ItemSheet extends ItemSheet {
     const sheetData = super.getData();
     sheetData.config = CONFIG.c2d10;
     sheetData.system = this.item.system;
+
+    /**
+     * Create a list of powers in the world. Used for selecting parent powers
+     * for variants.
+     */
+    if (this.item.type === "variant") {
+      sheetData.worldPowers = [];
+      for (const power of game.items) {
+        if (power.type === "power") sheetData.worldPowers.push({
+          powerId: power.system.powerId,
+          name: power.name
+        });
+      }
+    }
 
     /* Make system settings available for sheets to use for rendering */
     sheetData.showEffects = game.settings.get("c2d10", "showEffects");

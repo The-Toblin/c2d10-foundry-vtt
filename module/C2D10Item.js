@@ -4,6 +4,24 @@ export default class C2D10Item extends Item {
     trait: "systems/c2d10/templates/partials/chat-templates/trait-chat.hbs"
   };
 
+  async _preCreate(data, options, user) {
+    /* Hijack preCreate to create a unique ID for items that is persistent across characters.
+        This is mainly used to match powers with their combat skills. */
+
+    if (!this.isEmbedded && this.type === "power") {
+      if (typeof this.system.powerId === "undefined" || this.system.powerId === "") {
+        const updateData = {};
+        const powerId = randomID();
+
+        updateData["system.powerId"] = powerId;
+
+        this.updateSource(updateData);
+      }
+    }
+
+    return await super._preCreate(data, options, user);
+  }
+
   async showDescription() {
     const chatData = {
       user: game.user.id,

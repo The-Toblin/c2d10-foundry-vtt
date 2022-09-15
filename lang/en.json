@@ -135,7 +135,8 @@
             "range": "Range",
             "cost": "Cost",
             "pool": "Pool",
-            "opposed": "Opposed pool"
+            "opposed": "Opposed pool",
+            "variant": "Variant"
         },
         "asset": {
             "name": "Name",
