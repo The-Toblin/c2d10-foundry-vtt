@@ -222,7 +222,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     event.preventDefault();
     const element = event.currentTarget;
 
-    if (element.closest(".power-resource-row") !== null) {
+    if (element.closest(".power-resource-row") !== null && !this.actor.getFlag("c2d10", "locked")) {
       const dataset = element.closest(".power-resource-row").dataset;
       const item = this.actor.items.get(dataset.id);
       const res = dataset.res;
@@ -233,6 +233,9 @@ export default class C2D10ActorSheet extends ActorSheet {
         item.modifyResource(-1, res);
       }
 
+      return;
+    } else if (element.closest(".power-resource-row") !== null && this.actor.getFlag("c2d10", "locked")) {
+      ui.notifications.error("Unlock your sheet before attempting to edit it!");
       return;
     }
 
