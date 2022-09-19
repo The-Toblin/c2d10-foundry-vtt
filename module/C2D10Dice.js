@@ -393,4 +393,53 @@ export async function skillTest(crisis, item, pool, talents, actorId, group) {
     },
     dialogOptions
   ).render(true);
+
+}
+
+/**
+ * Perform a Power test. Will open a dialog to choose parent Talent. Takes Crisis into account.
+ * @param {number} crisis  The character's current value in Crisis.
+ * @param {string} item    The name of the item to roll for.
+ * @param {number} pool    The Talent rank to produce a pool of dice.
+ * @param {object} talents An object holding all the talents and ranks for the character.
+ * @param {string} actorId The actor's Id.
+ */
+export async function powerTest(crisis, item, pool, talents, actorId) {
+  const rollData = {};
+
+  // Populate the needed rolldata
+  rollData.talentsList = c2d10.allTalents;
+  rollData.pool = pool;
+  rollData.item = item;
+  rollData.crisis = crisis;
+  rollData.id = actorId;
+  rollData.DC = game.settings.get("c2d10", "DC");
+  rollData.talents = talents;
+
+  // Create the dialog
+  const dialogOptions = {
+    classes: ["c2d10-dialog", "roll"],
+    top: 300,
+    left: 400
+  };
+
+  new Dialog(
+    {
+      title: `Make ${item} test`,
+      content: await renderTemplate("systems/c2d10/templates/dialogs/roll-test-dialog.hbs", rollData),
+      buttons: {
+        roll: {
+          label: "Roll!",
+          callback: html => {
+            rollData.pool = html.find("input#pool").val() <= 5 ? parseInt(html.find("input#pool").val()) : 5;
+            rollData.crisis = html.find("input#crisis").val();
+            rollData.parent = html.find("select#parent").val();
+            rollData.focus = html.find("input#focus")[0].checked;
+            // Call the roll function
+            _doRoll(rollData);}
+        }
+      }
+    },
+    dialogOptions
+  ).render(true);
 }

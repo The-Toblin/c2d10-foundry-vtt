@@ -1,4 +1,4 @@
-import {wealthTest, talentTest, skillTest} from "../C2D10Dice.js";
+import {wealthTest, talentTest, skillTest, powerTest} from "../C2D10Dice.js";
 
 /**
  * Base Actor sheet. This holds all functions available to actor sheets and can be extended by
@@ -203,6 +203,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     html.find(".c2d10-wealth-test").click(this._doWealthTest.bind(this));
     html.find(".c2d10-talent-test").click(this._doTalentTest.bind(this));
     html.find(".c2d10-skill-test").click(this._doSkillTest.bind(this));
+    html.find(".c2d10-power-test").click(this._doPowerTest.bind(this));
 
     new ContextMenu(html, ".asset", this.itemContextMenu);
 
@@ -429,6 +430,28 @@ export default class C2D10ActorSheet extends ActorSheet {
     const crisis = dataset.group === "physical" ? sys.health.crisis.physical : sys.health.crisis.mental;
 
     await skillTest(crisis, dataset.id, pool, talents, actorId, dataset.group);
+  }
+
+  /**
+   * Perform a test with a power
+   * @param {html} event html click event data, including dataset.
+   */
+  async _doPowerTest(event) {
+    event.preventDefault();
+
+    if (event.shiftKey) {
+      this._postPowerDescription(event);
+      return;
+    }
+    const dataset = event.currentTarget.closest(".c2d10-test").dataset;
+    const power = this.actor.items.get(dataset.id);
+    const sys = this.actor.system;
+    const pool = power.system.level;
+    const talents = this.getData().talents;
+    const actorId = this.actor.id;
+    const crisis = dataset.group === "physical" ? sys.health.crisis.physical : sys.health.crisis.mental;
+
+    await powerTest(crisis, power.name, pool, talents, actorId);
   }
 
   async _postDescription(event) {

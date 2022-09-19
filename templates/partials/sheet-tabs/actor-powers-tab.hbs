@@ -9,7 +9,7 @@
                 <a class="remove-power delete-item asset-item" data-id="{{power._id}}" title="{{localize "c2d10.sheet.removePower"}}">
                     <i class="far fa-minus-square" style="margin-right: 5px"></i>
                 </a>
-                <h3 class="power-description" data-id="{{power._id}}" style="margin-right: 10px;">{{power.name}}</h3>
+                <h3 class="power-description c2d10-test c2d10-power-test power-description" data-id="{{power._id}}" style="margin-right: 10px;">{{power.name}}</h3>
             </div>
             <div class="flex-row table-no-border power-resource-row" data-res="level" data-type="powers" data-id="{{power._id}}" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
                 {{#dots power.system.level 5}}{{/dots}}
