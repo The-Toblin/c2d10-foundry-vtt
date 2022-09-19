@@ -11,23 +11,23 @@ import { getDice } from "./C2D10Utility.js";
 
 
 /**
- *  Counts successes, zeroes, determines messups and complications.
+ *  Counts hits, zeroes, determines messups and complications.
  * @param {object}    rolledResults  an array holding the rolled results from the dice roll.
  * @param {number}    DC             a number, showing the DC for the test.
  * @param {number}    crisis         a character's current crisis for the test.
  * @returns {object}  evaluation results in an object.
  */
 const _evaluateSuccesses = async (rolledResults, DC, crisis = 0) => {
-  let numOfSuccess = 0;
+  let numOfHits = 0;
   let complication = false;
   let mess = false;
   let numOfZeroes = 0;
 
   for (let i = 0; i < rolledResults.length - crisis; i++) {
     if (rolledResults[i].result === 9) {
-      numOfSuccess += 2;
+      numOfHits += 2;
     } else if (rolledResults[i].result > 6) {
-      numOfSuccess += 1;
+      numOfHits += 1;
     } else if (rolledResults[i].result === 0) {
       numOfZeroes += 1;
     }
@@ -35,22 +35,22 @@ const _evaluateSuccesses = async (rolledResults, DC, crisis = 0) => {
 
   for (let i = rolledResults.length - crisis; i < rolledResults.length; i++) {
     if (rolledResults[i].result === 9) {
-      numOfSuccess += 2;
+      numOfHits += 2;
       mess = true;
     } else if (rolledResults[i].result > 6) {
-      numOfSuccess += 1;
+      numOfHits += 1;
     } else if (rolledResults[i].result === 0) {
       complication = true;
     }
   }
 
-  const pass = numOfSuccess >= DC ? "Pass!" : "Fail!";
+  const pass = numOfHits >= DC ? "Pass!" : "Fail!";
 
   return {
     DC: DC,
     pass: pass,
     setbacks: numOfZeroes,
-    successes: numOfSuccess,
+    hits: numOfHits,
     zeroes: numOfZeroes,
     mess: mess,
     complication: complication
@@ -150,7 +150,7 @@ const _diceList = async (diceRolls, crisis = 0) => {
  * Build the rendered roll template for chat.
  * @param {string} formula      The rollformula, so it can be presented.
  * @param {string} listContents A rendered HTML string showing all dice rolls.
- * @param {object} evaluation   Evaluated roll object. Contains pass, DC, number of successes etc.
+ * @param {object} evaluation   Evaluated roll object. Contains pass, DC, number of hits etc.
  * @param {number} crisis       A character's current crisis.
  */
 const _renderRoll = async (formula, listContents, evaluation, crisis) => {
@@ -206,10 +206,10 @@ const _renderRoll = async (formula, listContents, evaluation, crisis) => {
           <div class="flex-col flex-start c2d10-contentbox">
             <div class="flex-row flex-between">
               <div class="stat-box">
-                Successes
+                Hits
               </div>
               <div class="value-box">
-                ${evaluation.successes}
+                ${evaluation.hits}
               </div>
             </div>
             <div class="flex-row flex-between">
@@ -217,7 +217,7 @@ const _renderRoll = async (formula, listContents, evaluation, crisis) => {
                 Excess
               </div>
               <div class="value-box">
-                ${evaluation.successes - evaluation.DC}
+                ${evaluation.hits - evaluation.DC}
               </div>
             </div>
             <div class="flex-row flex-between">
@@ -282,7 +282,7 @@ const _doRoll = async rollData => {
     parentName: rollData.parent,
     parentLevel: parentLevel,
     crisis: crisis,
-    successes: evaluation.successes,
+    hits: evaluation.hits,
     complication: evaluation.complication,
     roll: renderedRoll
   };
