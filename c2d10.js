@@ -172,6 +172,10 @@ Hooks.once("ready", () => {
   });
 });
 
+Hooks.on("renderPause", (_app, html, options) => {
+  html.find('img[src="icons/svg/clockwork.svg"]').attr("src", "systems/c2d10/assets/cd10-logo.webp");
+});
+
 Hooks.once("init", function() {
   console.log("==== C2D10 | Initialising CD10 RPG System 2nd Edition ====");
 
