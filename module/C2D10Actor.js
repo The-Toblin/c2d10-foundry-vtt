@@ -12,11 +12,22 @@ export default class C2D10Actor extends Actor {
     const maxStress = parseInt(this.system.talents.mental.willpower + this.system.talents.social.poise);
     const updateData = [];
 
-    updateData["system.health.crisis.physical"] = parseInt(this.system.health.strain.critical);
-    updateData["system.health.crisis.mental"] = parseInt(this.system.health.stress.critical);
+    const health = this.system.health;
+
+    // Update the max values.
     updateData["system.health.strain.max"] = maxStrain;
     updateData["system.health.stress.max"] = maxStress;
     updateData["system.health.crisis.max"] = 10;
+
+    // Create the crisis values.
+    updateData["system.health.crisis.physical"] = parseInt(health.strain.critical);
+    updateData["system.health.crisis.mental"] = parseInt(health.stress.critical);
+
+    // Combine the two types of damage and inverse them in order to show a reduction bar on tokens.
+    const strainValue = parseInt(health.strain.superficial + health.strain.critical);
+    const stressValue = parseInt(health.stress.superficial + health.stress.critical);
+    updateData["system.health.strain.value"] = parseInt(maxStrain - strainValue);
+    updateData["system.health.stress.value"] = parseInt(maxStress - stressValue);
 
     await this.update(updateData);
   }
@@ -47,9 +58,10 @@ export default class C2D10Actor extends Actor {
 
   async modifyHealth(isIncrease, isCrit, res) {
     const system = this.system;
-    const currentValue = system.health[res].value;
+    const currentSuperficial = system.health[res].superficial;
+    const superficial = system.health[res].superficial;
     const critical = system.health[res].critical;
-    const total = parseInt(critical + currentValue);
+    const total = parseInt(superficial + critical);
     const max = system.health[res].max;
 
     /**
@@ -77,12 +89,12 @@ export default class C2D10Actor extends Actor {
       /**
        * If we're reducing crit, convert to superficial.
        */
-      if (!isIncrease) updateData[`system.health.${res}.value`] = superficial + 1;
+      if (!isIncrease) updateData[`system.health.${res}.superficial`] = superficial + 1;
 
       /**
        * If the tracker is full, convert a superficial to crit.
        */
-      if (full && isIncrease) updateData[`system.health.${res}.value`] = superficial - 1;
+      if (full && isIncrease) updateData[`system.health.${res}.superficial`] = superficial - 1;
 
       /**
        * Finally, update the crit tracker.
@@ -92,17 +104,17 @@ export default class C2D10Actor extends Actor {
     }
 
     let updateData = [];
-    const full = parseInt(currentValue + critical) >= max;
+    const full = total >= max;
 
     if (isCrit) {
-      updateData = handleCrit(isIncrease, res, critical, currentValue, max, full);
+      updateData = handleCrit(isIncrease, res, critical, currentSuperficial, max, full);
     } else if (full && isIncrease) {
-      updateData = handleCrit(isIncrease, res, critical, currentValue, max, full);
+      updateData = handleCrit(isIncrease, res, critical, currentSuperficial, max, full);
     } else {
-      const newValue = isIncrease ? currentValue + 1 : currentValue - 1;
+      const newValue = isIncrease ? currentSuperficial + 1 : currentSuperficial - 1;
 
       if (newValue < 0) return;
-      updateData[`system.health.${res}.value`] = newValue;
+      updateData[`system.health.${res}.superficial`] = newValue;
     }
 
     if (typeof updateData !== "undefined") await this.update(updateData);
