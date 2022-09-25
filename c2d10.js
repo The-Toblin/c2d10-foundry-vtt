@@ -173,7 +173,7 @@ Hooks.once("ready", () => {
 });
 
 Hooks.on("renderPause", (_app, html, options) => {
-  html.find('img[src="icons/svg/clockwork.svg"]').attr("src", "systems/c2d10/assets/cd10-logo.webp");
+  html.find('img[src="icons/svg/clockwork.svg"]').attr("src", "systems/c2d10/assets/cd10-logo-circle.webp");
 });
 
 Hooks.once("init", function() {

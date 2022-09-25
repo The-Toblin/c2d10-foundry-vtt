@@ -48,6 +48,6 @@
     "protected": false,
     "gridDistance": "1.5",
     "gridUnits": "m",
-    "primaryTokenAttribute": "strain.critical",
-    "secondaryTokenAttribute": "stress.critical"
+    "primaryTokenAttribute": "strain",
+    "secondaryTokenAttribute": "stress"
 }
