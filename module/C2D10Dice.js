@@ -154,45 +154,6 @@ const _diceList = async (diceRolls, crisis = 0) => {
  * @param {number} crisis       A character's current crisis.
  */
 const _renderRoll = async (formula, listContents, evaluation, crisis) => {
-  let outcome = "";
-
-  if (evaluation.pass === "Pass!") {
-    if (evaluation.mess) {
-      outcome = `
-          <h2 class="align-center">
-            Mess up!
-          </h2>`;
-    } else if (evaluation.complication) {
-      outcome = `
-          <h2 class="align-center">
-            Pass with complication!
-          </h2>`;
-    } else {
-      outcome = `
-          <h2 class="align-center">
-            ${evaluation.pass}
-          </h2>`;
-    }
-  } else if (evaluation.pass === "Fail!") {
-    if (evaluation.complication) {
-      outcome = `
-          <h2 class="align-center">
-            Failure with complication!
-          </h2>
-          <h2 class="align-center">
-            Setbacks: ${evaluation.zeroes}
-          </h2>`;
-    } else {
-      outcome = `
-          <h2 class="align-center">
-            ${evaluation.pass}
-          </h2>
-          <h2 class="align-center">
-            Setbacks: ${evaluation.zeroes}
-          </h2>`;
-    }
-  }
-
   const renderedRoll =
   `<div class="dice-roll">
     <div class="dice-result">
@@ -228,9 +189,6 @@ const _renderRoll = async (formula, listContents, evaluation, crisis) => {
                     ${crisis}
                 </div>
             </div>
-        </div>
-        <div class="c2d10-contentbox">
-          ${outcome}
         </div>
     </div>
   </div>`;
