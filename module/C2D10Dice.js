@@ -194,47 +194,47 @@ const _renderRoll = async (formula, listContents, evaluation, crisis) => {
   }
 
   const renderedRoll =
-      `<div class="dice-roll">
-        <div class="dice-result">
-          <div class="dice-tooltip expanded align-center">
+  `<div class="dice-roll">
+    <div class="dice-result">
+        <div class="dice-tooltip expanded align-center">
             <section class="tooltip-part">
-              <div class="dice">
-                ${listContents}
-              </div>
+                <div class="dice">
+                    ${listContents}
+                </div>
             </section>
-          </div>
-          <div class="flex-col flex-start c2d10-contentbox">
-            <div class="flex-row flex-between">
-              <div class="stat-box">
-                Hits
-              </div>
-              <div class="value-box">
-                ${evaluation.hits}
-              </div>
-            </div>
-            <div class="flex-row flex-between">
-              <div class="stat-box">
-                Excess
-              </div>
-              <div class="value-box">
-                ${evaluation.hits - evaluation.DC}
-              </div>
-            </div>
-            <div class="flex-row flex-between">
-              <div class="stat-box">
-                Crisis
-              </div>
-              <div class="value-box">
-                ${crisis}
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-      <div class="c2d10-contentbox">
-        ${outcome}
-      </div>
-      </div>`;
+        <div class="flex-col flex-start c2d10-contentbox">
+            <div class="flex-row flex-between">
+                <div class="stat-box">
+                    Hits
+                </div>
+                <div class="value-box">
+                    ${evaluation.hits}
+                </div>
+            </div>
+            <div class="flex-row flex-between">
+                <div class="stat-box">
+                    Excess
+                </div>
+                <div class="value-box">
+                    ${evaluation.hits - evaluation.DC}
+                </div>
+            </div>
+            <div class="flex-row flex-between">
+                <div class="stat-box">
+                    Crisis
+                </div>
+                <div class="value-box">
+                    ${crisis}
+                </div>
+            </div>
+        </div>
+        <div class="c2d10-contentbox">
+          ${outcome}
+        </div>
+    </div>
+  </div>`;
+
   return renderedRoll;
 };
 

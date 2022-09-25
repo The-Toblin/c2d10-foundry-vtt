@@ -829,6 +829,10 @@ table input {
 .c2d10.item-sheet .crisis-bad {
   color: red !important;
 }
+.c2d10.sheet span.red,
+.c2d10.item-sheet span.red {
+  color: red !important;
+}
 .c2d10.sheet select,
 .c2d10.item-sheet select {
   border: none;

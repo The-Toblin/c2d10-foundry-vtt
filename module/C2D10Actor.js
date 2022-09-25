@@ -10,26 +10,21 @@ export default class C2D10Actor extends Actor {
   async prepareDerivedData() {
     const maxStrain = parseInt(this.system.talents.physical.endurance + 3);
     const maxStress = parseInt(this.system.talents.mental.willpower + this.system.talents.social.poise);
-    const updateData = [];
 
-    const health = this.system.health;
-
-    // Update the max values.
-    updateData["system.health.strain.max"] = maxStrain;
-    updateData["system.health.stress.max"] = maxStress;
-    updateData["system.health.crisis.max"] = 10;
-
-    // Create the crisis values.
-    updateData["system.health.crisis.physical"] = parseInt(health.strain.critical);
-    updateData["system.health.crisis.mental"] = parseInt(health.stress.critical);
+    this.system.health.crisis.physical = this.system.health.strain.critical;
+    this.system.health.crisis.mental = this.system.health.stress.critical;
+    this.system.health.crisis.max = 10;
 
     // Combine the two types of damage and inverse them in order to show a reduction bar on tokens.
-    const strainValue = parseInt(health.strain.superficial + health.strain.critical);
-    const stressValue = parseInt(health.stress.superficial + health.stress.critical);
-    updateData["system.health.strain.value"] = parseInt(maxStrain - strainValue);
-    updateData["system.health.stress.value"] = parseInt(maxStress - stressValue);
+    const strainValue = parseInt(this.system.health.strain.superficial + this.system.health.strain.critical);
+    const stressValue = parseInt(this.system.health.stress.superficial + this.system.health.stress.critical);
 
-    await this.update(updateData);
+    this.system.health.strain.value = parseInt(maxStrain - strainValue);
+    this.system.health.stress.value = parseInt(maxStress - stressValue);
+
+    this.system.health.physicalImpairment = strainValue === maxStrain;
+    this.system.health.mentalImpairment = stressValue === maxStress;
+
   }
 
   async modifyResource(n, type, group, res) {

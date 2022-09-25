@@ -393,7 +393,9 @@ export default class C2D10ActorSheet extends ActorSheet {
     const sys = this.getData().system;
     const actorId = this.actor.id;
 
-    await wealthTest(sys.health.crisis.mental, sys.info.wealth, actorId);
+    let pool = this.actor.health.mentalImpairment ? parseInt(sys.info.wealth - 2) : sys.info.wealth;
+    if (pool < 0) pool = 1;
+    await wealthTest(sys.health.crisis.mental, pool, actorId);
   }
 
   /**
@@ -408,9 +410,21 @@ export default class C2D10ActorSheet extends ActorSheet {
     }
     const dataset = event.currentTarget.closest(".c2d10-test").dataset;
     const sys = this.getData().system;
-    const pool = parseInt(sys.talents[dataset.group][dataset.id] * 2);
+    let pool = parseInt(sys.talents[dataset.group][dataset.id] * 2);
     const actorId = this.actor.id;
     const crisis = dataset.group === "physical" ? sys.health.crisis.physical : sys.health.crisis.mental;
+
+    if (dataset.group === "physical" && sys.health.physicalImpairment) {
+      pool -= 2;
+
+      if (pool < 1) pool = 1;
+    }
+
+    if (dataset.group !== "physical" && sys.health.mentalImpairment) {
+      pool -= 2;
+
+      if (pool < 1) pool = 1;
+    }
 
     await talentTest(crisis, dataset.id, pool, actorId);
   }
@@ -427,10 +441,22 @@ export default class C2D10ActorSheet extends ActorSheet {
     }
     const dataset = event.currentTarget.closest(".c2d10-test").dataset;
     const sys = this.getData().system;
-    const pool = sys.skills[dataset.group][dataset.id];
+    let pool = sys.skills[dataset.group][dataset.id];
     const talents = this.getData().talents;
     const actorId = this.actor.id;
     const crisis = dataset.group === "physical" ? sys.health.crisis.physical : sys.health.crisis.mental;
+
+    if (dataset.group === "physical" && sys.health.physicalImpairment) {
+      pool -= 2;
+
+      if (pool < 1) pool = 1;
+    }
+
+    if (dataset.group !== "physical" && sys.health.mentalImpairment) {
+      pool -= 2;
+
+      if (pool < 1) pool = 1;
+    }
 
     await skillTest(crisis, dataset.id, pool, talents, actorId, dataset.group);
   }
@@ -449,10 +475,16 @@ export default class C2D10ActorSheet extends ActorSheet {
     const dataset = event.currentTarget.closest(".c2d10-test").dataset;
     const power = this.actor.items.get(dataset.id);
     const sys = this.actor.system;
-    const pool = power.system.level;
+    let pool = power.system.level;
     const talents = this.getData().talents;
     const actorId = this.actor.id;
     const crisis = dataset.group === "physical" ? sys.health.crisis.physical : sys.health.crisis.mental;
+
+    if (sys.health.mentalImpairment) {
+      pool -= 2;
+
+      if (pool < 1) pool = 1;
+    }
 
     await powerTest(crisis, power.name, pool, talents, actorId);
   }
