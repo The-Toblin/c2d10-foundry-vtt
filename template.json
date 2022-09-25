@@ -111,11 +111,20 @@
     },
     "Item": {
         "types": [
+            "armor",
             "asset",
             "power",
             "variant",
-            "trait"
+            "trait",
+            "weapon"
         ],
+        "armor": {
+            "description": "",
+            "deflection": 0,
+            "penalty": "None",
+            "soak": 0,
+            "value": 0
+        },
         "asset": {
             "assetType": "",
             "description": "",
@@ -143,6 +152,11 @@
         "trait": {
             "level": 0,
             "traitType": "virtue"
+        },
+        "weapon": {
+            "critical": 0,
+            "superficial": 0,
+            "penalty": "None"            
         }
     }
 }
