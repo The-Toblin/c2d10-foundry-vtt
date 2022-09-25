@@ -1,10 +1,10 @@
 {
     "id": "c2d10",
     "title": "Celenia D10 Roleplaying System - 2nd Edition",
-    "version": 0.493,
+    "version": 0.494,
     "compatibility": {
         "minimum": "10",
-        "verified": "10.285",
+        "verified": "10.286",
         "maximum": "10"
     },
     "authors": [
@@ -48,6 +48,6 @@
     "protected": false,
     "gridDistance": "1.5",
     "gridUnits": "m",
-    "primaryTokenAttribute": "stress",
-    "secondaryTokenAttribute": "strain"
+    "primaryTokenAttribute": "strain",
+    "secondaryTokenAttribute": "stress"
 }

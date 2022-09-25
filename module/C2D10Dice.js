@@ -154,87 +154,45 @@ const _diceList = async (diceRolls, crisis = 0) => {
  * @param {number} crisis       A character's current crisis.
  */
 const _renderRoll = async (formula, listContents, evaluation, crisis) => {
-  let outcome = "";
-
-  if (evaluation.pass === "Pass!") {
-    if (evaluation.mess) {
-      outcome = `
-          <h2 class="align-center">
-            Mess up!
-          </h2>`;
-    } else if (evaluation.complication) {
-      outcome = `
-          <h2 class="align-center">
-            Pass with complication!
-          </h2>`;
-    } else {
-      outcome = `
-          <h2 class="align-center">
-            ${evaluation.pass}
-          </h2>`;
-    }
-  } else if (evaluation.pass === "Fail!") {
-    if (evaluation.complication) {
-      outcome = `
-          <h2 class="align-center">
-            Failure with complication!
-          </h2>
-          <h2 class="align-center">
-            Setbacks: ${evaluation.zeroes}
-          </h2>`;
-    } else {
-      outcome = `
-          <h2 class="align-center">
-            ${evaluation.pass}
-          </h2>
-          <h2 class="align-center">
-            Setbacks: ${evaluation.zeroes}
-          </h2>`;
-    }
-  }
-
   const renderedRoll =
-      `<div class="dice-roll">
-        <div class="dice-result">
-          <div class="dice-tooltip expanded align-center">
+  `<div class="dice-roll">
+    <div class="dice-result">
+        <div class="dice-tooltip expanded align-center">
             <section class="tooltip-part">
-              <div class="dice">
-                ${listContents}
-              </div>
+                <div class="dice">
+                    ${listContents}
+                </div>
             </section>
-          </div>
-          <div class="flex-col flex-start c2d10-contentbox">
-            <div class="flex-row flex-between">
-              <div class="stat-box">
-                Hits
-              </div>
-              <div class="value-box">
-                ${evaluation.hits}
-              </div>
-            </div>
-            <div class="flex-row flex-between">
-              <div class="stat-box">
-                Excess
-              </div>
-              <div class="value-box">
-                ${evaluation.hits - evaluation.DC}
-              </div>
-            </div>
-            <div class="flex-row flex-between">
-              <div class="stat-box">
-                Crisis
-              </div>
-              <div class="value-box">
-                ${crisis}
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-      <div class="c2d10-contentbox">
-        ${outcome}
-      </div>
-      </div>`;
+        <div class="flex-col flex-start c2d10-contentbox">
+            <div class="flex-row flex-between">
+                <div class="stat-box">
+                    Hits
+                </div>
+                <div class="value-box">
+                    ${evaluation.hits}
+                </div>
+            </div>
+            <div class="flex-row flex-between">
+                <div class="stat-box">
+                    Excess
+                </div>
+                <div class="value-box">
+                    ${evaluation.hits - evaluation.DC}
+                </div>
+            </div>
+            <div class="flex-row flex-between">
+                <div class="stat-box">
+                    Crisis
+                </div>
+                <div class="value-box">
+                    ${crisis}
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>`;
+
   return renderedRoll;
 };
 
