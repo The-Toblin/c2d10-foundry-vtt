@@ -635,6 +635,10 @@ table input {
   box-shadow: none !important;
   color: inherit !important;
 }
+.c2d10.sheet input.c2d10-sheet-entry,
+.c2d10.item-sheet input.c2d10-sheet-entry {
+  font-family: Quantum, sans-serif;
+}
 .c2d10.sheet .align-right,
 .c2d10.item-sheet .align-right {
   text-align: right;

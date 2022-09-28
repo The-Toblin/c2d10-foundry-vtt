@@ -143,8 +143,12 @@
         },
         "asset": {
             "name": "Name",
+            "ablation": "Ablation",
+            "deflection": "Deflection",
             "description": "Description",
             "assetType": "Type",
+            "critical": "Critical",
+            "superficial": "Superficial",
             "value": "Value",
             "quality": "Quality"
         },
