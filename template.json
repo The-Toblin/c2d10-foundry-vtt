@@ -106,10 +106,22 @@
                 "health",
                 "talents",
                 "skills"
-            ]
+            ],
+            "equipment": {
+                "armor": "",
+                "weapon": ""
+            }
         }
     },
     "Item": {
+        "templates": {
+            "coreAsset": {
+                "description": "This is a description",
+                "value": 0,
+                "quality": 0
+            }
+        },
+
         "types": [
             "armor",
             "asset",
@@ -119,17 +131,18 @@
             "weapon"
         ],
         "armor": {
-            "description": "",
+            "templates": [
+                "coreAsset"
+            ],
+            "ablation": 0,
             "deflection": 0,
-            "penalty": "None",
-            "soak": 0,
-            "value": 0
+            "penalty": "None"
         },
         "asset": {
-            "assetType": "",
-            "description": "",
-            "quality": 0,
-            "value": 0
+            "templates": [
+                "coreAsset"
+            ],
+            "assetType": ""
         },
         "power": {
             "description": "",
@@ -154,6 +167,9 @@
             "traitType": "virtue"
         },
         "weapon": {
+            "templates": [
+                "coreAsset"
+            ],
             "critical": 0,
             "superficial": 0,
             "penalty": "None"            
