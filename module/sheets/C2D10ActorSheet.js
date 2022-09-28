@@ -31,7 +31,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     /**
      * Items
      */
-    sheetData.assets = sheetData.items.filter(p => p.type === "asset");
+    sheetData.assets = sheetData.items.filter(p => p.type === "asset" || p.type === "armor" || p.type === "weapon" );
     sheetData.virtues = sheetData.items.filter(p => p.type === "trait" && p.system.traitType === "virtue");
     sheetData.vices = sheetData.items.filter(p => p.type === "trait" && p.system.traitType === "vice");
     sheetData.powers = sheetData.items.filter(p => p.type === "power");
