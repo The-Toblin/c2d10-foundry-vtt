@@ -25,13 +25,28 @@
              />
         </div>
     </div>
-    <div class="c2d10-subsection">
-        <h3 class="align-center c2d10-capitalize">
-            {{localize "c2d10.sheet.focus"}}
-        </h3>
-        <div class="c2d10-contentbox flex-row flex-center c2d10-dark-background">
-            <div style="position: relative;">
-                <input id="focus" name="focus" type="checkbox" value="off"/>
+    <div class="flex-row flex-between">
+        <div class="c2d10-subsection w-40 h-100">
+            <h3 class="align-center c2d10-capitalize">
+                {{localize "c2d10.sheet.focus"}}
+            </h3>
+            <div class="c2d10-contentbox flex-row flex-center c2d10-dark-background">
+                <div style="position: relative;">
+                    <input id="focus" name="focus" type="checkbox" value="off"/>
+                </div>
+            </div>
+        </div>
+        <div class="c2d10-subsection w-60 h-100">
+            <h3 class="align-center c2d10-capitalize">
+                {{localize "c2d10.sheet.trait"}}
+            </h3>
+            <div class="c2d10-contentbox flex-row flex-center c2d10-dark-background">
+               <input class="align-center"
+                id="trait"
+                type="text"
+                value="{{trait}}"
+                placeholder="{{localize "c2d10.sheet.trait"}}"
+             />
             </div>
         </div>
     </div>

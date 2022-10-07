@@ -412,7 +412,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     const sys = this.getData().system;
     let pool = parseInt(sys.talents[dataset.group][dataset.id] * 2);
     const actorId = this.actor.id;
-    const crisis = dataset.group === "physical" ? sys.health.crisis.physical : sys.health.crisis.mental;
+    const crisis = sys.health.crisis;
 
     if (dataset.group === "physical" && sys.health.physicalImpairment) {
       pool -= 2;
@@ -444,7 +444,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     let pool = sys.skills[dataset.group][dataset.id];
     const talents = this.getData().talents;
     const actorId = this.actor.id;
-    const crisis = dataset.group === "physical" ? sys.health.crisis.physical : sys.health.crisis.mental;
+    const crisis = sys.health.crisis;
 
     if (dataset.group === "physical" && sys.health.physicalImpairment) {
       pool -= 2;
@@ -478,7 +478,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     let pool = power.system.level;
     const talents = this.getData().talents;
     const actorId = this.actor.id;
-    const crisis = dataset.group === "physical" ? sys.health.crisis.physical : sys.health.crisis.mental;
+    const crisis = sys.health.crisis;
 
     if (sys.health.mentalImpairment) {
       pool -= 2;

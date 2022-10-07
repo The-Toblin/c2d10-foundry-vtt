@@ -71,9 +71,9 @@
                         {{localize "c2d10.resources.crisis"}}
                     </h3>
                 <div>
-                    <div class="dot-container flex-row resource-row crisis-number crisis-alert"
+                    <div class="dot-container flex-row resource-row crisis-number crisis-alert {{#if (gt system.health.crisis 3)}} crisis-bad{{/if}}"
                     data-type="health" data-id="crisis" data-pass="true" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
-                        {{system.health.crisis.physical}} {{system.health.crisis.mental}}
+                        {{system.health.crisis}}
                     </div>
                 </div>
             </div>

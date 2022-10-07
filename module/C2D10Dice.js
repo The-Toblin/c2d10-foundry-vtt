@@ -206,12 +206,15 @@ const _doRoll = async rollData => {
   const bonusDice = getDice();
   let pool = rollData.parent ? parseInt(rollData.pool + parentLevel + bonusDice) : rollData.pool + bonusDice;
   if (rollData.focus) pool += 1;
-  if (pool > 10) pool = 10;
+  if (rollData.trait > 0) pool += rollData.trait;
+
   const crisis = rollData.crisis > pool ? pool : rollData.crisis;
   const targetNumber = 7;
   const rollFormula = `${pool}d10cs>=${targetNumber}`;
   const theRoll = new Roll(rollFormula);
   const DC = rollData.DC;
+
+  console.log("RollData", rollData);
 
 
   // Execute the roll
@@ -317,9 +320,10 @@ export async function skillTest(crisis, item, pool, talents, actorId, group) {
 
   // Populate the needed rolldata
   rollData.talentsList = c2d10.allTalents;
-  rollData.pool = pool;
+  rollData.pool = parseInt(pool);
   rollData.item = item;
-  rollData.crisis = crisis;
+  rollData.crisis = parseInt(crisis);
+  rollData.trait = 0;
   rollData.id = actorId;
   rollData.DC = game.settings.get("c2d10", "DC");
   rollData.talents = talents;
@@ -340,10 +344,11 @@ export async function skillTest(crisis, item, pool, talents, actorId, group) {
         roll: {
           label: "Roll!",
           callback: html => {
-            rollData.pool = html.find("input#pool").val() <= 5 ? parseInt(html.find("input#pool").val()) : 5;
-            rollData.crisis = html.find("input#crisis").val();
+            rollData.pool = parseInt(html.find("input#pool").val() <= 5 ? parseInt(html.find("input#pool").val()) : 5);
+            rollData.crisis = parseInt(html.find("input#crisis").val());
             rollData.parent = html.find("select#parent").val();
             rollData.focus = html.find("input#focus")[0].checked;
+            rollData.trait = parseInt(html.find("input#trait").val());
             // Call the roll function
             _doRoll(rollData);}
         }
@@ -370,6 +375,7 @@ export async function powerTest(crisis, item, pool, talents, actorId) {
   rollData.pool = pool;
   rollData.item = item;
   rollData.crisis = crisis;
+  rollData.trait = 0;
   rollData.id = actorId;
   rollData.DC = game.settings.get("c2d10", "DC");
   rollData.talents = talents;
@@ -389,10 +395,11 @@ export async function powerTest(crisis, item, pool, talents, actorId) {
         roll: {
           label: "Roll!",
           callback: html => {
-            rollData.pool = html.find("input#pool").val() <= 5 ? parseInt(html.find("input#pool").val()) : 5;
-            rollData.crisis = html.find("input#crisis").val();
+            rollData.pool = parseInt(html.find("input#pool").val() <= 5 ? parseInt(html.find("input#pool").val()) : 5);
+            rollData.crisis = parseInt(html.find("input#crisis").val());
             rollData.parent = html.find("select#parent").val();
             rollData.focus = html.find("input#focus")[0].checked;
+            rollData.trait = parseInt(html.find("input#trait").val());
             // Call the roll function
             _doRoll(rollData);}
         }

@@ -15,9 +15,8 @@ export default class C2D10Actor extends Actor {
     this.system.health.strain.max = maxStrain;
     this.system.health.stress.max = maxStress;
 
-    this.system.health.crisis.physical = this.system.health.strain.critical;
-    this.system.health.crisis.mental = this.system.health.stress.critical;
-    this.system.health.crisis.max = 10;
+    const crisisValue = parseInt(this.system.health.strain.critical + this.system.health.stress.critical);
+    this.system.health.crisis = crisisValue <= 5 ? crisisValue : 5;
 
     // Combine the two types of damage and inverse them in order to show a reduction bar on tokens.
     const strainValue = parseInt(this.system.health.strain.superficial + this.system.health.strain.critical);

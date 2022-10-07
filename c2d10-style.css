@@ -1074,8 +1074,8 @@ table input {
   border: none !important;
   box-shadow: none !important;
   color: inherit !important;
-  height: 35px !important;
   font-size: 1.25rem;
+  font-family: Quantum, sans-serif;
 }
 .c2d10-dialog select {
   border: none;
