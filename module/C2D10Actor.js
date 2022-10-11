@@ -4,7 +4,7 @@ export default class C2D10Actor extends Actor {
   }
 
   prepareBaseData() {
-
+    super.prepareBaseData();
   }
 
   async prepareDerivedData() {
@@ -28,6 +28,41 @@ export default class C2D10Actor extends Actor {
     this.system.health.physicalImpairment = strainValue === maxStrain;
     this.system.health.mentalImpairment = stressValue === maxStress;
 
+  }
+
+  /**
+   * Returns the character's current strain values.
+   * @returns {Promise/object} Returns an object, holding three keys: value, crit, max.
+   */
+  async getStrain() {
+
+    return {
+      value: system.health.strain.value,
+      crit: system.health.strain.critical,
+      max: system.health.strain.max
+    };
+  }
+
+  /**
+   * Returns the character's current stress values.
+   * @returns {Promise/object} Returns an object, holding three keys: value, crit, max.
+   */
+  async getStress() {
+
+    return {
+      value: system.health.stress.value,
+      crit: system.health.stress.critical,
+      max: system.health.stress.max
+    };
+  }
+
+  /**
+   * Returns the character's current crisis values.
+   * @returns {number} The character's current crisis, based on strain and stress.
+   */
+  async getCrisis() {
+
+    return system.health.crisis;
   }
 
   async modifyResource(n, type, group, res) {

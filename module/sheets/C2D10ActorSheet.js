@@ -200,6 +200,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     html.find(".add-focus").click(this._addFocus.bind(this));
     html.find(".remove-focus").click(this._removeFocus.bind(this));
     html.find(".focus-edit").on("click contextmenu", this._editFocus.bind(this));
+    html.find(".c2d10-health-test").click(this._doHealthTest.bind(this));
     html.find(".c2d10-wealth-test").click(this._doWealthTest.bind(this));
     html.find(".c2d10-talent-test").click(this._doTalentTest.bind(this));
     html.find(".c2d10-skill-test").click(this._doSkillTest.bind(this));
@@ -378,6 +379,29 @@ export default class C2D10ActorSheet extends ActorSheet {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".asset-item").dataset.id;
     await this.actor.deleteEmbeddedDocuments("Item", [itemId]);
+  }
+
+  /**
+   * Perform a health test.
+   * @param {html} event html click event data, including dataset.
+   */
+  async _doHealthTest(event) {
+    event.preventDefault();
+    if (event.shiftKey) {
+      this._postDescription(event);
+      return;
+    }
+    const sys = this.getData().system;
+    const actorId = this.actor.id;
+
+    const dataset = event.currentTarget.closest(".c2d10-test").dataset;
+    const crisis = sys.health.crisis;
+
+    console.log(dataset);
+
+    let pool = this.actor.health.mentalImpairment ? parseInt(sys.info.wealth - 2) : sys.info.wealth;
+    if (pool < 0) pool = 1;
+    // Await healthTest(crisis, pool, stress, actorId);
   }
 
   /**
