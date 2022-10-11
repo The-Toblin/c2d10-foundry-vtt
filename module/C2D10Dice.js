@@ -214,9 +214,6 @@ const _doRoll = async rollData => {
   const theRoll = new Roll(rollFormula);
   const DC = rollData.DC;
 
-  console.log("RollData", rollData);
-
-
   // Execute the roll
   await theRoll.evaluate({async: true});
 
@@ -407,4 +404,24 @@ export async function powerTest(crisis, item, pool, talents, actorId) {
     },
     dialogOptions
   ).render(true);
+}
+
+/**
+ * Perform a Health test. Takes Crisis into account.
+ * @param {number} crisis  The character's current value in Crisis.
+ * @param {number} pool    The health ranks to produce a pool of dice.
+ * @param {boolean} stress The health (strain or stress) for rolling. True indicates stress, false equals strain.
+ * @param {string} actorId The actor's Id.
+ */
+export async function healthTest(crisis, pool, stress, actorId) {
+  const rollData = {};
+
+  rollData.crisis = crisis;
+  rollData.item = stress ? "stress" : "strain";
+  rollData.pool = pool;
+  rollData.id = actorId;
+  rollData.DC = rollData.DC = game.settings.get("c2d10", "DC");
+
+  _doRoll(rollData);
+
 }

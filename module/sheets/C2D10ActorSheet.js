@@ -1,4 +1,4 @@
-import {wealthTest, talentTest, skillTest, powerTest} from "../C2D10Dice.js";
+import {healthTest, wealthTest, talentTest, skillTest, powerTest} from "../C2D10Dice.js";
 
 /**
  * Base Actor sheet. This holds all functions available to actor sheets and can be extended by
@@ -200,6 +200,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     html.find(".add-focus").click(this._addFocus.bind(this));
     html.find(".remove-focus").click(this._removeFocus.bind(this));
     html.find(".focus-edit").on("click contextmenu", this._editFocus.bind(this));
+    html.find(".c2d10-health-test").click(this._doHealthTest.bind(this));
     html.find(".c2d10-wealth-test").click(this._doWealthTest.bind(this));
     html.find(".c2d10-talent-test").click(this._doTalentTest.bind(this));
     html.find(".c2d10-skill-test").click(this._doSkillTest.bind(this));
@@ -378,6 +379,28 @@ export default class C2D10ActorSheet extends ActorSheet {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".asset-item").dataset.id;
     await this.actor.deleteEmbeddedDocuments("Item", [itemId]);
+  }
+
+  /**
+   * Perform a health test.
+   * @param {html} event html click event data, including dataset.
+   */
+  async _doHealthTest(event) {
+    event.preventDefault();
+    if (event.shiftKey) {
+      this._postDescription(event);
+      return;
+    }
+
+    const actorId = this.actor.id;
+    const dataset = event.currentTarget.closest(".c2d10-test").dataset;
+    const crisis = await this.actor.getCrisis();
+    const stress = dataset.id === "stress";
+
+    let poolObject = stress ? await this.actor.getStress() : await this.actor.getStrain();
+    const pool = poolObject.value < 0 ? 1 : poolObject.value;
+
+    await healthTest(crisis, pool, stress, actorId);
   }
 
   /**
