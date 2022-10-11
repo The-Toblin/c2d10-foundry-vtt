@@ -420,7 +420,7 @@ export async function healthTest(crisis, pool, stress, actorId) {
   const rollData = {};
 
   rollData.crisis = crisis;
-  rollData.item = stress;
+  rollData.item = stress ? "stress" : "strain";
   rollData.pool = pool;
   rollData.id = actorId;
   rollData.DC = rollData.DC = game.settings.get("c2d10", "DC");

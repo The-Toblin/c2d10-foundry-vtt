@@ -1,4 +1,4 @@
-import {wealthTest, talentTest, skillTest, powerTest} from "../C2D10Dice.js";
+import {healthTest, wealthTest, talentTest, skillTest, powerTest} from "../C2D10Dice.js";
 
 /**
  * Base Actor sheet. This holds all functions available to actor sheets and can be extended by
@@ -397,11 +397,10 @@ export default class C2D10ActorSheet extends ActorSheet {
     const crisis = await this.actor.getCrisis();
     const stress = dataset.id === "stress";
 
-    let pool = stress ? await this.actor.getStress() : await this.actor.getStrain();
-    if (pool < 0) pool = 1;
+    let poolObject = stress ? await this.actor.getStress() : await this.actor.getStrain();
+    const pool = poolObject.value < 0 ? 1 : poolObject.value;
 
-    console.log(crisis, pool.value, stress, actorId);
-    // Await healthTest(crisis, pool, stress, actorId);
+    await healthTest(crisis, pool.value, stress, actorId);
   }
 
   /**
