@@ -35,12 +35,13 @@ export default class C2D10Actor extends Actor {
    * @returns {Promise/object} Returns an object, holding three keys: value, crit, max.
    */
   async getStrain() {
+    const strain = this.system.health.strain;
 
     return {
-      value: system.health.strain.value,
-      superficial: system.health.strain.superficial,
-      crit: system.health.strain.critical,
-      max: system.health.strain.max
+      value: strain.value,
+      superficial: strain.superficial,
+      crit: strain.critical,
+      max: strain.max
     };
   }
 
@@ -50,11 +51,13 @@ export default class C2D10Actor extends Actor {
    */
   async getStress() {
 
+    const stress = this.system.health.stress;
+
     return {
-      value: system.health.stress.value,
-      superficial: system.health.stress.superficial,
-      crit: system.health.stress.critical,
-      max: system.health.stress.max
+      value: stress.value,
+      superficial: stress.superficial,
+      crit: stress.critical,
+      max: stress.max
     };
   }
 
@@ -64,7 +67,7 @@ export default class C2D10Actor extends Actor {
    */
   async getCrisis() {
 
-    return system.health.crisis;
+    return this.system.health.crisis;
   }
 
   async modifyResource(n, type, group, res) {
