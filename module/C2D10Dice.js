@@ -214,9 +214,6 @@ const _doRoll = async rollData => {
   const theRoll = new Roll(rollFormula);
   const DC = rollData.DC;
 
-  console.log("RollData", rollData);
-
-
   // Execute the roll
   await theRoll.evaluate({async: true});
 
