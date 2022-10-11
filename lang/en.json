@@ -211,8 +211,8 @@
             "survival": "<p>When caught in a situation without water, food or shelter, it’s a good thing you know how to find what you need, yes? Survival, no matter the location, is a matter of knowledge of where to find resources. It can be used to find food, water, shelter for the night or other matters of survival in any kind of terrain or settlement.</p>",
             "technology": "<p>Technology varies between locations, but most of it works in a similar way. If you know one gadget, you can probably figure out how to use another. Technology covers everything from doing less legal activities on a terminal to repairing cybertech. Engineering, programming, cybersecurity is all covered under this skill.</p>",
             "crisis": "<p>Crisis is a measure of how debilitated a character is both mentally and physically. Causes your pools to accumulate Crisis Dice.</p>",
-            "strain": "<p>In-scene measure of physical strain. Provides +1DC for an Endurance test at the end of the scene. Fail to pass the test and you suffer 1 point of Crisis.</p><p>Click to perform the strain test.</p>",
-            "stress": "<p>In-scene measure of mental strain. Provides +1DC for a Willpower test at the end of the scene. Fail to pass the test and you suffer 1 point of Crisis.</p><p>Click to perform the stress test.</p>",
+            "strain": "<p>In-scene measure of physical strain. Yellow denotes superficial damage, red denotes critical damage. Critical damage contributes to Crisis.</p><p>Click to perform the strain test.</p>",
+            "stress": "<p>In-scene measure of mental stress. Yellow denotes superficial damage, red denotes critical damage. Critical damage contributes to Crisis.</p><p>Click to perform the stress test.</p>",
             "wealth": "<p>Your character's wealth class. Defaults to 2 ranks.</p><p>Click to perform a wealth test.</p>"
         }
     },
