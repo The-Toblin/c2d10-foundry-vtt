@@ -397,10 +397,10 @@ export default class C2D10ActorSheet extends ActorSheet {
     const crisis = await this.actor.getCrisis();
     const stress = dataset.id === "stress";
 
-    let pool = stress ? await this.actor.getStress().value : await this.actor.getStrain().value;
+    let pool = stress ? await this.actor.getStress() : await this.actor.getStrain();
     if (pool < 0) pool = 1;
 
-    console.log(crisis, pool, stress, actorId);
+    console.log(crisis, pool.value, stress, actorId);
     // Await healthTest(crisis, pool, stress, actorId);
   }
 
