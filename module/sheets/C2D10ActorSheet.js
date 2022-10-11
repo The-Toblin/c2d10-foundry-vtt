@@ -391,16 +391,16 @@ export default class C2D10ActorSheet extends ActorSheet {
       this._postDescription(event);
       return;
     }
-    const sys = this.getData().system;
+
     const actorId = this.actor.id;
-
     const dataset = event.currentTarget.closest(".c2d10-test").dataset;
-    const crisis = sys.health.crisis;
+    const crisis = this.actor.getCrisis;
+    const stress = dataset.id === "stress";
 
-    console.log(dataset);
-
-    let pool = this.actor.health.mentalImpairment ? parseInt(sys.info.wealth - 2) : sys.info.wealth;
+    let pool = stress ? this.actor.getStress.value : this.actor.getStrain.value;
     if (pool < 0) pool = 1;
+
+    console.log(crisis, pool, stress, actorId);
     // Await healthTest(crisis, pool, stress, actorId);
   }
 

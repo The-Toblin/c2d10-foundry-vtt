@@ -38,6 +38,7 @@ export default class C2D10Actor extends Actor {
 
     return {
       value: system.health.strain.value,
+      superficial: system.health.strain.superficial,
       crit: system.health.strain.critical,
       max: system.health.strain.max
     };
@@ -51,6 +52,7 @@ export default class C2D10Actor extends Actor {
 
     return {
       value: system.health.stress.value,
+      superficial: system.health.stress.superficial,
       crit: system.health.stress.critical,
       max: system.health.stress.max
     };
