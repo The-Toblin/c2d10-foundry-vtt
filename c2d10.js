@@ -174,16 +174,16 @@ Hooks.once("ready", () => {
 
 // Change the GM's tag to "Keeper".
 Hooks.on("renderPlayerList", html => {
-    let players = html.element.find(".player-name");
+  const players = html.element.find(".player-name");
 
   for (let player of players) {
-        const playerCharacterName = player.innerText;
-        const playerName = playerCharacterName.substring(0, playerCharacterName.indexOf("[")).trim();
-        const userId = game.users.find((x) => x.name === playerName)?.id;
-        const user = game.users.get(userId);
-            if (user.isGM) {
-          player.innerText = playerName+ " [Keeper]";
-      }
+    const playerCharacterName = player.innerText;
+    const playerName = playerCharacterName.substring(0, playerCharacterName.indexOf("[")).trim();
+    const userId = game.users.find(x => x.name === playerName)?.id;
+    const user = game.users.get(userId);
+    if (user.isGM) {
+      player.innerText = `${playerName} [Keeper]`;
+    }
   }
 });
 
