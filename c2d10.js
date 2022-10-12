@@ -1,4 +1,5 @@
 import { c2d10 } from "./module/config.js";
+import { CeleniaDie, CrisisDie } from "./module/dice.js";
 import C2D10Item from "./module/C2D10Item.js";
 import C2D10ItemSheet from "./module/sheets/C2D10ItemSheet.js";
 import C2D10Actor from "./module/C2D10Actor.js";
@@ -194,6 +195,9 @@ Hooks.on("renderPause", (_app, html, options) => {
 Hooks.once("init", function() {
   console.log("==== C2D10 | Initialising CD10 RPG System 2nd Edition ====");
 
+  CONFIG.Dice.terms.r = CeleniaDie;
+  CONFIG.Dice.terms.c = CrisisDie;
+
   /* Setup Config */
   CONFIG.c2d10 = c2d10;
   CONFIG.Item.documentClass = C2D10Item;
@@ -317,6 +321,81 @@ Hooks.once("init", function() {
       }
     }
     return result;
+  });
+});
+
+// Add DiceSoNice presets
+Hooks.once("diceSoNiceReady", dice3d => {
+  dice3d.addSystem({ id: "c2d10", name: "Celenia 2" }, true);
+
+  dice3d.addColorset({
+    name: "main",
+    description: "C2D10 Main Dice",
+    category: "C2D10",
+    foreground: "#fff",
+    background: "#3d0030",
+    texture: "none",
+    edge: "#3d0030",
+    material: "plastic",
+    font: "Arial Black",
+    fontScale: {
+      d6: 1.1,
+      df: 2.5
+    }
+  }, "default");
+
+  dice3d.addColorset({
+    name: "crisis",
+    description: "C2D10 Crisis Dice",
+    category: "C2D10",
+    foreground: "#000",
+    background: "#860000",
+    texture: "none",
+    edge: "#860000",
+    material: "plastic",
+    font: "Arial Black",
+    fontScale: {
+      d6: 1.1,
+      df: 2.5
+    }
+  }, "default");
+
+  dice3d.addDicePreset({
+    type: "dr",
+    labels: [
+      "systems/c2d10/assets/roll-miss.webp",
+      "systems/c2d10/assets/roll-miss.webp",
+      "systems/c2d10/assets/roll-miss.webp",
+      "systems/c2d10/assets/roll-miss.webp",
+      "systems/c2d10/assets/roll-miss.webp",
+      "systems/c2d10/assets/roll-miss.webp",
+      "systems/c2d10/assets/roll-hit.webp",
+      "systems/c2d10/assets/roll-hit.webp",
+      "systems/c2d10/assets/roll-crit.webp",
+      "systems/c2d10/assets/roll-fumble.webp"
+    ],
+    colorset: "main",
+    fontScale: 0.5,
+    system: "c2d10"
+  });
+
+  dice3d.addDicePreset({
+    type: "dc",
+    labels: [
+      "systems/c2d10/assets/roll-miss.webp",
+      "systems/c2d10/assets/roll-miss.webp",
+      "systems/c2d10/assets/roll-miss.webp",
+      "systems/c2d10/assets/roll-miss.webp",
+      "systems/c2d10/assets/roll-miss.webp",
+      "systems/c2d10/assets/roll-miss.webp",
+      "systems/c2d10/assets/crisis-hit.webp",
+      "systems/c2d10/assets/crisis-hit.webp",
+      "systems/c2d10/assets/crisis-crit.webp",
+      "systems/c2d10/assets/crisis-fumble.webp"
+    ],
+    colorset: "crisis",
+    fontScale: 0.5,
+    system: "c2d10"
   });
 });
 
