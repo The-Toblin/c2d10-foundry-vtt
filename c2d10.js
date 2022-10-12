@@ -172,6 +172,21 @@ Hooks.once("ready", () => {
   });
 });
 
+// Change the GM's tag to "Keeper".
+Hooks.on("renderPlayerList", html => {
+  const players = html.element.find(".player-name");
+
+  for (let player of players) {
+    const playerCharacterName = player.innerText;
+    const playerName = playerCharacterName.substring(0, playerCharacterName.indexOf("[")).trim();
+    const userId = game.users.find(x => x.name === playerName)?.id;
+    const user = game.users.get(userId);
+    if (user.isGM) {
+      player.innerText = `${playerName} [Keeper]`;
+    }
+  }
+});
+
 Hooks.on("renderPause", (_app, html, options) => {
   html.find('img[src="icons/svg/clockwork.svg"]').attr("src", "systems/c2d10/assets/cd10-logo-circle.webp");
 });
