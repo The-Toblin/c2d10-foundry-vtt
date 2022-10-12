@@ -1,5 +1,6 @@
 import {c2d10} from "./config.js";
 import { getDice } from "./C2D10Utility.js";
+import { CeleniaDie, CrisisDie } from "./dice.js";
 /**
  * Core dice roller file for handling all types of test.
  * Contains helper functions for resolving things necessary for tests.
@@ -12,35 +13,37 @@ import { getDice } from "./C2D10Utility.js";
 
 /**
  *  Counts hits, zeroes, determines messups and complications.
- * @param {object}    rolledResults  an array holding the rolled results from the dice roll.
+ * @param {object}    mainDice    An object holding all the
+ * @param {object}    crisisDice
  * @param {number}    DC             a number, showing the DC for the test.
- * @param {number}    crisis         a character's current crisis for the test.
  * @returns {object}  evaluation results in an object.
  */
-const _evaluateSuccesses = async (rolledResults, DC, crisis = 0) => {
+const _evaluateSuccesses = async (mainDice, crisisDice, DC) => {
   let numOfHits = 0;
   let complication = false;
   let mess = false;
   let numOfZeroes = 0;
 
-  for (let i = 0; i < rolledResults.length - crisis; i++) {
-    if (rolledResults[i].result === 9) {
+  for (let i = 0; i < mainDice.results.length; i++) {
+    if (mainDice.results[i].result === 9) {
       numOfHits += 2;
-    } else if (rolledResults[i].result > 6) {
+    } else if (mainDice.results[i].result > 6) {
       numOfHits += 1;
-    } else if (rolledResults[i].result === 0) {
+    } else if (mainDice.results[i].result === 0) {
       numOfZeroes += 1;
     }
   }
 
-  for (let i = rolledResults.length - crisis; i < rolledResults.length; i++) {
-    if (rolledResults[i].result === 9) {
-      numOfHits += 2;
-      mess = true;
-    } else if (rolledResults[i].result > 6) {
-      numOfHits += 1;
-    } else if (rolledResults[i].result === 0) {
-      complication = true;
+  if (typeof crisisDice !== "undefined") {
+    for (let i = 0; i < crisisDice.results.length; i++) {
+      if (crisisDice.results[i].result === 9) {
+        numOfHits += 2;
+        mess = true;
+      } else if (crisisDice.results[i].result > 6) {
+        numOfHits += 1;
+      } else if (crisisDice.results[i].result === 0) {
+        complication = true;
+      }
     }
   }
 
@@ -59,12 +62,11 @@ const _evaluateSuccesses = async (rolledResults, DC, crisis = 0) => {
 
 /**
  * Function to build the rendered list of rolls, marking dice accordingly.
- * @param {Array} diceRolls  List of the rolled results.
- * @param {number} crisis     The character's current crisis.
+ * @param {object}   mainDice     Object holding the rolled main dice.
+ * @param {object}   crisisDice   Object holding the rolled crisis dice.
  * @returns {object}
  */
-const _diceList = async (diceRolls, crisis = 0) => {
-  const crisisDice = parseInt(crisis); // Make sure crisis is interpreted as a number, not string.
+const _diceList = async (mainDice, crisisDice) => {
   const results = {
     0: '<li class="roll die d10 failure regular">',
     7: '<li class="roll die d10 success regular">',
@@ -82,12 +84,14 @@ const _diceList = async (diceRolls, crisis = 0) => {
   let rolledList = "";
 
 
-  for (let i = 0; i < diceRolls.length - crisisDice; i++) {
-    rolledList += `${results[diceRolls[i].result] || '<li class="roll die d10 blank regular">'} ${diceRolls[i].result} </li>`;
+  for (let i = 0; i < mainDice.results.length; i++) {
+    rolledList += `${results[mainDice.results[i].result] || '<li class="roll die d10 blank regular">'} ${mainDice.results[i].result} </li>`;
   }
 
-  for (let i = diceRolls.length - crisisDice; i < diceRolls.length; i++) {
-    rolledList += `${crisisResults[diceRolls[i].result] || '<li class="roll die d10 blank crisis">'} ${diceRolls[i].result} </li>`;
+  if (typeof crisisDice !== "undefined") {
+    for (let i = 0; i < crisisDice.results.length; i++) {
+      rolledList += `${crisisResults[crisisDice.results[i].result] || '<li class="roll die d10 blank crisis">'} ${crisisDice.results[i].result} </li>`;
+    }
   }
 
   /* Sort the list of rolls according to results, starting from zeroes and up.
@@ -110,23 +114,22 @@ const _diceList = async (diceRolls, crisis = 0) => {
 
   let sortedList = "";
 
-  if (crisisDice !== 10) {
-    sortedList +=`
+  sortedList +=`
   <div class="c2d10-contentbox force-2px-padding">
     <h3>${game.i18n.localize("c2d10.chat.pool")}</h3>
     <ol class="dice-rolls centered-list">`;
 
-    for (let i = 0; i < reArray.length; i++) {
-      const content = reArray[i];
-      if (content.includes("regular")) sortedList += content;
-    }
-
-    sortedList +=`
-      </ol>
-    </div>`;
+  for (let i = 0; i < reArray.length; i++) {
+    const content = reArray[i];
+    if (content.includes("regular")) sortedList += content;
   }
 
-  if (crisisDice > 0) {
+  sortedList +=`
+      </ol>
+    </div>`;
+
+  if (typeof crisisDice !== "undefined") {
+
     sortedList += `     
     <div class="c2d10-contentbox force-2px-padding">
       <h3>${game.i18n.localize("c2d10.chat.crisis")}</h3>
@@ -141,7 +144,6 @@ const _diceList = async (diceRolls, crisis = 0) => {
       </ol>
     </div>`;
   }
-
 
   return sortedList;
 };
@@ -201,16 +203,21 @@ const _renderRoll = async (formula, listContents, evaluation, crisis) => {
  * @param {object} rollData The rolldata delivered from the base function.
  */
 const _doRoll = async rollData => {
+  let crisis = false;
   const messageTemplate = "systems/c2d10/templates/partials/chat-templates/roll.hbs";
-  const parentLevel = rollData.parent ? rollData.talents[rollData.parent] : 0;
   const bonusDice = getDice();
-  let pool = rollData.parent ? parseInt(rollData.pool + parentLevel + bonusDice) : rollData.pool + bonusDice;
-  if (rollData.focus) pool += 1;
-  if (rollData.trait > 0) pool += rollData.trait;
+  const parentLevel = rollData.parent ? rollData.talents[rollData.parent] : 0;
+  let fullPool = rollData.parent ? parseInt(rollData.pool + parentLevel + bonusDice) : rollData.pool + bonusDice;
+  crisis = rollData.crisis >= fullPool ? fullPool : rollData.crisis;
+  if (rollData.focus) fullPool += 1;
+  if (rollData.trait > 0) fullPool += rollData.trait;
 
-  const crisis = rollData.crisis > pool ? pool : rollData.crisis;
+  const pool = fullPool - crisis > 0 ? parseInt(fullPool - crisis) : crisis;
+
   const targetNumber = 7;
-  const rollFormula = `${pool}d10cs>=${targetNumber}`;
+  let rollFormula = `${pool}drcs>=${targetNumber}`;
+
+  if (crisis > 0) rollFormula += ` + ${crisis}dccs>=${targetNumber}`;
   const theRoll = new Roll(rollFormula);
   const DC = rollData.DC;
 
@@ -218,15 +225,24 @@ const _doRoll = async rollData => {
   await theRoll.evaluate({async: true});
 
   // Turn 1-10 into 0-9.
-  for (let i = 0; i < pool; i++) {
-    theRoll.terms[0].results[i].result -= 1;
+  const mainDice = theRoll.dice.filter(function(term) {return term instanceof CeleniaDie;})[0];
+  const crisisDice = theRoll.dice.filter(function(term) {return term instanceof CrisisDie;})[0];
+
+  for (let i = 0; i < mainDice.results.length; i++) {
+    mainDice.results[i].result -= 1;
+  }
+
+  if (crisis) {
+    for (let i = 0; i < crisisDice.results.length; i++) {
+      crisisDice.results[i].result -= 1;
+    }
   }
 
   // Evaluate the roll
-  const evaluation = await _evaluateSuccesses(theRoll.terms[0].results, DC, crisis);
+  const evaluation = await _evaluateSuccesses(mainDice, crisisDice, DC);
 
   // Create a rendered HTML object holding the dice rolls to present in chat.
-  const renderedList = await _diceList(theRoll.terms[0].results, crisis);
+  const renderedList = await _diceList(mainDice, crisisDice);
 
   // Render the actual chat message
   const renderedRoll = await _renderRoll(rollFormula, renderedList, evaluation, crisis);
