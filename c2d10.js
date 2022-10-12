@@ -170,6 +170,17 @@ Hooks.once("ready", () => {
     const isPlayer = !game.users.current.isGM;
     C2D10Utility.buyDice(isIncrease, isPlayer);
   });
+
+  let players = html.find(".player-name");
+
+  for (let player of players) {
+    let playerCharacterName = player.innerText;
+    const playerName = playerCharacterName
+      .substring(0, playerCharacterName.indexOf("["))
+      .trim();
+
+    console.log(playerName);
+  }
 });
 
 Hooks.on("renderPause", (_app, html, options) => {
