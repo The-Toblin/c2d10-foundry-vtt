@@ -23,8 +23,8 @@ const _evaluateSuccesses = async (mainDice = false, crisisDice = false, DC = 0) 
   const regTotal = mainDice ? mainDice.total : 0;
   const crisisTotal = crisisDice ? crisisDice.total : 0;
   const numOfHits = parseInt(regTotal + crisisTotal);
-  const complication = crisisDice.values.some(x => x === 0);
-  const mess = crisisDice.values.some(x => x === 9);
+  const complication = crisisDice ? crisisDice.values.some(x => x === 0) : false;
+  const mess = crisisDice ? crisisDice.values.some(x => x === 9) : false;
   const numOfZeroes = mainDice ? mainDice.values.filter(x => x === 0).length : 0;
   const pass = numOfHits >= DC ? "Pass!" : "Fail!";
 
