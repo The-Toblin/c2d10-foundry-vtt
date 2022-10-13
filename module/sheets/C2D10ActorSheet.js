@@ -1,4 +1,4 @@
-import {healthTest, wealthTest, talentTest, skillTest, powerTest} from "../C2D10Dice.js";
+import {healthTest, wealthTest, talentTest, skillTest, powerTest} from "../dice/C2D10Roll.js";
 
 /**
  * Base Actor sheet. This holds all functions available to actor sheets and can be extended by

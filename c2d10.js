@@ -1,5 +1,6 @@
 import { c2d10 } from "./module/config.js";
-import { CeleniaDie, CrisisDie } from "./module/dice.js";
+import { RegularDie} from "./module/dice/C2D10RegularDie.js";
+import { CrisisDie } from "./module/dice/C2D10CrisisDie.js";
 import C2D10Item from "./module/C2D10Item.js";
 import C2D10ItemSheet from "./module/sheets/C2D10ItemSheet.js";
 import C2D10Actor from "./module/C2D10Actor.js";
@@ -195,7 +196,7 @@ Hooks.on("renderPause", (_app, html, options) => {
 Hooks.once("init", function() {
   console.log("==== C2D10 | Initialising CD10 RPG System 2nd Edition ====");
 
-  CONFIG.Dice.terms.r = CeleniaDie;
+  CONFIG.Dice.terms.r = RegularDie;
   CONFIG.Dice.terms.c = CrisisDie;
 
   /* Setup Config */
@@ -330,7 +331,7 @@ Hooks.once("diceSoNiceReady", dice3d => {
 
   dice3d.addColorset({
     name: "main",
-    description: "C2D10 Main Dice",
+    description: "C2D10 Regular Dice",
     category: "C2D10",
     foreground: "#fff",
     background: "#3d0030",
@@ -374,10 +375,14 @@ Hooks.once("diceSoNiceReady", dice3d => {
       "systems/c2d10/assets/roll-crit.webp",
       "systems/c2d10/assets/roll-fumble.webp"
     ],
+    values: {
+      min: 1,
+      max: 10
+    },
     colorset: "main",
     fontScale: 0.5,
     system: "c2d10"
-  });
+  }, "d10");
 
   dice3d.addDicePreset({
     type: "dc",
@@ -393,9 +398,13 @@ Hooks.once("diceSoNiceReady", dice3d => {
       "systems/c2d10/assets/crisis-crit.webp",
       "systems/c2d10/assets/crisis-fumble.webp"
     ],
+    values: {
+      min: 1,
+      max: 10
+    },
     colorset: "crisis",
     fontScale: 0.5,
     system: "c2d10"
-  });
+  }, "d10");
 });
 
