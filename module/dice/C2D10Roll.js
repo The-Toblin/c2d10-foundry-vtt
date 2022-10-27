@@ -73,7 +73,7 @@ const _diceList = async (mainDice = false, crisisDice = false) => {
     });
 
     for (const value of sortMain) {
-      rolledList.push(`${results[value] || '<li class="roll die d10 blank regular">0'}</li>`);
+      rolledList.push(`${results[value] || `<li class="roll die d10 blank regular">${value}`}</li>`);
     }
   }
 
@@ -85,7 +85,7 @@ const _diceList = async (mainDice = false, crisisDice = false) => {
     });
 
     for (const value of sortCrisis) {
-      rolledList.push(`${crisisResults[value] || '<li class="roll die d10 blank crisis">0'}</li>`);
+      rolledList.push(`${crisisResults[value] || `<li class="roll die d10 blank crisis">${value}`}</li>`);
     }
   }
 
