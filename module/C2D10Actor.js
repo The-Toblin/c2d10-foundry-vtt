@@ -30,46 +30,6 @@ export default class C2D10Actor extends Actor {
 
   }
 
-  /**
-   * Returns the character's current strain values.
-   * @returns {Promise/object} Returns an object, holding three keys: value, crit, max.
-   */
-  async getStrain() {
-    const strain = this.system.health.strain;
-
-    return {
-      value: strain.value,
-      superficial: strain.superficial,
-      crit: strain.critical,
-      max: strain.max
-    };
-  }
-
-  /**
-   * Returns the character's current stress values.
-   * @returns {Promise/object} Returns an object, holding three keys: value, crit, max.
-   */
-  async getStress() {
-
-    const stress = this.system.health.stress;
-
-    return {
-      value: stress.value,
-      superficial: stress.superficial,
-      crit: stress.critical,
-      max: stress.max
-    };
-  }
-
-  /**
-   * Returns the character's current crisis values.
-   * @returns {number} The character's current crisis, based on strain and stress.
-   */
-  async getCrisis() {
-
-    return this.system.health.crisis;
-  }
-
   async modifyResource(n, type, group, res) {
     const updateData = {};
     const system = this.system;

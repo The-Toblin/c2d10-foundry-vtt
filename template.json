@@ -1,7 +1,8 @@
 {
     "Actor": {
         "types": [
-            "actor"
+            "actor",
+            "npc"
         ],
         "templates": {
             "info": {
@@ -106,6 +107,21 @@
                 "health",
                 "talents",
                 "skills"
+            ],
+            "equipment": {
+                "armor": "",
+                "weapon": ""
+            }
+        },
+        "npc": {
+            "skills": {
+                "primary": 0,
+                "secondary": 0
+            },
+            "templates": [
+                "info",
+                "health",
+                "talents"
             ],
             "equipment": {
                 "armor": "",
