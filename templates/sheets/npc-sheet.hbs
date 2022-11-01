@@ -1,9 +1,52 @@
 <form class="{{cssClass}}" autocomplete="off">
+    {{log this}}
     <div class="sheet-main-content c2d10-section flex-row flex-start">
         <div class="sheet-info">
             {{> "systems/c2d10/templates/partials/sheet-tabs/actor-info.hbs"}}
             {{> "systems/c2d10/templates/partials/sheet-tabs/actor-talents.hbs"}}
-            {{> "systems/c2d10/templates/partials/sheet-tabs/actor-skills.hbs"}}
+            <section>
+                <h3>
+                    {{localize "c2d10.sheet.skills"}}
+                </h3>
+                <div class="content-box c2d10-subsection flex-row flex-between">
+                    <div class="flex-col flex-start w-100">
+                        <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
+                            <table>
+                                <colgroup>
+                                    <col class="w-60">
+                                    <col class="w-40">
+                                </colgroup>
+                                <tr>
+                                    <th class="c2d10-test c2d10-skill-test table-no-border description"
+                                        data-tooltip="{{localize (concat "c2d10.descriptions." system.skills.primary.name)}}
+                                        <p>Left click to roll, right click or shift+click for description.</p>"
+                                        data-type="skills" data-group="npc"
+                                        data-id="{{system.skills.primary.name}}"
+                                    >
+                                        {{localize (concat "c2d10.skills." system.skills.primary.name)}}
+                                    </th>
+                                    <td class="flex-row table-no-border resource-row" data-type="skills" data-group="npc" data-id="{{name}}" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
+                                        {{#dots system.skills.primary.level 5}}{{/dots}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="c2d10-test c2d10-skill-test table-no-border description"
+                                        data-tooltip="{{localize (concat "c2d10.descriptions." system.skills.secondary.name)}}
+                                        <p>Left click to roll, right click or shift+click for description.</p>"
+                                        data-type="skills" data-group="npc"
+                                        data-id="{{system.skills.secondary.name}}"
+                                    >
+                                        {{localize (concat "c2d10.skills." system.skills.secondary.name)}}
+                                    </th>
+                                    <td class="flex-row table-no-border resource-row" data-type="skills" data-group="npc" data-id="{{name}}" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
+                                        {{#dots system.skills.secondary.level 5}}{{/dots}}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 </form>

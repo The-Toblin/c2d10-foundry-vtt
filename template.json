@@ -115,8 +115,14 @@
         },
         "npc": {
             "skills": {
-                "primary": 0,
-                "secondary": 0
+                "primary": {
+                    "name": "",
+                    "level": 0
+                },
+                "secondary": {
+                    "name": "",
+                    "level": 0
+                }
             },
             "templates": [
                 "info",
