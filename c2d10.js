@@ -5,6 +5,7 @@ import C2D10Item from "./module/C2D10Item.js";
 import C2D10ItemSheet from "./module/sheets/C2D10ItemSheet.js";
 import C2D10Actor from "./module/C2D10Actor.js";
 import C2D10ActorSheet from "./module/sheets/C2D10ActorSheet.js";
+import C2D10NPCSheet from "./module/sheets/C2D10NPCSheet.js";
 import * as C2D10Utility from "./module/C2D10Utility.js";
 
 /**
@@ -217,6 +218,12 @@ Hooks.once("init", function() {
     types: ["actor"],
     makeDefault: true,
     label: "C2D10 Character Sheet"
+  });
+
+  Actors.registerSheet("c2d10", C2D10NPCSheet, {
+    types: ["npc"],
+    makeDefault: true,
+    label: "C2D10 NPC Sheet"
   });
 
   /* Load Handlebars helpers and partials */
