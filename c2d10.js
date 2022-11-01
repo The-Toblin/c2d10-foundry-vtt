@@ -4,7 +4,7 @@ import { CrisisDie } from "./module/dice/C2D10CrisisDie.js";
 import C2D10Item from "./module/C2D10Item.js";
 import C2D10ItemSheet from "./module/sheets/C2D10ItemSheet.js";
 import C2D10Actor from "./module/C2D10Actor.js";
-import C2D10ActorSheet from "./module/sheets/C2D10ActorSheet.js";
+import C2D10MainSheet from "./module/sheets/C2D10MainSheet.js";
 import C2D10NPCSheet from "./module/sheets/C2D10NPCSheet.js";
 import * as C2D10Utility from "./module/C2D10Utility.js";
 
@@ -198,7 +198,7 @@ Hooks.once("init", function() {
   console.log("==== C2D10 | Initialising CD10 RPG System 2nd Edition ====");
 
   CONFIG.Dice.terms.r = RegularDie;
-  CONFIG.Dice.terms.c = CrisisDie;
+  CONFIG.Dice.terms.s = CrisisDie;
 
   /* Setup Config */
   CONFIG.c2d10 = c2d10;
@@ -214,7 +214,7 @@ Hooks.once("init", function() {
   });
 
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("c2d10", C2D10ActorSheet, {
+  Actors.registerSheet("c2d10", C2D10MainSheet, {
     types: ["actor"],
     makeDefault: true,
     label: "C2D10 Character Sheet"
@@ -392,7 +392,7 @@ Hooks.once("diceSoNiceReady", dice3d => {
   }, "d10");
 
   dice3d.addDicePreset({
-    type: "dc",
+    type: "ds",
     labels: [
       "systems/c2d10/assets/roll-miss.webp",
       "systems/c2d10/assets/roll-miss.webp",

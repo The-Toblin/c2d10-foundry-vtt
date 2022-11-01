@@ -6,7 +6,7 @@ import {CeleniaDie} from "./C2D10BaseDie.js";
 export class CrisisDie extends CeleniaDie {
 
   /** @override */
-  static DENOMINATION = "c";
+  static DENOMINATION = "s";
 
   /** @override */
   static getResultLabel(result) {

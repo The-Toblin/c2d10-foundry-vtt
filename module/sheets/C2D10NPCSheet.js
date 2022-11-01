@@ -1,11 +1,9 @@
-import {healthTest, wealthTest, talentTest, skillTest, powerTest} from "../dice/C2D10Roll.js";
+import C2D10ActorSheet from "./C2D10ActorSheet.js";
 
 /**
- * Base Actor sheet. This holds all functions available to actor sheets and can be extended by
- * actor types for specific data.
+ * Override parent class with different settings and templates.
  */
-
-export default class C2D10NPCSheet extends ActorSheet {
+export default class C2D10NPCSheet extends C2D10ActorSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       template: "systems/c2d10/templates/sheets/npc-sheet.hbs",

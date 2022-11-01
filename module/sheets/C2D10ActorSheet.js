@@ -56,46 +56,6 @@ export default class C2D10ActorSheet extends ActorSheet {
       sheetData.talents[entry[0]] = entry[1];
     }
 
-    sheetData.skills = {};
-    for (const entry of Object.entries(sheetData.system.skills.physical)) {
-      sheetData.skills[entry[0]] = entry[1];
-    }
-    for (const entry of Object.entries(sheetData.system.skills.social)) {
-      sheetData.skills[entry[0]] = entry[1];
-    }
-    for (const entry of Object.entries(sheetData.system.skills.mental)) {
-      sheetData.skills[entry[0]] = entry[1];
-    }
-
-    /**
-     * Sort character focus.
-     */
-    sheetData.system.skills.focus.sort(function(a, b) {
-      let nameA = a.name.toUpperCase(); // Ignore upper and lowercase
-      let nameB = b.name.toUpperCase(); // Ignore upper and lowercase
-      if (nameA < nameB) {
-        return -1; // NameA comes first
-      }
-      if (nameA > nameB) {
-        return 1; // NameB comes first
-      }
-      return 0;  // Names must be equal
-    });
-
-    sheetData.system.skills.focus.sort(function(a, b) {
-      let nameA = a.parent.toUpperCase(); // Ignore upper and lowercase
-      let nameB = b.parent.toUpperCase(); // Ignore upper and lowercase
-      if (nameA < nameB) {
-        return -1; // NameA comes first
-      }
-      if (nameA > nameB) {
-        return 1; // NameB comes first
-      }
-      return 0;  // Names must be equal
-    });
-
-    sheetData.focus = sheetData.system.skills.focus;
-
     /**
      * Sort character's traits
      */

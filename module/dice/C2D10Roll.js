@@ -225,9 +225,9 @@ const _doRoll = async rollData => {
 
   if (pool > 0) rollFormula += `${pool}dr`;
   if (pool > 0 && crisis > 0) {
-    rollFormula += ` + ${crisis}dc`;
+    rollFormula += ` + ${crisis}ds`;
   } else if (crisis > 0) {
-    rollFormula += `${crisis}dc`;
+    rollFormula += `${crisis}ds`;
   }
 
   const theRoll = new Roll(rollFormula);
