@@ -9,7 +9,7 @@ export default class C2D10NPCSheet extends C2D10ActorSheet {
       template: "systems/c2d10/templates/sheets/npc-sheet.hbs",
       classes: ["c2d10", "sheet"],
       height: 890,
-      width: 910,
+      width: 700,
       tabs: [
         {
           navSelector: ".sheet-tabs",
