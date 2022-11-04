@@ -37,6 +37,7 @@
         },
         "sheet": {
             "appearance": "Appearance",
+            "archetype": "Archetype",
             "addFocus": "Add a focus",
             "assets": "Assets",
             "crisis": "Crisis",
