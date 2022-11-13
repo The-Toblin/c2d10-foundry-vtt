@@ -1,15 +1,16 @@
 {
     "Actor": {
         "types": [
-            "actor"
+            "actor",
+            "npc"
         ],
         "templates": {
             "info": {
                 "info": {
+                    "archetype": "",
                     "concept": "",
                     "experience": 0,
                     "species": "",
-                    "campaign": "",
                     "ambition": "",
                     "faction": "",
                     "wealth": 0,
@@ -106,6 +107,27 @@
                 "health",
                 "talents",
                 "skills"
+            ],
+            "equipment": {
+                "armor": "",
+                "weapon": ""
+            }
+        },
+        "npc": {
+            "skills": {
+                "primary": {
+                    "name": "",
+                    "level": 0
+                },
+                "secondary": {
+                    "name": "",
+                    "level": 0
+                }
+            },
+            "templates": [
+                "info",
+                "health",
+                "talents"
             ],
             "equipment": {
                 "armor": "",

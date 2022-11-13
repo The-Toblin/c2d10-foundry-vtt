@@ -56,46 +56,6 @@ export default class C2D10ActorSheet extends ActorSheet {
       sheetData.talents[entry[0]] = entry[1];
     }
 
-    sheetData.skills = {};
-    for (const entry of Object.entries(sheetData.system.skills.physical)) {
-      sheetData.skills[entry[0]] = entry[1];
-    }
-    for (const entry of Object.entries(sheetData.system.skills.social)) {
-      sheetData.skills[entry[0]] = entry[1];
-    }
-    for (const entry of Object.entries(sheetData.system.skills.mental)) {
-      sheetData.skills[entry[0]] = entry[1];
-    }
-
-    /**
-     * Sort character focus.
-     */
-    sheetData.system.skills.focus.sort(function(a, b) {
-      let nameA = a.name.toUpperCase(); // Ignore upper and lowercase
-      let nameB = b.name.toUpperCase(); // Ignore upper and lowercase
-      if (nameA < nameB) {
-        return -1; // NameA comes first
-      }
-      if (nameA > nameB) {
-        return 1; // NameB comes first
-      }
-      return 0;  // Names must be equal
-    });
-
-    sheetData.system.skills.focus.sort(function(a, b) {
-      let nameA = a.parent.toUpperCase(); // Ignore upper and lowercase
-      let nameB = b.parent.toUpperCase(); // Ignore upper and lowercase
-      if (nameA < nameB) {
-        return -1; // NameA comes first
-      }
-      if (nameA > nameB) {
-        return 1; // NameB comes first
-      }
-      return 0;  // Names must be equal
-    });
-
-    sheetData.focus = sheetData.system.skills.focus;
-
     /**
      * Sort character's traits
      */
@@ -394,11 +354,11 @@ export default class C2D10ActorSheet extends ActorSheet {
 
     const actorId = this.actor.id;
     const dataset = event.currentTarget.closest(".c2d10-test").dataset;
-    const crisis = await this.actor.getCrisis();
+    const crisis = await this.actor.system.health.crisis;
     const stress = dataset.id === "stress";
 
-    let poolObject = stress ? await this.actor.getStress() : await this.actor.getStrain();
-    const pool = poolObject.value < 0 ? 1 : poolObject.value;
+    let poolObject = stress ? await this.actor.system.health.stress.value : await this.actor.system.health.strain.value;
+    const pool = poolObject < 0 ? 1 : poolObject;
 
     await healthTest(crisis, pool, stress, actorId);
   }
@@ -416,9 +376,9 @@ export default class C2D10ActorSheet extends ActorSheet {
     const sys = this.getData().system;
     const actorId = this.actor.id;
 
-    let pool = this.actor.health.mentalImpairment ? parseInt(sys.info.wealth - 2) : sys.info.wealth;
-    if (pool < 0) pool = 1;
-    await wealthTest(sys.health.crisis.mental, pool, actorId);
+    let pool = sys.health.mentalImpairment ? parseInt((sys.info.wealth * 2) - 2) : sys.info.wealth * 2;
+    if (pool < 1) pool = 1;
+    await wealthTest(sys.health.crisis, pool, actorId);
   }
 
   /**

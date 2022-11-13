@@ -4,7 +4,8 @@ import { CrisisDie } from "./module/dice/C2D10CrisisDie.js";
 import C2D10Item from "./module/C2D10Item.js";
 import C2D10ItemSheet from "./module/sheets/C2D10ItemSheet.js";
 import C2D10Actor from "./module/C2D10Actor.js";
-import C2D10ActorSheet from "./module/sheets/C2D10ActorSheet.js";
+import C2D10MainSheet from "./module/sheets/C2D10MainSheet.js";
+import C2D10NPCSheet from "./module/sheets/C2D10NPCSheet.js";
 import * as C2D10Utility from "./module/C2D10Utility.js";
 
 /**
@@ -12,14 +13,16 @@ import * as C2D10Utility from "./module/C2D10Utility.js";
  */
 async function preloadHandlebarsTemplates() {
   const templatePaths = [
-    "systems/c2d10/templates/partials/sheet-tabs/actor-info.hbs",
-    "systems/c2d10/templates/partials/sheet-tabs/actor-bio.hbs",
-    "systems/c2d10/templates/partials/sheet-tabs/actor-talents.hbs",
-    "systems/c2d10/templates/partials/sheet-tabs/actor-skills.hbs",
-    "systems/c2d10/templates/partials/sheet-tabs/actor-assets-tab.hbs",
-    "systems/c2d10/templates/partials/sheet-tabs/actor-traits-tab.hbs",
-    "systems/c2d10/templates/partials/sheet-tabs/actor-powers-tab.hbs",
-    "systems/c2d10/templates/partials/sheet-tabs/actor-focus-tab.hbs",
+    "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-info.hbs",
+    "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-bio.hbs",
+    "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-talents.hbs",
+    "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-skills.hbs",
+    "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-assets-tab.hbs",
+    "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-traits-tab.hbs",
+    "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-powers-tab.hbs",
+    "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-focus-tab.hbs",
+    "systems/c2d10/templates/partials/sheet-tabs/npc/npc-info.hbs",
+    "systems/c2d10/templates/partials/sheet-tabs/npc/npc-skills.hbs",
     "systems/c2d10/templates/partials/list-items/asset-list-item.hbs",
     "systems/c2d10/templates/partials/list-items/trait-list-item.hbs",
     "systems/c2d10/templates/partials/list-items/variant-list-item.hbs",
@@ -197,7 +200,7 @@ Hooks.once("init", function() {
   console.log("==== C2D10 | Initialising CD10 RPG System 2nd Edition ====");
 
   CONFIG.Dice.terms.r = RegularDie;
-  CONFIG.Dice.terms.c = CrisisDie;
+  CONFIG.Dice.terms.s = CrisisDie;
 
   /* Setup Config */
   CONFIG.c2d10 = c2d10;
@@ -213,10 +216,16 @@ Hooks.once("init", function() {
   });
 
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("c2d10", C2D10ActorSheet, {
+  Actors.registerSheet("c2d10", C2D10MainSheet, {
     types: ["actor"],
     makeDefault: true,
     label: "C2D10 Character Sheet"
+  });
+
+  Actors.registerSheet("c2d10", C2D10NPCSheet, {
+    types: ["npc"],
+    makeDefault: true,
+    label: "C2D10 NPC Sheet"
   });
 
   /* Load Handlebars helpers and partials */
@@ -336,7 +345,7 @@ Hooks.once("diceSoNiceReady", dice3d => {
     foreground: "#fff",
     background: "#3d0030",
     texture: "none",
-    edge: "#3d0030",
+    edge: "#8a006c",
     material: "plastic",
     font: "Arial Black",
     fontScale: {
@@ -352,7 +361,7 @@ Hooks.once("diceSoNiceReady", dice3d => {
     foreground: "#000",
     background: "#860000",
     texture: "none",
-    edge: "#860000",
+    edge: "#bd0000",
     material: "plastic",
     font: "Arial Black",
     fontScale: {
@@ -385,7 +394,7 @@ Hooks.once("diceSoNiceReady", dice3d => {
   }, "d10");
 
   dice3d.addDicePreset({
-    type: "dc",
+    type: "ds",
     labels: [
       "systems/c2d10/assets/roll-miss.webp",
       "systems/c2d10/assets/roll-miss.webp",

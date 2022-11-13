@@ -225,9 +225,9 @@ const _doRoll = async rollData => {
 
   if (pool > 0) rollFormula += `${pool}dr`;
   if (pool > 0 && crisis > 0) {
-    rollFormula += ` + ${crisis}dc`;
+    rollFormula += ` + ${crisis}ds`;
   } else if (crisis > 0) {
-    rollFormula += `${crisis}dc`;
+    rollFormula += `${crisis}ds`;
   }
 
   const theRoll = new Roll(rollFormula);
@@ -294,6 +294,7 @@ export async function wealthTest(crisis, pool, actorId) {
   rollData.id = actorId;
   rollData.DC = rollData.DC = game.settings.get("c2d10", "DC");
 
+  console.log(rollData);
   _doRoll(rollData);
 
 }
