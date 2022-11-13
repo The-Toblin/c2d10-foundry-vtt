@@ -345,7 +345,7 @@ Hooks.once("diceSoNiceReady", dice3d => {
     foreground: "#fff",
     background: "#3d0030",
     texture: "none",
-    edge: "#3d0030",
+    edge: "#8a006c",
     material: "plastic",
     font: "Arial Black",
     fontScale: {
@@ -361,7 +361,7 @@ Hooks.once("diceSoNiceReady", dice3d => {
     foreground: "#000",
     background: "#860000",
     texture: "none",
-    edge: "#860000",
+    edge: "#bd0000",
     material: "plastic",
     font: "Arial Black",
     fontScale: {

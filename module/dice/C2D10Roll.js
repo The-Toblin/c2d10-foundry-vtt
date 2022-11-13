@@ -294,6 +294,7 @@ export async function wealthTest(crisis, pool, actorId) {
   rollData.id = actorId;
   rollData.DC = rollData.DC = game.settings.get("c2d10", "DC");
 
+  console.log(rollData);
   _doRoll(rollData);
 
 }

@@ -376,9 +376,9 @@ export default class C2D10ActorSheet extends ActorSheet {
     const sys = this.getData().system;
     const actorId = this.actor.id;
 
-    let pool = this.actor.health.mentalImpairment ? parseInt(sys.info.wealth - 2) : sys.info.wealth;
-    if (pool < 0) pool = 1;
-    await wealthTest(sys.health.crisis.mental, pool, actorId);
+    let pool = sys.health.mentalImpairment ? parseInt((sys.info.wealth * 2) - 2) : sys.info.wealth * 2;
+    if (pool < 1) pool = 1;
+    await wealthTest(sys.health.crisis, pool, actorId);
   }
 
   /**
