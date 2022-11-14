@@ -5,5 +5,3 @@ This is public, but in no way in any shape or form in release territory. This is
 
 Made by the Toblin
 tobias@celenia.se
-
-Test sign.
