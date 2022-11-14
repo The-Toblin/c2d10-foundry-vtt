@@ -4,10 +4,9 @@
     "babel-eslint": "^10.1.0"
   },
   "devDependencies": {
-    "eslint": "^8.27.0",
     "eslint-plugin-jsdoc": "^38.0.6"
   },
-  "scripts": {
+  "scripts":{
     "lint": "eslint ."
   }
 }
