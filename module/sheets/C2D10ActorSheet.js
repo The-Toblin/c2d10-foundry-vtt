@@ -1,4 +1,4 @@
-import {healthTest, wealthTest, talentTest, skillTest, powerTest} from "../dice/C2D10Roll.js";
+import {healthTest, economyTest, talentTest, skillTest, powerTest} from "../dice/C2D10Roll.js";
 
 /**
  * Base Actor sheet. This holds all functions available to actor sheets and can be extended by
@@ -161,7 +161,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     html.find(".remove-focus").click(this._removeFocus.bind(this));
     html.find(".focus-edit").on("click contextmenu", this._editFocus.bind(this));
     html.find(".c2d10-health-test").click(this._doHealthTest.bind(this));
-    html.find(".c2d10-wealth-test").click(this._doWealthTest.bind(this));
+    html.find(".c2d10-economy-test").click(this._doEconomyTest.bind(this));
     html.find(".c2d10-talent-test").click(this._doTalentTest.bind(this));
     html.find(".c2d10-skill-test").click(this._doSkillTest.bind(this));
     html.find(".c2d10-power-test").click(this._doPowerTest.bind(this));
@@ -364,10 +364,10 @@ export default class C2D10ActorSheet extends ActorSheet {
   }
 
   /**
-   * Perform a wealth test.
+   * Perform an acquisition test.
    * @param {html} event html click event data, including dataset.
    */
-  async _doWealthTest(event) {
+  async _doEconomyTest(event) {
     event.preventDefault();
     if (event.shiftKey) {
       this._postDescription(event);
@@ -376,9 +376,9 @@ export default class C2D10ActorSheet extends ActorSheet {
     const sys = this.getData().system;
     const actorId = this.actor.id;
 
-    let pool = sys.health.mentalImpairment ? parseInt((sys.info.wealth * 2) - 2) : sys.info.wealth * 2;
+    let pool = sys.health.mentalImpairment ? parseInt((sys.info.economy * 2) - 2) : sys.info.economy * 2;
     if (pool < 1) pool = 1;
-    await wealthTest(sys.health.crisis, pool, actorId);
+    await economyTest(sys.health.crisis, pool, actorId);
   }
 
   /**

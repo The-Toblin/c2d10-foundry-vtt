@@ -280,16 +280,16 @@ const _doRoll = async rollData => {
 };
 
 /**
- * Perform a Wealth test, rolling just with Wealth and nothing else. Takes Crisis into account.
+ * Perform an acquisition test, rolling just with Economy and nothing else. Takes Crisis into account.
  * @param {number} crisis  The character's current value in Crisis.
- * @param {number} pool    The Wealth rank to produce a pool of dice.
+ * @param {number} pool    The Economy rank to produce a pool of dice.
  * @param {string} actorId The actor's Id.
  */
-export async function wealthTest(crisis, pool, actorId) {
+export async function economyTest(crisis, pool, actorId) {
   const rollData = {};
 
   rollData.crisis = crisis;
-  rollData.item = "wealth";
+  rollData.item = "economy";
   rollData.pool = pool;
   rollData.id = actorId;
   rollData.DC = rollData.DC = game.settings.get("c2d10", "DC");
