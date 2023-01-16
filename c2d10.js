@@ -384,15 +384,22 @@ Hooks.once("diceSoNiceReady", dice3d => {
       "systems/c2d10/assets/roll-crit.webp",
       "systems/c2d10/assets/roll-fumble.webp"
     ],
-    values: {
-      min: 1,
-      max: 10
+    valueMap: {
+      0:1,
+      1:2,
+      2:3,
+      3:4,
+      4:5,
+      5:6,
+      6:7,
+      7:8,
+      8:9,
+      9:10
     },
     colorset: "main",
     fontScale: 0.5,
     system: "c2d10"
   }, "d10");
-  // TODO: Add valuemap
 
   dice3d.addDicePreset({
     type: "ds",
@@ -408,15 +415,20 @@ Hooks.once("diceSoNiceReady", dice3d => {
       "systems/c2d10/assets/crisis-crit.webp",
       "systems/c2d10/assets/crisis-fumble.webp"
     ],
-    values: {
-      min: 1,
-      max: 10
+    valueMap: {
+      0:1,
+      1:2,
+      2:3,
+      3:4,
+      4:5,
+      5:6,
+      6:7,
+      7:8,
+      8:9,
+      9:10
     },
     colorset: "crisis",
     fontScale: 0.5,
     system: "c2d10"
   }, "d10");
 });
-
-// TODO: Add valuemap
-
