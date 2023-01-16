@@ -25,6 +25,7 @@ export default class C2D10Actor extends Actor {
     this.system.health.strain.value = parseInt(maxStrain - strainValue);
     this.system.health.stress.value = parseInt(maxStress - stressValue);
 
+    // Check if any health tracker has reached max, and if so, apply the impairment for that class.
     this.system.health.physicalImpairment = strainValue === maxStrain;
     this.system.health.mentalImpairment = stressValue === maxStress;
 
