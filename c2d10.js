@@ -392,6 +392,7 @@ Hooks.once("diceSoNiceReady", dice3d => {
     fontScale: 0.5,
     system: "c2d10"
   }, "d10");
+  // TODO: Add valuemap
 
   dice3d.addDicePreset({
     type: "ds",
@@ -416,4 +417,6 @@ Hooks.once("diceSoNiceReady", dice3d => {
     system: "c2d10"
   }, "d10");
 });
+
+// TODO: Add valuemap
 
