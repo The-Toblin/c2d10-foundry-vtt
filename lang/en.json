@@ -1,5 +1,9 @@
 {
     "c2d10": {
+        "equipment": {
+            "weapon": "Weapon",
+            "armor": "Armor"
+        },
         "resources": {
             "none": "None",
             "stress": "Stress",

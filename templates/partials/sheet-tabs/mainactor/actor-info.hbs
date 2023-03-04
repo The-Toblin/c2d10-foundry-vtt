@@ -6,7 +6,7 @@
         <div class="flex-row flex-between">
             <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} w-fit">
                 <div class="image-box">
-                    <img class="actor-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="145px" />
+                    <img class="actor-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="125px" />
                 </div>
             </div>
             <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} w-100">
@@ -94,6 +94,24 @@
                 </h3>
                 <div class="flex-row flex-center resource-row" data-type="health" data-id="stress" data-pass="true" data-tooltip="{{localize "c2d10.sheet.health-tooltip"}}">
                     {{#healthdots system.health.stress.superficial system.health.stress.critical system.health.stress.max "stress"}}{{/healthdots}}
+                </div>
+            </div>
+        </div>
+        <div class="flex-row flex-between">
+            <div class="flex-row flex-between c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} crisis-box w-50">
+                <h3 class="description" data-tooltip="{{localize "c2d10.descriptions.weapon"}}">
+                    {{localize "c2d10.equipment.weapon"}}
+                </h3>
+                <div class="flex-row flex-center">
+                    {{#if system.equipment.weapon}}{{system.equipment.weapon.name}}{{/if}}
+                </div>
+            </div>
+            <div class="flex-row flex-between c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} crisis-box w-50">
+                <h3 class="c2d10-test c2d10-health-test description">
+                    {{localize "c2d10.equipment.armor"}}
+                </h3>
+                <div class="flex-row flex-center resource-row" data-type="health" data-id="stress" data-pass="true" data-tooltip="{{localize "c2d10.sheet.health-tooltip"}}">
+                    {{#if system.equipment.armor}}{{system.equipment.armor.name}}{{/if}}
                 </div>
             </div>
         </div>
