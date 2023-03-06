@@ -24,6 +24,7 @@ async function preloadHandlebarsTemplates() {
     "systems/c2d10/templates/partials/sheet-tabs/npc/npc-info.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/npc/npc-skills.hbs",
     "systems/c2d10/templates/partials/list-items/asset-list-item.hbs",
+    "systems/c2d10/templates/partials/list-items/equipment-list-item.hbs",
     "systems/c2d10/templates/partials/list-items/trait-list-item.hbs",
     "systems/c2d10/templates/partials/list-items/variant-list-item.hbs",
     "systems/c2d10/templates/dialogs/add-focus-dialog.hbs",

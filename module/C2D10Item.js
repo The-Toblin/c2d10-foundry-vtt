@@ -81,5 +81,25 @@ export default class C2D10Item extends Item {
 
     return ChatMessage.create(chatData);
   }
-}
 
+  /**
+   *  This function allows for equipping and unequipping equipment
+   * @param {boolean} unequip Optional parameter to guarantee an unequip.
+   */
+  equipItem(unequip) {
+    const sys = this.actor.system;
+    const type = this.type === "weapon" || this.type === "armor" ? this.type : null;
+    const updateData = {};
+
+    if (unequip || this.id === sys.equipment[type]) {
+      updateData[`system.equipment.${type}`] = null;
+    }
+
+    else if (type != null) {
+      updateData[`system.equipment.${type}`] = this.id;
+    }
+
+    this.actor.update(updateData);
+
+  }
+}

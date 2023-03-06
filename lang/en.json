@@ -48,6 +48,8 @@
             "delete": "Delete item",
             "description": "Post description",
             "edit": "Edit",
+            "equip": "Equip",
+            "equipment": "Equipment",
             "experience": "XP",
             "family": "Family",
             "focus": "Focus",

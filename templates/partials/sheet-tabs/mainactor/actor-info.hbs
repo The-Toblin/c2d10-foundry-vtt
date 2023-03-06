@@ -98,22 +98,26 @@
             </div>
         </div>
         <div class="flex-row flex-between">
-            <div class="flex-row flex-between c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} crisis-box w-50">
-                <h3 class="description" data-tooltip="{{localize "c2d10.descriptions.weapon"}}">
-                    {{localize "c2d10.equipment.weapon"}}
+            {{#if equippedWeapon}}
+            <div class="flex-row flex-between c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} crisis-box w-50 equipment-item asset-item" data-id={{system.equipment.weapon}}>
+                <h3 class="equipment">
+                    {{equippedWeapon.name}}
+                </h3>
+                <div class="flex-row flex-center equipment">
+                    {{equippedWeapon.damage}} {{equippedWeapon.damageType}}
+                </div>
+            </div>
+            {{/if}}
+            {{#if equippedArmor}}
+            <div class="flex-row flex-between c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} crisis-box w-50 equipment-item asset-item" data-id={{system.equipment.armor}}>
+                <h3 class="equipment">
+                    {{equippedArmor.name}}
                 </h3>
                 <div class="flex-row flex-center">
-                    {{#if system.equipment.weapon}}{{system.equipment.weapon.name}}{{/if}}
+                    {{equippedArmor.protection}} {{equippedArmor.protectionType}}
                 </div>
             </div>
-            <div class="flex-row flex-between c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} crisis-box w-50">
-                <h3 class="c2d10-test c2d10-health-test description">
-                    {{localize "c2d10.equipment.armor"}}
-                </h3>
-                <div class="flex-row flex-center resource-row" data-type="health" data-id="stress" data-pass="true" data-tooltip="{{localize "c2d10.sheet.health-tooltip"}}">
-                    {{#if system.equipment.armor}}{{system.equipment.armor.name}}{{/if}}
-                </div>
-            </div>
+             {{/if}}
         </div>
     </div>
 </section>
