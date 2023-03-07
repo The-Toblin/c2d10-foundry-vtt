@@ -40,8 +40,8 @@
     }
   ],
   "url": "https://github.com/The-Toblin/c2d10-foundry-vtt/",
-  "manifest": "https://raw.githubusercontent.com/The-Toblin/c2d10-foundry-vtt/main/system.json",
-  "download": "https://github.com/The-Toblin/c2d10-foundry-vtt/archive/refs/heads/main.zip",
+  "manifest": "https://raw.githubusercontent.com/The-Toblin/c2d10-foundry-vtt/tob-dev/system.json",
+  "download": "https://github.com/The-Toblin/c2d10-foundry-vtt/archive/refs/heads/tob-dev.zip",
   "gridDistance": 1.5,
   "gridUnits": "m",
   "primaryTokenAttribute": "strain",
