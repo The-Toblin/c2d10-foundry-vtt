@@ -1,5 +1,9 @@
 {
     "c2d10": {
+        "equipment": {
+            "weapon": "Weapon",
+            "armor": "Armor"
+        },
         "resources": {
             "none": "None",
             "stress": "Stress",
@@ -33,7 +37,7 @@
             "ambition": "Ambition",
             "species": "Species",
             "faction": "Faction",
-            "wealth": "Wealth"
+            "economy": "Economy"
         },
         "sheet": {
             "appearance": "Appearance",
@@ -44,6 +48,8 @@
             "delete": "Delete item",
             "description": "Post description",
             "edit": "Edit",
+            "equip": "Equip",
+            "equipment": "Equipment",
             "experience": "XP",
             "family": "Family",
             "focus": "Focus",
@@ -214,7 +220,7 @@
             "crisis": "<p>Crisis is a measure of how debilitated a character is both mentally and physically. Causes your pools to accumulate Crisis Dice.</p>",
             "strain": "<p>In-scene measure of physical strain. Yellow denotes superficial damage, red denotes critical damage. Critical damage contributes to Crisis.</p><p>Click to perform the strain test.</p>",
             "stress": "<p>In-scene measure of mental stress. Yellow denotes superficial damage, red denotes critical damage. Critical damage contributes to Crisis.</p><p>Click to perform the stress test.</p>",
-            "wealth": "<p>Your character's wealth class. Defaults to 2 ranks.</p><p>Click to perform a wealth test.</p>"
+            "economy": "<p>Your character's economic power class.</p><p>Click to perform an acquisition test.</p>"
         }
     },
     "SETTINGS": {

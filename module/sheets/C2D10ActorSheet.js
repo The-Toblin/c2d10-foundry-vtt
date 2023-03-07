@@ -1,4 +1,4 @@
-import {healthTest, wealthTest, talentTest, skillTest, powerTest} from "../dice/C2D10Roll.js";
+import { healthTest, economyTest, talentTest, skillTest, powerTest } from "../dice/C2D10Roll.js";
 
 /**
  * Base Actor sheet. This holds all functions available to actor sheets and can be extended by
@@ -10,7 +10,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     return mergeObject(super.defaultOptions, {
       template: "systems/c2d10/templates/sheets/actor-sheet.hbs",
       classes: ["c2d10", "sheet"],
-      height: 890,
+      height: 895,
       width: 910,
       tabs: [
         {
@@ -31,11 +31,40 @@ export default class C2D10ActorSheet extends ActorSheet {
     /**
      * Items
      */
-    sheetData.assets = sheetData.items.filter(p => p.type === "asset" || p.type === "armor" || p.type === "weapon" );
+    sheetData.assets = sheetData.items.filter(p => p.type === "asset");
+    sheetData.equipment = sheetData.items.filter(p => p.type === "armor" || p.type === "weapon");
     sheetData.virtues = sheetData.items.filter(p => p.type === "trait" && p.system.traitType === "virtue");
     sheetData.vices = sheetData.items.filter(p => p.type === "trait" && p.system.traitType === "vice");
     sheetData.powers = sheetData.items.filter(p => p.type === "power");
     sheetData.variants = sheetData.items.filter(p => p.type === "variant");
+
+    /**
+     * Set up equipped weapon and armor objects to display on the sheet
+     */
+    let wep = this.actor.items.get(sheetData.system.equipment.weapon);
+    let arm = this.actor.items.get(sheetData.system.equipment.armor);
+
+    if (wep) {
+      let wepDamage = wep.system.critical > 0 ? wep.system.critical : wep.system.superficial;
+      let wepType = wep.system.critical > 0 ? "Critical" : "Superficial";
+
+      sheetData.equippedWeapon = {
+        name: wep.name,
+        damage: wepDamage,
+        damageType: wepType
+      };
+    }
+
+    if (arm) {
+      let armProt = arm.system.deflection > 0 ? arm.system.deflection : arm.system.ablation;
+      let armProtType= arm.system.deflection > 0 ? "Deflection" : "Ablation";
+
+      sheetData.equippedArmor = {
+        name: arm.name,
+        protection: armProt,
+        protectionType: armProtType
+      };
+    }
 
     /**
      * Set a flag to allow the traits tab to be shown if traits are present.
@@ -145,6 +174,45 @@ export default class C2D10ActorSheet extends ActorSheet {
     }
   ];
 
+  /**
+   * Equipment item context menu. Edit, equip/unequip, post and remove.
+   */
+  equipmentContextMenu = [
+    {
+      name: game.i18n.localize("c2d10.sheet.equip"),
+      icon: '<i class="fas fa-edit"></i>',
+      callback: element => {
+        const itemId = element.closest(".equipment-item")[0].dataset.id;
+        const item = this.actor.items.get(itemId);
+
+        item.equipItem();
+      }
+    },
+    {
+      name: game.i18n.localize("c2d10.sheet.edit"),
+      icon: '<i class="fas fa-edit"></i>',
+      callback: element => {
+        const itemId = element.closest(".equipment-item")[0].dataset.id;
+        const item = this.actor.items.get(itemId);
+
+        item.sheet.render(true);
+      }
+    },
+    {
+      name: game.i18n.localize("c2d10.sheet.remove"),
+      icon: '<i class="fas fa-trash"></i>',
+      callback: element => {
+        const itemId = element.closest(".equipment-item")[0].dataset.id;
+        const item = this.actor.items.get(itemId);
+
+        if (this.actor.system.equipment[item.type] === itemId) {
+          item.equipItem(true);
+        }
+        this.actor.deleteEmbeddedDocuments("Item", [itemId]);
+      }
+    }
+  ];
+
 
   /**
    * Makes sure the listeners are active on the sheet. They monitor mouse-movements and clicks on the sheet
@@ -161,12 +229,13 @@ export default class C2D10ActorSheet extends ActorSheet {
     html.find(".remove-focus").click(this._removeFocus.bind(this));
     html.find(".focus-edit").on("click contextmenu", this._editFocus.bind(this));
     html.find(".c2d10-health-test").click(this._doHealthTest.bind(this));
-    html.find(".c2d10-wealth-test").click(this._doWealthTest.bind(this));
+    html.find(".c2d10-economy-test").click(this._doEconomyTest.bind(this));
     html.find(".c2d10-talent-test").click(this._doTalentTest.bind(this));
     html.find(".c2d10-skill-test").click(this._doSkillTest.bind(this));
     html.find(".c2d10-power-test").click(this._doPowerTest.bind(this));
 
     new ContextMenu(html, ".asset", this.itemContextMenu);
+    new ContextMenu(html, ".equipment", this.equipmentContextMenu);
 
     super.activateListeners(html);
   }
@@ -253,7 +322,8 @@ export default class C2D10ActorSheet extends ActorSheet {
         buttons: {
           roll: {
             label: "Add!",
-            callback: html => { this._doAddFocus(html);
+            callback: html => {
+              this._doAddFocus(html);
 
             }
           }
@@ -295,7 +365,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     const name = dataset.name;
     const parent = dataset.parent;
     const dialogData = this.getData();
-    dialogData.focusContent = {name, parent};
+    dialogData.focusContent = { name, parent };
 
     const dialogOptions = {
       classes: ["c2d10-dialog", "editFocus"],
@@ -309,7 +379,8 @@ export default class C2D10ActorSheet extends ActorSheet {
         buttons: {
           roll: {
             label: "Save!",
-            callback: html => { this._doEditFocus(html, dialogData.focusContent);
+            callback: html => {
+              this._doEditFocus(html, dialogData.focusContent);
 
             }
           }
@@ -322,7 +393,7 @@ export default class C2D10ActorSheet extends ActorSheet {
   async _doEditFocus(html, focusContent) {
     const currentArray = this.getData().system.skills.focus;
     const newName = html.find("input#focus-name").val();
-    const newParent= html.find("select#focus-skill").val();
+    const newParent = html.find("select#focus-skill").val();
     const index = currentArray.findIndex(p => p.name === focusContent.name);
     currentArray[index] = {
       name: newName,
@@ -364,10 +435,10 @@ export default class C2D10ActorSheet extends ActorSheet {
   }
 
   /**
-   * Perform a wealth test.
+   * Perform an acquisition test.
    * @param {html} event html click event data, including dataset.
    */
-  async _doWealthTest(event) {
+  async _doEconomyTest(event) {
     event.preventDefault();
     if (event.shiftKey) {
       this._postDescription(event);
@@ -376,9 +447,9 @@ export default class C2D10ActorSheet extends ActorSheet {
     const sys = this.getData().system;
     const actorId = this.actor.id;
 
-    let pool = sys.health.mentalImpairment ? parseInt((sys.info.wealth * 2) - 2) : sys.info.wealth * 2;
+    let pool = sys.health.mentalImpairment ? parseInt((sys.info.economy * 2) - 2) : sys.info.economy * 2;
     if (pool < 1) pool = 1;
-    await wealthTest(sys.health.crisis, pool, actorId);
+    await economyTest(sys.health.crisis, pool, actorId);
   }
 
   /**

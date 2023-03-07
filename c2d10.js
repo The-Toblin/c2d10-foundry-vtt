@@ -1,5 +1,5 @@
 import { c2d10 } from "./module/config.js";
-import { RegularDie} from "./module/dice/C2D10RegularDie.js";
+import { RegularDie } from "./module/dice/C2D10RegularDie.js";
 import { CrisisDie } from "./module/dice/C2D10CrisisDie.js";
 import C2D10Item from "./module/C2D10Item.js";
 import C2D10ItemSheet from "./module/sheets/C2D10ItemSheet.js";
@@ -24,6 +24,7 @@ async function preloadHandlebarsTemplates() {
     "systems/c2d10/templates/partials/sheet-tabs/npc/npc-info.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/npc/npc-skills.hbs",
     "systems/c2d10/templates/partials/list-items/asset-list-item.hbs",
+    "systems/c2d10/templates/partials/list-items/equipment-list-item.hbs",
     "systems/c2d10/templates/partials/list-items/trait-list-item.hbs",
     "systems/c2d10/templates/partials/list-items/variant-list-item.hbs",
     "systems/c2d10/templates/dialogs/add-focus-dialog.hbs",
@@ -99,7 +100,7 @@ function registerSystemSettings() {
 
 Hooks.once("ready", () => {
   /**
-   * Add the necessary Keeper controls to the view, hide everything but Hero points for players.
+   * Add the necessary Keeper controls to the view, hide the buttons for players.
    */
   const HP = C2D10Utility.getHeroPoints();
   const VP = C2D10Utility.getVillainPoints();
@@ -254,11 +255,11 @@ Hooks.once("init", function() {
    */
   Handlebars.registerHelper("dots", function(value, max, content) {
     const full =
-    `<div class="dot-container full">
+      `<div class="dot-container full">
       <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp"/>
     </div>`;
     const empty =
-    `<div class="dot-container empty">
+      `<div class="dot-container empty">
       <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp"/>
     </div>`;
 
@@ -283,20 +284,20 @@ Hooks.once("init", function() {
 
   Handlebars.registerHelper("healthdots", function(superficial, critical, max, context, content) {
     const critdie =
-    `<div class="dot-container full">
+      `<div class="dot-container full">
       <img class="d10-dot-full" src="/systems/c2d10/assets/d10-red.webp"/>
     </div>`;
     const full =
-    `<div class="dot-container full">
+      `<div class="dot-container full">
       <img class="d10-dot-full" src="/systems/c2d10/assets/d10-yellow.webp"/>
     </div>`;
     const empty =
-    `<div class="dot-container empty">
+      `<div class="dot-container empty">
       <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp"/>
     </div>`;
 
     const space =
-    `<div class="space">
+      `<div class="space">
       <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp"/>
     </div>`;
 
@@ -384,9 +385,17 @@ Hooks.once("diceSoNiceReady", dice3d => {
       "systems/c2d10/assets/roll-crit.webp",
       "systems/c2d10/assets/roll-fumble.webp"
     ],
-    values: {
-      min: 1,
-      max: 10
+    valueMap: {
+      0: 1,
+      1: 2,
+      2: 3,
+      3: 4,
+      4: 5,
+      5: 6,
+      6: 7,
+      7: 8,
+      8: 9,
+      9: 10
     },
     colorset: "main",
     fontScale: 0.5,
@@ -407,13 +416,20 @@ Hooks.once("diceSoNiceReady", dice3d => {
       "systems/c2d10/assets/crisis-crit.webp",
       "systems/c2d10/assets/crisis-fumble.webp"
     ],
-    values: {
-      min: 1,
-      max: 10
+    valueMap: {
+      0: 1,
+      1: 2,
+      2: 3,
+      3: 4,
+      4: 5,
+      5: 6,
+      6: 7,
+      7: 8,
+      8: 9,
+      9: 10
     },
     colorset: "crisis",
     fontScale: 0.5,
     system: "c2d10"
   }, "d10");
 });
-

@@ -9,7 +9,7 @@ export class RegularDie extends CeleniaDie {
   static DENOMINATION = "r";
 
   /** @override */
-  static getResultLabel(result) {
+  getResultLabel(result) {
     return {
       0: '<img src="systems/c2d10/assets/roll-fumble.webp" />',
       1: '<img src="systems/c2d10/assets/roll-miss.webp" />',

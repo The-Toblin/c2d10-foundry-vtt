@@ -9,7 +9,7 @@ export class CrisisDie extends CeleniaDie {
   static DENOMINATION = "s";
 
   /** @override */
-  static getResultLabel(result) {
+  getResultLabel(result) {
     return {
       1: '<img src="systems/c2d10/assets/roll-miss.webp" />',
       2: '<img src="systems/c2d10/assets/roll-miss.webp" />',

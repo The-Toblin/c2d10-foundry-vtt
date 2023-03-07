@@ -695,7 +695,7 @@ table input {
 .c2d10.sheet .table-no-border,
 .c2d10.item-sheet .table-no-border {
   border: none !important;
-  padding: 2px;
+  padding: 0px 2px;
 }
 .c2d10.sheet .warning,
 .c2d10.item-sheet .warning {

@@ -27,6 +27,8 @@
                 {{/if}}
                 {{#if assets}}
                     <a class="item" data-tab="assets">{{localize "c2d10.sheet.assets"}}</a>
+                {{else if equipment}}
+                    <a class="item" data-tab="assets">{{localize "c2d10.sheet.assets"}}</a>
                 {{/if}}
                 {{#if powers}}
                     <a class="item" data-tab="powers">{{localize "c2d10.sheet.powers"}}</a>
@@ -50,17 +52,15 @@
                 {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-focus-tab.hbs"}}
             </div>
             {{!-- Traits Tab --}}
-            {{#if traits }}
+            {{#if traits}}
                 <div class="tab sheet-traits" data-group="primary" data-tab="traits">
                     {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-traits-tab.hbs"}}
                 </div>
             {{/if}}
             {{!-- Assets Tab --}}
-            {{#if assets}}
-                <div class="tab sheet-assets" data-group="primary" data-tab="assets">
-                    {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-assets-tab.hbs"}}
-                </div>
-            {{/if}}
+            <div class="tab sheet-assets" data-group="primary" data-tab="assets">
+                {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-assets-tab.hbs"}}
+            </div>
             {{!-- Powers Tab --}}
             {{#if powers}}
                 <div class="tab sheet-powers" data-group="primary" data-tab="powers">
