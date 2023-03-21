@@ -8,7 +8,7 @@ import { CrisisDie } from "./C2D10CrisisDie.js";
  *
  * Exports the rollBasicTest function that allows performing C2D10 tests.
  * This utility file contains a number of internal helper functions saved as constants.
- * Only a single function is exported for use, and it is found at the end of this file.
+ * Only the final functions are exported for use, and are found at the end of this file.
  */
 
 
