@@ -15,6 +15,7 @@ export default class C2D10Actor extends Actor {
     this.system.health.strain.max = maxStrain;
     this.system.health.stress.max = maxStress;
 
+    // Calculate current Crisis based on critical damage, and cap the value at 5.
     const crisisValue = parseInt(this.system.health.strain.critical + this.system.health.stress.critical);
     this.system.health.crisis = crisisValue <= 5 ? crisisValue : 5;
 
