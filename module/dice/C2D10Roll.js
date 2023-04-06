@@ -14,10 +14,10 @@ import { CrisisDie } from "./C2D10CrisisDie.js";
 
 /**
  *  Counts hits, zeroes, determines messups and complications.
- * @param {object}    mainDice    An object holding all the
- * @param {object}    crisisDice
- * @param {number}    DC             a number, showing the DC for the test.
- * @returns {object}  evaluation results in an object.
+ * @param {object}    mainDice    An object holding all the pool dice
+ * @param {object}    crisisDice  An object, holding all the crisis dice, if any.
+ * @param {number}    DC          a number, showing the DC for the test.
+ * @returns {object}              evaluation results in an object.
  */
 const _evaluateSuccesses = async (mainDice = false, crisisDice = false, DC = 0) => {
   const regTotal = mainDice ? mainDice.total : 0;
@@ -133,41 +133,6 @@ const _diceList = async (mainDice = false, crisisDice = false) => {
  * @param {object} evaluation   Evaluated roll object. Contains pass, DC, number of hits etc.
  */
 const _renderRoll = async (listContents, evaluation) => {
-  let outcome = "";
-
-  if (evaluation.pass === "Pass!") {
-    if (evaluation.mess) {
-      outcome = `
-          <h2 class="align-center">
-            Mess up!
-          </h2>`;
-    } else if (evaluation.complication) {
-      outcome = `
-          <h2 class="align-center">
-            Pass with complication!
-          </h2>`;
-    } else {
-      outcome = `
-          <h2 class="align-center">
-            ${evaluation.pass}
-          </h2>`;
-    }
-  } else if (evaluation.pass === "Fail!") {
-    if (evaluation.complication) {
-      outcome = `
-          <h2 class="align-center">
-            Failure with complication!
-          </h2>`;
-      if (evaluation.zeroes > 0) outcome += `<h2 class="align-center">Setbacks: ${evaluation.zeroes}</h2>`;
-    } else {
-      outcome = `
-          <h2 class="align-center">
-            ${evaluation.pass}
-          </h2>`;
-      if (evaluation.zeroes > 0) outcome += `<h2 class="align-center">Setbacks: ${evaluation.zeroes}</h2>`;
-    }
-  }
-
 
   const renderedRoll =
   `<div class="dice-roll">
@@ -196,9 +161,6 @@ const _renderRoll = async (listContents, evaluation) => {
                     ${evaluation.hits - evaluation.DC}
                 </div>
             </div>
-        </div>
-        <div class="flex-col flex-start c2d10-contentbox">
-          ${outcome}
         </div>
     </div>
   </div>`;
@@ -318,22 +280,39 @@ export async function talentTest(crisis, item, pool, actorId) {
 
 /**
  * Perform a Skill test. Will open a dialog to choose parent Talent. Takes Crisis into account.
- * @param {number} crisis  The character's current value in Crisis.
- * @param {string} item    The name of the item to roll for.
- * @param {number} pool    The Talent rank to produce a pool of dice.
- * @param {object} talents An object holding all the talents and ranks for the character.
- * @param {string} actorId The actor's Id.
- * @param {string} group   The group the skill belongs to.
+ * @param {string}  type    The type of item being rolled for (talent, skill, power, other)
+ * @param {string}  group   The group the item belongs to (physical, mental etc)
+ * @param {string}  id      The name of the item being rolled for.
+ * @param {string}  actorId  The actor's Id.
  */
-export async function skillTest(crisis, item, pool, talents, actorId, group) {
+export async function skillTest(type, group, id, actorId) {
   const rollData = {};
 
-  // Determine which talent is highest in the group, so we can preselect it when opening the dialog.
-  const talentObject = game.actors.get(actorId).system.talents[group];
-  const highest = Object.keys(talentObject).reduce((a, b) => talentObject[a] > talentObject[b] ? a : b);
+  // Determine which item was clicked and preselect it.
+  let selectedItem;
+  let highestTalent;
+
+  if (type === "skills") {
+    selectedItem = system[type][group][id];
+    const talentObject = game.actors.get(actorId).system.talents[group];
+    highestTalent = Object.keys(talentObject).reduce((a, b) => talentObject[a] > talentObject[b] ? a : b);
+  } else {
+    selectedItem = system[type][group][id];
+  }
+
+  rollData.worldPowers = [];
+  for (const power of game.items) {
+    if (power.type === "power") rollData.worldPowers.push({
+      powerId: power.system.powerId,
+      name: power.name
+    });
+  }
+  // TODO: I'm currently here and working on collecting rolldata for the new roll function
 
   // Populate the needed rolldata
   rollData.talentsList = c2d10.allTalents;
+  rollData.skillList = c2d10.allSkills;
+  rollData.powerList = c2d10.allPowers;
   rollData.pool = parseInt(pool);
   rollData.item = item;
   rollData.crisis = parseInt(crisis);
@@ -341,7 +320,20 @@ export async function skillTest(crisis, item, pool, talents, actorId, group) {
   rollData.id = actorId;
   rollData.DC = game.settings.get("c2d10", "DC");
   rollData.talents = talents;
-  rollData.highest = highest;
+  rollData.highest = highestTalent;
+
+
+  if (dataset.group === "physical" && sys.health.physicalImpairment) {
+    pool -= 2;
+
+    if (pool < 1) pool = 1;
+  }
+
+  if (dataset.group !== "physical" && sys.health.mentalImpairment) {
+    pool -= 2;
+
+    if (pool < 1) pool = 1;
+  }
 
   // Create the dialog
   const dialogOptions = {
@@ -382,7 +374,7 @@ export async function skillTest(crisis, item, pool, talents, actorId, group) {
  * @param {object} skills  An object holding all the skills and ranks for the character.
  * @param {string} actorId The actor's Id.
  */
-export async function powerTest(crisis, item, pool, skills, talents, actorId) {
+export async function powerTest(crisis, item, pool, talents, actorId) {
   const rollData = {};
 
   // Populate the needed rolldata
@@ -394,7 +386,6 @@ export async function powerTest(crisis, item, pool, skills, talents, actorId) {
   rollData.id = actorId;
   rollData.DC = game.settings.get("c2d10", "DC");
   rollData.talents = talents;
-  rollData.skills = skills;
 
   // Create the dialog
   const dialogOptions = {
