@@ -379,9 +379,10 @@ export async function skillTest(crisis, item, pool, talents, actorId, group) {
  * @param {string} item    The name of the item to roll for.
  * @param {number} pool    The Talent rank to produce a pool of dice.
  * @param {object} talents An object holding all the talents and ranks for the character.
+ * @param {object} skills  An object holding all the skills and ranks for the character.
  * @param {string} actorId The actor's Id.
  */
-export async function powerTest(crisis, item, pool, talents, actorId) {
+export async function powerTest(crisis, item, pool, skills, talents, actorId) {
   const rollData = {};
 
   // Populate the needed rolldata
@@ -393,6 +394,7 @@ export async function powerTest(crisis, item, pool, talents, actorId) {
   rollData.id = actorId;
   rollData.DC = game.settings.get("c2d10", "DC");
   rollData.talents = talents;
+  rollData.skills = skills;
 
   // Create the dialog
   const dialogOptions = {

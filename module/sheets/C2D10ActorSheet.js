@@ -497,6 +497,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     const sys = this.getData().system;
     let pool = sys.skills[dataset.group][dataset.id];
     const talents = this.getData().talents;
+    const skills = this.getData().skills;
     const actorId = this.actor.id;
     const crisis = sys.health.crisis;
 
@@ -512,7 +513,7 @@ export default class C2D10ActorSheet extends ActorSheet {
       if (pool < 1) pool = 1;
     }
 
-    await skillTest(crisis, dataset.id, pool, talents, actorId, dataset.group);
+    await skillTest(crisis, dataset.id, pool, talents, skills, actorId, dataset.group);
   }
 
   /**
