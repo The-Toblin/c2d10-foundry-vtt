@@ -280,19 +280,25 @@ export async function talentTest(crisis, item, pool, actorId) {
 
 /**
  * Perform a Skill test. Will open a dialog to choose parent Talent. Takes Crisis into account.
- * @param {string}  type    The type of item being rolled for (talent, skill, power, other)
- * @param {string}  group   The group the item belongs to (physical, mental etc)
- * @param {string}  id      The name of the item being rolled for.
- * @param {string}  actorId  The actor's Id.
+ * @param {string}  rolltype  A string holding the type of roll to be performed.
+ * @param {string}  type      The type of item being rolled for as pool 1 (talent, skill, power, other)
+ * @param {string}  group     The group the item belongs to (physical, mental etc)
+ * @param {string}  id        The name of the item being rolled for.
+ * @param {string}  actorId   The actor's Id.
  */
-export async function skillTest(type, group, id, actorId) {
+export async function rollTest(rolltype, type, group, id, actorId) {
   const rollData = {};
+
+  console.warn("This was delivered to the function:", "\n", "Type:", type, "\n", "Group:", group, "\n", "Name:", id, "\n", "ActorId:", actorId);
 
   // Determine which item was clicked and preselect it.
   let selectedItem;
   let highestTalent;
 
-  if (type === "skills") {
+  if (type === "powers") {
+    // Do stuff
+  }
+  else if (type === "skills") {
     selectedItem = system[type][group][id];
     const talentObject = game.actors.get(actorId).system.talents[group];
     highestTalent = Object.keys(talentObject).reduce((a, b) => talentObject[a] > talentObject[b] ? a : b);
@@ -307,7 +313,6 @@ export async function skillTest(type, group, id, actorId) {
       name: power.name
     });
   }
-  // TODO: I'm currently here and working on collecting rolldata for the new roll function
 
   // Populate the needed rolldata
   rollData.talentsList = c2d10.allTalents;
@@ -323,13 +328,13 @@ export async function skillTest(type, group, id, actorId) {
   rollData.highest = highestTalent;
 
 
-  if (dataset.group === "physical" && sys.health.physicalImpairment) {
+  if (group === "physical" && game.actors.get(actorId).system.health.physicalImpairment) {
     pool -= 2;
 
     if (pool < 1) pool = 1;
   }
 
-  if (dataset.group !== "physical" && sys.health.mentalImpairment) {
+  if (group !== "physical" && game.actors.get(actorId).system.health.mentalImpairment) {
     pool -= 2;
 
     if (pool < 1) pool = 1;

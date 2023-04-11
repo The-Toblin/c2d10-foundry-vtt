@@ -1,4 +1,4 @@
-import { healthTest, economyTest, talentTest, skillTest, powerTest } from "../dice/C2D10Roll.js";
+import { healthTest, economyTest, talentTest, rollTest, powerTest } from "../dice/C2D10Roll.js";
 
 /**
  * Base Actor sheet. This holds all functions available to actor sheets and can be extended by
@@ -480,7 +480,7 @@ export default class C2D10ActorSheet extends ActorSheet {
       if (pool < 1) pool = 1;
     }
 
-    await talentTest(crisis, dataset.id, pool, actorId);
+    await rollTest(dataset.type, dataset.group, dataset.id, actorId);
   }
 
   /**
@@ -497,7 +497,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     const sys = this.getData().system;
     const actorId = this.actor.id;
 
-    await skillTest(dataset.type, dataset.group, dataset.id, actorId);
+    await rollTest(dataset.type, dataset.group, dataset.id, actorId);
   }
 
   /**
@@ -515,17 +515,9 @@ export default class C2D10ActorSheet extends ActorSheet {
     const power = this.actor.items.get(dataset.id);
     const sys = this.actor.system;
     let pool = power.system.level;
-    const talents = this.getData().talents;
     const actorId = this.actor.id;
-    const crisis = sys.health.crisis;
 
-    if (sys.health.mentalImpairment) {
-      pool -= 2;
-
-      if (pool < 1) pool = 1;
-    }
-
-    await powerTest(crisis, power.name, pool, talents, actorId);
+    await rollTest(null, "powers", power.name, actorId);
   }
 
   async _postDescription(event) {
