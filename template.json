@@ -147,9 +147,11 @@
         "types": [
             "armor",
             "asset",
+            "debt",
             "power",
             "variant",
             "trait",
+            "wealth",
             "weapon"
         ],
         "armor": {
@@ -165,6 +167,11 @@
                 "coreAsset"
             ],
             "assetType": ""
+        },
+        "debt": {
+            "templates": [
+                "coreAsset"
+            ]
         },
         "power": {
             "description": "",
@@ -187,6 +194,11 @@
         "trait": {
             "level": 0,
             "traitType": "virtue"
+        },
+        "wealth": {
+            "templates": [
+                "coreAsset"
+            ]
         },
         "weapon": {
             "templates": [
