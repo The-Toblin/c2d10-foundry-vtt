@@ -25,6 +25,12 @@
                     "family": ""
                 }
             },
+	    "equipment": {
+	    	"equipment": {
+		    "armor": "",
+		    "weapon": ""
+		}
+	    },
             "health": {
                 "health": {
                     "strain": {
@@ -103,15 +109,12 @@
         },
         "actor": {
             "templates": [
+		"equipment",
                 "info",
                 "health",
                 "talents",
                 "skills"
-            ],
-            "equipment": {
-                "armor": "",
-                "weapon": ""
-            }
+            ]
         },
         "npc": {
             "skills": {
@@ -125,14 +128,11 @@
                 }
             },
             "templates": [
+		"equipment",
                 "info",
                 "health",
                 "talents"
-            ],
-            "equipment": {
-                "armor": "",
-                "weapon": ""
-            }
+            ]
         }
     },
     "Item": {
