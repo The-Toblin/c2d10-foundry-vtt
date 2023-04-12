@@ -291,7 +291,12 @@ export async function rollTest(rolltype, type, group, id, actorId) {
 
   console.warn("This was delivered to the function:", "\n", "Type:", type, "\n", "Group:", group, "\n", "Name:", id, "\n", "ActorId:", actorId);
 
-  // Determine which item was clicked and preselect it.
+  /* Determine which item was clicked and preselect the most fitting match.
+  *  For Talents, this would be a mirror (to roll with itself), but for skills
+  *  it would be the highest talent in the group. For powers, health and economy
+  *  would be absolutely nothing.
+  */
+
   let selectedItem;
   let highestTalent;
 
