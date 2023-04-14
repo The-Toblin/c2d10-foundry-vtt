@@ -242,74 +242,45 @@ const _doRoll = async rollData => {
 };
 
 /**
- * Perform an acquisition test, rolling just with Economy and nothing else. Takes Crisis into account.
- * @param {number} crisis  The character's current value in Crisis.
- * @param {number} pool    The Economy rank to produce a pool of dice.
- * @param {string} actorId The actor's Id.
+ * Perform a test. Will open a dialog to choose the second pool item. Takes Crisis into account.
+ * @param {string}  actorId             The actor's Id.
+ * @param {string}  type                The type of item being rolled for as pool 1 (talent, skill, power, other).
+ * @param {string}  group               The group the item belongs to (physical, mental etc).
+ * @param {string}  name                The name of the item being rolled for.
+ * @param {string}  pool1               The size of the rolled (Pool1) item.
+ * @param {boolean} physicalImpairment  A boolean showing if the character is physically impaired.
+ * @param {boolean} mentalImpairment    A boolean showing if the character is mentally or socially impaired.
+ * @param {number}  crisis              The character's current number of Crisis Dice.
+ * @param {...any} args
  */
-export async function economyTest(crisis, pool, actorId) {
+export async function rollTest(actorId, type, group, name, pool1, physicalImpairment, mentalImpairment, crisis) {
   const rollData = {};
 
-  rollData.crisis = crisis;
-  rollData.item = "economy";
-  rollData.pool = pool;
-  rollData.id = actorId;
-  rollData.DC = rollData.DC = game.settings.get("c2d10", "DC");
-
-  _doRoll(rollData);
-
-}
-
-/**
- * Perform a blank Talent test, rolling just with the Talent and nothing else. Takes Crisis into account.
- * @param {number} crisis  The character's current value in Crisis.
- * @param {string} item    The name of the item to roll for.
- * @param {number} pool    The Talent rank to produce a pool of dice. For blank talent tests it to be 2x the talent.
- * @param {string} actorId The actor's Id.
- */
-export async function talentTest(crisis, item, pool, actorId) {
-  const rollData = {};
-  rollData.crisis = crisis;
-  rollData.item = item;
-  rollData.pool = pool;
-  rollData.id = actorId;
-  rollData.DC = game.settings.get("c2d10", "DC");
-
-  _doRoll(rollData);
-}
-
-/**
- * Perform a Skill test. Will open a dialog to choose parent Talent. Takes Crisis into account.
- * @param {string}  rolltype  A string holding the type of roll to be performed.
- * @param {string}  type      The type of item being rolled for as pool 1 (talent, skill, power, other)
- * @param {string}  group     The group the item belongs to (physical, mental etc)
- * @param {string}  id        The name of the item being rolled for.
- * @param {string}  actorId   The actor's Id.
- */
-export async function rollTest(rolltype, type, group, id, actorId) {
-  const rollData = {};
-
-  console.warn("This was delivered to the function:", "\n", "Type:", type, "\n", "Group:", group, "\n", "Name:", id, "\n", "ActorId:", actorId);
-
-  /* Determine which item was clicked and preselect the most fitting match.
-  *  For Talents, this would be a mirror (to roll with itself), but for skills
-  *  it would be the highest talent in the group. For powers, health and economy
-  *  would be absolutely nothing.
+  /*
+  * Based on what was clicked on the sheet, there is an ideal pre-selected companion for the roll.
+  * We will here determine the best pre-selected item for talent tests and skill tests,
+  * but leave it set to "none" for anything else.
   */
 
-  let selectedItem;
-  let highestTalent;
+  let preSelectedTalent;
 
-  if (type === "powers") {
-    // Do stuff
-  }
-  else if (type === "skills") {
-    selectedItem = system[type][group][id];
+  if (type === "skills") {
+    // For skill tests, the ideal pre-selected item is the highest talent in the matching group.
     const talentObject = game.actors.get(actorId).system.talents[group];
-    highestTalent = Object.keys(talentObject).reduce((a, b) => talentObject[a] > talentObject[b] ? a : b);
-  } else {
-    selectedItem = system[type][group][id];
+    preSelectedTalent = Object.keys(talentObject).reduce((a, b) => talentObject[a] > talentObject[b] ? a : b);
+  } else if (group === "economy") {
+    // For acquisition tests, these are usually performed with a matching social talent, so we select the highest.
+    const talentObject = game.actors.get(actorId).system.talents.social;
+    preSelectedTalent = Object.keys(talentObject).reduce((a, b) => talentObject[a] > talentObject[b] ? a : b);
   }
+  else if (type === "talents") {
+    // For talent tests, these are usually performed solo, so pre-selecting itself is ideal.
+    preSelectedTalent = name;
+  } else {
+    // In every other case, we preselect "None"
+    preSelectedTalent = "None";
+  }
+
 
   rollData.worldPowers = [];
   for (const power of game.items) {
@@ -322,7 +293,6 @@ export async function rollTest(rolltype, type, group, id, actorId) {
   // Populate the needed rolldata
   rollData.talentsList = c2d10.allTalents;
   rollData.skillList = c2d10.allSkills;
-  rollData.powerList = c2d10.allPowers;
   rollData.pool = parseInt(pool);
   rollData.item = item;
   rollData.crisis = parseInt(crisis);
@@ -330,16 +300,16 @@ export async function rollTest(rolltype, type, group, id, actorId) {
   rollData.id = actorId;
   rollData.DC = game.settings.get("c2d10", "DC");
   rollData.talents = talents;
-  rollData.highest = highestTalent;
+  rollData.preSelectedTalent = preSelectedTalent;
 
 
-  if (group === "physical" && game.actors.get(actorId).system.health.physicalImpairment) {
+  if (group === "physical" && physicalImpairment) {
     pool -= 2;
 
     if (pool < 1) pool = 1;
   }
 
-  if (group !== "physical" && game.actors.get(actorId).system.health.mentalImpairment) {
+  if (group !== "physical" && mentalImpairment) {
     pool -= 2;
 
     if (pool < 1) pool = 1;
@@ -371,77 +341,6 @@ export async function rollTest(rolltype, type, group, id, actorId) {
       }
     },
     dialogOptions
-  ).render(true);
-
-}
-
-/**
- * Perform a Power test. Will open a dialog to choose parent Talent. Takes Crisis into account.
- * @param {number} crisis  The character's current value in Crisis.
- * @param {string} item    The name of the item to roll for.
- * @param {number} pool    The Talent rank to produce a pool of dice.
- * @param {object} talents An object holding all the talents and ranks for the character.
- * @param {object} skills  An object holding all the skills and ranks for the character.
- * @param {string} actorId The actor's Id.
- */
-export async function powerTest(crisis, item, pool, talents, actorId) {
-  const rollData = {};
-
-  // Populate the needed rolldata
-  rollData.talentsList = c2d10.allTalents;
-  rollData.pool = pool;
-  rollData.item = item;
-  rollData.crisis = crisis;
-  rollData.trait = 0;
-  rollData.id = actorId;
-  rollData.DC = game.settings.get("c2d10", "DC");
-  rollData.talents = talents;
-
-  // Create the dialog
-  const dialogOptions = {
-    classes: ["c2d10-dialog", "roll"],
-    top: 300,
-    left: 400
-  };
-
-  new Dialog(
-    {
-      title: `Make ${item} test`,
-      content: await renderTemplate("systems/c2d10/templates/dialogs/roll-test-dialog.hbs", rollData),
-      buttons: {
-        roll: {
-          label: "Roll!",
-          callback: html => {
-            rollData.pool = parseInt(html.find("input#pool").val() <= 5 ? parseInt(html.find("input#pool").val()) : 5);
-            rollData.crisis = parseInt(html.find("input#crisis").val());
-            rollData.parent = html.find("select#parent").val();
-            rollData.focus = html.find("input#focus")[0].checked;
-            rollData.trait = parseInt(html.find("input#trait").val());
-            // Call the roll function
-            _doRoll(rollData);}
-        }
-      }
-    },
-    dialogOptions
-  ).render(true);
-}
-
-/**
- * Perform a Health test. Takes Crisis into account.
- * @param {number} crisis  The character's current value in Crisis.
- * @param {number} pool    The health ranks to produce a pool of dice.
- * @param {boolean} stress The health (strain or stress) for rolling. True indicates stress, false equals strain.
- * @param {string} actorId The actor's Id.
- */
-export async function healthTest(crisis, pool, stress, actorId) {
-  const rollData = {};
-
-  rollData.crisis = crisis;
-  rollData.item = stress ? "stress" : "strain";
-  rollData.pool = pool;
-  rollData.id = actorId;
-  rollData.DC = rollData.DC = game.settings.get("c2d10", "DC");
-
-  _doRoll(rollData);
+  ).render(false);
 
 }

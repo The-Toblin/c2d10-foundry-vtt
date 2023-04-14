@@ -57,7 +57,7 @@
             </div>
             <div class="w-20 flex-col">
                 <div class="c2d10-contentbox h-100 {{#if showEffects}}fancy-effects{{/if}} flex-col flex-between">
-                    <h3 class="c2d10-test c2d10-economy-test description" data-tooltip="{{localize "c2d10.descriptions.economy"}}" data-type="info" data-id="economy" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
+                    <h3 class="c2d10-test c2d10-economy-test description" data-tooltip="{{localize "c2d10.descriptions.economy"}}" data-type="info" data-group="info" data-id="economy" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
                         {{localize "c2d10.character.economy"}}
                     </h3>
                     <div class="flex-row flex-between">
@@ -81,7 +81,7 @@
         </div>
         <div class="flex-row flex-between">
             <div class="flex-row flex-between c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} crisis-box w-50">
-                <h3 class="c2d10-test c2d10-health-test description" data-tooltip="{{localize "c2d10.descriptions.strain"}}" data-type="health" data-id="strain">
+                <h3 class="c2d10-test c2d10-health-test description" data-tooltip="{{localize "c2d10.descriptions.strain"}}" data-type="health" data-group="physical" data-id="strain">
                     {{localize "c2d10.resources.strain"}} {{#if system.health.physicalImpairment}}<span class="red" data-tooltip="{{localize "c2d10.sheet.impaired-tooltip"}}">{{localize "c2d10.sheet.impaired"}}</span>{{/if}}
                 </h3>
                 <div class="flex-row flex-center resource-row" data-type="health" data-id="strain" data-pass="true" data-tooltip="{{localize "c2d10.sheet.health-tooltip"}}">
@@ -89,7 +89,7 @@
                 </div>
             </div>
             <div class="flex-row flex-between c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} crisis-box w-50">
-                <h3 class="c2d10-test c2d10-health-test description" data-tooltip="{{localize "c2d10.descriptions.stress"}}" data-type="health" data-id="stress">
+                <h3 class="c2d10-test c2d10-health-test description" data-tooltip="{{localize "c2d10.descriptions.stress"}}" data-type="health" data-group="mental" data-id="stress">
                     {{localize "c2d10.resources.stress"}} {{#if system.health.mentalImpairment}}<span class="red" data-tooltip="{{localize "c2d10.sheet.impaired-tooltip"}}">{{localize "c2d10.sheet.impaired"}}</span>{{/if}}
                 </h3>
                 <div class="flex-row flex-center resource-row" data-type="health" data-id="stress" data-pass="true" data-tooltip="{{localize "c2d10.sheet.health-tooltip"}}">
