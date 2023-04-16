@@ -169,8 +169,8 @@
             "vice": "Vice"
         },
         "test-dialog": {
-            "pool": "Pool Size",
-            "parent": "Select Talent",
+            "pool1": "Dice",
+            "pool2": "Select Pool 2",
             "crisis": "Current crisis"
         },
         "chat": {

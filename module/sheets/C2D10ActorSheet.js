@@ -453,6 +453,8 @@ export default class C2D10ActorSheet extends ActorSheet {
     const physicalImpairment = sys.health.physicalImpairment;
     const mentalImpairment = sys.health.mentalImpairment;
     const crisis = sys.health.crisis;
+    const talents = this.getData().talents;
+    const skills = this.getData().skills;
     let pool = null;
     let name = null; // This is just to get around the fact that we use itemId to fetch power data.
 
@@ -478,7 +480,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     }
 
     // Perform the roll
-    await rollTest(actorId, type, group, name, pool, physicalImpairment, mentalImpairment, crisis);
+    await rollTest(actorId, talents, skills, type, group, name, pool, physicalImpairment, mentalImpairment, crisis);
   }
 
   async _postDescription(event) {

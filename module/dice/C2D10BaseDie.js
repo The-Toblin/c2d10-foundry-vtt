@@ -6,8 +6,6 @@ export class CeleniaDie extends Die {
   constructor(termData = {}) {
 
     termData.faces = 10;
-
-    console.log(termData);
     super(termData);
   }
 

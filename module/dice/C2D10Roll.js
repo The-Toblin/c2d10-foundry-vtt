@@ -16,21 +16,22 @@ import { CrisisDie } from "./C2D10CrisisDie.js";
  *  Counts hits, zeroes, determines messups and complications.
  * @param {object}    mainDice    An object holding all the pool dice
  * @param {object}    crisisDice  An object, holding all the crisis dice, if any.
- * @param {number}    DC          a number, showing the DC for the test.
  * @returns {object}              evaluation results in an object.
  */
-const _evaluateSuccesses = async (mainDice = false, crisisDice = false, DC = 0) => {
+const _evaluateHits = async (mainDice = false, crisisDice = false) => {
+
+  // Define values used to resolve the roll. A number of values here are deprecated and not shown, but are kept
+  // for legacy reasons.
   const regTotal = mainDice ? mainDice.total : 0;
   const crisisTotal = crisisDice ? crisisDice.total : 0;
   const numOfHits = parseInt(regTotal + crisisTotal);
   const complication = crisisDice ? crisisDice.values.some(x => x === 0) : false;
   const mess = crisisDice ? crisisDice.values.some(x => x === 9) : false;
   const numOfZeroes = mainDice ? mainDice.values.filter(x => x === 0).length : 0;
-  const pass = numOfHits >= DC ? "Pass!" : "Fail!";
+  const DC = game.settings.get("c2d10", "DC");
 
   return {
     DC: DC,
-    pass: pass,
     setbacks: numOfZeroes,
     hits: numOfHits,
     zeroes: numOfZeroes,
@@ -173,28 +174,31 @@ const _renderRoll = async (listContents, evaluation) => {
  * @param {object} rollData The rolldata delivered from the base function.
  */
 const _doRoll = async rollData => {
+
+  console.warn(rollData);
   let crisis = false;
   const messageTemplate = "systems/c2d10/templates/partials/chat-templates/roll.hbs";
   const bonusDice = getDice();
-  const parentLevel = rollData.parent ? rollData.talents[rollData.parent] : 0;
-  let fullPool = rollData.parent ? parseInt(rollData.pool + parentLevel + bonusDice) : rollData.pool + bonusDice;
-  crisis = rollData.crisis >= fullPool ? fullPool : rollData.crisis;
-  if (rollData.focus) fullPool += 1;
-  if (rollData.trait > 0) fullPool += rollData.trait;
+  const pool2Level = rollData.pool2Name ? rollData.talents[rollData.pool2Name] : 0;
 
-  const pool = fullPool - crisis > 0 ? parseInt(fullPool - crisis) : 0;
+  let combinedPool = parseInt(rollData.pool1Level + pool2Level + bonusDice);
+
+  console.warn(rollData.pool1Level, pool2Level, combinedPool);
+  crisis = rollData.crisis >= combinedPool ? combinedPool : rollData.crisis;
+  if (rollData.focus) combinedPool += 1;
+  if (rollData.trait !== 0) combinedPool += rollData.trait;
+
+  const rollablePool = combinedPool - crisis > 0 ? parseInt(combinedPool - crisis) : 0;
   let rollFormula = "";
 
-  if (pool > 0) rollFormula += `${pool}dr`;
-  if (pool > 0 && crisis > 0) {
+  if (rollablePool > 0) rollFormula += `${rollablePool}dr`;
+  if (rollablePool > 0 && crisis > 0) {
     rollFormula += ` + ${crisis}ds`;
   } else if (crisis > 0) {
     rollFormula += `${crisis}ds`;
   }
 
   const theRoll = new Roll(rollFormula);
-  const DC = rollData.DC;
-
   // Execute the roll
   await theRoll.evaluate({async: true});
 
@@ -202,7 +206,7 @@ const _doRoll = async rollData => {
   const crisisDice = theRoll.dice.filter(function(term) {return term instanceof CrisisDie;})[0];
 
   // Evaluate the roll
-  const evaluation = await _evaluateSuccesses(mainDice, crisisDice, DC);
+  const evaluation = await _evaluateHits(mainDice, crisisDice);
 
   // Create a rendered HTML object holding the dice rolls to present in chat.
   const renderedList = await _diceList(mainDice, crisisDice);
@@ -213,11 +217,11 @@ const _doRoll = async rollData => {
   // Create the chat message object
   let templateContext = {
     name: game.actors.get(rollData.id).name,
-    DC: DC,
-    skillName: rollData.item,
-    skillLevel: rollData.pool,
-    parentName: rollData.parent,
-    parentLevel: parentLevel,
+    DC: evaluation.DC,
+    pool1Name: rollData.pool1Name,
+    pool1Level: rollData.pool1Level,
+    pool2Name: rollData.pool2Name,
+    pool2Level: pool2Level,
     crisis: crisis,
     hits: evaluation.hits,
     complication: evaluation.complication,
@@ -244,18 +248,28 @@ const _doRoll = async rollData => {
 /**
  * Perform a test. Will open a dialog to choose the second pool item. Takes Crisis into account.
  * @param {string}  actorId             The actor's Id.
+ * @param {object}  talents             An object holding all the actor's talents and levels.
+ * @param {object}  skills              An object holding all the actor's skills and levels.
  * @param {string}  type                The type of item being rolled for as pool 1 (talent, skill, power, other).
  * @param {string}  group               The group the item belongs to (physical, mental etc).
- * @param {string}  name                The name of the item being rolled for.
- * @param {string}  pool1               The size of the rolled (Pool1) item.
+ * @param {string}  pool1Name                The name of the item being rolled for.
+ * @param {string}  pool1Level               The size of the rolled (Pool1) item.
  * @param {boolean} physicalImpairment  A boolean showing if the character is physically impaired.
  * @param {boolean} mentalImpairment    A boolean showing if the character is mentally or socially impaired.
  * @param {number}  crisis              The character's current number of Crisis Dice.
- * @param {...any} args
  */
-export async function rollTest(actorId, type, group, name, pool1, physicalImpairment, mentalImpairment, crisis) {
-  const rollData = {};
+export async function rollTest(actorId,
+  talents,
+  skills,
+  type,
+  group,
+  pool1Name,
+  pool1Level,
+  physicalImpairment,
+  mentalImpairment,
+  crisis) {
 
+  const rollData = {};
   /*
   * Based on what was clicked on the sheet, there is an ideal pre-selected companion for the roll.
   * We will here determine the best pre-selected item for talent tests and skill tests,
@@ -263,7 +277,6 @@ export async function rollTest(actorId, type, group, name, pool1, physicalImpair
   */
 
   let preSelectedTalent;
-
   if (type === "skills") {
     // For skill tests, the ideal pre-selected item is the highest talent in the matching group.
     const talentObject = game.actors.get(actorId).system.talents[group];
@@ -275,12 +288,11 @@ export async function rollTest(actorId, type, group, name, pool1, physicalImpair
   }
   else if (type === "talents") {
     // For talent tests, these are usually performed solo, so pre-selecting itself is ideal.
-    preSelectedTalent = name;
+    preSelectedTalent = pool1Name;
   } else {
     // In every other case, we preselect "None"
     preSelectedTalent = "None";
   }
-
 
   rollData.worldPowers = [];
   for (const power of game.items) {
@@ -293,12 +305,15 @@ export async function rollTest(actorId, type, group, name, pool1, physicalImpair
   // Populate the needed rolldata
   rollData.talentsList = c2d10.allTalents;
   rollData.skillList = c2d10.allSkills;
-  rollData.pool1 = parseInt(pool1);
-  rollData.item = item;
+  rollData.talents = talents;
+  rollData.skills = skills;
+  rollData.pool1Level = pool1Level;
+  rollData.pool1Name = pool1Name;
   rollData.crisis = parseInt(crisis);
+  rollData.physicalImpairment = physicalImpairment;
+  rollData.mentalImpairment = mentalImpairment;
   rollData.trait = 0;
   rollData.id = actorId;
-  rollData.talents = talents;
   rollData.preSelectedTalent = preSelectedTalent;
 
   // Create the dialog
@@ -308,18 +323,17 @@ export async function rollTest(actorId, type, group, name, pool1, physicalImpair
     left: 400
   };
 
-  // TODO: Check if you can pass variables inside rollData through the dialog to the following function
   new Dialog(
     {
-      title: `Make ${item} test`,
+      title: `Make ${pool1Name} test`,
       content: await renderTemplate("systems/c2d10/templates/dialogs/roll-test-dialog.hbs", rollData),
       buttons: {
         roll: {
           label: "Roll!",
           callback: html => {
-            rollData.pool1 = parseInt(html.find("input#pool").val() <= 5 ? parseInt(html.find("input#pool").val()) : 5);
+            rollData.pool1Level = parseInt(html.find("input#pool1Level").val() <= 5 ? parseInt(html.find("input#pool1Level").val()) : 5);
             rollData.crisis = parseInt(html.find("input#crisis").val());
-            rollData.parent = html.find("select#parent").val();
+            rollData.pool2Name = html.find("select#pool2name").val();
             rollData.focus = html.find("input#focus")[0].checked;
             rollData.trait = parseInt(html.find("input#trait").val());
             // Call the roll function
@@ -328,6 +342,6 @@ export async function rollTest(actorId, type, group, name, pool1, physicalImpair
       }
     },
     dialogOptions
-  ).render(false);
+  ).render(true);
 
 }
