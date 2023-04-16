@@ -293,27 +293,13 @@ export async function rollTest(actorId, type, group, name, pool1, physicalImpair
   // Populate the needed rolldata
   rollData.talentsList = c2d10.allTalents;
   rollData.skillList = c2d10.allSkills;
-  rollData.pool = parseInt(pool);
+  rollData.pool1 = parseInt(pool1);
   rollData.item = item;
   rollData.crisis = parseInt(crisis);
   rollData.trait = 0;
   rollData.id = actorId;
-  rollData.DC = game.settings.get("c2d10", "DC");
   rollData.talents = talents;
   rollData.preSelectedTalent = preSelectedTalent;
-
-
-  if (group === "physical" && physicalImpairment) {
-    pool -= 2;
-
-    if (pool < 1) pool = 1;
-  }
-
-  if (group !== "physical" && mentalImpairment) {
-    pool -= 2;
-
-    if (pool < 1) pool = 1;
-  }
 
   // Create the dialog
   const dialogOptions = {
@@ -322,6 +308,7 @@ export async function rollTest(actorId, type, group, name, pool1, physicalImpair
     left: 400
   };
 
+  // TODO: Check if you can pass variables inside rollData through the dialog to the following function
   new Dialog(
     {
       title: `Make ${item} test`,
@@ -330,7 +317,7 @@ export async function rollTest(actorId, type, group, name, pool1, physicalImpair
         roll: {
           label: "Roll!",
           callback: html => {
-            rollData.pool = parseInt(html.find("input#pool").val() <= 5 ? parseInt(html.find("input#pool").val()) : 5);
+            rollData.pool1 = parseInt(html.find("input#pool").val() <= 5 ? parseInt(html.find("input#pool").val()) : 5);
             rollData.crisis = parseInt(html.find("input#crisis").val());
             rollData.parent = html.find("select#parent").val();
             rollData.focus = html.find("input#focus")[0].checked;
