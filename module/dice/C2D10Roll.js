@@ -179,11 +179,10 @@ const _doRoll = async rollData => {
   let crisis = false;
   const messageTemplate = "systems/c2d10/templates/partials/chat-templates/roll.hbs";
   const bonusDice = getDice();
-  const pool2Level = rollData.pool2Name ? rollData.talents[rollData.pool2Name] : 0;
+  const pool2Level = rollData.pool2Name !== "None" && rollData.pool2Name !== "undefined" ? rollData.talents[rollData.pool2Name] : 0;
 
   let combinedPool = parseInt(rollData.pool1Level + pool2Level + bonusDice);
 
-  console.warn(rollData.pool1Level, pool2Level, combinedPool);
   crisis = rollData.crisis >= combinedPool ? combinedPool : rollData.crisis;
   if (rollData.focus) combinedPool += 1;
   if (rollData.trait !== 0) combinedPool += rollData.trait;

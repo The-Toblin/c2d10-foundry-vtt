@@ -2,10 +2,10 @@
     <h2 class="align-center c2d10-capitalize">{{name}}</h2>
     <h3 class="align-center c2d10-capitalize">
         [{{localize "c2d10.chat.DC"}} {{DC}}]
-        {{#if pool2Name}}
-            {{pool2Name}} + 
-        {{/if}}
         {{pool1Name}}
+        {{#unless (eq pool2Name "None")}}
+           + {{pool2Name}} 
+        {{/unless}}
     </h3>
     {{{roll}}}
 </section>
