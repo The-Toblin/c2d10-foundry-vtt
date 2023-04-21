@@ -1,4 +1,4 @@
-import { healthTest, economyTest, talentTest, skillTest, powerTest } from "../dice/C2D10Roll.js";
+import { rollTest } from "../dice/C2D10Roll.js";
 
 /**
  * Base Actor sheet. This holds all functions available to actor sheets and can be extended by
@@ -44,6 +44,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     let wep = this.actor.items.get(sheetData.system.equipment.weapon);
     let arm = this.actor.items.get(sheetData.system.equipment.armor);
 
+    // If a weapon is equipped, determine its damage type and send it to the display.
     if (wep) {
       let wepDamage = wep.system.critical > 0 ? wep.system.critical : wep.system.superficial;
       let wepType = wep.system.critical > 0 ? "Critical" : "Superficial";
@@ -55,6 +56,7 @@ export default class C2D10ActorSheet extends ActorSheet {
       };
     }
 
+    // If an asrmor is equipped, determine its defense type and send it to the display.
     if (arm) {
       let armProt = arm.system.deflection > 0 ? arm.system.deflection : arm.system.ablation;
       let armProtType= arm.system.deflection > 0 ? "Deflection" : "Ablation";
@@ -222,17 +224,17 @@ export default class C2D10ActorSheet extends ActorSheet {
   activateListeners(html) {
     html.find(".dot-container").on("click contextmenu", this._onResourceChange.bind(this));
     html.find(".description").on("contextmenu", this._postDescription.bind(this));
-    html.find(".power-description").on("contextmenu", this._postPowerDescription.bind(this));
+    html.find(".item-description").on("contextmenu", this._postItemDescription.bind(this));
     html.find(".edit-lock").click(this._toggleEditLock.bind(this));
     html.find(".delete-item").click(this._deleteItem.bind(this));
     html.find(".add-focus").click(this._addFocus.bind(this));
     html.find(".remove-focus").click(this._removeFocus.bind(this));
     html.find(".focus-edit").on("click contextmenu", this._editFocus.bind(this));
-    html.find(".c2d10-health-test").click(this._doHealthTest.bind(this));
-    html.find(".c2d10-economy-test").click(this._doEconomyTest.bind(this));
-    html.find(".c2d10-talent-test").click(this._doTalentTest.bind(this));
-    html.find(".c2d10-skill-test").click(this._doSkillTest.bind(this));
-    html.find(".c2d10-power-test").click(this._doPowerTest.bind(this));
+    html.find(".c2d10-health-test").click(this._doRollTest.bind(this));
+    html.find(".c2d10-economy-test").click(this._doRollTest.bind(this));
+    html.find(".c2d10-talent-test").click(this._doRollTest.bind(this));
+    html.find(".c2d10-skill-test").click(this._doRollTest.bind(this));
+    html.find(".c2d10-power-test").click(this._doRollTest.bind(this));
 
     new ContextMenu(html, ".asset", this.itemContextMenu);
     new ContextMenu(html, ".equipment", this.equipmentContextMenu);
@@ -413,134 +415,72 @@ export default class C2D10ActorSheet extends ActorSheet {
   }
 
   /**
-   * Perform a health test.
+   * Perform a test or contest.
    * @param {html} event html click event data, including dataset.
    */
-  async _doHealthTest(event) {
+  async _doRollTest(event) {
     event.preventDefault();
+
+    // If the shiftkey is held down, post the description to chat instead of rolling.
     if (event.shiftKey) {
       this._postDescription(event);
       return;
     }
 
-    const actorId = this.actor.id;
-    const dataset = event.currentTarget.closest(".c2d10-test").dataset;
-    const crisis = await this.actor.system.health.crisis;
-    const stress = dataset.id === "stress";
-
-    let poolObject = stress ? await this.actor.system.health.stress.value : await this.actor.system.health.strain.value;
-    const pool = poolObject < 0 ? 1 : poolObject;
-
-    await healthTest(crisis, pool, stress, actorId);
-  }
-
-  /**
-   * Perform an acquisition test.
-   * @param {html} event html click event data, including dataset.
-   */
-  async _doEconomyTest(event) {
-    event.preventDefault();
-    if (event.shiftKey) {
-      this._postDescription(event);
-      return;
-    }
-    const sys = this.getData().system;
-    const actorId = this.actor.id;
-
-    let pool = sys.health.mentalImpairment ? parseInt((sys.info.economy * 2) - 2) : sys.info.economy * 2;
-    if (pool < 1) pool = 1;
-    await economyTest(sys.health.crisis, pool, actorId);
-  }
-
-  /**
-   * Perform a Talent test.
-   * @param {html} event html click event data, including dataset.
-   */
-  async _doTalentTest(event) {
-    event.preventDefault();
-    if (event.shiftKey) {
-      this._postDescription(event);
-      return;
-    }
+    // Extract the dataset from the HTML data and establish a few constants we'll need.
     const dataset = event.currentTarget.closest(".c2d10-test").dataset;
     const sys = this.getData().system;
-    let pool = parseInt(sys.talents[dataset.group][dataset.id] * 2);
     const actorId = this.actor.id;
+
+    /**
+     * A test (or roll) in C2D10 requires two (or rarely three) pools,
+     * the impairment status of the actor performing the roll,
+     * the character's current number of crisis dice.
+     *
+     * The function in the roll class takes the actorId, the type, group and id (name in clear text) of
+     * the primary pool item, that item's pool value (number of D10), and the character's impairment.
+     *
+     * So we'll first need to establish those values and deliver them to the function.
+     *
+     * The ActorId was already set above. The rest we can derive either from the actor's system
+     * data or from the dataset.
+     */
+
+
+    const type = dataset.type;
+    const group = dataset.group;
+    const id = dataset.id;
+    const physicalImpairment = sys.health.physicalImpairment;
+    const mentalImpairment = sys.health.mentalImpairment;
     const crisis = sys.health.crisis;
-
-    if (dataset.group === "physical" && sys.health.physicalImpairment) {
-      pool -= 2;
-
-      if (pool < 1) pool = 1;
-    }
-
-    if (dataset.group !== "physical" && sys.health.mentalImpairment) {
-      pool -= 2;
-
-      if (pool < 1) pool = 1;
-    }
-
-    await talentTest(crisis, dataset.id, pool, actorId);
-  }
-
-  /**
-   * Perform a Skill test.
-   * @param {html} event html click event data, including dataset.
-   */
-  async _doSkillTest(event) {
-    event.preventDefault();
-    if (event.shiftKey) {
-      this._postDescription(event);
-      return;
-    }
-    const dataset = event.currentTarget.closest(".c2d10-test").dataset;
-    const sys = this.getData().system;
-    let pool = sys.skills[dataset.group][dataset.id];
     const talents = this.getData().talents;
-    const actorId = this.actor.id;
-    const crisis = sys.health.crisis;
+    const skills = this.getData().skills;
+    let pool = null;
+    let name = null; // This is just to get around the fact that we use itemId to fetch power data.
 
-    if (dataset.group === "physical" && sys.health.physicalImpairment) {
-      pool -= 2;
+    // First, if this is an acquisition roll, set the pool to the economy value.
+    if (id === "economy") {
+      pool = sys[type][id] > 1 ? sys[type][id] : 1;
+      name = id;
 
-      if (pool < 1) pool = 1;
+    // If not, check if it's a health test and determine the value of the pool.
+    } else if (type === "health") {
+      pool = sys[type][id].value > 1 ? sys[type][id].value : 1;
+      name = id;
+
+    // If it's a power test, we fetch the pool value from the power item.
+    } else if (type === "powers") {
+      pool = this.actor.items.get(id).system.level;
+      name = this.actor.items.get(id).name;
+
+    // Finally, the remaining option is either a talent or skill test, both of which are handled identically.
+    } else {
+      pool = sys[type][group][id];
+      name = id;
     }
 
-    if (dataset.group !== "physical" && sys.health.mentalImpairment) {
-      pool -= 2;
-
-      if (pool < 1) pool = 1;
-    }
-
-    await skillTest(crisis, dataset.id, pool, talents, actorId, dataset.group);
-  }
-
-  /**
-   * Perform a test with a power
-   * @param {html} event html click event data, including dataset.
-   */
-  async _doPowerTest(event) {
-    event.preventDefault();
-
-    if (event.shiftKey) {
-      this._postPowerDescription(event);
-      return;
-    }
-    const dataset = event.currentTarget.closest(".c2d10-test").dataset;
-    const power = this.actor.items.get(dataset.id);
-    const sys = this.actor.system;
-    let pool = power.system.level;
-    const talents = this.getData().talents;
-    const actorId = this.actor.id;
-    const crisis = sys.health.crisis;
-
-    if (sys.health.mentalImpairment) {
-      pool -= 2;
-
-      if (pool < 1) pool = 1;
-    }
-
-    await powerTest(crisis, power.name, pool, talents, actorId);
+    // Perform the roll
+    await rollTest(actorId, talents, skills, type, group, name, pool, physicalImpairment, mentalImpairment, crisis);
   }
 
   async _postDescription(event) {
@@ -559,9 +499,9 @@ export default class C2D10ActorSheet extends ActorSheet {
     ChatMessage.create(chatData);
   }
 
-  async _postPowerDescription(event) {
+  async _postItemDescription(event) {
     event.preventDefault();
-    const id = event.currentTarget.closest(".power-description").dataset.id;
+    const id = event.currentTarget.closest(".item-description").dataset.id;
     const item = this.actor.items.get(id);
     const messageTemplate = "systems/c2d10/templates/partials/chat-templates/description.hbs";
     const messageContext = {

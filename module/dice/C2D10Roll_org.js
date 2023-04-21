@@ -16,22 +16,21 @@ import { CrisisDie } from "./C2D10CrisisDie.js";
  *  Counts hits, zeroes, determines messups and complications.
  * @param {object}    mainDice    An object holding all the pool dice
  * @param {object}    crisisDice  An object, holding all the crisis dice, if any.
+ * @param {number}    DC          a number, showing the DC for the test.
  * @returns {object}              evaluation results in an object.
  */
-const _evaluateHits = async (mainDice = false, crisisDice = false) => {
-
-  // Define values used to resolve the roll. A number of values here are deprecated and not shown, but are kept
-  // for legacy reasons.
+const _evaluateSuccesses = async (mainDice = false, crisisDice = false, DC = 0) => {
   const regTotal = mainDice ? mainDice.total : 0;
   const crisisTotal = crisisDice ? crisisDice.total : 0;
   const numOfHits = parseInt(regTotal + crisisTotal);
   const complication = crisisDice ? crisisDice.values.some(x => x === 0) : false;
   const mess = crisisDice ? crisisDice.values.some(x => x === 9) : false;
   const numOfZeroes = mainDice ? mainDice.values.filter(x => x === 0).length : 0;
-  const DC = game.settings.get("c2d10", "DC");
+  const pass = numOfHits >= DC ? "Pass!" : "Fail!";
 
   return {
     DC: DC,
+    pass: pass,
     setbacks: numOfZeroes,
     hits: numOfHits,
     zeroes: numOfZeroes,
@@ -134,6 +133,41 @@ const _diceList = async (mainDice = false, crisisDice = false) => {
  * @param {object} evaluation   Evaluated roll object. Contains pass, DC, number of hits etc.
  */
 const _renderRoll = async (listContents, evaluation) => {
+  let outcome = "";
+
+  if (evaluation.pass === "Pass!") {
+    if (evaluation.mess) {
+      outcome = `
+          <h2 class="align-center">
+            Mess up!
+          </h2>`;
+    } else if (evaluation.complication) {
+      outcome = `
+          <h2 class="align-center">
+            Pass with complication!
+          </h2>`;
+    } else {
+      outcome = `
+          <h2 class="align-center">
+            ${evaluation.pass}
+          </h2>`;
+    }
+  } else if (evaluation.pass === "Fail!") {
+    if (evaluation.complication) {
+      outcome = `
+          <h2 class="align-center">
+            Failure with complication!
+          </h2>`;
+      if (evaluation.zeroes > 0) outcome += `<h2 class="align-center">Setbacks: ${evaluation.zeroes}</h2>`;
+    } else {
+      outcome = `
+          <h2 class="align-center">
+            ${evaluation.pass}
+          </h2>`;
+      if (evaluation.zeroes > 0) outcome += `<h2 class="align-center">Setbacks: ${evaluation.zeroes}</h2>`;
+    }
+  }
+
 
   const renderedRoll =
   `<div class="dice-roll">
@@ -163,6 +197,9 @@ const _renderRoll = async (listContents, evaluation) => {
                 </div>
             </div>
         </div>
+        <div class="flex-col flex-start c2d10-contentbox">
+          ${outcome}
+        </div>
     </div>
   </div>`;
 
@@ -174,30 +211,28 @@ const _renderRoll = async (listContents, evaluation) => {
  * @param {object} rollData The rolldata delivered from the base function.
  */
 const _doRoll = async rollData => {
-
-  console.warn(rollData);
   let crisis = false;
   const messageTemplate = "systems/c2d10/templates/partials/chat-templates/roll.hbs";
   const bonusDice = getDice();
-  const pool2Level = rollData.pool2Name !== "None" && rollData.pool2Name !== "undefined" ? rollData.talents[rollData.pool2Name] : 0;
+  const parentLevel = rollData.parent ? rollData.talents[rollData.parent] : 0;
+  let fullPool = rollData.parent ? parseInt(rollData.pool + parentLevel + bonusDice) : rollData.pool + bonusDice;
+  crisis = rollData.crisis >= fullPool ? fullPool : rollData.crisis;
+  if (rollData.focus) fullPool += 1;
+  if (rollData.trait > 0) fullPool += rollData.trait;
 
-  let combinedPool = parseInt(rollData.pool1Level + pool2Level + bonusDice);
-
-  crisis = rollData.crisis >= combinedPool ? combinedPool : rollData.crisis;
-  if (rollData.focus) combinedPool += 1;
-  if (rollData.trait !== 0) combinedPool += rollData.trait;
-
-  const rollablePool = combinedPool - crisis > 0 ? parseInt(combinedPool - crisis) : 0;
+  const pool = fullPool - crisis > 0 ? parseInt(fullPool - crisis) : 0;
   let rollFormula = "";
 
-  if (rollablePool > 0) rollFormula += `${rollablePool}dr`;
-  if (rollablePool > 0 && crisis > 0) {
+  if (pool > 0) rollFormula += `${pool}dr`;
+  if (pool > 0 && crisis > 0) {
     rollFormula += ` + ${crisis}ds`;
   } else if (crisis > 0) {
     rollFormula += `${crisis}ds`;
   }
 
   const theRoll = new Roll(rollFormula);
+  const DC = rollData.DC;
+
   // Execute the roll
   await theRoll.evaluate({async: true});
 
@@ -205,7 +240,7 @@ const _doRoll = async rollData => {
   const crisisDice = theRoll.dice.filter(function(term) {return term instanceof CrisisDie;})[0];
 
   // Evaluate the roll
-  const evaluation = await _evaluateHits(mainDice, crisisDice);
+  const evaluation = await _evaluateSuccesses(mainDice, crisisDice, DC);
 
   // Create a rendered HTML object holding the dice rolls to present in chat.
   const renderedList = await _diceList(mainDice, crisisDice);
@@ -216,11 +251,11 @@ const _doRoll = async rollData => {
   // Create the chat message object
   let templateContext = {
     name: game.actors.get(rollData.id).name,
-    DC: evaluation.DC,
-    pool1Name: rollData.pool1Name,
-    pool1Level: rollData.pool1Level,
-    pool2Name: rollData.pool2Name,
-    pool2Level: pool2Level,
+    DC: DC,
+    skillName: rollData.item,
+    skillLevel: rollData.pool,
+    parentName: rollData.parent,
+    parentLevel: parentLevel,
     crisis: crisis,
     hits: evaluation.hits,
     complication: evaluation.complication,
@@ -245,75 +280,68 @@ const _doRoll = async rollData => {
 };
 
 /**
- * Perform a test. Will open a dialog to choose the second pool item. Takes Crisis into account.
- * @param {string}  actorId             The actor's Id.
- * @param {object}  talents             An object holding all the actor's talents and levels.
- * @param {object}  skills              An object holding all the actor's skills and levels.
- * @param {string}  type                The type of item being rolled for as pool 1 (talent, skill, power, other).
- * @param {string}  group               The group the item belongs to (physical, mental etc).
- * @param {string}  pool1Name                The name of the item being rolled for.
- * @param {string}  pool1Level               The size of the rolled (Pool1) item.
- * @param {boolean} physicalImpairment  A boolean showing if the character is physically impaired.
- * @param {boolean} mentalImpairment    A boolean showing if the character is mentally or socially impaired.
- * @param {number}  crisis              The character's current number of Crisis Dice.
+ * Perform an acquisition test, rolling just with Economy and nothing else. Takes Crisis into account.
+ * @param {number} crisis  The character's current value in Crisis.
+ * @param {number} pool    The Economy rank to produce a pool of dice.
+ * @param {string} actorId The actor's Id.
  */
-export async function rollTest(actorId,
-  talents,
-  skills,
-  type,
-  group,
-  pool1Name,
-  pool1Level,
-  physicalImpairment,
-  mentalImpairment,
-  crisis) {
-
+export async function economyTest(crisis, pool, actorId) {
   const rollData = {};
-  /*
-  * Based on what was clicked on the sheet, there is an ideal pre-selected companion for the roll.
-  * We will here determine the best pre-selected item for talent tests and skill tests,
-  * but leave it set to "none" for anything else.
-  */
 
-  let preSelectedTalent;
-  if (type === "skills") {
-    // For skill tests, the ideal pre-selected item is the highest talent in the matching group.
-    const talentObject = game.actors.get(actorId).system.talents[group];
-    preSelectedTalent = Object.keys(talentObject).reduce((a, b) => talentObject[a] > talentObject[b] ? a : b);
-  } else if (group === "economy") {
-    // For acquisition tests, these are usually performed with a matching social talent, so we select the highest.
-    const talentObject = game.actors.get(actorId).system.talents.social;
-    preSelectedTalent = Object.keys(talentObject).reduce((a, b) => talentObject[a] > talentObject[b] ? a : b);
-  }
-  else if (type === "talents") {
-    // For talent tests, these are usually performed solo, so pre-selecting itself is ideal.
-    preSelectedTalent = pool1Name;
-  } else {
-    // In every other case, we preselect "None"
-    preSelectedTalent = "None";
-  }
+  rollData.crisis = crisis;
+  rollData.item = "economy";
+  rollData.pool = pool;
+  rollData.id = actorId;
+  rollData.DC = rollData.DC = game.settings.get("c2d10", "DC");
 
-  rollData.worldPowers = [];
-  for (const power of game.items) {
-    if (power.type === "power") rollData.worldPowers.push({
-      powerId: power.system.powerId,
-      name: power.name
-    });
-  }
+  _doRoll(rollData);
+
+}
+
+/**
+ * Perform a blank Talent test, rolling just with the Talent and nothing else. Takes Crisis into account.
+ * @param {number} crisis  The character's current value in Crisis.
+ * @param {string} item    The name of the item to roll for.
+ * @param {number} pool    The Talent rank to produce a pool of dice. For blank talent tests it to be 2x the talent.
+ * @param {string} actorId The actor's Id.
+ */
+export async function talentTest(crisis, item, pool, actorId) {
+  const rollData = {};
+  rollData.crisis = crisis;
+  rollData.item = item;
+  rollData.pool = pool;
+  rollData.id = actorId;
+  rollData.DC = game.settings.get("c2d10", "DC");
+
+  _doRoll(rollData);
+}
+
+/**
+ * Perform a Skill test. Will open a dialog to choose parent Talent. Takes Crisis into account.
+ * @param {number} crisis  The character's current value in Crisis.
+ * @param {string} item    The name of the item to roll for.
+ * @param {number} pool    The Talent rank to produce a pool of dice.
+ * @param {object} talents An object holding all the talents and ranks for the character.
+ * @param {string} actorId The actor's Id.
+ * @param {string} group   The group the skill belongs to.
+ */
+export async function skillTest(crisis, item, pool, talents, actorId, group) {
+  const rollData = {};
+
+  // Determine which talent is highest in the group, so we can preselect it when opening the dialog.
+  const talentObject = game.actors.get(actorId).system.talents[group];
+  const highest = Object.keys(talentObject).reduce((a, b) => talentObject[a] > talentObject[b] ? a : b);
 
   // Populate the needed rolldata
   rollData.talentsList = c2d10.allTalents;
-  rollData.skillList = c2d10.allSkills;
-  rollData.talents = talents;
-  rollData.skills = skills;
-  rollData.pool1Level = pool1Level;
-  rollData.pool1Name = pool1Name;
+  rollData.pool = parseInt(pool);
+  rollData.item = item;
   rollData.crisis = parseInt(crisis);
-  rollData.physicalImpairment = physicalImpairment;
-  rollData.mentalImpairment = mentalImpairment;
   rollData.trait = 0;
   rollData.id = actorId;
-  rollData.preSelectedTalent = preSelectedTalent;
+  rollData.DC = game.settings.get("c2d10", "DC");
+  rollData.talents = talents;
+  rollData.highest = highest;
 
   // Create the dialog
   const dialogOptions = {
@@ -324,15 +352,15 @@ export async function rollTest(actorId,
 
   new Dialog(
     {
-      title: `Make ${pool1Name} test`,
+      title: `Make ${item} test`,
       content: await renderTemplate("systems/c2d10/templates/dialogs/roll-test-dialog.hbs", rollData),
       buttons: {
         roll: {
           label: "Roll!",
           callback: html => {
-            rollData.pool1Level = parseInt(html.find("input#pool1Level").val() <= 5 ? parseInt(html.find("input#pool1Level").val()) : 5);
+            rollData.pool = parseInt(html.find("input#pool").val() <= 5 ? parseInt(html.find("input#pool").val()) : 5);
             rollData.crisis = parseInt(html.find("input#crisis").val());
-            rollData.pool2Name = html.find("select#pool2name").val();
+            rollData.parent = html.find("select#parent").val();
             rollData.focus = html.find("input#focus")[0].checked;
             rollData.trait = parseInt(html.find("input#trait").val());
             // Call the roll function
@@ -342,5 +370,77 @@ export async function rollTest(actorId,
     },
     dialogOptions
   ).render(true);
+
+}
+
+/**
+ * Perform a Power test. Will open a dialog to choose parent Talent. Takes Crisis into account.
+ * @param {number} crisis  The character's current value in Crisis.
+ * @param {string} item    The name of the item to roll for.
+ * @param {number} pool    The Talent rank to produce a pool of dice.
+ * @param {object} talents An object holding all the talents and ranks for the character.
+ * @param {object} skills  An object holding all the skills and ranks for the character.
+ * @param {string} actorId The actor's Id.
+ */
+export async function powerTest(crisis, item, pool, skills, talents, actorId) {
+  const rollData = {};
+
+  // Populate the needed rolldata
+  rollData.talentsList = c2d10.allTalents;
+  rollData.pool = pool;
+  rollData.item = item;
+  rollData.crisis = crisis;
+  rollData.trait = 0;
+  rollData.id = actorId;
+  rollData.DC = game.settings.get("c2d10", "DC");
+  rollData.talents = talents;
+  rollData.skills = skills;
+
+  // Create the dialog
+  const dialogOptions = {
+    classes: ["c2d10-dialog", "roll"],
+    top: 300,
+    left: 400
+  };
+
+  new Dialog(
+    {
+      title: `Make ${item} test`,
+      content: await renderTemplate("systems/c2d10/templates/dialogs/roll-test-dialog.hbs", rollData),
+      buttons: {
+        roll: {
+          label: "Roll!",
+          callback: html => {
+            rollData.pool = parseInt(html.find("input#pool").val() <= 5 ? parseInt(html.find("input#pool").val()) : 5);
+            rollData.crisis = parseInt(html.find("input#crisis").val());
+            rollData.parent = html.find("select#parent").val();
+            rollData.focus = html.find("input#focus")[0].checked;
+            rollData.trait = parseInt(html.find("input#trait").val());
+            // Call the roll function
+            _doRoll(rollData);}
+        }
+      }
+    },
+    dialogOptions
+  ).render(true);
+}
+
+/**
+ * Perform a Health test. Takes Crisis into account.
+ * @param {number} crisis  The character's current value in Crisis.
+ * @param {number} pool    The health ranks to produce a pool of dice.
+ * @param {boolean} stress The health (strain or stress) for rolling. True indicates stress, false equals strain.
+ * @param {string} actorId The actor's Id.
+ */
+export async function healthTest(crisis, pool, stress, actorId) {
+  const rollData = {};
+
+  rollData.crisis = crisis;
+  rollData.item = stress ? "stress" : "strain";
+  rollData.pool = pool;
+  rollData.id = actorId;
+  rollData.DC = rollData.DC = game.settings.get("c2d10", "DC");
+
+  _doRoll(rollData);
 
 }
