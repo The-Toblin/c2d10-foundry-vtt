@@ -175,7 +175,6 @@ const _renderRoll = async (listContents, evaluation) => {
  */
 const _doRoll = async rollData => {
 
-  console.warn(rollData);
   let crisis = false;
   const messageTemplate = "systems/c2d10/templates/partials/chat-templates/roll.hbs";
   const bonusDice = getDice();
@@ -186,6 +185,10 @@ const _doRoll = async rollData => {
   crisis = rollData.crisis >= combinedPool ? combinedPool : rollData.crisis;
   if (rollData.focus) combinedPool += 1;
   if (rollData.trait !== 0) combinedPool += rollData.trait;
+
+  if (combinedPool < 1 ) {
+    combinedPool = 1;
+  }
 
   const rollablePool = combinedPool - crisis > 0 ? parseInt(combinedPool - crisis) : 0;
   let rollFormula = "";
