@@ -29,15 +29,11 @@
                 "health": {
                     "strain": {
                         "min": 0,
-                        "max": 10,
-                        "value": 0,
                         "superficial": 0,
                         "critical": 0
                     },
                     "stress": {
                         "min": 0,
-                        "max": 10,
-                        "value": 0,
                         "superficial": 0,
                         "critical": 0
                     }

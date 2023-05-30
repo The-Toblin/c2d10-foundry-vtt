@@ -53,6 +53,7 @@ export default class C2D10Actor extends Actor {
     } else {
       updateData[`system.${type}.${group}.${res}`] = newValue;
     }
+
     await this.update(updateData);
   }
 
@@ -81,7 +82,7 @@ export default class C2D10Actor extends Actor {
      * @param {boolean} full          If the tracker is full, convert superficial to crit.
      */
     function handleCrit(isIncrease, res, critical, superficial, max, full = false) {
-      const updateData = [];
+      const updateData = {};
       const newValue = isIncrease ? critical + 1 : critical - 1;
 
       if (newValue < 0) return;
@@ -103,7 +104,7 @@ export default class C2D10Actor extends Actor {
       return updateData;
     }
 
-    let updateData = [];
+    let updateData = {};
     const full = total >= max;
 
     if (isCrit) {
