@@ -10,11 +10,13 @@
     <td class="c2d10-contentbox {{#if @root.showEffects}}fancy-effects{{/if}} equipment">
         {{system.assetType}}
     <td class="c2d10-contentbox {{#if @root.showEffects}}fancy-effects{{/if}} equipment">
-        <div class="flex-row">
-            {{#dots system.quality 5}}{{/dots}}
-        </div>
+        {{system.quantity}}
     </td>
-    <td class="c2d10-contentbox {{#if @root.showEffects}}fancy-effects{{/if}} equipment">
+    <td class="c2d10-contentbox {{#if @root.showEffects}}fancy-effects{{/if}}">
+        <div class="quantity-asset increase-asset"><i class="far fa-plus-square"></i></div>
+        <div class="quantity-asset decrease-asset"><i class="far fa-minus-square"></i></div>
+    </td>
+    <td class="c2d10-contentbox {{#if @root.showEffects}}fancy-effects{{/if}}">
         <div class="flex-row">
             {{#dots system.value 5}}{{/dots}}
         </div>

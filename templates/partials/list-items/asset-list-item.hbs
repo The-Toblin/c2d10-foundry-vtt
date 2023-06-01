@@ -1,6 +1,6 @@
 <tr class="asset-item" data-id="{{id}}">
     <td class="c2d10-contentbox asset {{#if @root.showEffects}}fancy-effects{{/if}}">
-        <a class="delete-item" title="{{localize "c2d10.sheet.delete"}}">
+        <a class="delete-item" title="{{localize " c2d10.sheet.delete"}}">
             <i class="far fa-minus-square"></i>
         </a>
     </td>
@@ -10,11 +10,13 @@
     <td class="c2d10-contentbox {{#if @root.showEffects}}fancy-effects{{/if}} asset">
         {{system.assetType}}
     <td class="c2d10-contentbox {{#if @root.showEffects}}fancy-effects{{/if}} asset">
-        <div class="flex-row">
-            {{#dots system.quality 5}}{{/dots}}
-        </div>
+        {{system.quantity}}
     </td>
-    <td class="c2d10-contentbox {{#if @root.showEffects}}fancy-effects{{/if}} asset">
+    <td class="c2d10-contentbox {{#if @root.showEffects}}fancy-effects{{/if}}">
+        <div class="quantity-asset increase-asset"><i class="far fa-plus-square"></i></div>
+        <div class="quantity-asset decrease-asset"><i class="far fa-minus-square"></i></div>
+    </td>
+    <td class="c2d10-contentbox {{#if @root.showEffects}}fancy-effects{{/if}}">
         <div class="flex-row">
             {{#dots system.value 5}}{{/dots}}
         </div>

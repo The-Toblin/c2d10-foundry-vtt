@@ -140,7 +140,8 @@
             "coreAsset": {
                 "description": "This is a description",
                 "value": 0,
-                "quality": 0
+                "quality": 0,
+                "quantity": 1
             }
         },
 
