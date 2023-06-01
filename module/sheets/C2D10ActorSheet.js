@@ -230,11 +230,11 @@ export default class C2D10ActorSheet extends ActorSheet {
     html.find(".add-focus").click(this._addFocus.bind(this));
     html.find(".remove-focus").click(this._removeFocus.bind(this));
     html.find(".focus-edit").on("click contextmenu", this._editFocus.bind(this));
-    html.find(".c2d10-health-test").click(this._doHealthTest.bind(this));
-    html.find(".c2d10-economy-test").click(this._doEconomyTest.bind(this));
-    html.find(".c2d10-talent-test").click(this._doTalentTest.bind(this));
-    html.find(".c2d10-skill-test").click(this._doSkillTest.bind(this));
-    html.find(".c2d10-power-test").click(this._doPowerTest.bind(this));
+    html.find(".c2d10-health-test").click(this._doRollTest.bind(this));
+    html.find(".c2d10-economy-test").click(this._doRollTest.bind(this));
+    html.find(".c2d10-talent-test").click(this._doRollTest.bind(this));
+    html.find(".c2d10-skill-test").click(this._doRollTest.bind(this));
+    html.find(".c2d10-power-test").click(this._doRollTest.bind(this));
     html.find(".asset").click(this._onClickItem.bind(this));
     html.find(".equipment").click(this._onClickItem.bind(this));
     html.find(".quantity-asset").click(this._modifyQuantity.bind(this));
