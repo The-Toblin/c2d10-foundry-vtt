@@ -25,6 +25,12 @@
                     "family": ""
                 }
             },
+	    "equipment": {
+	    	"equipment": {
+		    "armor": "",
+		    "weapon": ""
+		}
+	    },
             "health": {
                 "health": {
                     "strain": {
@@ -99,15 +105,12 @@
         },
         "actor": {
             "templates": [
+		"equipment",
                 "info",
                 "health",
                 "talents",
                 "skills"
-            ],
-            "equipment": {
-                "armor": "",
-                "weapon": ""
-            }
+            ]
         },
         "npc": {
             "skills": {
@@ -121,14 +124,11 @@
                 }
             },
             "templates": [
+		"equipment",
                 "info",
                 "health",
                 "talents"
-            ],
-            "equipment": {
-                "armor": "",
-                "weapon": ""
-            }
+            ]
         }
     },
     "Item": {
@@ -136,16 +136,19 @@
             "coreAsset": {
                 "description": "This is a description",
                 "value": 0,
-                "quality": 0
+                "quality": 0,
+                "quantity": 1
             }
         },
 
         "types": [
             "armor",
             "asset",
+            "debt",
             "power",
             "variant",
             "trait",
+            "wealth",
             "weapon"
         ],
         "armor": {
@@ -161,6 +164,11 @@
                 "coreAsset"
             ],
             "assetType": ""
+        },
+        "debt": {
+            "templates": [
+                "coreAsset"
+            ]
         },
         "power": {
             "description": "",
@@ -183,6 +191,11 @@
         "trait": {
             "level": 0,
             "traitType": "virtue"
+        },
+        "wealth": {
+            "templates": [
+                "coreAsset"
+            ]
         },
         "weapon": {
             "templates": [

@@ -158,7 +158,8 @@
             "critical": "Critical",
             "superficial": "Superficial",
             "value": "Value",
-            "quality": "Quality"
+            "quality": "Quality",
+            "quantity": "Quantity"
         },
         "trait": {
             "name": "Name",
