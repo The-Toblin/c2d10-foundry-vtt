@@ -251,7 +251,6 @@ export default class C2D10ActorSheet extends ActorSheet {
     const itemId = element.closest(".asset-item").dataset.id;
     const item = this.actor.items.get(itemId);
 
-    console.log(event);
     const modifier = element.className.includes("increase") ? 1 : -1;
     const quantity = item.system.quantity + modifier;
 
