@@ -1,28 +1,29 @@
 <form class="flex-col flex-start c2d10-dialog">
     <div class="c2d10-subsection">
-        <h3 class="align-center">
-            {{localize "c2d10.test-dialog.parent"}}
-        </h3>
-        <div class="c2d10-contentbox">
-            {{#if talentsList}}
-                <select id="parent">
-                    {{selectOptions talentsList selected=highest localize=true}}
-                </select>
-            {{/if}}
-        </div>
-    </div>
-    <div class="c2d10-subsection">
         <h3 class="align-center c2d10-capitalize">
-            {{item}} {{localize "c2d10.test-dialog.pool"}}
+            {{pool1Name}} {{localize "c2d10.test-dialog.pool1"}}
         </h3>
         <div class="c2d10-contentbox flex-row">
             <input class="align-center"
-                id="pool"
+                id="pool1Level"
                 type="text"
-                value="{{pool}}"
-                placeholder="{{localize "c2d10.test-dialog.pool"}}"
+                value="{{pool1Level}}"
+                placeholder="{{localize "c2d10.test-dialog.pool1"}}"
                 autofocus
              />
+        </div>
+    </div>
+    <div class="c2d10-subsection">
+        <h3 class="align-center">
+            {{localize "c2d10.test-dialog.pool2"}}
+        </h3>
+        <div class="c2d10-contentbox">
+            {{#if talentsList}}
+                <select id="pool2name">
+                    <option value="None">None</option>
+                    {{selectOptions talentsList selected=preSelectedTalent localize=true}}
+                </select>
+            {{/if}}
         </div>
     </div>
     <div class="flex-row flex-between">
