@@ -1,6 +1,7 @@
 import { c2d10 } from "./module/config.js";
 import { RegularDie } from "./module/dice/C2D10RegularDie.js";
 import { CrisisDie } from "./module/dice/C2D10CrisisDie.js";
+import * as Chat from "./module/chat.js";
 import C2D10Item from "./module/C2D10Item.js";
 import C2D10ItemSheet from "./module/sheets/C2D10ItemSheet.js";
 import C2D10Actor from "./module/C2D10Actor.js";
@@ -196,6 +197,9 @@ Hooks.on("renderPlayerList", html => {
 Hooks.on("renderPause", (_app, html, options) => {
   html.find('img[src="icons/svg/clockwork.svg"]').attr("src", "systems/c2d10/assets/cd10-logo-circle.webp");
 });
+
+Hooks.on("renderChatLog", (app, html, data) => Chat.addChatListeners(html));
+Hooks.on("renderChatMessage", (app, html, data) => Chat.hideChatActionButtons(app, html, data));
 
 Hooks.once("init", function() {
   console.log("==== C2D10 | Initialising CD10 RPG System 2nd Edition ====");

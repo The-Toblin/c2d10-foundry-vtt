@@ -12,7 +12,7 @@
         background: linear-gradient(0deg, @colors[bkg], 55%, fade(@colors[bkg], 85%));
         border: none !important;
         box-shadow: none !important;
-        color: inherit !important;
+        color: @colors[main];
         font-size: @size[large];
         font-family: @h1;
     }
@@ -62,5 +62,12 @@
         font-family: @h1;
         font-size: @size[normal];
         text-shadow: none;
+    }
+
+    .value-box {
+        color: inherit;
+        font-family: @h1;
+        font-size: @size[large];
+        margin: auto
     }
 }

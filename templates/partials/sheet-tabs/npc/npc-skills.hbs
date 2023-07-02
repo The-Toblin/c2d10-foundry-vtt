@@ -3,7 +3,7 @@
         {{localize "c2d10.sheet.skills"}}
     </h3>
     <div class="content-box c2d10-subsection {{#if showEffects}}fancy-effects{{/if}} flex-row flex-between">
-        <div class="c2d10-contentbox crisis-box w-50 flex-row flex-between">
+        <div class="c2d10-contentbox  w-50 flex-row flex-between">
             <div class="c2d10-test c2d10-skill-test description" data-type="skills" data-id="{{system.skills.primary.name}}" data-level="{{system.skills.primary.level}}" data-tooltip="<p>Left click to roll.</p>">
                 <input name="system.skills.primary.name" type="text" value="{{system.skills.primary.name}}" placeholder="{{localize "c2d10.sheet.skill"}}"/>
             </div>
@@ -11,7 +11,7 @@
                 {{#dots system.skills.primary.level 5}}{{/dots}}
             </div>
         </div>
-        <div class="c2d10-contentbox crisis-box w-50 flex-row flex-between">
+        <div class="c2d10-contentbox  w-50 flex-row flex-between">
             <div class="c2d10-test c2d10-skill-test description" data-type="skills" data-id="{{system.skills.primary.name}}" data-level="{{system.skills.secondary.level}}" data-tooltip="<p>Left click to roll.</p>">
                 <input name="system.skills.secondary.name" type="text" value="{{system.skills.secondary.name}}" placeholder="{{localize "c2d10.sheet.skill"}}"/>
             </div>

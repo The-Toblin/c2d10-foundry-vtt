@@ -8,6 +8,8 @@ export default class C2D10Actor extends Actor {
   }
 
   async prepareDerivedData() {
+    this.system.extras = {};
+
     // Derive health values.
     const maxStrain = parseInt(this.system.talents.physical.endurance + 3);
     const maxStress = parseInt(this.system.talents.mental.willpower + this.system.talents.social.poise);
@@ -30,6 +32,122 @@ export default class C2D10Actor extends Actor {
     this.system.health.physicalImpairment = strainValue === maxStrain;
     this.system.health.mentalImpairment = stressValue === maxStress;
 
+    // Set up different objects, handy for other classes and displaying on the sheet
+    this.system.extras.assets = this.items.filter(p => p.type === "asset");
+    this.system.extras.equipment = this.items.filter(p => p.type === "armor" || p.type === "weapon");
+    this.system.extras.virtues = this.items.filter(p => p.type === "trait" && p.system.traitType === "virtue");
+    this.system.extras.vices = this.items.filter(p => p.type === "trait" && p.system.traitType === "vice");
+    this.system.extras.powers = this.items.filter(p => p.type === "power");
+    this.system.extras.variants = this.items.filter(p => p.type === "variant");
+
+    /**
+     * Set up equipped weapon and armor objects to display on the sheet
+     */
+    let wep = this.items.get(this.system.equipment.weapon);
+    let arm = this.items.get(this.system.equipment.armor);
+
+    // If a weapon is equipped, determine its damage type and send it to the display.
+    if (wep) {
+      let wepDamage = wep.system.critical > 0 ? wep.system.critical : wep.system.superficial;
+      let wepType = wep.system.critical > 0 ? "Critical" : "Superficial";
+
+      this.system.extras.equippedWeapon = {
+        name: wep.name,
+        damage: wepDamage,
+        damageType: wepType
+      };
+    }
+
+    // If an asrmor is equipped, determine its defense type and send it to the display.
+    if (arm) {
+      let armProt = arm.system.deflection > 0 ? arm.system.deflection : arm.system.ablation;
+      let armProtType= arm.system.deflection > 0 ? "Deflection" : "Ablation";
+
+      this.system.extras.equippedArmor = {
+        name: arm.name,
+        protection: armProt,
+        protectionType: armProtType
+      };
+    }
+
+    /**
+     * Create list objects to use for dialogs.
+     */
+    this.system.extras.talents = {};
+    for (const entry of Object.entries(this.system.talents.physical)) {
+      this.system.extras.talents[entry[0]] = entry[1];
+    }
+    for (const entry of Object.entries(this.system.talents.social)) {
+      this.system.extras.talents[entry[0]] = entry[1];
+    }
+    for (const entry of Object.entries(this.system.talents.mental)) {
+      this.system.extras.talents[entry[0]] = entry[1];
+    }
+
+    /**
+     * Create list objects to use for dialogs.
+     */
+    this.system.extras.skills = {};
+    for (const entry of Object.entries(this.system.skills.physical)) {
+      this.system.extras.skills[entry[0]] = entry[1];
+    }
+    for (const entry of Object.entries(this.system.skills.social)) {
+      this.system.extras.skills[entry[0]] = entry[1];
+    }
+    for (const entry of Object.entries(this.system.skills.mental)) {
+      this.system.extras.skills[entry[0]] = entry[1];
+    }
+
+    /**
+     * Sort character's traits
+     */
+    this.system.extras.virtues.sort(function(a, b) {
+      let nameA = a.name.toUpperCase(); // Ignore upper and lowercase
+      let nameB = b.name.toUpperCase(); // Ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1; // NameA comes first
+      }
+      if (nameA > nameB) {
+        return 1; // NameB comes first
+      }
+      return 0;  // Names must be equal
+    });
+
+    this.system.extras.vices.sort(function(a, b) {
+      let nameA = a.name.toUpperCase(); // Ignore upper and lowercase
+      let nameB = b.name.toUpperCase(); // Ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1; // NameA comes first
+      }
+      if (nameA > nameB) {
+        return 1; // NameB comes first
+      }
+      return 0;  // Names must be equal
+    });
+
+    this.system.extras.powers.sort(function(a, b) {
+      let nameA = a.name.toUpperCase(); // Ignore upper and lowercase
+      let nameB = b.name.toUpperCase(); // Ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1; // NameA comes first
+      }
+      if (nameA > nameB) {
+        return 1; // NameB comes first
+      }
+      return 0;  // Names must be equal
+    });
+
+    this.system.extras.variants.sort(function(a, b) {
+      let nameA = a.name.toUpperCase(); // Ignore upper and lowercase
+      let nameB = b.name.toUpperCase(); // Ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1; // NameA comes first
+      }
+      if (nameA > nameB) {
+        return 1; // NameB comes first
+      }
+      return 0;  // Names must be equal
+    });
   }
 
   async modifyResource(n, type, group, res) {

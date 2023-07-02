@@ -44,6 +44,7 @@
             "archetype": "Archetype",
             "addFocus": "Add a focus",
             "assets": "Assets",
+            "attack": "Attack",
             "crisis": "Crisis",
             "delete": "Delete item",
             "description": "Post description",
@@ -152,6 +153,7 @@
         "asset": {
             "name": "Name",
             "ablation": "Ablation",
+            "damage": "Damage",
             "deflection": "Deflection",
             "description": "Description",
             "assetType": "Type",
@@ -170,11 +172,16 @@
             "vice": "Vice"
         },
         "test-dialog": {
-            "pool1": "Dice",
-            "pool2": "Select Pool 2",
+            "pool1": "Pool Dice",
+            "pool2": "Select Talent Pool",
             "crisis": "Current crisis"
         },
         "chat": {
+            "attack": {
+                "title": "Attack ({weapon})",
+                "attack": "Attack"
+            },
+            "defend": "Defend",
             "roll": "Roll",
             "test": "Test",
             "DC": "DC",

@@ -390,6 +390,10 @@
   justify-content: center;
   align-content: flex-start;
 }
+.flex-verticalcenter {
+  display: flex;
+  align-items: center;
+}
 .w-100 {
   width: 100%;
 }
@@ -688,8 +692,9 @@ table input {
   border: none !important;
   color: #29a253;
   font-family: Quantum, sans-serif;
-  font-size: 1rem;
+  font-size: 1.25rem;
   text-shadow: none;
+  margin: none;
 }
 .c2d10.sheet #no-marker,
 .c2d10.item-sheet #no-marker {
@@ -813,19 +818,13 @@ table input {
 .c2d10.item-sheet .space {
   visibility: hidden;
 }
-.c2d10.sheet .crisis-box,
-.c2d10.item-sheet .crisis-box {
-  padding-top: 10px;
-}
-.c2d10.sheet .crisis-box h3,
-.c2d10.item-sheet .crisis-box h3 {
-  margin-right: 10px;
-}
 .c2d10.sheet .crisis-number,
 .c2d10.item-sheet .crisis-number {
   text-align: center;
   font-family: Quantum, sans-serif;
   justify-content: center;
+  align-items: center;
+  margin-top: 10%;
 }
 .c2d10.sheet .crisis-fine,
 .c2d10.item-sheet .crisis-fine {
@@ -1079,7 +1078,7 @@ table input {
   background: linear-gradient(0deg, #021109, 55%, rgba(2, 17, 9, 0.85));
   border: none !important;
   box-shadow: none !important;
-  color: inherit !important;
+  color: #88f2ad;
   font-size: 1.25rem;
   font-family: Quantum, sans-serif;
 }
@@ -1122,4 +1121,10 @@ table input {
   font-family: Quantum, sans-serif;
   font-size: 1rem;
   text-shadow: none;
+}
+.c2d10-dialog .value-box {
+  color: inherit;
+  font-family: Quantum, sans-serif;
+  font-size: 1.25rem;
+  margin: auto;
 }

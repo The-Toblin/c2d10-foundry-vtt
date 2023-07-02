@@ -18,8 +18,8 @@
                         <td>
                             <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "c2d10.character.name"}}" />
                         </td>
-                       <th class="cd10-header">
-                        {{localize "c2d10.sheet.archetype"}}
+                        <th class="cd10-header">
+                            {{localize "c2d10.sheet.archetype"}}
                         </th>
                         <td>
                             <input name="system.info.archetype" type="text" value="{{system.info.archetype}}" placeholder="{{localize "c2d10.sheet.archetype"}}" />
@@ -57,41 +57,40 @@
             </div>
             <div class="w-20 flex-col">
                 <div class="c2d10-contentbox h-100 {{#if showEffects}}fancy-effects{{/if}} flex-col flex-between">
-                    <h3 class="c2d10-test c2d10-economy-test description" data-tooltip="{{localize "c2d10.descriptions.economy"}}" data-type="info" data-group="info" data-id="economy" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
+                    <label class="c2d10-test align-center c2d10-economy-test description" data-tooltip="{{localize "c2d10.descriptions.economy"}}" data-type="info" data-group="info" data-id="economy" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
                         {{localize "c2d10.character.economy"}}
-                    </h3>
+                    </label>
                     <div class="flex-row flex-between">
                         <div class="flex-row resource-row" data-type="info" data-id="economy" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
                             {{#dots system.info.economy 5}}{{/dots}}
                         </div>
                     </div>
                 </div>
-                <div class="c2d10-contentbox h-100 {{#if showEffects}}fancy-effects{{/if}} flex-col flex-center">
-                    <h3 class="description" data-tooltip="{{localize "c2d10.descriptions.crisis"}}" data-id="crisis">
+                <div class="c2d10-contentbox h-100 {{#if showEffects}}fancy-effects{{/if}} flex-col flex-start">
+                    <label class="description align-center" data-tooltip="{{localize "c2d10.descriptions.crisis"}}" data-id="crisis">
                         {{localize "c2d10.resources.crisis"}}
-                    </h3>
-                <div>
-                    <div class="dot-container flex-row resource-row crisis-number crisis-alert {{#if (gt system.health.crisis 3)}} crisis-bad{{/if}}"
-                    data-type="health" data-id="crisis" data-pass="true" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
-                        {{system.health.crisis}}
+                    </label>
+                    <div>
+                        <div class="dot-container flex-row resource-row crisis-number crisis-alert {{#if (gt system.health.crisis 3)}} crisis-bad{{/if}}" data-type="health" data-id="crisis" data-pass="true" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
+                            {{system.health.crisis}}
+                        </div>
                     </div>
                 </div>
             </div>
-            </div>
         </div>
         <div class="flex-row flex-between">
-            <div class="flex-row flex-between c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} crisis-box w-50">
-                <h3 class="c2d10-test c2d10-health-test description" data-tooltip="{{localize "c2d10.descriptions.strain"}}" data-type="health" data-group="physical" data-id="strain">
+            <div class="flex-row flex-between c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}  w-50">
+                <label class="c2d10-test c2d10-health-test description" data-tooltip="{{localize "c2d10.descriptions.strain"}}" data-type="health" data-group="physical" data-id="strain">
                     {{localize "c2d10.resources.strain"}} {{#if system.health.physicalImpairment}}<span class="red" data-tooltip="{{localize "c2d10.sheet.impaired-tooltip"}}">{{localize "c2d10.sheet.impaired"}}</span>{{/if}}
-                </h3>
+                </label>
                 <div class="flex-row flex-center resource-row" data-type="health" data-id="strain" data-pass="true" data-tooltip="{{localize "c2d10.sheet.health-tooltip"}}">
                     {{#healthdots system.health.strain.superficial system.health.strain.critical system.health.strain.max "strain"}}{{/healthdots}}
                 </div>
             </div>
-            <div class="flex-row flex-between c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} crisis-box w-50">
-                <h3 class="c2d10-test c2d10-health-test description" data-tooltip="{{localize "c2d10.descriptions.stress"}}" data-type="health" data-group="mental" data-id="stress">
+            <div class="flex-row flex-between c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}  w-50">
+                <label class="c2d10-test c2d10-health-test description" data-tooltip="{{localize "c2d10.descriptions.stress"}}" data-type="health" data-group="mental" data-id="stress">
                     {{localize "c2d10.resources.stress"}} {{#if system.health.mentalImpairment}}<span class="red" data-tooltip="{{localize "c2d10.sheet.impaired-tooltip"}}">{{localize "c2d10.sheet.impaired"}}</span>{{/if}}
-                </h3>
+                </label>
                 <div class="flex-row flex-center resource-row" data-type="health" data-id="stress" data-pass="true" data-tooltip="{{localize "c2d10.sheet.health-tooltip"}}">
                     {{#healthdots system.health.stress.superficial system.health.stress.critical system.health.stress.max "stress"}}{{/healthdots}}
                 </div>
@@ -99,25 +98,32 @@
         </div>
         <div class="flex-row flex-between">
             {{#if equippedWeapon}}
-            <div class="flex-row flex-between c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} crisis-box w-50 equipment-item asset-item" data-id={{system.equipment.weapon}}>
-                <h3 class="equipment">
-                    {{equippedWeapon.name}}
-                </h3>
-                <div class="flex-row flex-center equipment">
-                    {{equippedWeapon.damage}} {{equippedWeapon.damageType}}
+            <div class="flex-row flex-start" style="width: 49.5%;">
+                <div class="flex-verticalcenter c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} equipment-item asset-item" data-id={{system.equipment.weapon}}>
+                    <a class="c2d10-attack-weapon c2d10-test" title="{{localize "c2d10.sheet.attack"}}" data-type="attack" data-id="{{system.equipment.weapon}}">
+                        <i class="fa-light fa-crosshairs-simple"></i>
+                    </a>
+                </div>
+                <div class="flex-row flex-between flex-verticalcenter w-100 c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} equipment equipment-item asset-item" data-id={{system.equipment.weapon}}>
+                    <label>
+                        {{equippedWeapon.name}}
+                    </label>
+                    <div class="flex-row flex-center">
+                        {{equippedWeapon.damage}} {{equippedWeapon.damageType}}
+                    </div>
                 </div>
             </div>
             {{/if}}
             {{#if equippedArmor}}
-            <div class="flex-row flex-between c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} crisis-box w-50 equipment-item asset-item" data-id={{system.equipment.armor}}>
-                <h3 class="equipment">
-                    {{equippedArmor.name}}
-                </h3>
-                <div class="flex-row flex-center">
-                    {{equippedArmor.protection}} {{equippedArmor.protectionType}}
+                <div class="flex-row flex-between w-50 c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} equipment equipment-item asset-item" data-id={{system.equipment.armor}}>
+                    <label>
+                        {{equippedArmor.name}}
+                    </label>
+                    <div class="flex-row flex-center">
+                        {{equippedArmor.protection}} {{equippedArmor.protectionType}}
+                    </div>
                 </div>
-            </div>
-             {{/if}}
+            {{/if}}
         </div>
     </div>
 </section>

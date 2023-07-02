@@ -31,112 +31,41 @@ export default class C2D10ActorSheet extends ActorSheet {
     /**
      * Items
      */
-    sheetData.assets = sheetData.items.filter(p => p.type === "asset");
-    sheetData.equipment = sheetData.items.filter(p => p.type === "armor" || p.type === "weapon");
-    sheetData.virtues = sheetData.items.filter(p => p.type === "trait" && p.system.traitType === "virtue");
-    sheetData.vices = sheetData.items.filter(p => p.type === "trait" && p.system.traitType === "vice");
-    sheetData.powers = sheetData.items.filter(p => p.type === "power");
-    sheetData.variants = sheetData.items.filter(p => p.type === "variant");
+    sheetData.assets =sheetData.system.extras.assets;
+    sheetData.equipment =sheetData.system.extras.equipment;
 
     /**
-     * Set up equipped weapon and armor objects to display on the sheet
+     * Traits
      */
-    let wep = this.actor.items.get(sheetData.system.equipment.weapon);
-    let arm = this.actor.items.get(sheetData.system.equipment.armor);
+    sheetData.virtues =sheetData.system.extras.virtues;
+    sheetData.vices =sheetData.system.extras.vices;
 
-    // If a weapon is equipped, determine its damage type and send it to the display.
-    if (wep) {
-      let wepDamage = wep.system.critical > 0 ? wep.system.critical : wep.system.superficial;
-      let wepType = wep.system.critical > 0 ? "Critical" : "Superficial";
+    /**
+     * Powers
+     */
+    sheetData.powers =sheetData.system.extras.powers;
+    sheetData.variants =sheetData.system.extras.variants;
 
-      sheetData.equippedWeapon = {
-        name: wep.name,
-        damage: wepDamage,
-        damageType: wepType
-      };
-    }
+    /**
+     * Equipment
+     */
+    sheetData.equippedWeapon =sheetData.system.extras.equippedWeapon;
+    sheetData.equippedArmor =sheetData.system.extras.equippedArmor;
 
-    // If an asrmor is equipped, determine its defense type and send it to the display.
-    if (arm) {
-      let armProt = arm.system.deflection > 0 ? arm.system.deflection : arm.system.ablation;
-      let armProtType= arm.system.deflection > 0 ? "Deflection" : "Ablation";
+    /**
+     * Talents
+     */
+    sheetData.talents =sheetData.system.extras.talents;
 
-      sheetData.equippedArmor = {
-        name: arm.name,
-        protection: armProt,
-        protectionType: armProtType
-      };
-    }
+    /**
+     * Skills
+     */
+    sheetData.skills =sheetData.system.extras.skills;
 
     /**
      * Set a flag to allow the traits tab to be shown if traits are present.
      */
     if (sheetData.vices || sheetData.virtues) sheetData.traits = true;
-
-    /**
-     * Create list objects to use for dialogs.
-     */
-    sheetData.talents = {};
-    for (const entry of Object.entries(sheetData.system.talents.physical)) {
-      sheetData.talents[entry[0]] = entry[1];
-    }
-    for (const entry of Object.entries(sheetData.system.talents.social)) {
-      sheetData.talents[entry[0]] = entry[1];
-    }
-    for (const entry of Object.entries(sheetData.system.talents.mental)) {
-      sheetData.talents[entry[0]] = entry[1];
-    }
-
-    /**
-     * Sort character's traits
-     */
-    sheetData.virtues.sort(function(a, b) {
-      let nameA = a.name.toUpperCase(); // Ignore upper and lowercase
-      let nameB = b.name.toUpperCase(); // Ignore upper and lowercase
-      if (nameA < nameB) {
-        return -1; // NameA comes first
-      }
-      if (nameA > nameB) {
-        return 1; // NameB comes first
-      }
-      return 0;  // Names must be equal
-    });
-
-    sheetData.vices.sort(function(a, b) {
-      let nameA = a.name.toUpperCase(); // Ignore upper and lowercase
-      let nameB = b.name.toUpperCase(); // Ignore upper and lowercase
-      if (nameA < nameB) {
-        return -1; // NameA comes first
-      }
-      if (nameA > nameB) {
-        return 1; // NameB comes first
-      }
-      return 0;  // Names must be equal
-    });
-
-    sheetData.powers.sort(function(a, b) {
-      let nameA = a.name.toUpperCase(); // Ignore upper and lowercase
-      let nameB = b.name.toUpperCase(); // Ignore upper and lowercase
-      if (nameA < nameB) {
-        return -1; // NameA comes first
-      }
-      if (nameA > nameB) {
-        return 1; // NameB comes first
-      }
-      return 0;  // Names must be equal
-    });
-
-    sheetData.variants.sort(function(a, b) {
-      let nameA = a.name.toUpperCase(); // Ignore upper and lowercase
-      let nameB = b.name.toUpperCase(); // Ignore upper and lowercase
-      if (nameA < nameB) {
-        return -1; // NameA comes first
-      }
-      if (nameA > nameB) {
-        return 1; // NameB comes first
-      }
-      return 0;  // Names must be equal
-    });
 
     /**
      * Make system settings available for sheets to use for rendering
@@ -145,7 +74,6 @@ export default class C2D10ActorSheet extends ActorSheet {
     sheetData.locked = this.actor.getFlag("c2d10", "locked");
     return sheetData;
   }
-
 
   // Define which template to be used by this actor type.
   get template() {
@@ -182,7 +110,7 @@ export default class C2D10ActorSheet extends ActorSheet {
   equipmentContextMenu = [
     {
       name: game.i18n.localize("c2d10.sheet.equip"),
-      icon: '<i class="fas fa-edit"></i>',
+      icon: '<i class="fas fa-toolbox"></i>',
       callback: element => {
         const itemId = element.closest(".equipment-item")[0].dataset.id;
         const item = this.actor.items.get(itemId);
@@ -235,6 +163,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     html.find(".c2d10-talent-test").click(this._doRollTest.bind(this));
     html.find(".c2d10-skill-test").click(this._doRollTest.bind(this));
     html.find(".c2d10-power-test").click(this._doRollTest.bind(this));
+    html.find(".c2d10-attack-weapon").click(this._doPostEquipmentCard.bind(this));
     html.find(".asset").click(this._onClickItem.bind(this));
     html.find(".equipment").click(this._onClickItem.bind(this));
     html.find(".quantity-asset").click(this._modifyQuantity.bind(this));
@@ -505,6 +434,12 @@ export default class C2D10ActorSheet extends ActorSheet {
       pool = this.actor.items.get(id).system.level;
       name = this.actor.items.get(id).name;
 
+    // Check for attacks
+    } else if (type === "attack") {
+      let item = this.actor.items.get(id);
+      item.showDescription();
+      name = item.name;
+
     // Finally, the remaining option is either a talent or skill test, both of which are handled identically.
     } else {
       pool = sys[type][group][id];
@@ -513,6 +448,13 @@ export default class C2D10ActorSheet extends ActorSheet {
 
     // Perform the roll
     await rollTest(actorId, talents, skills, type, group, name, pool, physicalImpairment, mentalImpairment, crisis);
+  }
+
+  async _doPostEquipmentCard(event) {
+    event.preventDefault();
+    const id = event.currentTarget.closest(".equipment-item").dataset.id;
+    const item = this.actor.items.get(id);
+    item.showDescription();
   }
 
   async _postDescription(event) {

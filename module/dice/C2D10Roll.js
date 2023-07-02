@@ -14,11 +14,14 @@ import { CrisisDie } from "./C2D10CrisisDie.js";
 
 /**
  *  Counts hits, zeroes, determines messups and complications.
+ * @param isAttack
  * @param {object}    mainDice    An object holding all the pool dice
  * @param {object}    crisisDice  An object, holding all the crisis dice, if any.
+ * @param {boolean}   isDefense    If this was an attack, this is true
+ * @param {number}    hits        If this was an attack, set the DC to enemy hits instead.
  * @returns {object}              evaluation results in an object.
  */
-const _evaluateHits = async (mainDice = false, crisisDice = false) => {
+const _evaluateHits = async (isDefense, isAttack, hits, mainDice = false, crisisDice = false) => {
 
   // Define values used to resolve the roll. A number of values here are deprecated and not shown, but are kept
   // for legacy reasons.
@@ -28,7 +31,16 @@ const _evaluateHits = async (mainDice = false, crisisDice = false) => {
   const complication = crisisDice ? crisisDice.values.some(x => x === 0) : false;
   const mess = crisisDice ? crisisDice.values.some(x => x === 9) : false;
   const numOfZeroes = mainDice ? mainDice.values.filter(x => x === 0).length : 0;
-  const DC = game.settings.get("c2d10", "DC");
+  let DC = 2;
+
+  if (isAttack) {
+    DC = 0;
+  } else if (isDefense) {
+    DC = hits;
+  }
+  else {
+    DC = game.settings.get("c2d10", "DC");
+  }
 
   return {
     DC: DC,
@@ -178,9 +190,8 @@ const _doRoll = async rollData => {
   let crisis = false;
   const messageTemplate = "systems/c2d10/templates/partials/chat-templates/roll.hbs";
   const bonusDice = getDice();
-  const pool2Level = rollData.pool2Name !== "None" && rollData.pool2Name !== "undefined" ? rollData.talents[rollData.pool2Name] : 0;
 
-  let combinedPool = parseInt(rollData.pool1Level + pool2Level + bonusDice);
+  let combinedPool = parseInt(rollData.pool1Level + rollData.pool2Level + bonusDice);
 
   crisis = rollData.crisis >= combinedPool ? combinedPool : rollData.crisis;
   if (rollData.focus) combinedPool += 1;
@@ -207,8 +218,13 @@ const _doRoll = async rollData => {
   const mainDice = theRoll.dice.filter(function(term) {return term instanceof RegularDie;})[0];
   const crisisDice = theRoll.dice.filter(function(term) {return term instanceof CrisisDie;})[0];
 
+  // If the roll was an attack, we attach a defend box to the message, by providing a boolean to the template.
+  const isAttack = rollData.type === "attack";
+  const isDefense = rollData.type === "defense";
+  const damageType = rollData.damageType ? "Critical" : "Superficial";
+
   // Evaluate the roll
-  const evaluation = await _evaluateHits(mainDice, crisisDice);
+  const evaluation = await _evaluateHits(isDefense, isAttack, rollData.hits, mainDice, crisisDice);
 
   // Create a rendered HTML object holding the dice rolls to present in chat.
   const renderedList = await _diceList(mainDice, crisisDice);
@@ -223,11 +239,15 @@ const _doRoll = async rollData => {
     pool1Name: rollData.pool1Name,
     pool1Level: rollData.pool1Level,
     pool2Name: rollData.pool2Name,
-    pool2Level: pool2Level,
+    pool2Level: rollData.pool2Level,
     crisis: crisis,
     hits: evaluation.hits,
     complication: evaluation.complication,
-    roll: renderedRoll
+    roll: renderedRoll,
+    attack: isAttack,
+    defense: isDefense,
+    damage: rollData.damage,
+    damageType: damageType
   };
 
   let chatData = {
@@ -254,11 +274,14 @@ const _doRoll = async rollData => {
  * @param {object}  skills              An object holding all the actor's skills and levels.
  * @param {string}  type                The type of item being rolled for as pool 1 (talent, skill, power, other).
  * @param {string}  group               The group the item belongs to (physical, mental etc).
- * @param {string}  pool1Name                The name of the item being rolled for.
- * @param {string}  pool1Level               The size of the rolled (Pool1) item.
+ * @param {string}  pool1Name           The name of the item being rolled for.
+ * @param {string}  pool1Level          The size of the rolled (Pool1) item.
  * @param {boolean} physicalImpairment  A boolean showing if the character is physically impaired.
  * @param {boolean} mentalImpairment    A boolean showing if the character is mentally or socially impaired.
  * @param {number}  crisis              The character's current number of Crisis Dice.
+ * @param {number}  damage              If the roll is an attack, we include the damage of the weapon being used.
+ * @param {boolean} damageType          If the roll is an attack, we include the damage type of it. True for Critical.
+ * @param {number}  hits                If the roll is an attack, we include the number of hits from the attacker.
  */
 export async function rollTest(actorId,
   talents,
@@ -269,7 +292,10 @@ export async function rollTest(actorId,
   pool1Level,
   physicalImpairment,
   mentalImpairment,
-  crisis) {
+  crisis,
+  damage,
+  damageType,
+  hits) {
 
   const rollData = {};
   /*
@@ -279,21 +305,62 @@ export async function rollTest(actorId,
   */
 
   let preSelectedTalent;
-  if (type === "skills") {
-    // For skill tests, the ideal pre-selected item is the highest talent in the matching group.
-    const talentObject = game.actors.get(actorId).system.talents[group];
-    preSelectedTalent = Object.keys(talentObject).reduce((a, b) => talentObject[a] > talentObject[b] ? a : b);
-  } else if (group === "economy") {
+  let preSelectedSkill;
+
+  if (pool1Name === "economy") {
     // For acquisition tests, these are usually performed with a matching social talent, so we select the highest.
     const talentObject = game.actors.get(actorId).system.talents.social;
     preSelectedTalent = Object.keys(talentObject).reduce((a, b) => talentObject[a] > talentObject[b] ? a : b);
+
+  }
+  else if (type === "skills") {
+    // For skill tests, the ideal pre-selected item is the highest talent in the matching group.
+    const talentObject = game.actors.get(actorId).system.talents[group];
+    preSelectedTalent = Object.keys(talentObject).reduce((a, b) => talentObject[a] > talentObject[b] ? a : b);
+
   }
   else if (type === "talents") {
     // For talent tests, these are usually performed solo, so pre-selecting itself is ideal.
     preSelectedTalent = pool1Name;
+
+  }
+  else if (type === "attack") {
+    // For attacks, we select the highest physical talent automatically. We will also define a preselected pool 1 item,
+    // which is a skill.
+    const talentObject = game.actors.get(actorId).system.talents.physical;
+    preSelectedTalent = Object.keys(talentObject).reduce((a, b) => talentObject[a] > talentObject[b] ? a : b);
+
+    const physSkills = game.actors.get(actorId).system.skills.physical;
+    const skillObject =
+    {
+      brawl: physSkills.brawl,
+      melee: physSkills.melee,
+      firearms: physSkills.firearms
+    };
+    preSelectedSkill = Object.keys(skillObject).reduce((a, b) => skillObject[a] > skillObject[b] ? a : b);
+
+    // We also include the attack's damage and type here.
+    rollData.damage = damage || 0;
+    rollData.damageType = damageType || null;
+    rollData.hits = hits;
+
+  } else if (type === "defense") {
+    // For defenses, we select the highest physical talent automatically. We will also define a preselected pool 1 item,
+    // which is a skill.
+    const talentObject = game.actors.get(actorId).system.talents.physical;
+    preSelectedTalent = Object.keys(talentObject).reduce((a, b) => talentObject[a] > talentObject[b] ? a : b);
+    const skillObject = skills;
+    preSelectedSkill = Object.keys(skillObject).reduce((a, b) => skillObject[a] > skillObject[b] ? a : b);
+
+    // We also include the attack's damage and type here.
+    rollData.damage = damage || 0;
+    rollData.damageType = damageType;
+    rollData.hits = hits;
+
   } else {
     // In every other case, we preselect "None"
     preSelectedTalent = "None";
+
   }
 
   rollData.worldPowers = [];
@@ -306,17 +373,20 @@ export async function rollTest(actorId,
 
   // Populate the needed rolldata
   rollData.talentsList = c2d10.allTalents;
-  rollData.skillList = c2d10.allSkills;
+  rollData.skillList = type === "attack" ? {brawl: "c2d10.skills.brawl", melee: "c2d10.skills.melee", firearms: "c2d10.skills.firearms"} : c2d10.allSkills;
+  rollData.type = type;
   rollData.talents = talents;
   rollData.skills = skills;
   rollData.pool1Level = pool1Level;
   rollData.pool1Name = pool1Name;
-  rollData.crisis = parseInt(crisis);
+  rollData.crisis = type !== "health" ? parseInt(crisis) : 0;
   rollData.physicalImpairment = physicalImpairment;
   rollData.mentalImpairment = mentalImpairment;
   rollData.trait = 0;
   rollData.id = actorId;
   rollData.preSelectedTalent = preSelectedTalent;
+  rollData.preSelectedSkill = preSelectedSkill;
+  rollData.isCombat = type === "attack" || type === "defense";
 
   // Create the dialog
   const dialogOptions = {
@@ -333,9 +403,15 @@ export async function rollTest(actorId,
         roll: {
           label: "Roll!",
           callback: html => {
-            rollData.pool1Level = parseInt(html.find("input#pool1Level").val() <= 5 ? parseInt(html.find("input#pool1Level").val()) : 5);
-            rollData.crisis = parseInt(html.find("input#crisis").val());
+            if (rollData.isCombat) {
+              rollData.pool1Name = html.find("select#pool1name").val();
+              rollData.pool1Level = rollData.pool1Name !== "None" && rollData.pool1Name !== "undefined" ? rollData.skills[rollData.pool1Name] : 0;
+            }
             rollData.pool2Name = html.find("select#pool2name").val();
+            rollData.pool2Level = rollData.pool2Name !== "None" && rollData.pool2Name !== "undefined" ? rollData.talents[rollData.pool2Name] : 0;
+
+            rollData.crisis = parseInt(html.find("input#crisis").val());
+
             rollData.focus = html.find("input#focus")[0].checked;
             rollData.trait = parseInt(html.find("input#trait").val());
             // Call the roll function
@@ -345,5 +421,4 @@ export async function rollTest(actorId,
     },
     dialogOptions
   ).render(true);
-
 }

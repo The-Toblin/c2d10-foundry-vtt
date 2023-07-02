@@ -3,15 +3,20 @@
         <h3 class="align-center c2d10-capitalize">
             {{pool1Name}} {{localize "c2d10.test-dialog.pool1"}}
         </h3>
-        <div class="c2d10-contentbox flex-row">
-            <input class="align-center"
-                id="pool1Level"
-                type="text"
-                value="{{pool1Level}}"
-                placeholder="{{localize "c2d10.test-dialog.pool1"}}"
-                autofocus
-             />
-        </div>
+        {{#if isCombat}}
+            {{#if skillList}}
+                <select id="pool1name">
+                    <option value="None">None</option>
+                    {{selectOptions skillList selected=preSelectedSkill localize=true}}
+                </select>
+            {{/if}}
+        {{else}}
+            <div class="c2d10-contentbox flex-row">
+                <h3 class="align-center value-box">
+                    {{pool1Level}}
+                </h3>
+            </div>
+        {{/if}}
     </div>
     <div class="c2d10-subsection">
         <h3 class="align-center">
@@ -33,7 +38,7 @@
             </h3>
             <div class="c2d10-contentbox flex-row flex-center c2d10-dark-background">
                 <div style="position: relative;">
-                    <input id="focus" name="focus" type="checkbox" value="off"/>
+                    <input id="focus" name="focus" type="checkbox" value="off" />
                 </div>
             </div>
         </div>
@@ -42,12 +47,7 @@
                 {{localize "c2d10.sheet.trait"}}
             </h3>
             <div class="c2d10-contentbox flex-row flex-center c2d10-dark-background">
-               <input class="align-center"
-                id="trait"
-                type="text"
-                value="{{trait}}"
-                placeholder="{{localize "c2d10.sheet.trait"}}"
-             />
+                <input class="align-center" id="trait" type="text" value="{{trait}}" placeholder="{{localize " c2d10.sheet.trait"}}" />
             </div>
         </div>
     </div>
@@ -56,7 +56,7 @@
             {{localize "c2d10.test-dialog.crisis"}}
         </h3>
         <div class="c2d10-contentbox">
-            <input class="align-center" id="crisis" type="text" value="{{crisis}}" placeholder="{{localize "c2d10.test-dialog.crisis"}}" />
+            <input class="align-center" id="crisis" type="text" value="{{crisis}}" placeholder="{{localize " c2d10.test-dialog.crisis"}}" />
         </div>
     </div>
 </form>
