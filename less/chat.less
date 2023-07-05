@@ -61,6 +61,26 @@
         }
 
         .message-content {
+            .c2d10-combat-message {
+                color: @colors[alert];
+            }
+            
+            .button-box {
+
+                .roll,
+                .defend,
+                .attack {
+                    color: @colors[alert];
+                    font-size: @size[large];
+                    background: @colors[green-d];
+
+                    &:hover {
+                        box-shadow: 0 0 50px 5px #000 inset;
+                        background: @colors[green]
+                    }
+                }
+            }
+
             &:hover {
                 .crt-chromatic-aberration();
                 .crt-flicker();
@@ -98,7 +118,6 @@
         padding-right: 2px !important;
     }
 }
-
 
 .d10.blank {
     color: #00000000 !important;

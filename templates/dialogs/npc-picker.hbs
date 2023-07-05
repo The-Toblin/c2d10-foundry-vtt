@@ -1,0 +1,15 @@
+<form class="flex-col flex-start c2d10-dialog">
+    <section class="c2d10-subsection">
+        <h3 class="align-center c2d10-capitalize">
+            {{localize "c2d10.character.character"}}
+        </h3>
+        <select id="character">
+            <option value="None">{{localize "c2d10.npc-pick-dialog.none"}}</option>
+            {{selectOptions this selected=None localize=false}}
+        </select>
+    </section>
+    <section class="c2d10-subsection align-center">
+        <label>{{localize "c2d10.npc-pick-dialog.attention"}}</label>
+        <p>{{localize "c2d10.npc-pick-dialog.selected-token-error"}}</p>
+    </section>
+</form>

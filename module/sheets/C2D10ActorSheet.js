@@ -455,6 +455,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     const id = event.currentTarget.closest(".equipment-item").dataset.id;
     const item = this.actor.items.get(id);
     item.showDescription();
+    this._doRollTest(event);
   }
 
   async _postDescription(event) {

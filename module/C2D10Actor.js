@@ -58,7 +58,7 @@ export default class C2D10Actor extends Actor {
       };
     }
 
-    // If an asrmor is equipped, determine its defense type and send it to the display.
+    // If an armor is equipped, determine its defense type and send it to the display.
     if (arm) {
       let armProt = arm.system.deflection > 0 ? arm.system.deflection : arm.system.ablation;
       let armProtType= arm.system.deflection > 0 ? "Deflection" : "Ablation";

@@ -6,7 +6,7 @@
         {{#if isCombat}}
             {{#if skillList}}
                 <select id="pool1name">
-                    <option value="None">None</option>
+                    <option value="None">{{localize "c2d10.test-dialog.none"}}</option>
                     {{selectOptions skillList selected=preSelectedSkill localize=true}}
                 </select>
             {{/if}}
@@ -25,7 +25,7 @@
         <div class="c2d10-contentbox">
             {{#if talentsList}}
                 <select id="pool2name">
-                    <option value="None">None</option>
+                    <option value="None">{{localize "c2d10.test-dialog.none"}}</option>
                     {{selectOptions talentsList selected=preSelectedTalent localize=true}}
                 </select>
             {{/if}}

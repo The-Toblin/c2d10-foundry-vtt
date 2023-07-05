@@ -31,6 +31,7 @@
             "touch": "Touch"
         },
         "character": {
+            "character": "Character",
             "name": "Nickname",
             "campaign": "Campaign",
             "concept": "Concept",
@@ -172,16 +173,28 @@
             "vice": "Vice"
         },
         "test-dialog": {
+            "none": "None",
             "pool1": "Pool Dice",
             "pool2": "Select Talent Pool",
             "crisis": "Current crisis"
         },
+        "npc-pick-dialog": {
+            "attention": "Attention!",
+            "none": "None",
+            "selected-token-error": "If you're trying to use a token, close this window and select the token, then click again!"
+        },
         "chat": {
+            "actions": "Actions to take",
             "attack": {
                 "title": "Attack ({weapon})",
-                "attack": "Attack"
+                "attack": "Attack",
+                "attacking": "Attacking"
             },
-            "defend": "Defend",
+            "defend":{
+                "defend": "Defend",
+                "defending": "Defending",
+                "damage-taken": "damage taken"
+            },
             "roll": "Roll",
             "test": "Test",
             "DC": "DC",

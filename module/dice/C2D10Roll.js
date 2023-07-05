@@ -14,20 +14,21 @@ import { CrisisDie } from "./C2D10CrisisDie.js";
 
 /**
  *  Counts hits, zeroes, determines messups and complications.
- * @param isAttack
- * @param {object}    mainDice    An object holding all the pool dice
- * @param {object}    crisisDice  An object, holding all the crisis dice, if any.
- * @param {boolean}   isDefense    If this was an attack, this is true
- * @param {number}    hits        If this was an attack, set the DC to enemy hits instead.
- * @returns {object}              evaluation results in an object.
+ * @param {boolean}   isDefense     Boolean defining if this is a defense roll.
+ * @param {boolean}   isAttack      Boolean defining if this is a attack roll.
+ * @param {number}    attackerHits  The number of hits used as DC if it's an attack or defense.
+ * @param {object}    mainDice      An object holding all the pool dice.
+ * @param {object}    crisisDice    An object, holding all the crisis dice, if any.
+ * @returns {object}                evaluation results in an object.
  */
-const _evaluateHits = async (isDefense, isAttack, hits, mainDice = false, crisisDice = false) => {
+const _evaluateHits = async (isDefense, isAttack, attackerHits, mainDice = false, crisisDice = false) => {
 
-  // Define values used to resolve the roll. A number of values here are deprecated and not shown, but are kept
-  // for legacy reasons.
+  // Define values used to resolve the roll. A number of values here are deprecated and not shown,
+  // but are kept for legacy reasons.
+
   const regTotal = mainDice ? mainDice.total : 0;
   const crisisTotal = crisisDice ? crisisDice.total : 0;
-  const numOfHits = parseInt(regTotal + crisisTotal);
+  const numOfHits = parseInt(parseInt(regTotal) + parseInt(crisisTotal));
   const complication = crisisDice ? crisisDice.values.some(x => x === 0) : false;
   const mess = crisisDice ? crisisDice.values.some(x => x === 9) : false;
   const numOfZeroes = mainDice ? mainDice.values.filter(x => x === 0).length : 0;
@@ -36,19 +37,22 @@ const _evaluateHits = async (isDefense, isAttack, hits, mainDice = false, crisis
   if (isAttack) {
     DC = 0;
   } else if (isDefense) {
-    DC = hits;
+    DC = attackerHits;
   }
   else {
     DC = game.settings.get("c2d10", "DC");
   }
 
+  const successfulDefense = isDefense && parseInt(numOfHits) >= parseInt(DC);
+
   return {
-    DC: DC,
-    setbacks: numOfZeroes,
-    hits: numOfHits,
-    zeroes: numOfZeroes,
+    DC: parseInt(DC),
+    setbacks: parseInt(numOfZeroes),
+    hits: parseInt(numOfHits),
+    zeroes: parseInt(numOfZeroes),
     mess: mess,
-    complication: complication
+    complication: complication,
+    successfulDefense: successfulDefense
   };
 };
 
@@ -246,8 +250,9 @@ const _doRoll = async rollData => {
     roll: renderedRoll,
     attack: isAttack,
     defense: isDefense,
-    damage: rollData.damage,
-    damageType: damageType
+    damage: parseInt(rollData.damage + (evaluation.DC - evaluation.hits)),
+    damageType: damageType,
+    successfulDefense: evaluation.successfulDefense
   };
 
   let chatData = {
@@ -267,6 +272,30 @@ const _doRoll = async rollData => {
   }
 };
 
+/**
+ * This function will add the skill values to the lists of skills and talents,
+ * so that the user can see in the dialog what their value is without having to
+ * visit their sheet.
+ * @param {object}  skills  The list of the character's skills and values.
+ * @param {object}  talents The List of the character's talents and values.
+ */
+async function _addValuesToList(skills, talents) {
+
+  const newTalentsList = {};
+  for (const val in c2d10.allTalents) {
+    newTalentsList[val] = `${game.i18n.localize(c2d10.allTalents[val])} (${talents[val]})`;
+  }
+
+  const newSkillsList = {};
+  for (const val in c2d10.allSkills) {
+    newSkillsList[val] = `${game.i18n.localize(c2d10.allSkills[val])} (${skills[val]})`;
+  }
+
+  return {
+    talents: newTalentsList,
+    skills: newSkillsList
+  };
+}
 /**
  * Perform a test. Will open a dialog to choose the second pool item. Takes Crisis into account.
  * @param {string}  actorId             The actor's Id.
@@ -306,6 +335,7 @@ export async function rollTest(actorId,
 
   let preSelectedTalent;
   let preSelectedSkill;
+  let attackSkillList = {};
 
   if (pool1Name === "economy") {
     // For acquisition tests, these are usually performed with a matching social talent, so we select the highest.
@@ -340,9 +370,16 @@ export async function rollTest(actorId,
     preSelectedSkill = Object.keys(skillObject).reduce((a, b) => skillObject[a] > skillObject[b] ? a : b);
 
     // We also include the attack's damage and type here.
-    rollData.damage = damage || 0;
+    rollData.damage = parseInt(damage) || parseInt(0);
     rollData.damageType = damageType || null;
-    rollData.hits = hits;
+    rollData.hits = parseInt(hits);
+
+    // Finally, we construct a reduced skill list with only attack skills.
+    attackSkillList = {
+      brawl: `${game.i18n.localize("c2d10.skills.brawl")} (${game.actors.get(actorId).system.skills.physical.brawl})`,
+      melee: `${game.i18n.localize("c2d10.skills.melee")} (${game.actors.get(actorId).system.skills.physical.melee})`,
+      firearms: `${game.i18n.localize("c2d10.skills.firearms")} (${game.actors.get(actorId).system.skills.physical.firearms})`
+    };
 
   } else if (type === "defense") {
     // For defenses, we select the highest physical talent automatically. We will also define a preselected pool 1 item,
@@ -353,9 +390,9 @@ export async function rollTest(actorId,
     preSelectedSkill = Object.keys(skillObject).reduce((a, b) => skillObject[a] > skillObject[b] ? a : b);
 
     // We also include the attack's damage and type here.
-    rollData.damage = damage || 0;
+    rollData.damage = parseInt(damage) || parseInt(0);
     rollData.damageType = damageType;
-    rollData.hits = hits;
+    rollData.hits = parseInt(hits);
 
   } else {
     // In every other case, we preselect "None"
@@ -371,18 +408,25 @@ export async function rollTest(actorId,
     });
   }
 
-  // Populate the needed rolldata
-  rollData.talentsList = c2d10.allTalents;
-  rollData.skillList = type === "attack" ? {brawl: "c2d10.skills.brawl", melee: "c2d10.skills.melee", firearms: "c2d10.skills.firearms"} : c2d10.allSkills;
+  /*
+  * In order to create lists to choose our skills and talents from in the dialog,
+  * we must create a custom list with the values of said skills and talents. Let's
+  * do that first:
+  */
+  const lists = await _addValuesToList(skills, talents);
+
+  // Then populate the needed rolldata
+  rollData.talentsList = lists.talents;
+  rollData.skillList = type === "attack" ? attackSkillList : lists.skills;
   rollData.type = type;
   rollData.talents = talents;
   rollData.skills = skills;
-  rollData.pool1Level = pool1Level;
+  rollData.pool1Level = parseInt(pool1Level);
   rollData.pool1Name = pool1Name;
   rollData.crisis = type !== "health" ? parseInt(crisis) : 0;
   rollData.physicalImpairment = physicalImpairment;
   rollData.mentalImpairment = mentalImpairment;
-  rollData.trait = 0;
+  rollData.trait = parseInt(0);
   rollData.id = actorId;
   rollData.preSelectedTalent = preSelectedTalent;
   rollData.preSelectedSkill = preSelectedSkill;
@@ -390,7 +434,7 @@ export async function rollTest(actorId,
 
   // Create the dialog
   const dialogOptions = {
-    classes: ["c2d10-dialog", "roll"],
+    classes: ["c2d10-dialog", "c2d10-test-roll"],
     top: 300,
     left: 400
   };
@@ -405,10 +449,10 @@ export async function rollTest(actorId,
           callback: html => {
             if (rollData.isCombat) {
               rollData.pool1Name = html.find("select#pool1name").val();
-              rollData.pool1Level = rollData.pool1Name !== "None" && rollData.pool1Name !== "undefined" ? rollData.skills[rollData.pool1Name] : 0;
+              rollData.pool1Level = rollData.pool1Name !== "None" && rollData.pool1Name !== "undefined" ? parseInt(rollData.skills[rollData.pool1Name]) : parseInt(0);
             }
             rollData.pool2Name = html.find("select#pool2name").val();
-            rollData.pool2Level = rollData.pool2Name !== "None" && rollData.pool2Name !== "undefined" ? rollData.talents[rollData.pool2Name] : 0;
+            rollData.pool2Level = rollData.pool2Name !== "None" && rollData.pool2Name !== "undefined" ? parseInt(rollData.talents[rollData.pool2Name]) : parseInt(0);
 
             rollData.crisis = parseInt(html.find("input#crisis").val());
 
