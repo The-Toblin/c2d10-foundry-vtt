@@ -1,7 +1,8 @@
 export default class C2D10Item extends Item {
 
   chatTemplate = {
-    trait: "systems/c2d10/templates/partials/chat-templates/trait-chat.hbs"
+    trait: "systems/c2d10/templates/partials/chat-templates/trait-chat.hbs",
+    weapon: "systems/c2d10/templates/cards/weapon-card.hbs"
   };
 
   async _preCreate(data, options, user) {
@@ -28,15 +29,17 @@ export default class C2D10Item extends Item {
     };
 
     const cardData = {
-      ...this.data,
-      owner: this.actor.id
+      ...this,
+      itemId: this.id,
+      owner: this.actor.id,
+      damageType: this.system.critical !== 0 ? "Critical" : "Superficial",
+      damage: this.system.critical !== 0 ? parseInt(this.system.critical) : parseInt(this.system.superficial)
     };
 
     chatData.content = await renderTemplate(
       this.chatTemplate[this.type],
       cardData
     );
-    chatData.roll = true;
 
     return ChatMessage.create(chatData);
   }
