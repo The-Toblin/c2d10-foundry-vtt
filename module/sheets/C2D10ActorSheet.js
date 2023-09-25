@@ -452,9 +452,10 @@ export default class C2D10ActorSheet extends ActorSheet {
 
   async _doPostEquipmentCard(event) {
     event.preventDefault();
-    const id = event.currentTarget.closest(".equipment-item").dataset.id;
-    const item = this.actor.items.get(id);
-    item.showDescription();
+    // Commenting the following out for the time being. Apparently I posted the description twice by accident.
+    // const id = event.currentTarget.closest(".equipment-item").dataset.id;
+    // const item = this.actor.items.get(id);
+    // item.showDescription();
     this._doRollTest(event);
   }
 

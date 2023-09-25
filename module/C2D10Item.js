@@ -41,6 +41,7 @@ export default class C2D10Item extends Item {
       cardData
     );
 
+    console.warn("Creating chat message");
     return ChatMessage.create(chatData);
   }
 
