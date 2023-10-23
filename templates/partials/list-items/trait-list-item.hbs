@@ -1,16 +1,29 @@
 <tr class="trait-item asset-item" data-id="{{id}}">
     <td class="c2d10-contentbox {{#if @root.showEffects}}fancy-effects{{/if}}">
-        <a class="delete-item" title="{{localize "c2d10.sheet.delete"}}">
+        <a class="delete-item" title="{{localize " c2d10.sheet.delete"}}">
             <i class="far fa-minus-square"></i>
         </a>
     </td>
     <td class="c2d10-contentbox {{#if @root.showEffects}}fancy-effects{{/if}} asset">
-        {{name}}
+        <div>
+            {{name}}
+        </div>
+        <div>
+            {{#each effects as |effect|}}
+                <ul>
+                    <li data-effectId="{{effect.id}}">
+                        <a class="c2d10-toggle-effect">{{effect.name}}
+                            <i class="fas {{#if ../flags.c2d10.activeEffect}}fa-times{{else}}fa-check{{/if}}"></i>
+                        </a>
+                    </li>
+                </ul>
+            {{/each}}
+        </div>
     </td>
     <td class="c2d10-contentbox {{#if @root.showEffects}}fancy-effects{{/if}} asset c2d10-capitalize">
         {{system.traitType}}
     </td>
-    <td class="c2d10-contentbox {{#if @root.showEffects}}fancy-effects{{/if}} asset" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
+    <td class="c2d10-contentbox {{#if @root.showEffects}}fancy-effects{{/if}} asset" data-tooltip="{{localize " c2d10.sheet.dot-tooltip"}}">
         <div class="flex-row flex-center">
             {{#dots system.level 5}}{{/dots}}
         </div>

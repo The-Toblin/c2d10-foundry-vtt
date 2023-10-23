@@ -164,9 +164,10 @@ export default class C2D10ActorSheet extends ActorSheet {
     html.find(".c2d10-skill-test").click(this._doRollTest.bind(this));
     html.find(".c2d10-power-test").click(this._doRollTest.bind(this));
     html.find(".c2d10-attack-weapon").click(this._doPostEquipmentCard.bind(this));
-    html.find(".asset").click(this._onClickItem.bind(this));
+    // Html.find(".asset").click(this._onClickItem.bind(this));
     html.find(".equipment").click(this._onClickItem.bind(this));
     html.find(".quantity-asset").click(this._modifyQuantity.bind(this));
+    html.find(".c2d10-toggle-effect").click(this._onToggleEffect.bind(this));
 
     new ContextMenu(html, ".asset", this.itemContextMenu);
     new ContextMenu(html, ".equipment", this.equipmentContextMenu);
@@ -490,5 +491,26 @@ export default class C2D10ActorSheet extends ActorSheet {
     };
 
     ChatMessage.create(chatData);
+  }
+
+  async _onToggleEffect(event) {
+    event.preventDefault();
+    const owner = this.actor;
+    const a = event.currentTarget;
+    const tr = a.closest("tr");
+    const item = tr.dataset.id ? owner.items.get(tr.dataset.id) : null;
+    const li = a.closest("li");
+    const relevantEffects = this.actor.getEmbeddedCollection("ActiveEffect").contents.filter(effect => effect.origin.endsWith(item.id));
+
+    if (relevantEffects.length === 0) return;
+
+    let currentFlag = item.getFlag("c2d10", "activeEffect");
+
+    item.setFlag("c2d10", "activeEffect", !currentFlag);
+
+    const effect = relevantEffects[0];
+    await effect.update({disabled: !currentFlag});
+
+    console.log("FLIPPED!", !currentFlag);
   }
 }

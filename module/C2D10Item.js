@@ -19,7 +19,27 @@ export default class C2D10Item extends Item {
         await this.updateSource(updateData);
       }
     }
+
     return await super._preCreate(data, options, user);
+  }
+
+  /*
+  * On creation of the item, check if it's embedded, and if so, apply effects.
+  */
+  async _onCreateDocuments() {
+    console.log("OnCreate Triggered");
+    if (this.isEmbedded && this.parent.getFlag("c2d10", "preCreateFlag")) {
+      this.parent.setFlag("c2d10", "preCreateFlag", false);
+    } else {
+      this.parent.setFlag("c2d10", "preCreateFlag", true);
+    }
+  }
+
+  async _onDeleteDocuments() {
+    console.log("OnDelete Triggered");
+    if (this.isEmbedded) {
+      this.parent.unsetFlag("c2d10", "preCreateFlag");
+    }
   }
 
   async showDescription() {

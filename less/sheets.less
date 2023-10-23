@@ -113,11 +113,13 @@
         margin-right: 5px;
     }
 
-    .item {
-        .green-border();
-        text-orientation: mixed;
-        transform: rotate(-180deg);
-        margin: 2px 5px 2px 5px;
+    nav {
+        .item {
+            .green-border();
+            text-orientation: mixed;
+            transform: rotate(-180deg);
+            margin: 2px 5px 2px 5px;
+        }
     }
 
     .item.active {
@@ -232,6 +234,11 @@
         }
     }
 
+    td.effect-controls,
+    td.effect-name {
+        text-align: left;
+    }
+
     .c2d10-fit-content {
         height: fit-content !important;
     }
@@ -248,4 +255,8 @@
 
 .c2d10.item-sheet {
     height: fit-content !important;
+}
+
+.c2d10-invert {
+    filter: invert(1);
 }

@@ -1,7 +1,7 @@
 <form class="sheet-main-content c2d10 sheet flex-col flex-start">
     <section class="c2d10-sheet-header-box">
         <h1>
-            <input name="name" type="text" value="{{item.name}}" placeholder="{{localize "c2d10.trait.name"}}" />
+            <input name="name" type="text" value="{{item.name}}" placeholder="{{localize " c2d10.trait.name"}}" />
         </h1>
         <h3 class="c2d10-alert">
             <select name="system.traitType">
@@ -17,7 +17,7 @@
             <div class="flex-col flex-start">
                 <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} w-fit">
                     <div class="image-box flex-row flex-center">
-                        <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" height="145px" width="auto"/>
+                        <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" height="145px" width="auto" />
                     </div>
                 </div>
                 <div class="flex-col flex-start w-20 value-box c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
@@ -26,12 +26,45 @@
                             <th class="table-no-border">
                                 {{localize "c2d10.trait.level"}}
                             </th>
-                            <td class="flex-row table-no-border resource-row" data-id="level" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
+                            <td class="flex-row table-no-border resource-row" data-id="level" data-tooltip="{{localize " c2d10.sheet.dot-tooltip"}}">
                                 {{#dots system.level 5}}{{/dots}}
                             </td>
                         </tr>
                     </table>
                 </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="c2d10-subsection flex-row flex-between">
+            <div class="w-80 c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
+                <table class="item-list effects-list">
+                    <tr>
+                        <th>Effects - LOCALIZE THIS</th>
+                        <th>
+                            <a class="effect-control" data-action="create">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        </th>
+                    </tr>
+                    {{#each effects as | effect |}}
+                    <tr class="item c2d10-effect" data-effect-id="{{effect.id}}">
+                        <td class="item-name effect-name">
+                            {{effect.name}}
+                        </td>
+                        <td class="effect-controls">
+                            <a class="effect-control" data-action="edit" title="Edit - LOCALIZE THIS!">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </td>
+                       <td class="effect-controls">
+                            <a class="effect-control" data-action="delete" title="Delete - LOCALIZE THIS!">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </table>
             </div>
         </div>
     </section>
