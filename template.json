@@ -25,12 +25,12 @@
                     "family": ""
                 }
             },
-	    "equipment": {
-	    	"equipment": {
-		    "armor": "",
-		    "weapon": ""
-		}
-	    },
+            "equipment": {
+                "equipment": {
+                    "armor": "",
+                    "weapon": ""
+                }
+            },
             "health": {
                 "health": {
                     "strain": {
@@ -42,6 +42,11 @@
                         "min": 0,
                         "superficial": 0,
                         "critical": 0
+                    },
+                    "cybernetic-load": {
+                        "min": 0,
+                        "max": 10,
+                        "current": 0
                     }
                 }
             },
@@ -105,7 +110,7 @@
         },
         "actor": {
             "templates": [
-		"equipment",
+                "equipment",
                 "info",
                 "health",
                 "talents",
@@ -124,7 +129,7 @@
                 }
             },
             "templates": [
-		"equipment",
+                "equipment",
                 "info",
                 "health",
                 "talents"
@@ -140,10 +145,10 @@
                 "quantity": 1
             }
         },
-
         "types": [
             "armor",
             "asset",
+            "cybernetics",
             "debt",
             "power",
             "variant",
@@ -164,6 +169,14 @@
                 "coreAsset"
             ],
             "assetType": ""
+        },
+        "cybernetics": {
+            "templates": [
+                "coreAsset"
+            ],
+            "cybernetic_load": 1,
+            "type": "Neural",
+            "surgery": "Neural"
         },
         "debt": {
             "templates": [
@@ -203,7 +216,7 @@
             ],
             "critical": 0,
             "superficial": 0,
-            "penalty": "None"            
+            "penalty": "None"
         }
     }
 }
