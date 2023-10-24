@@ -499,18 +499,15 @@ export default class C2D10ActorSheet extends ActorSheet {
     const a = event.currentTarget;
     const tr = a.closest("tr");
     const item = tr.dataset.id ? owner.items.get(tr.dataset.id) : null;
-    const li = a.closest("li");
     const relevantEffects = this.actor.getEmbeddedCollection("ActiveEffect").contents.filter(effect => effect.origin.endsWith(item.id));
 
     if (relevantEffects.length === 0) return;
+    let currentFlag;
+    relevantEffects.forEach(async e => {
+      currentFlag = e.disabled;
+      await e.update({disabled: !currentFlag});
+    });
 
-    let currentFlag = item.getFlag("c2d10", "activeEffect");
-
-    item.setFlag("c2d10", "activeEffect", !currentFlag);
-
-    const effect = relevantEffects[0];
-    await effect.update({disabled: !currentFlag});
-
-    console.log("FLIPPED!", !currentFlag);
+    item.setFlag("c2d10", "activeEffect", currentFlag);
   }
 }
