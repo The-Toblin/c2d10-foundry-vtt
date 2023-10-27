@@ -261,9 +261,11 @@ Hooks.once("init", function() {
    * Handlebars helper for rendering resource dots
    */
   Handlebars.registerHelper("dots", function(value, max, content) {
+    const fulldie = value > 5 ? "d10-yellow.webp" : "d10-white-full.webp";
+
     const full =
       `<div class="dot-container full">
-      <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp"/>
+      <img class="d10-dot-full" src="/systems/c2d10/assets/${fulldie}"/>
     </div>`;
     const empty =
       `<div class="dot-container empty">
@@ -275,6 +277,8 @@ Hooks.once("init", function() {
     </div>`;
 
     let res = "";
+    value = value > 5 ? 5 : value; // Prevent rendering of excess points, even though it *can* happen due to traits and such.
+
     if (value > 0) {
       for (let i = 0; i < value; ++i) {
         if (i === 5) {
