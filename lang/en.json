@@ -202,7 +202,8 @@
             "test": "Test",
             "DC": "DC",
             "pool": "Pool Dice",
-            "crisis": "Crisis Dice"
+            "crisis": "Crisis Dice",
+            "fateOutcome": "Fate is not on your side..."
         },
         "descriptions": {
             "agility": "<p>A measure of a character's ability to coordinate their body and a general measure of their flexibility and control of fine motorics.</p>",

@@ -33,6 +33,8 @@ const _evaluateHits = async (isDefense, isAttack, attackerHits, mainDice = false
   const complication = crisisDice ? crisisDice.values.some(x => x === 0) : false;
   const mess = crisisDice ? crisisDice.values.some(x => x === 9) : false;
   const numOfZeroes = mainDice ? mainDice.values.filter(x => x === 0).length : 0;
+  const fatedOutcome = findFated(mainDice, "fated").length > 0;
+
   let DC = 2;
 
   if (isAttack) {
@@ -49,6 +51,7 @@ const _evaluateHits = async (isDefense, isAttack, attackerHits, mainDice = false
   return {
     DC: parseInt(DC),
     setbacks: parseInt(numOfZeroes),
+    fatedOutcome: fatedOutcome,
     hits: parseInt(numOfHits),
     zeroes: parseInt(numOfZeroes),
     mess: mess,
@@ -58,12 +61,36 @@ const _evaluateHits = async (isDefense, isAttack, attackerHits, mainDice = false
 };
 
 /**
+ * Novelty function to find if any of the dice were Fated
+ * @param {object}  mainDice  The Object holding the main dice of the roll
+ * @param {string}  fated     A string holding the key to look for.
+ */
+function findFated(mainDice, fated) {
+  let result = [];
+  /**
+   * Subfunction to traverse the subobjects
+   * @param {object}  mainDice  The Object holding the main dice of the roll
+   * @param {string}  fated     A string holding the key to look for.
+   */
+  function recursivelyFindProp(mainDice, fated) {
+    Object.keys(mainDice).forEach(function(key) {
+      if (typeof mainDice[key] === "object") {
+        recursivelyFindProp(mainDice[key], fated);
+      } else if (key === fated) result.push(mainDice[key]);
+    });
+  }
+  recursivelyFindProp(mainDice, fated);
+  return result;
+}
+
+/**
  * Function to build the rendered list of rolls, marking dice accordingly.
  * @param {object}   mainDice     Object holding the rolled main dice.
  * @param {object}   crisisDice   Object holding the rolled crisis dice.
  * @returns {object}
  */
 const _diceList = async (mainDice = false, crisisDice = false) => {
+
   const results = {
     0: '<li class="roll die d10 failure regular">X',
     7: '<li class="roll die d10 success regular">1',
@@ -254,6 +281,7 @@ const _doRoll = async rollData => {
     hits: evaluation.hits,
     complication: evaluation.complication,
     roll: renderedRoll,
+    fatedOutcome: evaluation.fatedOutcome,
     attack: isAttack,
     defense: isDefense,
     damage: parseInt(rollData.damage + (evaluation.DC - evaluation.hits)),

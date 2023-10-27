@@ -23,18 +23,6 @@ export default class C2D10Item extends Item {
     return await super._preCreate(data, options, user);
   }
 
-  /*
-  * On creation, and deletion of the item, check if it's embedded. Might hook into this in the future. For now, do nothing.
-  */
-  async _onCreate() {
-    if (!this.isEmbedded) return;
-
-  }
-
-  async _onDelete() {
-    if (!this.isEmbedded) return;
-  }
-
   async showDescription() {
     const chatData = {
       user: game.user.id,
@@ -54,7 +42,6 @@ export default class C2D10Item extends Item {
       cardData
     );
 
-    console.warn("Creating chat message");
     return ChatMessage.create(chatData);
   }
 

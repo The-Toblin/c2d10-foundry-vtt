@@ -19,7 +19,8 @@ export class FatedDie extends CeleniaDie {
     }
 
     if (roll.result === 1) {
-      console.log("=== C2D10: Fated Die resulted in 1, Changing to 0 ===");
+      console.log("==== C2D10: Fated Die resulted in 1, Changing to 0 ====");
+      roll.fated = true;
       roll.result = 0;
     }
 
