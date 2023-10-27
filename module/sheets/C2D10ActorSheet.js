@@ -164,14 +164,23 @@ export default class C2D10ActorSheet extends ActorSheet {
     html.find(".c2d10-skill-test").click(this._doRollTest.bind(this));
     html.find(".c2d10-power-test").click(this._doRollTest.bind(this));
     html.find(".c2d10-attack-weapon").click(this._doPostEquipmentCard.bind(this));
-    html.find(".asset").click(this._onClickItem.bind(this));
+    // Html.find(".asset").click(this._onClickItem.bind(this));
     html.find(".equipment").click(this._onClickItem.bind(this));
     html.find(".quantity-asset").click(this._modifyQuantity.bind(this));
+    html.find(".c2d10-toggle-effect").click(this._onToggleEffect.bind(this));
+
+    // Ugly hack to make the sheet update when switching tabs, since active effects don't trigger a sheet update.
+    html.find(".sheet-tabs").click(this._onNavClick.bind(this));
 
     new ContextMenu(html, ".asset", this.itemContextMenu);
     new ContextMenu(html, ".equipment", this.equipmentContextMenu);
 
     super.activateListeners(html);
+  }
+
+  _onNavClick(event) {
+    event.preventDefault();
+    this.render(true);
   }
 
   _modifyQuantity(event) {
@@ -490,5 +499,17 @@ export default class C2D10ActorSheet extends ActorSheet {
     };
 
     ChatMessage.create(chatData);
+  }
+
+  async _onToggleEffect(event) {
+    event.preventDefault();
+    const owner = this.actor;
+    const a = event.currentTarget;
+    const tr = a.closest("tr");
+    const item = tr.dataset.id ? owner.items.get(tr.dataset.id) : null;
+
+    item.toggleEffects();
+
+    this.render(true); // Ugly hack to update the sheet with new data, since active effects don't do this inherently.
   }
 }

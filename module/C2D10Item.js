@@ -19,6 +19,7 @@ export default class C2D10Item extends Item {
         await this.updateSource(updateData);
       }
     }
+
     return await super._preCreate(data, options, user);
   }
 
@@ -41,7 +42,6 @@ export default class C2D10Item extends Item {
       cardData
     );
 
-    console.warn("Creating chat message");
     return ChatMessage.create(chatData);
   }
 
@@ -105,5 +105,23 @@ export default class C2D10Item extends Item {
 
     this.actor.update(updateData);
 
+  }
+
+  async toggleEffects() {
+    const relevantEffects = this.effects;
+
+    if (relevantEffects.length === 0) return;
+    let currentFlag;
+    relevantEffects.forEach(async e => {
+      currentFlag = e.disabled;
+      await e.update(
+        {
+          disabled: !currentFlag,
+          isSuppressed: false
+        }
+      );
+    });
+
+    await this.setFlag("c2d10", "activeEffect", currentFlag);
   }
 }

@@ -17,7 +17,7 @@
             <div class="flex-col flex-start">
                 <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} w-fit">
                     <div class="image-box flex-row flex-center">
-                        <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" height="145px" width="auto"/>
+                        <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" height="145px" width="auto" />
                     </div>
                 </div>
                 <div class="flex-col flex-start w-20 value-box c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
@@ -32,6 +32,44 @@
                         </tr>
                     </table>
                 </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="c2d10-subsection flex-row flex-between">
+            <div class="w-80 c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
+                <table class="item-list effects-list">
+                    <colgroup>
+                    <col class="w-90">
+                    <col class="w-5">
+                    <col class="w-5">
+                </colgroup>
+                    <tr>
+                        <th>{{localize "c2d10.sheet.effects"}}</th>
+                        <th class="c2d10-icon-column">
+                            <a class="effect-control" data-action="create">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        </th>
+                    </tr>
+                    {{#each effects as | effect |}}
+                        <tr class="item c2d10-effect" data-effect-id="{{effect.id}}">
+                            <td class="item-name effect-name">
+                                {{effect.name}}
+                            </td>
+                            <td class="c2d10-icon-column">
+                                <a class="effect-control" data-action="edit" title="{{localize "c2d10.sheet.edit"}}">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </td>
+                            <td class="c2d10-icon-column">
+                                <a class="effect-control" data-action="delete" title="{{localize "c2d10.sheet.delete"}}">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {{/each}}
+                </table>
             </div>
         </div>
     </section>

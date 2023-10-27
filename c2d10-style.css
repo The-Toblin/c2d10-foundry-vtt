@@ -767,8 +767,8 @@ table input {
   width: 40px;
   margin-right: 5px;
 }
-.c2d10.sheet .item,
-.c2d10.item-sheet .item {
+.c2d10.sheet nav .item,
+.c2d10.item-sheet nav .item {
   border-radius: 3px;
   border: 2px solid;
   border-color: #29a253 !important;
@@ -893,6 +893,12 @@ table input {
 .c2d10.item-sheet table td:first-child {
   padding-left: 5px;
 }
+.c2d10.sheet td.effect-controls,
+.c2d10.item-sheet td.effect-controls,
+.c2d10.sheet td.effect-name,
+.c2d10.item-sheet td.effect-name {
+  text-align: left;
+}
 .c2d10.sheet .c2d10-fit-content,
 .c2d10.item-sheet .c2d10-fit-content {
   height: fit-content !important;
@@ -908,6 +914,9 @@ table input {
 }
 .c2d10.item-sheet {
   height: fit-content !important;
+}
+.c2d10-invert {
+  filter: invert(1);
 }
 .keeper-control-box {
   position: absolute;

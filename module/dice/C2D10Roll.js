@@ -2,6 +2,7 @@ import {c2d10} from "../config.js";
 import { getDice } from "../C2D10Utility.js";
 import { RegularDie} from "./C2D10RegularDie.js";
 import { CrisisDie } from "./C2D10CrisisDie.js";
+import { FatedDie } from "./C2D10FatedDie.js";
 /**
  * Core dice roller file for handling all types of test.
  * Contains helper functions for resolving things necessary for tests.
@@ -32,6 +33,8 @@ const _evaluateHits = async (isDefense, isAttack, attackerHits, mainDice = false
   const complication = crisisDice ? crisisDice.values.some(x => x === 0) : false;
   const mess = crisisDice ? crisisDice.values.some(x => x === 9) : false;
   const numOfZeroes = mainDice ? mainDice.values.filter(x => x === 0).length : 0;
+  const fatedOutcome = findFated(mainDice, "fated").length > 0;
+
   let DC = 2;
 
   if (isAttack) {
@@ -48,6 +51,7 @@ const _evaluateHits = async (isDefense, isAttack, attackerHits, mainDice = false
   return {
     DC: parseInt(DC),
     setbacks: parseInt(numOfZeroes),
+    fatedOutcome: fatedOutcome,
     hits: parseInt(numOfHits),
     zeroes: parseInt(numOfZeroes),
     mess: mess,
@@ -57,12 +61,36 @@ const _evaluateHits = async (isDefense, isAttack, attackerHits, mainDice = false
 };
 
 /**
+ * Novelty function to find if any of the dice were Fated
+ * @param {object}  mainDice  The Object holding the main dice of the roll
+ * @param {string}  fated     A string holding the key to look for.
+ */
+function findFated(mainDice, fated) {
+  let result = [];
+  /**
+   * Subfunction to traverse the subobjects
+   * @param {object}  mainDice  The Object holding the main dice of the roll
+   * @param {string}  fated     A string holding the key to look for.
+   */
+  function recursivelyFindProp(mainDice, fated) {
+    Object.keys(mainDice).forEach(function(key) {
+      if (typeof mainDice[key] === "object") {
+        recursivelyFindProp(mainDice[key], fated);
+      } else if (key === fated) result.push(mainDice[key]);
+    });
+  }
+  recursivelyFindProp(mainDice, fated);
+  return result;
+}
+
+/**
  * Function to build the rendered list of rolls, marking dice accordingly.
  * @param {object}   mainDice     Object holding the rolled main dice.
  * @param {object}   crisisDice   Object holding the rolled crisis dice.
  * @returns {object}
  */
 const _diceList = async (mainDice = false, crisisDice = false) => {
+
   const results = {
     0: '<li class="roll die d10 failure regular">X',
     7: '<li class="roll die d10 success regular">1',
@@ -191,6 +219,9 @@ const _renderRoll = async (listContents, evaluation) => {
  */
 const _doRoll = async rollData => {
 
+  // Check if the character is FATED, if so, change the rollformula
+  const fated = !!game.actors.get(rollData.id).flags.c2d10.fated;
+
   let crisis = false;
   const messageTemplate = "systems/c2d10/templates/partials/chat-templates/roll.hbs";
   const bonusDice = getDice();
@@ -208,7 +239,7 @@ const _doRoll = async rollData => {
   const rollablePool = combinedPool - crisis > 0 ? parseInt(combinedPool - crisis) : 0;
   let rollFormula = "";
 
-  if (rollablePool > 0) rollFormula += `${rollablePool}dr`;
+  if (rollablePool > 0) rollFormula = fated ? `${rollablePool}da` : `${rollablePool}dr`;
   if (rollablePool > 0 && crisis > 0) {
     rollFormula += ` + ${crisis}ds`;
   } else if (crisis > 0) {
@@ -219,7 +250,9 @@ const _doRoll = async rollData => {
   // Execute the roll
   await theRoll.evaluate({async: true});
 
-  const mainDice = theRoll.dice.filter(function(term) {return term instanceof RegularDie;})[0];
+  // Construct lists of dice, taking into account any FATED characters
+  const mainDice = fated ? theRoll.dice.filter(function(term) {return term instanceof FatedDie;})[0]
+    :theRoll.dice.filter(function(term) {return term instanceof RegularDie;})[0];
   const crisisDice = theRoll.dice.filter(function(term) {return term instanceof CrisisDie;})[0];
 
   // If the roll was an attack, we attach a defend box to the message, by providing a boolean to the template.
@@ -248,6 +281,7 @@ const _doRoll = async rollData => {
     hits: evaluation.hits,
     complication: evaluation.complication,
     roll: renderedRoll,
+    fatedOutcome: evaluation.fatedOutcome,
     attack: isAttack,
     defense: isDefense,
     damage: parseInt(rollData.damage + (evaluation.DC - evaluation.hits)),

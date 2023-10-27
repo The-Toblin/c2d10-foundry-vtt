@@ -15,6 +15,7 @@ export default class C2D10ItemSheet extends ItemSheet {
     const sheetData = super.getData();
     sheetData.config = CONFIG.c2d10;
     sheetData.system = this.item.system;
+    sheetData.effects = this.item.getEmbeddedCollection("ActiveEffect").contents;
 
     /**
      * Create a list of powers in the world. Used for selecting parent powers
@@ -35,8 +36,31 @@ export default class C2D10ItemSheet extends ItemSheet {
 
   activateListeners(html) {
     html.find(".dot-container").on("click contextmenu", this._onResourceChange.bind(this));
+    html.find(".effect-control").click(this._onEffectControl.bind(this));
 
     super.activateListeners(html);
+  }
+
+  _onEffectControl(event) {
+    event.preventDefault();
+    const owner = this.item;
+    const a = event.currentTarget;
+    const tr = a.closest("tr");
+    const activeEffect = tr.dataset.effectId ? owner.effects.get(tr.dataset.effectId) : null;
+
+    switch (a.dataset.action) {
+      case "create":
+        return owner.createEmbeddedDocuments("ActiveEffect", [{
+          label: "New Effect",
+          icon: "icons/svg/aura.svg",
+          origin: owner.uuid,
+          disabled: true
+        }]);
+      case "edit":
+        return activeEffect.sheet.render(true);
+      case "delete":
+        return activeEffect.delete();
+    }
   }
 
   _onResourceChange(event) {

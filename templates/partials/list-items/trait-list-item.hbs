@@ -4,8 +4,10 @@
             <i class="far fa-minus-square"></i>
         </a>
     </td>
-    <td class="c2d10-contentbox {{#if @root.showEffects}}fancy-effects{{/if}} asset">
-        {{name}}
+    <td class="c2d10-contentbox {{#if @root.showEffects}}fancy-effects{{/if}} {{#if flags.c2d10.activeEffect}}c2d10-invert{{/if}} asset">
+        <a class="c2d10-toggle-effect">
+            {{name}}
+        </a>
     </td>
     <td class="c2d10-contentbox {{#if @root.showEffects}}fancy-effects{{/if}} asset c2d10-capitalize">
         {{system.traitType}}

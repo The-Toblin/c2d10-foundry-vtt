@@ -3,11 +3,7 @@ export default class C2D10Actor extends Actor {
     super.prepareData();
   }
 
-  prepareBaseData() {
-    super.prepareBaseData();
-  }
-
-  async prepareDerivedData() {
+  async prepareBaseData() {
     this.system.extras = {};
 
     // Derive health values.
@@ -68,6 +64,7 @@ export default class C2D10Actor extends Actor {
         protection: armProt,
         protectionType: armProtType
       };
+      super.prepareBaseData();
     }
 
     /**

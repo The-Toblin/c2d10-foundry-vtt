@@ -44,12 +44,15 @@
             "appearance": "Appearance",
             "archetype": "Archetype",
             "addFocus": "Add a focus",
+            "addEffect": "Add effect",
             "assets": "Assets",
             "attack": "Attack",
             "crisis": "Crisis",
-            "delete": "Delete item",
-            "description": "Post description",
+            "delete": "Delete",
+            "description": "Description",
             "edit": "Edit",
+            "effect": "Effect",
+            "effects": "Effects",
             "equip": "Equip",
             "equipment": "Equipment",
             "experience": "XP",
@@ -190,7 +193,7 @@
                 "attack": "Attack",
                 "attacking": "Attacking"
             },
-            "defend":{
+            "defend": {
                 "defend": "Defend",
                 "defending": "Defending",
                 "damage-taken": "damage taken"
@@ -199,7 +202,8 @@
             "test": "Test",
             "DC": "DC",
             "pool": "Pool Dice",
-            "crisis": "Crisis Dice"
+            "crisis": "Crisis Dice",
+            "fateOutcome": "Fate is not on your side..."
         },
         "descriptions": {
             "agility": "<p>A measure of a character's ability to coordinate their body and a general measure of their flexibility and control of fine motorics.</p>",
