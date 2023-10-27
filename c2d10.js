@@ -269,6 +269,10 @@ Hooks.once("init", function() {
       `<div class="dot-container empty">
       <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp"/>
     </div>`;
+    const space =
+      `<div class="space">
+      <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp"/>
+    </div>`;
 
     let res = "";
     if (value > 0) {
