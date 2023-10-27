@@ -24,22 +24,15 @@ export default class C2D10Item extends Item {
   }
 
   /*
-  * On creation of the item, check if it's embedded, and if so, apply effects.
+  * On creation, and deletion of the item, check if it's embedded. Might hook into this in the future. For now, do nothing.
   */
-  async _onCreateDocuments() {
-    console.log("OnCreate Triggered");
-    if (this.isEmbedded && this.parent.getFlag("c2d10", "preCreateFlag")) {
-      this.parent.setFlag("c2d10", "preCreateFlag", false);
-    } else {
-      this.parent.setFlag("c2d10", "preCreateFlag", true);
-    }
+  async _onCreate() {
+    if (!this.isEmbedded) return;
+
   }
 
-  async _onDeleteDocuments() {
-    console.log("OnDelete Triggered");
-    if (this.isEmbedded) {
-      this.parent.unsetFlag("c2d10", "preCreateFlag");
-    }
+  async _onDelete() {
+    if (!this.isEmbedded) return;
   }
 
   async showDescription() {
@@ -125,5 +118,23 @@ export default class C2D10Item extends Item {
 
     this.actor.update(updateData);
 
+  }
+
+  async toggleEffects() {
+    const relevantEffects = this.effects;
+
+    if (relevantEffects.length === 0) return;
+    let currentFlag;
+    relevantEffects.forEach(async e => {
+      currentFlag = e.disabled;
+      await e.update(
+        {
+          disabled: !currentFlag,
+          isSuppressed: false
+        }
+      );
+    });
+
+    await this.setFlag("c2d10", "activeEffect", currentFlag);
   }
 }

@@ -169,10 +169,18 @@ export default class C2D10ActorSheet extends ActorSheet {
     html.find(".quantity-asset").click(this._modifyQuantity.bind(this));
     html.find(".c2d10-toggle-effect").click(this._onToggleEffect.bind(this));
 
+    // Ugly hack to make the sheet update when switching tabs, since active effects don't trigger a sheet update.
+    html.find(".sheet-tabs").click(this._onNavClick.bind(this));
+
     new ContextMenu(html, ".asset", this.itemContextMenu);
     new ContextMenu(html, ".equipment", this.equipmentContextMenu);
 
     super.activateListeners(html);
+  }
+
+  _onNavClick(event) {
+    event.preventDefault();
+    this.render(true);
   }
 
   _modifyQuantity(event) {
@@ -499,15 +507,9 @@ export default class C2D10ActorSheet extends ActorSheet {
     const a = event.currentTarget;
     const tr = a.closest("tr");
     const item = tr.dataset.id ? owner.items.get(tr.dataset.id) : null;
-    const relevantEffects = this.actor.getEmbeddedCollection("ActiveEffect").contents.filter(effect => effect.origin.endsWith(item.id));
 
-    if (relevantEffects.length === 0) return;
-    let currentFlag;
-    relevantEffects.forEach(async e => {
-      currentFlag = e.disabled;
-      await e.update({disabled: !currentFlag});
-    });
+    item.toggleEffects();
 
-    item.setFlag("c2d10", "activeEffect", currentFlag);
+    this.render(true); // Ugly hack to update the sheet with new data, since active effects don't do this inherently.
   }
 }

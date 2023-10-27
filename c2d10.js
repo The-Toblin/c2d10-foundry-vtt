@@ -1,6 +1,8 @@
 import { c2d10 } from "./module/config.js";
 import { RegularDie } from "./module/dice/C2D10RegularDie.js";
 import { CrisisDie } from "./module/dice/C2D10CrisisDie.js";
+import { FatedDie } from "./module/dice/C2D10FatedDie.js";
+
 import * as Chat from "./module/chat.js";
 import C2D10Item from "./module/C2D10Item.js";
 import C2D10ItemSheet from "./module/sheets/C2D10ItemSheet.js";
@@ -206,6 +208,7 @@ Hooks.once("init", function() {
 
   CONFIG.Dice.terms.r = RegularDie;
   CONFIG.Dice.terms.s = CrisisDie;
+  CONFIG.Dice.terms.a = FatedDie;
 
   /* Setup Config */
   CONFIG.c2d10 = c2d10;
@@ -375,6 +378,22 @@ Hooks.once("diceSoNiceReady", dice3d => {
     }
   }, "default");
 
+  dice3d.addColorset({
+    name: "fated",
+    description: "C2D10 Fated Dice",
+    category: "C2D10",
+    foreground: "#fff",
+    background: "#000",
+    texture: "none",
+    edge: "#d9ff00",
+    material: "glass",
+    font: "Arial Black",
+    fontScale: {
+      d6: 1.1,
+      da: 2.5
+    }
+  }, "default");
+
   dice3d.addDicePreset({
     type: "dr",
     labels: [
@@ -409,6 +428,25 @@ Hooks.once("diceSoNiceReady", dice3d => {
       "systems/c2d10/assets/crisis-fumble.webp"
     ],
     colorset: "crisis",
+    fontScale: 0.5,
+    system: "c2d10"
+  }, "d10");
+
+  dice3d.addDicePreset({
+    type: "da",
+    labels: [
+      "systems/c2d10/assets/roll-fumble.webp",
+      "systems/c2d10/assets/roll-miss.webp",
+      "systems/c2d10/assets/roll-miss.webp",
+      "systems/c2d10/assets/roll-miss.webp",
+      "systems/c2d10/assets/roll-miss.webp",
+      "systems/c2d10/assets/roll-miss.webp",
+      "systems/c2d10/assets/roll-hit.webp",
+      "systems/c2d10/assets/roll-hit.webp",
+      "systems/c2d10/assets/roll-crit.webp",
+      "systems/c2d10/assets/roll-fumble.webp"
+    ],
+    colorset: "fated",
     fontScale: 0.5,
     system: "c2d10"
   }, "d10");

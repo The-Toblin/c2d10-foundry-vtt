@@ -82,3 +82,6 @@ c2d10.range = {
   close: "c2d10.range.close",
   touch: "c2d10.range.touch"
 };
+
+// Set up modern behaviour for grandchildren activeEffects
+CONFIG.ActiveEffect.legacyTransferral = false;

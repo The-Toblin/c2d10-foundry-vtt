@@ -2,6 +2,7 @@ import {c2d10} from "../config.js";
 import { getDice } from "../C2D10Utility.js";
 import { RegularDie} from "./C2D10RegularDie.js";
 import { CrisisDie } from "./C2D10CrisisDie.js";
+import { FatedDie } from "./C2D10FatedDie.js";
 /**
  * Core dice roller file for handling all types of test.
  * Contains helper functions for resolving things necessary for tests.
@@ -191,6 +192,9 @@ const _renderRoll = async (listContents, evaluation) => {
  */
 const _doRoll = async rollData => {
 
+  // Check if the character is FATED, if so, change the rollformula
+  const fated = !!game.actors.get(rollData.id).flags.c2d10.fated;
+
   let crisis = false;
   const messageTemplate = "systems/c2d10/templates/partials/chat-templates/roll.hbs";
   const bonusDice = getDice();
@@ -208,7 +212,7 @@ const _doRoll = async rollData => {
   const rollablePool = combinedPool - crisis > 0 ? parseInt(combinedPool - crisis) : 0;
   let rollFormula = "";
 
-  if (rollablePool > 0) rollFormula += `${rollablePool}dr`;
+  if (rollablePool > 0) rollFormula = fated ? `${rollablePool}da` : `${rollablePool}dr`;
   if (rollablePool > 0 && crisis > 0) {
     rollFormula += ` + ${crisis}ds`;
   } else if (crisis > 0) {
@@ -219,7 +223,9 @@ const _doRoll = async rollData => {
   // Execute the roll
   await theRoll.evaluate({async: true});
 
-  const mainDice = theRoll.dice.filter(function(term) {return term instanceof RegularDie;})[0];
+  // Construct lists of dice, taking into account any FATED characters
+  const mainDice = fated ? theRoll.dice.filter(function(term) {return term instanceof FatedDie;})[0]
+    :theRoll.dice.filter(function(term) {return term instanceof RegularDie;})[0];
   const crisisDice = theRoll.dice.filter(function(term) {return term instanceof CrisisDie;})[0];
 
   // If the roll was an attack, we attach a defend box to the message, by providing a boolean to the template.
