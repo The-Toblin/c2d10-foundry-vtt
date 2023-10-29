@@ -147,6 +147,10 @@ export default class C2D10Actor extends Actor {
     });
   }
 
+  _onCreate() {
+    this.setFlag("c2d10", "locked", false);
+  }
+
   async modifyResource(n, type, group, res) {
     const updateData = {};
     const system = this.system;

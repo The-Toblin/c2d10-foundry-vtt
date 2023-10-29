@@ -221,7 +221,7 @@ const _doRoll = async rollData => {
 
   const actor = game.actors.get(rollData.id);
   // Check if the character is FATED, if so, change the rollformula
-  const fated = actor.flags.c2d10.hasOwnProperty("fated") ? actor.flags.c2d10.fated : false;
+  const fated = !!game.actors.get(rollData.id).getFlag("c2d10", "fated");
 
   let crisis = false;
   const messageTemplate = "systems/c2d10/templates/partials/chat-templates/roll.hbs";
