@@ -495,8 +495,6 @@ export async function rollTest(actorId,
   rollData.preSelectedSkill = preSelectedSkill;
   rollData.isCombat = type === "attack" || type === "defense";
 
-
-  console.log(rollData);
   // Create the dialog
   const dialogOptions = {
     classes: ["c2d10-dialog", "c2d10-test-roll"],
