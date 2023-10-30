@@ -311,10 +311,41 @@ const _doRoll = async rollData => {
  * This function will add the skill values to the lists of skills and talents,
  * so that the user can see in the dialog what their value is without having to
  * visit their sheet.
- * @param {object}  skills  The list of the character's skills and values.
- * @param {object}  talents The List of the character's talents and values.
+ * @param {string}  actorId The Actor's ID
  */
-async function _addValuesToList(skills, talents) {
+async function _addValuesToList(actorId) {
+
+  const actor = game.actors.get(actorId);
+  const actorTalents = actor.system.talents;
+  const actorSkills = actor.system.skills;
+
+  /**
+   * Create list objects to use for dialogs.
+   */
+  const talents = {};
+  for (const entry of Object.entries(actorTalents.physical)) {
+    talents[entry[0]] = entry[1];
+  }
+  for (const entry of Object.entries(actorTalents.social)) {
+    talents[entry[0]] = entry[1];
+  }
+  for (const entry of Object.entries(actorTalents.mental)) {
+    talents[entry[0]] = entry[1];
+  }
+
+  /**
+   * Create list objects to use for dialogs.
+   */
+  const skills = {};
+  for (const entry of Object.entries(actorSkills.physical)) {
+    skills[entry[0]] = entry[1];
+  }
+  for (const entry of Object.entries(actorSkills.social)) {
+    skills[entry[0]] = entry[1];
+  }
+  for (const entry of Object.entries(actorSkills.mental)) {
+    skills[entry[0]] = entry[1];
+  }
 
   const newTalentsList = {};
   for (const val in c2d10.allTalents) {
@@ -327,15 +358,15 @@ async function _addValuesToList(skills, talents) {
   }
 
   return {
-    talents: newTalentsList,
-    skills: newSkillsList
+    talents: talents,
+    skills: skills,
+    talentsWithValues: newTalentsList,
+    skillsWithValues: newSkillsList
   };
 }
 /**
  * Perform a test. Will open a dialog to choose the second pool item. Takes Crisis into account.
  * @param {string}  actorId             The actor's Id.
- * @param {object}  talents             An object holding all the actor's talents and levels.
- * @param {object}  skills              An object holding all the actor's skills and levels.
  * @param {string}  type                The type of item being rolled for as pool 1 (talent, skill, power, other).
  * @param {string}  group               The group the item belongs to (physical, mental etc).
  * @param {string}  pool1Name           The name of the item being rolled for.
@@ -348,8 +379,6 @@ async function _addValuesToList(skills, talents) {
  * @param {number}  hits                If the roll is an attack, we include the number of hits from the attacker.
  */
 export async function rollTest(actorId,
-  talents,
-  skills,
   type,
   group,
   pool1Name,
@@ -406,8 +435,7 @@ export async function rollTest(actorId,
 
     // We also include the attack's damage and type here.
     rollData.damage = parseInt(damage) || parseInt(0);
-    rollData.damageType = damageType || null;
-    rollData.hits = parseInt(hits);
+    rollData.damageType = !!damageType;
 
     // Finally, we construct a reduced skill list with only attack skills.
     attackSkillList = {
@@ -448,14 +476,14 @@ export async function rollTest(actorId,
   * we must create a custom list with the values of said skills and talents. Let's
   * do that first:
   */
-  const lists = await _addValuesToList(skills, talents);
+  const lists = await _addValuesToList(actorId);
 
   // Then populate the needed rolldata
-  rollData.talentsList = lists.talents;
-  rollData.skillList = type === "attack" ? attackSkillList : lists.skills;
+  rollData.talentsList = lists.talentsWithValues;
+  rollData.skillList = type === "attack" ? attackSkillList : lists.skillsWithValues;
   rollData.type = type;
-  rollData.talents = talents;
-  rollData.skills = skills;
+  rollData.talents = lists.talents;
+  rollData.skills = lists.skills;
   rollData.pool1Level = parseInt(pool1Level);
   rollData.pool1Name = pool1Name;
   rollData.crisis = type !== "health" ? parseInt(crisis) : 0;
@@ -467,6 +495,8 @@ export async function rollTest(actorId,
   rollData.preSelectedSkill = preSelectedSkill;
   rollData.isCombat = type === "attack" || type === "defense";
 
+
+  console.log(rollData);
   // Create the dialog
   const dialogOptions = {
     classes: ["c2d10-dialog", "c2d10-test-roll"],

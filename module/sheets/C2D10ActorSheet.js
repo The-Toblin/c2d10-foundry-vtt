@@ -31,36 +31,36 @@ export default class C2D10ActorSheet extends ActorSheet {
     /**
      * Items
      */
-    sheetData.assets =sheetData.system.extras.assets;
-    sheetData.equipment =sheetData.system.extras.equipment;
+    sheetData.assets = sheetData.system.extras.assets;
+    sheetData.equipment = sheetData.system.extras.equipment;
 
     /**
      * Traits
      */
-    sheetData.virtues =sheetData.system.extras.virtues;
-    sheetData.vices =sheetData.system.extras.vices;
+    sheetData.virtues = sheetData.system.extras.virtues;
+    sheetData.vices = sheetData.system.extras.vices;
 
     /**
      * Powers
      */
-    sheetData.powers =sheetData.system.extras.powers;
-    sheetData.variants =sheetData.system.extras.variants;
+    sheetData.powers = sheetData.system.extras.powers;
+    sheetData.variants = sheetData.system.extras.variants;
 
     /**
      * Equipment
      */
-    sheetData.equippedWeapon =sheetData.system.extras.equippedWeapon;
-    sheetData.equippedArmor =sheetData.system.extras.equippedArmor;
+    sheetData.equippedWeapon = sheetData.system.extras.equippedWeapon;
+    sheetData.equippedArmor = sheetData.system.extras.equippedArmor;
 
     /**
      * Talents
      */
-    sheetData.talents =sheetData.system.extras.talents;
+    sheetData.talents = sheetData.system.extras.talents;
 
     /**
      * Skills
      */
-    sheetData.skills =sheetData.system.extras.skills;
+    sheetData.skills = sheetData.system.extras.skills;
 
     /**
      * Set a flag to allow the traits tab to be shown if traits are present.
@@ -423,8 +423,8 @@ export default class C2D10ActorSheet extends ActorSheet {
     const physicalImpairment = sys.health.physicalImpairment;
     const mentalImpairment = sys.health.mentalImpairment;
     const crisis = sys.health.crisis;
-    const talents = this.getData().talents;
-    const skills = this.getData().skills;
+    let damage = 0;
+    let damageType = true;
     let pool = null;
     let name = null; // This is just to get around the fact that we use itemId to fetch power data.
 
@@ -449,14 +449,17 @@ export default class C2D10ActorSheet extends ActorSheet {
       item.showDescription();
       name = item.name;
 
-    // Finally, the remaining option is either a talent or skill test, both of which are handled identically.
+      damageType = this.actor.system.extras.equippedWeapon.damageType === "Critical";
+      damage = this.actor.system.extras.equippedWeapon.damage;
+
+      // Finally, the remaining option is either a talent or skill test, both of which are handled identically.
     } else {
       pool = sys[type][group][id];
       name = id;
     }
 
     // Perform the roll
-    await rollTest(actorId, talents, skills, type, group, name, pool, physicalImpairment, mentalImpairment, crisis);
+    await rollTest(actorId, type, group, name, pool, physicalImpairment, mentalImpairment, crisis, damage, damageType);
   }
 
   async _doPostEquipmentCard(event) {

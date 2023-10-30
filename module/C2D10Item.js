@@ -29,12 +29,14 @@ export default class C2D10Item extends Item {
       speaker: ChatMessage.getSpeaker()
     };
 
+    console.log(this.system);
+
     const cardData = {
       ...this,
       itemId: this.id,
       owner: this.actor.id,
-      damageType: this.system.critical !== 0 ? "Critical" : "Superficial",
-      damage: this.system.critical !== 0 ? parseInt(this.system.critical) : parseInt(this.system.superficial)
+      damageType: parseInt(this.system.critical) !== 0 ? "Critical" : "Superficial",
+      damage: parseInt(this.system.critical) !== 0 ? parseInt(this.system.critical) : parseInt(this.system.superficial)
     };
 
     chatData.content = await renderTemplate(

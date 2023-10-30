@@ -68,34 +68,6 @@ export default class C2D10Actor extends Actor {
     }
 
     /**
-     * Create list objects to use for dialogs.
-     */
-    this.system.extras.talents = {};
-    for (const entry of Object.entries(this.system.talents.physical)) {
-      this.system.extras.talents[entry[0]] = entry[1];
-    }
-    for (const entry of Object.entries(this.system.talents.social)) {
-      this.system.extras.talents[entry[0]] = entry[1];
-    }
-    for (const entry of Object.entries(this.system.talents.mental)) {
-      this.system.extras.talents[entry[0]] = entry[1];
-    }
-
-    /**
-     * Create list objects to use for dialogs.
-     */
-    this.system.extras.skills = {};
-    for (const entry of Object.entries(this.system.skills.physical)) {
-      this.system.extras.skills[entry[0]] = entry[1];
-    }
-    for (const entry of Object.entries(this.system.skills.social)) {
-      this.system.extras.skills[entry[0]] = entry[1];
-    }
-    for (const entry of Object.entries(this.system.skills.mental)) {
-      this.system.extras.skills[entry[0]] = entry[1];
-    }
-
-    /**
      * Sort character's traits
      */
     this.system.extras.virtues.sort(function(a, b) {
