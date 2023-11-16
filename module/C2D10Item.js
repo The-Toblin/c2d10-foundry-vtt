@@ -29,8 +29,6 @@ export default class C2D10Item extends Item {
       speaker: ChatMessage.getSpeaker()
     };
 
-    console.log(this.system);
-
     const cardData = {
       ...this,
       itemId: this.id,
