@@ -47,6 +47,11 @@
                         "min": 0,
                         "max": 10,
                         "current": 0
+                    },
+                    "neural-load": {
+                        "min": 0,
+                        "max": 10,
+                        "current": 0
                     }
                 }
             },
