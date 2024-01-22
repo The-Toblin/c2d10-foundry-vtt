@@ -7,8 +7,9 @@ export default class C2D10Actor extends Actor {
     this.system.extras = {};
 
     // Derive health values.
-    const maxStrain = parseInt(this.system.talents.physical.endurance);
-    const maxStress = math.max(parseInt(this.system.talents.mental.willpower, parseInt(this.system.talents.social.poise)));
+    const talents = this.system.talents;
+    const maxStrain = parseInt(talents.physical.endurance);
+    const maxStress = math.max(parseInt(talents.mental.willpower, parseInt(talents.social.poise)));
 
     this.system.health.strain.max = maxStrain;
     this.system.health.stress.max = maxStress;

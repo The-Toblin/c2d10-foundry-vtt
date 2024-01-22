@@ -32,21 +32,23 @@
                 }
             },
             "health": {
-                "health": {
+                "trackers": {
                     "strain": {
                         "one": false,
                         "two": false,
                         "three": false,
                         "four": false,
-                        "five": false                        
+                        "five": false
                     },
                     "stress": {
                         "one": false,
                         "two": false,
                         "three": false,
                         "four": false,
-                        "five": false     
-                    },
+                        "five": false
+                    }
+                },
+                "consequences": {
                     "mild": {
                         "ticked": false,
                         "description": ""
@@ -66,7 +68,9 @@
                     "severe": {
                         "ticked": false,
                         "description": ""
-                    },
+                    }
+                },
+                "cybernetics": {
                     "cybernetic-load": {
                         "min": 0,
                         "max": 10,
