@@ -34,16 +34,45 @@
             "health": {
                 "health": {
                     "strain": {
-                        "min": 0,
-                        "superficial": 0,
-                        "critical": 0
+                        "one": false,
+                        "two": false,
+                        "three": false,
+                        "four": false,
+                        "five": false                        
                     },
                     "stress": {
-                        "min": 0,
-                        "superficial": 0,
-                        "critical": 0
+                        "one": false,
+                        "two": false,
+                        "three": false,
+                        "four": false,
+                        "five": false     
+                    },
+                    "mild": {
+                        "ticked": false,
+                        "description": ""
+                    },
+                    "mildPhysical": {
+                        "ticked": false,
+                        "description": ""
+                    },
+                    "mildMental": {
+                        "ticked": false,
+                        "description": ""
+                    },
+                    "moderate": {
+                        "ticked": false,
+                        "description": ""
+                    },
+                    "severe": {
+                        "ticked": false,
+                        "description": ""
                     },
                     "cybernetic-load": {
+                        "min": 0,
+                        "max": 10,
+                        "current": 0
+                    },
+                    "neural-load": {
                         "min": 0,
                         "max": 10,
                         "current": 0
