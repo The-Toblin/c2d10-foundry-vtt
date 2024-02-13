@@ -1,6 +1,6 @@
 export default class C2D10ItemSheet extends ItemSheet {
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       width: 700,
       height: 550,
       classes: ["c2d10", "item-sheet"]

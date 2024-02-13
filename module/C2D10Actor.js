@@ -5,29 +5,12 @@ export default class C2D10Actor extends Actor {
 
   async prepareBaseData() {
     this.system.extras = {};
-
-    // Derive health values.
     const talents = this.system.talents;
-    const maxStrain = parseInt(talents.physical.endurance);
-    const maxStress = math.max(parseInt(talents.mental.willpower, parseInt(talents.social.poise)));
+    const skills = this.system.skills;
 
-    this.system.health.strain.max = maxStrain;
-    this.system.health.stress.max = maxStress;
-
-    // Calculate current Crisis based on critical damage, and cap the value at 5.
-    const crisisValue = parseInt(this.system.health.strain.critical + this.system.health.stress.critical);
-    this.system.health.crisis = crisisValue <= 5 ? crisisValue : 5;
-
-    // Combine the two types of damage and inverse them in order to show a reduction bar on tokens.
-    const strainValue = parseInt(this.system.health.strain.superficial + this.system.health.strain.critical);
-    const stressValue = parseInt(this.system.health.stress.superficial + this.system.health.stress.critical);
-
-    this.system.health.strain.value = parseInt(maxStrain - strainValue);
-    this.system.health.stress.value = parseInt(maxStress - stressValue);
-
-    // Check if any health tracker has reached max, and if so, apply the impairment for that class.
-    this.system.health.physicalImpairment = strainValue === maxStrain;
-    this.system.health.mentalImpairment = stressValue === maxStress;
+    // Set up variables to be used by health trackers
+    this.system.extras.maxstrain = talents.physical.endurance;
+    this.system.extras.maxstress = talents.mental.willpower > talents.social.poise ? talents.mental.willpower : talents.social.poise;
 
     // Set up different objects, handy for other classes and displaying on the sheet
     this.system.extras.assets = this.items.filter(p => p.type === "asset");
@@ -45,25 +28,20 @@ export default class C2D10Actor extends Actor {
 
     // If a weapon is equipped, determine its damage type and send it to the display.
     if (wep) {
-      let wepDamage = wep.system.critical > 0 ? wep.system.critical : wep.system.superficial;
-      let wepType = wep.system.critical > 0 ? "Critical" : "Superficial";
+
 
       this.system.extras.equippedWeapon = {
         name: wep.name,
-        damage: wepDamage,
-        damageType: wepType
+        damage: wep.system.damage
       };
     }
 
     // If an armor is equipped, determine its defense type and send it to the display.
     if (arm) {
-      let armProt = arm.system.deflection > 0 ? arm.system.deflection : arm.system.ablation;
-      let armProtType= arm.system.deflection > 0 ? "Deflection" : "Ablation";
 
       this.system.extras.equippedArmor = {
         name: arm.name,
-        protection: armProt,
-        protectionType: armProtType
+        protection: arm.system.protection
       };
       super.prepareBaseData();
     }
@@ -149,67 +127,14 @@ export default class C2D10Actor extends Actor {
     await this.update(updateData);
   }
 
-  async modifyHealth(isIncrease, isCrit, res) {
+  async modifyHealth(group, id) {
+    const updateData = {};
     const system = this.system;
-    const currentSuperficial = system.health[res].superficial;
-    const superficial = system.health[res].superficial;
-    const critical = system.health[res].critical;
-    const total = parseInt(superficial + critical);
-    const max = system.health[res].max;
 
-    /**
-     * If the tracker is maxed out with critical damage, and we're not reducing, do nothing
-     */
-    if (critical === max && isIncrease) {
-      return;
-    }
+    const newValue = !system.trackers[group][id];
 
-    /**
-     * Function for handling complex critical damage conversions.
-     * @param {boolean} isIncrease    Whether to increase or not.
-     * @param {string}  res           Name of the resource.
-     * @param {number}  critical      The critical damage the character currently has.
-     * @param {number}  superficial   The superficial damage the character currently has.
-     * @param {number}  max           Max health on the tracker.
-     * @param {boolean} full          If the tracker is full, convert superficial to crit.
-     */
-    function handleCrit(isIncrease, res, critical, superficial, max, full = false) {
-      const updateData = {};
-      const newValue = isIncrease ? critical + 1 : critical - 1;
+    updateData[`system.trackers.${group}.${id}`] = newValue;
 
-      if (newValue < 0) return;
-
-      /**
-       * If we're reducing crit, convert to superficial.
-       */
-      if (!isIncrease) updateData[`system.health.${res}.superficial`] = superficial + 1;
-
-      /**
-       * If the tracker is full, convert a superficial to crit.
-       */
-      if (full && isIncrease) updateData[`system.health.${res}.superficial`] = superficial - 1;
-
-      /**
-       * Finally, update the crit tracker.
-       */
-      updateData[`system.health.${res}.critical`] = newValue;
-      return updateData;
-    }
-
-    let updateData = {};
-    const full = total >= max;
-
-    if (isCrit) {
-      updateData = handleCrit(isIncrease, res, critical, currentSuperficial, max, full);
-    } else if (full && isIncrease) {
-      updateData = handleCrit(isIncrease, res, critical, currentSuperficial, max, full);
-    } else {
-      const newValue = isIncrease ? currentSuperficial + 1 : currentSuperficial - 1;
-
-      if (newValue < 0) return;
-      updateData[`system.health.${res}.superficial`] = newValue;
-    }
-
-    if (typeof updateData !== "undefined") await this.update(updateData);
+    await this.update(updateData);
   }
 }

@@ -18,6 +18,7 @@ async function preloadHandlebarsTemplates() {
   const templatePaths = [
     "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-info.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-bio.hbs",
+    "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-consequences.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-talents.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-skills.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-assets-tab.hbs",

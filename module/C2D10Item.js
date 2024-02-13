@@ -35,8 +35,7 @@ export default class C2D10Item extends Item {
       ...this,
       itemId: this.id,
       owner: this.actor.id,
-      damageType: parseInt(this.system.critical) !== 0 ? "Critical" : "Superficial",
-      damage: parseInt(this.system.critical) !== 0 ? parseInt(this.system.critical) : parseInt(this.system.superficial)
+      damage: parseInt(this.system.damage)
     };
 
     chatData.content = await renderTemplate(

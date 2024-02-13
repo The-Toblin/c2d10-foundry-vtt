@@ -7,7 +7,7 @@ import { rollTest } from "../dice/C2D10Roll.js";
 
 export default class C2D10ActorSheet extends ActorSheet {
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       template: "systems/c2d10/templates/sheets/actor-sheet.hbs",
       classes: ["c2d10", "sheet"],
       height: 895,
@@ -151,6 +151,7 @@ export default class C2D10ActorSheet extends ActorSheet {
    */
   activateListeners(html) {
     html.find(".dot-container").on("click contextmenu", this._onResourceChange.bind(this));
+    html.find(".health-container").on("click contextmenu", this._onModifyHealth.bind(this));
     html.find(".description").on("contextmenu", this._postDescription.bind(this));
     html.find(".item-description").on("contextmenu", this._postItemDescription.bind(this));
     html.find(".edit-lock").click(this._toggleEditLock.bind(this));
@@ -263,6 +264,14 @@ export default class C2D10ActorSheet extends ActorSheet {
     } else {
       ui.notifications.error("Unlock your sheet before attempting to edit it!");
     }
+  }
+
+  _onModifyHealth(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    const dataset = element.closest(".health-container").dataset;
+
+    this.actor.modifyHealth(dataset.group, dataset.id);
   }
 
   /**
