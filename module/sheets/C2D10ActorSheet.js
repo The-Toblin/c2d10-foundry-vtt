@@ -152,6 +152,7 @@ export default class C2D10ActorSheet extends ActorSheet {
   activateListeners(html) {
     html.find(".dot-container").on("click contextmenu", this._onResourceChange.bind(this));
     html.find(".health-container").on("click contextmenu", this._onModifyHealth.bind(this));
+    html.find(".c2d10-consequence-box").on("click contextmenu", this._onToggleConsequence.bind(this));
     html.find(".description").on("contextmenu", this._postDescription.bind(this));
     html.find(".item-description").on("contextmenu", this._postItemDescription.bind(this));
     html.find(".edit-lock").click(this._toggleEditLock.bind(this));
@@ -523,5 +524,12 @@ export default class C2D10ActorSheet extends ActorSheet {
     item.toggleEffects();
 
     this.render(true); // Ugly hack to update the sheet with new data, since active effects don't do this inherently.
+  }
+
+  async _onToggleConsequence(event) {
+    event.preventDefault();
+    const dataset = event.currentTarget.closest(".c2d10-consequence-box").dataset;
+
+    await this.actor.toggleConsequence(dataset.id);
   }
 }

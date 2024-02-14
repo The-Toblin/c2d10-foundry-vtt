@@ -137,4 +137,15 @@ export default class C2D10Actor extends Actor {
 
     await this.update(updateData);
   }
+
+  async toggleConsequence(consequence) {
+    const updateData = {};
+    const systemData = this.system.consequences;
+
+    const newValue = !systemData[consequence].ticked;
+
+    updateData[`system.consequences.${consequence}.ticked`] = newValue;
+
+    await this.update(updateData);
+  }
 }
