@@ -158,7 +158,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     html.find(".add-focus").click(this._addFocus.bind(this));
     html.find(".remove-focus").click(this._removeFocus.bind(this));
     html.find(".focus-edit").on("click contextmenu", this._editFocus.bind(this));
-    html.find(".c2d10-health-test").click(this._doRollTest.bind(this));
+    // Html.find(".c2d10-health-test").click(this._doRollTest.bind(this));
     html.find(".c2d10-economy-test").click(this._doRollTest.bind(this));
     html.find(".c2d10-talent-test").click(this._doRollTest.bind(this));
     html.find(".c2d10-skill-test").click(this._doRollTest.bind(this));
@@ -411,12 +411,10 @@ export default class C2D10ActorSheet extends ActorSheet {
     const actorId = this.actor.id;
 
     /**
-     * A test (or roll) in C2D10 requires two (or rarely three) pools,
-     * the impairment status of the actor performing the roll,
-     * the character's current number of crisis dice.
+     * A test (or roll) in C2D10 requires two (or rarely three) pools.
      *
      * The function in the roll class takes the actorId, the type, group and id (name in clear text) of
-     * the primary pool item, that item's pool value (number of D10), and the character's impairment.
+     * the primary pool item and that item's pool value (number of D10).
      *
      * So we'll first need to establish those values and deliver them to the function.
      *
@@ -428,22 +426,13 @@ export default class C2D10ActorSheet extends ActorSheet {
     const type = dataset.type;
     const group = dataset.group;
     const id = dataset.id;
-    const physicalImpairment = sys.health.physicalImpairment;
-    const mentalImpairment = sys.health.mentalImpairment;
-    const crisis = sys.health.crisis;
     let damage = 0;
-    let damageType = true;
     let pool = null;
     let name = null; // This is just to get around the fact that we use itemId to fetch power data.
 
     // First, if this is an acquisition roll, set the pool to the economy value.
     if (id === "economy") {
       pool = sys[type][id] > 1 ? sys[type][id] : 1;
-      name = id;
-
-    // If not, check if it's a health test and determine the value of the pool.
-    } else if (type === "health") {
-      pool = sys[type][id].value > 1 ? sys[type][id].value : 1;
       name = id;
 
     // If it's a power test, we fetch the pool value from the power item.
@@ -457,7 +446,6 @@ export default class C2D10ActorSheet extends ActorSheet {
       item.showDescription();
       name = item.name;
 
-      damageType = this.actor.system.extras.equippedWeapon.damageType === "Critical";
       damage = this.actor.system.extras.equippedWeapon.damage;
 
       // Finally, the remaining option is either a talent or skill test, both of which are handled identically.
@@ -467,7 +455,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     }
 
     // Perform the roll
-    await rollTest(actorId, type, group, name, pool, physicalImpairment, mentalImpairment, crisis, damage, damageType);
+    await rollTest(actorId, type, group, name, pool, damage);
   }
 
   async _doPostEquipmentCard(event) {

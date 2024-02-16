@@ -31,7 +31,7 @@ export default class C2D10Actor extends Actor {
     if (wep) {
       this.system.extras.equippedWeapon = {
         name: wep.name,
-        damage: wep.system.damage
+        damage: wep.system.critical
       };
     }
 
@@ -39,7 +39,7 @@ export default class C2D10Actor extends Actor {
     if (arm) {
       this.system.extras.equippedArmor = {
         name: arm.name,
-        protection: arm.system.protection
+        protection: arm.system.deflection
       };
       super.prepareBaseData();
     }

@@ -272,6 +272,10 @@
             "name": "Difficulty",
             "label": "Setting difficulty for tests taken. Most tests performed will be matched against this."
         },
+        "campaignCrisis": {
+            "name": "Campaign Crisis",
+            "label": "The value of the current campaign's Crisis. This influences how many Crisis Dice each character will be rolling with."
+        },
         "bonusDice": {
             "name": "Bonus Dice Purchase",
             "label": "Store and manage the amount of bonus dice a character has purchased using narrative points. "

@@ -12,7 +12,8 @@
   .c2d10-hero-points,
   .c2d10-villain-points,
   .c2d10-difficulty,
-  .c2d10-bonus-dice {
+  .c2d10-bonus-dice,
+  .c2d10-crisis {
     background: fade(@colors[bkg], 85%);
     border: 1px solid @colors[bkg];
     border-radius: 5px;
@@ -34,12 +35,13 @@
       line-height: 1;
       position: absolute;
       width: 80px;
-    } 
+    }
 
     .hp-control-numbers,
     .vp-control-numbers,
     .dc-control-numbers,
-    .bonus-control-numbers {
+    .bonus-control-numbers,
+    .crisis-control-numbers {
       pointer-events: none;
     }
 
@@ -61,6 +63,7 @@
     .hp-control,
     .vp-control,
     .dc-control,
+    .crisis-control,
     .bonus-control {
       display: block;
       width: 40px;
@@ -114,11 +117,12 @@
     }
   }
 
-  .c2d10-difficulty {
+  .c2d10-difficulty,
+  .c2d10-crisis {
     &::after {
       bottom: 20px;
       left: 2px;
-      content: 'Difficulty';
+      content: 'Crisis';
     }
   }
 }
