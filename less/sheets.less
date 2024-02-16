@@ -1,5 +1,12 @@
+.c2d10-sheet {
+    min-width: 800px;
+}
+
 .c2d10.sheet,
 .c2d10.item-sheet {
+    display: flex;
+    flex-grow: 1;
+
     .c2d10-section();
 
     .window-content {
@@ -112,13 +119,19 @@
     .sheet-tabs {
         .green-border();
         .inset-shadow();
+        flex-grow: 1;
         color: @colors[green];
         writing-mode: vertical-lr;
         position: relative;
         top: 0px;
-        height: 771px;
         width: 40px;
         margin-right: 5px;
+    }
+
+    .nav-tabs {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
     }
 
     nav {

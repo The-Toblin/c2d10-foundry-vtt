@@ -12,6 +12,9 @@ import { FatedDie } from "./C2D10FatedDie.js";
  * Only the final functions are exported for use, and are found at the end of this file.
  */
 
+// TODO: Rework this entire file to account for new health system. Just log minimum damage and number of hits.
+// Also rework for new global crisis
+
 
 /**
  *  Counts hits, zeroes, determines messups and complications.

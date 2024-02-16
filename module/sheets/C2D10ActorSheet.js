@@ -10,8 +10,6 @@ export default class C2D10ActorSheet extends ActorSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
       template: "systems/c2d10/templates/sheets/actor-sheet.hbs",
       classes: ["c2d10", "sheet"],
-      height: 895,
-      width: 910,
       tabs: [
         {
           navSelector: ".sheet-tabs",
@@ -152,7 +150,7 @@ export default class C2D10ActorSheet extends ActorSheet {
   activateListeners(html) {
     html.find(".dot-container").on("click contextmenu", this._onResourceChange.bind(this));
     html.find(".health-container").on("click contextmenu", this._onModifyHealth.bind(this));
-    html.find(".c2d10-consequence-box").on("click contextmenu", this._onToggleConsequence.bind(this));
+    html.find(".c2d10-consequence-clickbox").on("click contextmenu", this._onToggleConsequence.bind(this));
     html.find(".description").on("contextmenu", this._postDescription.bind(this));
     html.find(".item-description").on("contextmenu", this._postItemDescription.bind(this));
     html.find(".edit-lock").click(this._toggleEditLock.bind(this));

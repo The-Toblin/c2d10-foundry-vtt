@@ -4,8 +4,8 @@
     </h3>
     <div class="content-box c2d10-subsection">
         {{#if (eq this.system.extras.maxstrain 5)}}
-        <div class="c2d10-consequence-box flex-row flex-start" data-type="health" data-group="consequence" data-id="mildphys">
-            <div class="c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}}{{#if system.consequences.mildPhysical.ticked}} c2d10-invert{{/if}} c2d10-white-label">
+        <div class="c2d10-consequence-box flex-row flex-start" data-type="health" data-group="consequence" data-id="mildPhysical">
+            <div class="c2d10-consequence-clickbox c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}}{{#if system.consequences.mildPhysical.ticked}} c2d10-invert{{/if}} c2d10-white-label">
                [2]
             </div>
             <div class="c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}} flex-grow" >
@@ -14,8 +14,8 @@
         </div>
         {{/if}}
         {{#if (eq this.system.extras.maxstress 5)}}
-        <div class="c2d10-consequence-box flex-row flex-start" data-type="health" data-group="consequence" data-id="mildment">
-            <div class="c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}}{{#if system.consequences.mildMental.ticked}} c2d10-invert{{/if}} c2d10-white-label">
+        <div class="c2d10-consequence-box flex-row flex-start" data-type="health" data-group="consequence" data-id="mildMental">
+            <div class="c2d10-consequence-clickbox c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}}{{#if system.consequences.mildMental.ticked}} c2d10-invert{{/if}} c2d10-white-label">
                [2]
             </div>
             <div class="c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}} flex-grow" >
@@ -24,7 +24,7 @@
         </div>
         {{/if}}
         <div class="c2d10-consequence-box flex-row flex-start" data-type="health" data-group="consequence" data-id="mild">
-            <div class="c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}}{{#if system.consequences.mild.ticked}} c2d10-invert{{/if}} c2d10-white-label">
+            <div class="c2d10-consequence-clickbox c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}}{{#if system.consequences.mild.ticked}} c2d10-invert{{/if}} c2d10-white-label">
                [2]
             </div>
             <div class="c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}} flex-grow" >
@@ -32,7 +32,7 @@
             </div>
         </div>
                 <div class="c2d10-consequence-box flex-row flex-start" data-type="health" data-group="consequence" data-id="moderate">
-            <div class="c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}}{{#if system.consequences.moderate.ticked}} c2d10-invert{{/if}} c2d10-white-label">
+            <div class="c2d10-consequence-clickbox c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}}{{#if system.consequences.moderate.ticked}} c2d10-invert{{/if}} c2d10-white-label">
                [4]
             </div>
             <div class="c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}} flex-grow" >
@@ -40,7 +40,7 @@
             </div>
         </div>
                 <div class="c2d10-consequence-box flex-row flex-start" data-type="health" data-group="consequence" data-id="severe">
-            <div class="c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}}{{#if system.consequences.severe.ticked}} c2d10-invert{{/if}} c2d10-white-label">
+            <div class="c2d10-consequence-clickbox c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}}{{#if system.consequences.severe.ticked}} c2d10-invert{{/if}} c2d10-white-label">
                [6]
             </div>
             <div class="c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}} flex-grow" >

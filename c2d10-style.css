@@ -264,7 +264,7 @@
   background-color: rgba(2, 17, 9, 0.75);
   color: #e5e5ec;
   font-family: VT323, monospace;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 200;
   letter-spacing: 1px;
   padding: 5px;
@@ -306,7 +306,7 @@
 .c2d10-basic-text {
   color: #e5e5ec;
   font-family: VT323, monospace;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 200;
   letter-spacing: 1px;
 }
@@ -444,12 +444,12 @@
 }
 .d10-dot-full,
 .d10-dot-empty {
-  min-width: 20px;
-  min-height: 20px;
-  max-width: 20px;
-  max-height: 20px;
+  min-width: 18px !important;
+  min-height: 18px !important;
+  max-width: 20px !important;
+  max-height: 20px !important;
   border: none !important;
-  padding: 2px;
+  padding: 1px;
 }
 table {
   border: none;
@@ -508,7 +508,7 @@ table input {
   background-color: rgba(2, 17, 9, 0.75);
   color: #e5e5ec;
   font-family: VT323, monospace;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 200;
   letter-spacing: 1px;
   padding: 5px;
@@ -581,7 +581,7 @@ table input {
 #chat-log .chat-message .message-content .button-box .attack,
 #chat-log .chat-message.whisper .message-content .button-box .attack {
   color: #e0f287;
-  font-size: 1.25rem;
+  font-size: 1.09375rem;
   background: #005c20;
 }
 #chat-log .chat-message .message-content .button-box .roll:hover,
@@ -653,8 +653,13 @@ table input {
 .d10.complication {
   background-image: url(assets/d10-red.webp) !important;
 }
+.c2d10-sheet {
+  min-width: 800px;
+}
 .c2d10.sheet,
 .c2d10.item-sheet {
+  display: flex;
+  flex-grow: 1;
   background: linear-gradient(0deg, #021109, 15%, rgba(2, 17, 9, 0.85));
 }
 .c2d10.sheet .window-content,
@@ -696,7 +701,7 @@ table input {
   text-align: center;
   color: #29a253;
   font-family: Quantum, sans-serif;
-  font-size: 2.5rem;
+  font-size: 2.1875rem;
   height: fit-content;
 }
 .c2d10.sheet h3,
@@ -705,7 +710,7 @@ table input {
   text-align: center;
   color: #29a253;
   font-family: Quantum, sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.09375rem;
   text-shadow: none;
   height: fit-content;
 }
@@ -717,7 +722,7 @@ table input {
 .c2d10.item-sheet label {
   color: #29a253;
   font-family: Quantum, sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.09375rem;
   text-shadow: none;
   margin: none;
 }
@@ -728,7 +733,7 @@ table input {
   color: #e5e5ec;
   text-transform: uppercase;
   font-family: Quantum, sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.09375rem;
 }
 .c2d10.sheet #no-marker,
 .c2d10.item-sheet #no-marker {
@@ -770,13 +775,19 @@ table input {
   border: 2px solid;
   border-color: #29a253 !important;
   box-shadow: 0 0 50px 5px #000 inset;
+  flex-grow: 1;
   color: #29a253;
   writing-mode: vertical-lr;
   position: relative;
   top: 0px;
-  height: 771px;
   width: 40px;
   margin-right: 5px;
+}
+.c2d10.sheet .nav-tabs,
+.c2d10.item-sheet .nav-tabs {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 .c2d10.sheet nav .item,
 .c2d10.item-sheet nav .item {
@@ -806,7 +817,7 @@ table input {
 .c2d10.item-sheet .c2d10-asset-textarea textarea {
   color: #e5e5ec;
   font-family: VT323, monospace;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 200;
   letter-spacing: 1px;
   color: inherit;
@@ -843,7 +854,7 @@ table input {
 .c2d10.item-sheet .c2d10-asset-card-table td {
   color: #e5e5ec;
   font-family: VT323, monospace;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 200;
   letter-spacing: 1px;
   text-align: center;
@@ -882,7 +893,7 @@ table input {
   color: #88f2ad;
   background: linear-gradient(0deg, #021109, 55%, rgba(2, 17, 9, 0.85));
   font-family: VT323, monospace;
-  font-size: 1.25rem;
+  font-size: 1.09375rem;
   padding: 5px 10px;
   height: fit-content;
 }
@@ -890,7 +901,7 @@ table input {
 .c2d10.item-sheet select option {
   background-color: #021109;
   font-family: VT323, monospace;
-  font-size: 1.25rem;
+  font-size: 1.09375rem;
 }
 .c2d10.sheet .c2d10-test:hover,
 .c2d10.item-sheet .c2d10-test:hover {
@@ -1122,7 +1133,7 @@ table input {
   border: none !important;
   box-shadow: none !important;
   color: #88f2ad;
-  font-size: 1.25rem;
+  font-size: 1.09375rem;
   font-family: Quantum, sans-serif;
 }
 .c2d10-dialog select {
@@ -1130,7 +1141,7 @@ table input {
   color: #88f2ad;
   background: linear-gradient(0deg, #021109, 55%, rgba(2, 17, 9, 0.85));
   font-family: VT323, monospace;
-  font-size: 1.25rem;
+  font-size: 1.09375rem;
   padding: 5px 10px;
   width: 100%;
   height: 35px !important;
@@ -1138,21 +1149,21 @@ table input {
 .c2d10-dialog select option {
   background-color: #021109;
   font-family: VT323, monospace;
-  font-size: 1.25rem;
+  font-size: 1.09375rem;
 }
 .c2d10-dialog h1 {
   border: none !important;
   text-align: center;
   color: #29a253;
   font-family: Quantum, sans-serif;
-  font-size: 2.5rem;
+  font-size: 2.1875rem;
 }
 .c2d10-dialog h3 {
   border: none !important;
   text-align: center;
   color: #29a253;
   font-family: Quantum, sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.09375rem;
   text-shadow: none;
 }
 .c2d10-dialog .label-box {
@@ -1162,17 +1173,17 @@ table input {
   border: none !important;
   color: #29a253;
   font-family: Quantum, sans-serif;
-  font-size: 1rem;
+  font-size: 0.875rem;
   text-shadow: none;
 }
 .c2d10-dialog .value-box {
   color: inherit;
   font-family: Quantum, sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.09375rem;
   margin: auto;
 }
 .c2d10-dialog p {
   color: #e5e5ec;
   font-family: VT323, monospace;
-  font-size: 1rem;
+  font-size: 0.875rem;
 }

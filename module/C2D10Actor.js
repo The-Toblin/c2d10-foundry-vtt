@@ -10,7 +10,8 @@ export default class C2D10Actor extends Actor {
 
     // Set up variables to be used by health trackers
     this.system.extras.maxstrain = talents.physical.endurance;
-    this.system.extras.maxstress = talents.mental.willpower > talents.social.poise ? talents.mental.willpower : talents.social.poise;
+    this.system.extras.maxstress = talents.mental.willpower
+    > talents.social.poise ? talents.mental.willpower : talents.social.poise;
 
     // Set up different objects, handy for other classes and displaying on the sheet
     this.system.extras.assets = this.items.filter(p => p.type === "asset");
@@ -28,8 +29,6 @@ export default class C2D10Actor extends Actor {
 
     // If a weapon is equipped, determine its damage type and send it to the display.
     if (wep) {
-
-
       this.system.extras.equippedWeapon = {
         name: wep.name,
         damage: wep.system.damage
@@ -38,7 +37,6 @@ export default class C2D10Actor extends Actor {
 
     // If an armor is equipped, determine its defense type and send it to the display.
     if (arm) {
-
       this.system.extras.equippedArmor = {
         name: arm.name,
         protection: arm.system.protection
@@ -98,10 +96,20 @@ export default class C2D10Actor extends Actor {
     });
   }
 
+  /**
+   * Set the sheet to be unlocked on character creation. Also ensures the lock flag is set.
+   */
   _onCreate() {
     this.setFlag("c2d10", "locked", false);
   }
 
+  /**
+   * A function to modify resources (talents, skills, powers etc) on an actor
+   * @param {number} n     The number to modify the resource by
+   * @param {string} type  The type of the resource (talent, skills, economy etc)
+   * @param {string} group The group the resource belongs to (physical, mental etc)
+   * @param {string} res   The resource to modify
+   */
   async modifyResource(n, type, group, res) {
     const updateData = {};
     const system = this.system;
@@ -127,6 +135,11 @@ export default class C2D10Actor extends Actor {
     await this.update(updateData);
   }
 
+  /**
+   *  This function toggles a health box on a health tracker.
+   * @param {string} group  A string holding the group of the value to act upon.
+   * @param {string} id     The name (or id) of the tracker to update.
+   */
   async modifyHealth(group, id) {
     const updateData = {};
     const system = this.system;
@@ -138,11 +151,18 @@ export default class C2D10Actor extends Actor {
     await this.update(updateData);
   }
 
+  /**
+   * Function to toggle consequences on or off on an Actor.
+   * @param {string} consequence A string holding the id/name of the consequence to act upon.
+   */
   async toggleConsequence(consequence) {
     const updateData = {};
     const systemData = this.system.consequences;
 
     const newValue = !systemData[consequence].ticked;
+
+    // Clear the description if a consequence is disabled
+    if (!newValue) updateData[`system.consequences.${consequence}.description`] = "";
 
     updateData[`system.consequences.${consequence}.ticked`] = newValue;
 

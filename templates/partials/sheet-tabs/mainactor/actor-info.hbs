@@ -60,7 +60,7 @@
                     <label class="align-center description" data-tooltip="{{localize "c2d10.descriptions.strain"}}" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
                         {{localize "c2d10.resources.strain"}}
                     </label>
-                    <div class="flex-row flex-between">
+                    <div class="flex-row flex-center">
                         <div class="flex-row resource-row" data-type="info" data-id="strain" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
                             {{#if (gte system.extras.maxstrain 1) }}
                                 {{#if system.trackers.strain.one }}
@@ -124,7 +124,7 @@
                     <label class="description align-center" data-tooltip="{{localize "c2d10.descriptions.stress"}}" data-id="stress">
                         {{localize "c2d10.resources.stress"}}
                     </label>
-                    <div class="flex-row flex-between">
+                    <div class="flex-row flex-center">
                         <div class="flex-row resource-row" data-type="info" data-id="stress" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
                             {{#if (gte system.extras.maxstress 1) }}
                                 {{#if system.trackers.stress.one }}
