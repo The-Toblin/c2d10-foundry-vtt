@@ -3,7 +3,6 @@
   data-DC="{{DC}}"
   data-hits="{{hits}}"
   data-weapon-damage="{{damage}}"
-  data-damage-type="{{damageType}}"
 >
   <div class="flex-col flex-start">
     <h2 class="align-center c2d10-capitalize">
@@ -25,7 +24,7 @@
       {{/unless}}
       {{pool1Name}}
       {{#unless (eq pool2Name "None")}}
-        + {{pool2Name}}
+        +{{pool2Name}}
       {{/unless}}
     </h3>
   </div>
@@ -54,9 +53,6 @@
         {{localize "c2d10.chat.defend.damage-taken"}}
       </h3>
       <div class="c2d10-contentbox flex-row flex-between">
-        <div>
-          {{damageType}}
-        </div>
         <div>
           {{damage}}
         </div>

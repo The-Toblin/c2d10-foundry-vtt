@@ -91,8 +91,7 @@
             "title": "Title",
             "species": "Species",
             "dot-tooltip": "<p>Left click to increase, right click or shift+left click, to reduce.</p>",
-            "health-tooltip": "<p>Left click to increase superficial damage, right click to reduce. Press CTRL and click to increase critical damage. CTLR+right click to reduce critical damage.</p><p>In lieu of a right mouse button, SHIFT left-click can be used instead.</p>",
-            "impaired-tooltip": "<p>You are impaired. All tests performed with this group of talents, skills and powers will suffer a -2 dice penalty until you recover."
+            "health-tooltip": "<p>Click to toggle the health box on, or off.</p>"
         },
         "talents": {
             "physical": "Physical",
@@ -168,6 +167,7 @@
             "description": "Description",
             "assetType": "Type",
             "critical": "Critical",
+            "protection": "Protection",
             "superficial": "Superficial",
             "value": "Value",
             "quality": "Quality",

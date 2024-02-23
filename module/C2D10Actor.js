@@ -27,19 +27,19 @@ export default class C2D10Actor extends Actor {
     let wep = this.items.get(this.system.equipment.weapon);
     let arm = this.items.get(this.system.equipment.armor);
 
-    // If a weapon is equipped, determine its damage type and send it to the display.
+    // If a weapon is equipped, determine its damage and send it to the display.
     if (wep) {
       this.system.extras.equippedWeapon = {
         name: wep.name,
-        damage: wep.system.critical
+        damage: wep.system.damage
       };
     }
 
-    // If an armor is equipped, determine its defense type and send it to the display.
+    // If an armor is equipped, determine its protection and send it to the display.
     if (arm) {
       this.system.extras.equippedArmor = {
         name: arm.name,
-        protection: arm.system.deflection
+        protection: arm.system.protection
       };
       super.prepareBaseData();
     }

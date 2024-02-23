@@ -193,8 +193,7 @@
             "templates": [
                 "coreAsset"
             ],
-            "ablation": 0,
-            "deflection": 0,
+            "protection": 0,
             "penalty": "None"
         },
         "asset": {
@@ -247,8 +246,7 @@
             "templates": [
                 "coreAsset"
             ],
-            "critical": 0,
-            "superficial": 0,
+            "damage": 0,
             "penalty": "None"
         }
     }
