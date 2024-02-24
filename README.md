@@ -5,3 +5,6 @@ This is public, but in no way in any shape or form in release territory. This is
 
 Made by the Toblin
 tobias@celenia.se
+
+# CHANGELOG 0.601
+Implemented new health system inspired by FATE.
