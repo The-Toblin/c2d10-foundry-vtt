@@ -1,4 +1,4 @@
-<section class="c2d10-card flex-col weapon" data-item-id="{{this.itemId}}" data-owner-id="{{this.owner}}" data-weapon-damage="{{damage}}" data-damage-type="{{damageType}}">
+<section class="c2d10-card flex-col weapon" data-item-id="{{this.itemId}}" data-owner-id="{{this.owner}}" data-weapon-damage="{{damage}}">
     <div class="flex-col flex-start">
         <h1 class="c2d10-capitalize align-center">{{this.name}}</h1>
         <h3 class="c2d10-capitalize align-center">{{this.system.assetType}}</h3>
@@ -9,13 +9,12 @@
         <div>
             {{localize "c2d10.asset.damage"}}
         </div>
-        <div class="flex-row flex-between">
-            {{damage}} {{damageType}}
-        </div>
     </div>
     <div class="c2d10-contentbox">
         {{{this.system.description}}}
     </div>
+  
+    <!-- Commented out for now
     <div class="c2d10-interactables-attack-box">
         <h3 class="align-center c2d10-capitalize" style="margin-top: 20px;">
             {{localize "c2d10.chat.actions"}}
@@ -24,4 +23,5 @@
             <button class="attack">{{localize "c2d10.chat.attack.attack"}}!</button>
         </div>
     </div>
+    -->
 </section>

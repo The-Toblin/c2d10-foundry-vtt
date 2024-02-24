@@ -43,8 +43,7 @@ function onAttack(event) {
     physicalImpairment,
     mentalImpairment,
     crisis,
-    damage,
-    damageType);
+    damage);
 }
 
 /**
@@ -165,7 +164,6 @@ function _doRoll(card, attacker, defender) {
     mentalImpairment,
     crisis,
     damage,
-    damageType,
     hits);
 }
 
