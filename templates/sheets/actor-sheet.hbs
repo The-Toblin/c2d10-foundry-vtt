@@ -22,9 +22,7 @@
                 <a class="item" data-tab="info">{{localize "c2d10.sheet.info"}}</a>
                 <a class="item" data-tab="bio">{{localize "c2d10.sheet.bio"}}</a>
                 <a class="item" data-tab="focus">{{localize "c2d10.sheet.focus"}}</a>
-                {{#if traits}}
-                    <a class="item" data-tab="traits">{{localize "c2d10.sheet.traits"}}</a>
-                {{/if}}
+                <a class="item" data-tab="traits">{{localize "c2d10.sheet.tandc"}}</a>
                 {{#if assets}}
                     <a class="item" data-tab="assets">{{localize "c2d10.sheet.assets"}}</a>
                 {{else if equipment}}
@@ -39,7 +37,6 @@
             {{!-- Info Tab --}}
             <div class="tab sheet-info" data-group="primary" data-tab="info">
                 {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-info.hbs"}}
-                {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-consequences.hbs"}}
                 {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-talents.hbs"}}
                 {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-skills.hbs"}}
             </div>
@@ -53,11 +50,9 @@
                 {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-focus-tab.hbs"}}
             </div>
             {{!-- Traits Tab --}}
-            {{#if traits}}
-                <div class="tab sheet-traits" data-group="primary" data-tab="traits">
-                    {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-traits-tab.hbs"}}
-                </div>
-            {{/if}}
+            <div class="tab sheet-traits" data-group="primary" data-tab="traits">
+                {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-traits-tab.hbs"}}
+            </div>
             {{!-- Assets Tab --}}
             <div class="tab sheet-assets" data-group="primary" data-tab="assets">
                 {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-assets-tab.hbs"}}

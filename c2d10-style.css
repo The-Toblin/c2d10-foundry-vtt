@@ -654,7 +654,7 @@ table input {
   background-image: url(assets/d10-red.webp) !important;
 }
 .c2d10.sheet {
-  min-width: 800px;
+  min-width: 900px;
 }
 .c2d10.item-sheet {
   min-width: 900px;
@@ -935,6 +935,11 @@ table input {
 }
 .c2d10.sheet .remove-power,
 .c2d10.item-sheet .remove-power {
+  color: #e5e5ec;
+}
+.c2d10.sheet .c2d10-remove-trait,
+.c2d10.item-sheet .c2d10-remove-trait {
+  font-size: 2.75rem;
   color: #e5e5ec;
 }
 .c2d10.item-sheet {

@@ -168,4 +168,24 @@ export default class C2D10Actor extends Actor {
 
     await this.update(updateData);
   }
+
+  async addTrait(isDelete, id) {
+    const updateData = {};
+
+    if (isDelete && id !== 0) {
+      updateData[`system.traits.-=${id}`] = null;
+
+      await this.update(updateData);
+
+    } else if (id === 0) {id = foundry.utils.randomID();
+
+      updateData[`system.traits.${id}`] = {
+        traitID: id,
+        description: ""
+      };
+
+      await this.update(updateData);
+
+    }
+  }
 }

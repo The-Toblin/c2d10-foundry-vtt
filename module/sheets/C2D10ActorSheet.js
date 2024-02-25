@@ -33,12 +33,6 @@ export default class C2D10ActorSheet extends ActorSheet {
     sheetData.equipment = sheetData.system.extras.equipment;
 
     /**
-     * Traits
-     */
-    sheetData.virtues = sheetData.system.extras.virtues;
-    sheetData.vices = sheetData.system.extras.vices;
-
-    /**
      * Powers
      */
     sheetData.powers = sheetData.system.extras.powers;
@@ -156,6 +150,8 @@ export default class C2D10ActorSheet extends ActorSheet {
     html.find(".edit-lock").click(this._toggleEditLock.bind(this));
     html.find(".delete-item").click(this._deleteItem.bind(this));
     html.find(".add-focus").click(this._addFocus.bind(this));
+    html.find(".add-trait").click(this._addTrait.bind(this));
+    html.find(".remove-trait").click(this._removeTrait.bind(this));
     html.find(".remove-focus").click(this._removeFocus.bind(this));
     html.find(".focus-edit").on("click contextmenu", this._editFocus.bind(this));
     // Html.find(".c2d10-health-test").click(this._doRollTest.bind(this));
@@ -384,6 +380,21 @@ export default class C2D10ActorSheet extends ActorSheet {
     updateData["system.skills.focus"] = currentArray;
 
     await this.actor.update(updateData);
+  }
+
+  async _addTrait(event) {
+    if (event) event.preventDefault();
+
+    await this.actor.addTrait(false, 0);
+  }
+
+  async _removeTrait(event) {
+    if (event) event.preventDefault();
+
+    console.log(event.currentTarget.closest(".remove-trait").dataset);
+
+    await this.actor.addTrait(true, event.currentTarget.closest(".remove-trait").dataset.id);
+
   }
 
   async _deleteItem(event) {
