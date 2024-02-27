@@ -44,33 +44,6 @@ export default class C2D10Actor extends Actor {
       super.prepareBaseData();
     }
 
-    /**
-     * Sort character's traits
-     */
-    this.system.extras.virtues.sort(function(a, b) {
-      let nameA = a.name.toUpperCase(); // Ignore upper and lowercase
-      let nameB = b.name.toUpperCase(); // Ignore upper and lowercase
-      if (nameA < nameB) {
-        return -1; // NameA comes first
-      }
-      if (nameA > nameB) {
-        return 1; // NameB comes first
-      }
-      return 0;  // Names must be equal
-    });
-
-    this.system.extras.vices.sort(function(a, b) {
-      let nameA = a.name.toUpperCase(); // Ignore upper and lowercase
-      let nameB = b.name.toUpperCase(); // Ignore upper and lowercase
-      if (nameA < nameB) {
-        return -1; // NameA comes first
-      }
-      if (nameA > nameB) {
-        return 1; // NameB comes first
-      }
-      return 0;  // Names must be equal
-    });
-
     this.system.extras.powers.sort(function(a, b) {
       let nameA = a.name.toUpperCase(); // Ignore upper and lowercase
       let nameB = b.name.toUpperCase(); // Ignore upper and lowercase
