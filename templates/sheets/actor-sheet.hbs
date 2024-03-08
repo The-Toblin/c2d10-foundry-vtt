@@ -15,14 +15,14 @@
                     {{localize "c2d10.sheet.experience"}}
                 </h3>
                 <div>
-                    <input name="system.info.experience" type="number" value="{{system.info.experience}}" placeholder="{{localize "c2d10.sheet.experience"}}"/>
+                    <input name="system.info.experience" type="number" value="{{system.info.experience}}" placeholder="{{localize "c2d10.sheet.experience"}}" />
                 </div>
             </div>
             <nav class="sheet-tabs tabs c2d10-tab-list" data-group="primary">
-                <a class="item" data-tab="info">{{localize "c2d10.sheet.info"}}</a>
+                <a class="item" data-tab="skills">{{localize "c2d10.sheet.skills"}}</a>
                 <a class="item" data-tab="bio">{{localize "c2d10.sheet.bio"}}</a>
                 <a class="item" data-tab="focus">{{localize "c2d10.sheet.focus"}}</a>
-                <a class="item" data-tab="traits">{{localize "c2d10.sheet.tandc"}}</a>
+                <a class="item" data-tab="traits">{{localize "c2d10.sheet.traits"}}</a>
                 {{#if assets}}
                     <a class="item" data-tab="assets">{{localize "c2d10.sheet.assets"}}</a>
                 {{else if equipment}}
@@ -33,36 +33,254 @@
                 {{/if}}
             </nav>
         </section>
-        <section id="tabs" class="sheet-body">
-            {{!-- Info Tab --}}
-            <div class="tab sheet-info" data-group="primary" data-tab="info">
-                {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-info.hbs"}}
-                {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-talents.hbs"}}
-                {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-skills.hbs"}}
-            </div>
-            {{!-- Bio Tab --}}
-            <div class="tab sheet-bio" data-group="primary" data-tab="bio">
-{{!DO NOT UNINDENT! Will break handlebars handling of textareas}}
-{{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-bio.hbs"}}
-            </div>
-            {{!-- Focus Tab --}}
-            <div class="tab sheet-focus" data-group="primary" data-tab="focus">
-                {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-focus-tab.hbs"}}
-            </div>
-            {{!-- Traits Tab --}}
-            <div class="tab sheet-traits" data-group="primary" data-tab="traits">
-                {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-traits-tab.hbs"}}
-            </div>
-            {{!-- Assets Tab --}}
-            <div class="tab sheet-assets" data-group="primary" data-tab="assets">
-                {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-assets-tab.hbs"}}
-            </div>
-            {{!-- Powers Tab --}}
-            {{#if powers}}
-                <div class="tab sheet-powers" data-group="primary" data-tab="powers">
-                    {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-powers-tab.hbs"}}
+        <div class="flex-col flex-between flex-grow">
+            <h3>
+                {{localize "c2d10.sheet.info"}}
+            </h3>
+            <div class="content-box c2d10-subsection">
+                <div class="flex-row flex-between">
+                    <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} w-fit">
+                        <div class="image-box">
+                            <img class="actor-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="125px" />
+                        </div>
+                    </div>
+                    <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} w-100">
+                        <table>
+                            <tr>
+                                <th>
+                                    {{localize "c2d10.character.name"}}
+                                </th>
+                                <td>
+                                    <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "c2d10.character.name"}}" />
+                                </td>
+                                <th class="cd10-header">
+                                    {{localize "c2d10.sheet.archetype"}}
+                                </th>
+                                <td>
+                                    <input name="system.info.archetype" type="text" value="{{system.info.archetype}}" placeholder="{{localize "c2d10.sheet.archetype"}}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    {{localize "c2d10.character.concept"}}
+                                </th>
+                                <td>
+                                    <input name="system.info.concept" type="text" value="{{system.info.concept}}" placeholder="{{localize "c2d10.character.concept"}}" />
+                                </td>
+                                <th>
+                                    {{localize "c2d10.character.ambition"}}
+                                </th>
+                                <td>
+                                    <input name="system.info.ambition" type="text" value="{{system.info.ambition}}" placeholder="{{localize "c2d10.character.ambition"}}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    {{localize "c2d10.character.species"}}
+                                </th>
+                                <td>
+                                    <input name="system.info.species" type="text" value="{{system.info.species}}" placeholder="{{localize "c2d10.character.species"}}" />
+                                </td>
+                                <th>
+                                    {{localize "c2d10.character.faction"}}
+                                </th>
+                                <td>
+                                    <input name="system.info.faction" type="text" value="{{system.info.faction}}" placeholder="{{localize "c2d10.character.faction"}}" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="w-20 flex-col">
+                        <div class="c2d10-contentbox h-100 {{#if showEffects}}fancy-effects{{/if}} flex-col flex-between">
+                            <label class="align-center description" data-tooltip="{{localize "c2d10.descriptions.strain"}}" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
+                                {{localize "c2d10.resources.strain"}}
+                            </label>
+                            <div class="flex-row flex-center">
+                                <div class="flex-row resource-row" data-type="info" data-id="strain" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
+                                    {{#if (gte system.extras.maxstrain 1) }}
+                                        {{#if system.trackers.strain.one }}
+                                            <div class="health-container full" data-type="health" data-group="strain" data-id="one">
+                                                <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp" />
+                                            </div>
+                                        {{else}}
+                                            <div class="health-container empty" data-type="health" data-group="strain" data-id="one">
+                                                <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp" />
+                                            </div>
+                                        {{/if}}
+                                    {{/if}}
+                                    {{#if (gte system.extras.maxstrain 2) }}
+                                        {{#if system.trackers.strain.two }}
+                                            <div class="health-container full" data-type="health" data-group="strain" data-id="two">
+                                                <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp" />
+                                            </div>
+                                        {{else}}
+                                            <div class="health-container empty" data-type="health" data-group="strain" data-id="two">
+                                                <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp" />
+                                            </div>
+                                        {{/if}}
+                                    {{/if}}
+                                    {{#if (gte system.extras.maxstrain 3) }}
+                                        {{#if system.trackers.strain.three }}
+                                            <div class="health-container full" data-type="health" data-group="strain" data-id="three">
+                                                <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp" />
+                                            </div>
+                                        {{else}}
+                                            <div class="health-container empty" data-type="health" data-group="strain" data-id="three">
+                                                <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp" />
+                                            </div>
+                                        {{/if}}
+                                    {{/if}}
+                                    {{#if (gte system.extras.maxstrain 4) }}
+                                        {{#if system.trackers.strain.four }}
+                                            <div class="health-container full" data-type="health" data-group="strain" data-id="four">
+                                                <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp" />
+                                            </div>
+                                        {{else}}
+                                            <div class="health-container empty" data-type="health" data-group="strain" data-id="four">
+                                                <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp" />
+                                            </div>
+                                        {{/if}}
+                                    {{/if}}
+                                    {{#if (gte system.extras.maxstrain 5) }}
+                                        {{#if system.trackers.strain.five }}
+                                            <div class="health-container full" data-type="health" data-group="strain" data-id="five">
+                                                <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp" />
+                                            </div>
+                                        {{else}}
+                                            <div class="health-container empty" data-type="health" data-group="strain" data-id="five">
+                                                <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp" />
+                                            </div>
+                                        {{/if}}
+                                    {{/if}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="c2d10-contentbox h-100 {{#if showEffects}}fancy-effects{{/if}} flex-col flex-between">
+                            <label class="description align-center" data-tooltip="{{localize "c2d10.descriptions.stress"}}" data-id="stress">
+                                {{localize "c2d10.resources.stress"}}
+                            </label>
+                            <div class="flex-row flex-center">
+                                <div class="flex-row resource-row" data-type="info" data-id="stress" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
+                                    {{#if (gte system.extras.maxstress 1) }}
+                                        {{#if system.trackers.stress.one }}
+                                            <div class="health-container full" data-type="health" data-group="stress" data-id="one">
+                                                <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp" />
+                                            </div>
+                                        {{else}}
+                                            <div class="health-container empty" data-type="health" data-group="stress" data-id="one">
+                                                <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp" />
+                                            </div>
+                                        {{/if}}
+                                    {{/if}}
+                                    {{#if (gte system.extras.maxstress 2) }}
+                                        {{#if system.trackers.stress.two }}
+                                            <div class="health-container full" data-type="health" data-group="stress" data-id="two">
+                                                <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp" />
+                                            </div>
+                                        {{else}}
+                                            <div class="health-container empty" data-type="health" data-group="stress" data-id="two">
+                                                <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp" />
+                                            </div>
+                                        {{/if}}
+                                    {{/if}}
+                                    {{#if (gte system.extras.maxstress 3) }}
+                                        {{#if system.trackers.stress.three }}
+                                            <div class="health-container full" data-type="health" data-group="stress" data-id="three">
+                                                <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp" />
+                                            </div>
+                                        {{else}}
+                                            <div class="health-container empty" data-type="health" data-group="stress" data-id="three">
+                                                <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp" />
+                                            </div>
+                                        {{/if}}
+                                    {{/if}}
+                                    {{#if (gte system.extras.maxstress 4) }}
+                                        {{#if system.trackers.stress.four }}
+                                            <div class="health-container full" data-type="health" data-group="stress" data-id="four">
+                                                <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp" />
+                                            </div>
+                                        {{else}}
+                                            <div class="health-container empty" data-type="health" data-group="stress" data-id="four">
+                                                <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp" />
+                                            </div>
+                                        {{/if}}
+                                    {{/if}}
+                                    {{#if (gte system.extras.maxstress 5) }}
+                                        {{#if system.trackers.stress.five }}
+                                            <div class="health-container full" data-type="health" data-group="stress" data-id="five">
+                                                <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp" />
+                                            </div>
+                                        {{else}}
+                                            <div class="health-container empty" data-type="health" data-group="stress" data-id="five">
+                                                <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp" />
+                                            </div>
+                                        {{/if}}
+                                    {{/if}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            {{/if}}
-        </section>
+                <div class="flex-row flex-between">
+                    {{#if equippedWeapon}}
+                        <div class="flex-row flex-start" style="width: 49.5%;">
+                            <div class="flex-verticalcenter c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} equipment-item asset-item" data-id={{system.equipment.weapon}}>
+                                <a class="c2d10-attack-weapon c2d10-test" title="{{localize "c2d10.sheet.attack"}}" data-type="attack" data-id="{{system.equipment.weapon}}">
+                                    <i class="fa-light fa-crosshairs-simple"></i>
+                                </a>
+                            </div>
+                            <div class="flex-row flex-between flex-verticalcenter w-100 c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} equipment equipment-item asset-item" data-id={{system.equipment.weapon}}>
+                                <label>
+                                    {{equippedWeapon.name}}
+                                </label>
+                                <div class="flex-row flex-center">
+                                    {{equippedWeapon.damage}}
+                                </div>
+                            </div>
+                        </div>
+                    {{/if}}
+                    {{#if equippedArmor}}
+                        <div class="flex-row flex-between w-50 c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} equipment equipment-item asset-item" data-id={{system.equipment.armor}}>
+                            <label>
+                                {{equippedArmor.name}}
+                            </label>
+                            <div class="flex-row flex-center">
+                                {{equippedArmor.protection}}
+                            </div>
+                        </div>
+                    {{/if}}
+                </div>
+            </div>
+            <section id="tabs" class="sheet-body">
+                {{!-- Info Tab --}}
+                <div class="tab sheet-info" data-group="primary" data-tab="skills">
+                    {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-talents.hbs"}}
+                    {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-skills.hbs"}}
+                </div>
+                {{!-- Bio Tab --}}
+                <div class="tab sheet-bio" data-group="primary" data-tab="bio">
+                    {{!DO NOT UNINDENT! Will break handlebars handling of textareas}}
+                    {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-bio.hbs"}}
+                </div>
+                {{!-- Focus Tab --}}
+                <div class="tab sheet-focus" data-group="primary" data-tab="focus">
+                    {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-focus-tab.hbs"}}
+                </div>
+                {{!-- Traits Tab --}}
+                <div class="tab sheet-traits" data-group="primary" data-tab="traits">
+                    {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-traits-tab.hbs"}}
+                </div>
+                {{!-- Assets Tab --}}
+                <div class="tab sheet-assets" data-group="primary" data-tab="assets">
+                    {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-assets-tab.hbs"}}
+                </div>
+                {{!-- Powers Tab --}}
+                {{#if powers}}
+                    <div class="tab sheet-powers" data-group="primary" data-tab="powers">
+                        {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-powers-tab.hbs"}}
+                    </div>
+                {{/if}}
+            </section>
+        </div>
     </div>
 </form>
