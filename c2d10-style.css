@@ -514,6 +514,13 @@ table input {
 #chat-log h3 {
   border: none;
 }
+#chat-log h3 {
+  color: #e5e5ec;
+  font-family: VT323, monospace;
+  font-size: 0.875rem;
+  font-weight: 200;
+  letter-spacing: 1px;
+}
 #chat-log .chat-message,
 #chat-log .chat-message.whisper {
   border-radius: 3px;
@@ -672,6 +679,9 @@ table input {
 }
 .c2d10.item-sheet {
   min-width: 900px;
+}
+.sheet.journal-entry .journal-entry-content {
+  background: none;
 }
 .c2d10.sheet,
 .c2d10.item-sheet {
