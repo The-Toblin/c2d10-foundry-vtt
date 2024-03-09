@@ -223,15 +223,13 @@
         "variant": {
             "power": "",
             "description": "",
-            "duration": 0,
-            "duration-denominator": "None",
-            "range": 0,
-            "range-denominator": "None",
+            "short-description": "",
+            "duration": "",
+            "range": "",
             "level-req": 1,
-            "cost": 0,
-            "cost-resource": "None",
-            "pool": "None",
-            "opposed": "None"
+            "cost": "",
+            "pool": "",
+            "opposed": ""
         },
         "trait": {
             "level": 0,

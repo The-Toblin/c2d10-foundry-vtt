@@ -104,6 +104,14 @@
     background: linear-gradient(0deg, @colors[bkg], 55%, fade(@colors[bkg], 85%));
 }
 
+.c2d10-collapsible-content {
+    display: none;
+}
+
+.c2d10-button-collapsible:hover {
+    filter: invert();
+}
+
 .inset-shadow() {
     box-shadow: 0 0 50px 5px #000 inset;
 }
@@ -261,6 +269,10 @@
     flex-grow: 1;
 }
 
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
 .w-100 {
     width: 100%
 }
@@ -275,6 +287,10 @@
 
 .w-20 {
     width: 19%
+}
+
+.w-33 {
+    width: 33%
 }
 
 .w-40 {
@@ -299,6 +315,14 @@
 
 .h-100 {
     height: 100%;
+}
+
+.h-20 {
+    height: 20%;
+}
+
+.h-80 {
+    height: 80%;
 }
 
 .h-fit {

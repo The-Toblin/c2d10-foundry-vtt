@@ -271,6 +271,12 @@
 .c2d10-dark-background {
   background: linear-gradient(0deg, #021109, 55%, rgba(2, 17, 9, 0.85));
 }
+.c2d10-collapsible-content {
+  display: none;
+}
+.c2d10-button-collapsible:hover {
+  filter: invert();
+}
 .white-border {
   border-radius: 3px;
   border: 2px solid;
@@ -394,6 +400,9 @@
 .flex-grow {
   flex-grow: 1;
 }
+.flex-wrap {
+  flex-wrap: wrap;
+}
 .w-100 {
   width: 100%;
 }
@@ -405,6 +414,9 @@
 }
 .w-20 {
   width: 19%;
+}
+.w-33 {
+  width: 33%;
 }
 .w-40 {
   width: 39%;
@@ -423,6 +435,12 @@
 }
 .h-100 {
   height: 100%;
+}
+.h-20 {
+  height: 20%;
+}
+.h-80 {
+  height: 80%;
 }
 .h-fit {
   min-height: fit-content;

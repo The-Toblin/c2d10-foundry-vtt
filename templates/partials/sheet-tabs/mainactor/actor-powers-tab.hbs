@@ -3,33 +3,26 @@
         {{localize "c2d10.sheet.powers"}}
     </h3>
     {{#each powers as |power|}}
-    <div class="flex-col flex-center content-box c2d10-subsection">
-        <div class="flex-row flex-between">
-            <div class="flex-row flex-start">
-                <a class="remove-power delete-item asset-item" data-id="{{power._id}}" title="{{localize "c2d10.sheet.removePower"}}">
-                    <i class="far fa-minus-square" style="margin-right: 5px"></i>
-                </a>
-                <h3 class="item-description c2d10-test c2d10-power-test" data-type="powers" data-group="powers" data-id="{{power._id}}" style="margin-right: 10px;">{{power.name}}</h3>
+        <div class="flex-col flex-center content-box c2d10-subsection">
+            <div class="flex-row flex-between">
+                <div class="flex-row flex-start">
+                    <a class="remove-power delete-item asset-item" data-id="{{power._id}}" title="{{localize "c2d10.sheet.removePower"}}">
+                        <i class="far fa-minus-square" style="margin-right: 5px"></i>
+                    </a>
+                    <h3 class="item-description c2d10-test c2d10-power-test" data-type="powers" data-group="powers" data-id="{{power._id}}" style="margin-right: 10px;">{{power.name}}</h3>
+                </div>
+                <div class="flex-row table-no-border power-resource-row" data-res="level" data-id="{{power._id}}" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
+                    {{#dots power.system.level 5}}{{/dots}}
+                </div>
             </div>
-            <div class="flex-row table-no-border power-resource-row" data-res="level" data-id="{{power._id}}" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
-                {{#dots power.system.level 5}}{{/dots}}
+            <button type="button" class="c2d10-button-collapsible">Open power</button>
+            <div class="c2d10-collapsible-content">
+                {{#each ../variants as |variant|}}
+                    {{#if (eq power.system.powerId variant.system.power)}}
+                        {{> "systems/c2d10/templates/cards/power-card.hbs"}}
+                    {{/if}}
+                {{/each}}
             </div>
         </div>
-        <table class="c2d10-asset-card-table {{#if showEffects}}fancy-effects{{/if}}">
-            <tr>
-                <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.variant"}}</th>
-                <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.pool"}}</th>
-                <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.cost"}}</th>
-                <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.range"}}</th>
-                <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.opposed"}}</th>
-                <th class="c2d10-contentbox align-left">{{localize "c2d10.powers.duration"}}</th>
-            </tr>
-            {{#each ../variants as |variant|}}
-            {{#if (eq power.system.powerId variant.system.power)}}
-                {{> "systems/c2d10/templates/partials/list-items/variant-list-item.hbs"}}
-            {{/if}}
-            {{/each}}
-        </table>
-    </div>
-     {{/each}}
+    {{/each}}
 </section>

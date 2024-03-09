@@ -31,6 +31,8 @@ async function preloadHandlebarsTemplates() {
     "systems/c2d10/templates/partials/list-items/equipment-list-item.hbs",
     "systems/c2d10/templates/partials/list-items/trait-list-item.hbs",
     "systems/c2d10/templates/partials/list-items/variant-list-item.hbs",
+    "systems/c2d10/templates/cards/weapon-card.hbs",
+    "systems/c2d10/templates/cards/power-card.hbs",
     "systems/c2d10/templates/dialogs/add-focus-dialog.hbs",
     "systems/c2d10/templates/dialogs/roll-test-dialog.hbs"
   ];

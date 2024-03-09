@@ -160,23 +160,16 @@ export default class C2D10ActorSheet extends ActorSheet {
     html.find(".c2d10-skill-test").click(this._doRollTest.bind(this));
     html.find(".c2d10-power-test").click(this._doRollTest.bind(this));
     html.find(".c2d10-attack-weapon").click(this._doPostEquipmentCard.bind(this));
-    // Html.find(".asset").click(this._onClickItem.bind(this));
+    html.find(".variant-item").click(this._onClickVariant.bind(this));
     html.find(".equipment").click(this._onClickItem.bind(this));
     html.find(".quantity-asset").click(this._modifyQuantity.bind(this));
     html.find(".c2d10-toggle-effect").click(this._onToggleEffect.bind(this));
-
-    // Ugly hack to make the sheet update when switching tabs, since active effects don't trigger a sheet update.
-    html.find(".sheet-tabs").click(this._onNavClick.bind(this));
+    html.find(".c2d10-button-collapsible").click(this._onToggleCollapsible.bind(this));
 
     new ContextMenu(html, ".asset", this.itemContextMenu);
     new ContextMenu(html, ".equipment", this.equipmentContextMenu);
 
     super.activateListeners(html);
-  }
-
-  _onNavClick(event) {
-    event.preventDefault();
-    this.render(true);
   }
 
   _modifyQuantity(event) {
@@ -204,6 +197,22 @@ export default class C2D10ActorSheet extends ActorSheet {
     const element = event.currentTarget;
     const itemId = element.closest(".asset-item").dataset.id;
     const item = this.actor.items.get(itemId);
+
+    item.sheet.render(true);
+  }
+
+  /**
+   * Render the item sheet when clicking an item
+   * @param {object} event The clicked event-data.
+   */
+  _onClickVariant(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    const itemId = element.closest(".variant-item").dataset.itemId;
+    const item = this.actor.items.get(itemId);
+
+    console.log(item);
+
 
     item.sheet.render(true);
   }
@@ -391,8 +400,6 @@ export default class C2D10ActorSheet extends ActorSheet {
   async _removeTrait(event) {
     if (event) event.preventDefault();
 
-    console.log(event.currentTarget.closest(".remove-trait").dataset);
-
     await this.actor.addTrait(true, event.currentTarget.closest(".remove-trait").dataset.id);
 
   }
@@ -528,5 +535,22 @@ export default class C2D10ActorSheet extends ActorSheet {
     const dataset = event.currentTarget.closest(".c2d10-consequence-box").dataset;
 
     await this.actor.toggleConsequence(dataset.id);
+  }
+
+  _onToggleCollapsible(event) {
+    event.preventDefault();
+
+    const buttonClass = event.currentTarget;
+    const content = buttonClass.nextElementSibling;
+
+    if (content.style.display === "flex") {
+
+      content.style.display = "none";
+      buttonClass.textContent = "Open Power";
+
+    } else {
+      content.style.display = "flex";
+      buttonClass.textContent = "Close Power";
+    }
   }
 }
