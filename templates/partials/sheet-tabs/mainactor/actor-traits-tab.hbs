@@ -1,12 +1,7 @@
 <section class="content-box flex-col flex-between">
     <div class="flex-col">
-        <div class="c2d10-contentbox flex-row flex-between" style="width:fit-content; position: absolute;">
-            <a class="add-trait" title="{{localize "c2d10.sheet.addTrait"}}" style="padding-right:2px;">
-                <i class="far fa-plus-square"></i>
-            </a>
-            <div>
-                {{localize "c2d10.sheet.addTrait"}}
-            </div>
+        <div class="c2d10-contentbox flex-row flex-between add-trait" title="{{localize "c2d10.sheet.addTrait"}}" style="width:fit-content; position: absolute;">
+            {{localize "c2d10.sheet.addTrait"}}
         </div>
         <h3 style="padding-top: 10px">
             {{localize "c2d10.sheet.traits"}}
@@ -20,7 +15,7 @@
                         </a>
                     </div>
                     <div class="c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}} flex-grow">
-                        <input id="trait-name" type="text" name="{{concat "system.traits." traitID ".description" }}" value="{{description}}" placeholder="{{localize "c2d10.sheet.description"}}" />
+                        <input id="trait-name" type="text" name="{{concat " system.traits." traitID ".description" }}" value="{{description}}" placeholder="{{localize "c2d10.sheet.description"}}" />
                     </div>
                 </div>
             {{/each}}

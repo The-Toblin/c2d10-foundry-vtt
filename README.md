@@ -16,11 +16,17 @@ Implemented new health system inspired by FATE.
 - Fixed CSS on roll messages in chat
 - Removed DC setting
 - Added global crisis
+
+## 0.607
 - Minor chat styling
 - Journal background removed
 
+## 0.608
+- Traits renamed to "Hooks" - Credit to Nina Lanfer for this excellent suggestion.
+- Removed the "plus" sign on the "Add Trait" button and made the whole button clickable. It also now responds to hover.
+- Renamed the "Title" field on the character sheet to "Citizen class" to be more usable for other settings.
 
 # TODO
-Make the whole Trait button clickable, not just the plus sign (in fact, remove the plus)
-Rename Traits to "Hooks". Nina is fucking awesome.
-Add "Citizen class" to the sheet
+
+- Remove the multiple stars for Focus
+- In order to achieve the above, Focuses should really be moved to be in an array underneath their parent skill.

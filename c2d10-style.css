@@ -683,6 +683,17 @@ table input {
 .sheet.journal-entry .journal-entry-content {
   background: none;
 }
+.sheet.journal-entry h1,
+.sheet.journal-entry h2,
+.sheet.journal-entry h3,
+.sheet.journal-entry h4,
+.sheet.journal-entry p,
+.sheet.journal-entry a,
+.sheet.journal-entry b,
+.sheet.journal-entry i,
+.sheet.journal-entry em {
+  color: #e5e5ec;
+}
 .c2d10.sheet,
 .c2d10.item-sheet {
   display: flex;
@@ -963,6 +974,10 @@ table input {
 .c2d10.item-sheet .c2d10-remove-trait {
   font-size: 2.75rem;
   color: #e5e5ec;
+}
+.c2d10.sheet .add-trait:hover,
+.c2d10.item-sheet .add-trait:hover {
+  filter: invert(1);
 }
 .c2d10.item-sheet {
   height: fit-content !important;
