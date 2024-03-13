@@ -105,37 +105,118 @@
             "skills": {
                 "skills": {
                     "physical": {
-                        "acrobatics": 0,
-                        "athletics": 0,
-                        "brawl": 0,
-                        "burglary": 0,
-                        "crafts": 0,
-                        "driving": 0,
-                        "firearms": 0,
-                        "melee": 0,
-                        "mechanics": 0
+                        "acrobatics": {
+                            "rank": 0,
+                            "focus": []
+                        },
+                        "athletics": {
+                            "rank": 0,
+                            "focus": []
+                        },
+                        "brawl": {
+                            "rank": 0,
+                            "focus": []
+                        },
+                        "burglary": {
+                            "rank": 0,
+                            "focus": []
+                        },
+                        "crafts": {
+                            "rank": 0,
+                            "focus": []
+                        },
+                        "driving": {
+                            "rank": 0,
+                            "focus": []
+                        },
+                        "firearms": {
+                            "rank": 0,
+                            "focus": []
+                        },
+                        "melee": {
+                            "rank": 0,
+                            "focus": []
+                        },
+                        "mechanics": {
+                            "rank": 0,
+                            "focus": []
+                        }
                     },
                     "social": {
-                        "carousing": 0,
-                        "insight": 0,
-                        "intimidation": 0,
-                        "leadership": 0,
-                        "persuasion": 0,
-                        "performance": 0,
-                        "politics": 0,
-                        "streetsmarts": 0,
-                        "subterfuge": 0
+                        "carousing": {
+                            "rank": 0,
+                            "focus": []
+                        },
+                        "insight": {
+                            "rank": 0,
+                            "focus": []
+                        },
+                        "intimidation": {
+                            "rank": 0,
+                            "focus": []
+                        },
+                        "leadership": {
+                            "rank": 0,
+                            "focus": []
+                        },
+                        "persuasion": {
+                            "rank": 0,
+                            "focus": []
+                        },
+                        "performance": {
+                            "rank": 0,
+                            "focus": []
+                        },
+                        "politics": {
+                            "rank": 0,
+                            "focus": []
+                        },
+                        "streetsmarts": {
+                            "rank": 0,
+                            "focus": []
+                        },
+                        "subterfuge": {
+                            "rank": 0,
+                            "focus": []
+                        }
                     },
                     "mental": {
-                        "academia": 0,
-                        "awareness": 0,
-                        "electronics": 0,
-                        "investigation": 0,
-                        "medicine": 0,
-                        "mysticism": 0,
-                        "stealth": 0,
-                        "survival": 0,
-                        "technology": 0
+                        "academia": {
+                            "rank": 0,
+                            "focus": []
+                        },
+                        "awareness": {
+                            "rank": 0,
+                            "focus": []
+                        },
+                        "electronics": {
+                            "rank": 0,
+                            "focus": []
+                        },
+                        "investigation": {
+                            "rank": 0,
+                            "focus": []
+                        },
+                        "medicine": {
+                            "rank": 0,
+                            "focus": []
+                        },
+                        "mysticism": {
+                            "rank": 0,
+                            "focus": []
+                        },
+                        "stealth": {
+                            "rank": 0,
+                            "focus": []
+                        },
+                        "survival": {
+                            "rank": 0,
+                            "focus": []
+                        },
+                        "technology": {
+                            "rank": 0,
+                            "focus": []
+                        }
                     },
                     "focus": []
                 }

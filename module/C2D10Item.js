@@ -29,30 +29,6 @@ export default class C2D10Item extends Item {
 
   // Minor migration for armor and weapons here
   async prepareBaseData() {
-    if (this.type === "armor" && (this.system.albation || this.system.deflection)) {
-      const updateData = {};
-      let protection = this.system.deflection > 0 ? this.system.deflection : this.system.ablation;
-
-      updateData["system.protection"] = protection;
-      updateData["system.-=ablation"] = null;
-      updateData["system.-=deflection"] = null;
-      console.warn(`Updating ${this.name} protection to ${protection}`);
-
-      await this.update(updateData);
-    }
-
-    if (this.type === "weapon" && (this.system.superficial || this.system.critical)) {
-      const updateData = {};
-      let damage = this.system.superficial > 0 ? this.system.superficial : this.system.critical;
-
-      updateData["system.damage"] = damage;
-      updateData["system.-=superficial"] = null;
-      updateData["system.-=critical"] = null;
-      console.warn(`Updating ${this.name} damage to ${damage}`);
-
-      await this.update(updateData);
-    }
-
     super.prepareBaseData();
   }
 

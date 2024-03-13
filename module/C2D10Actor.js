@@ -6,7 +6,7 @@ export default class C2D10Actor extends Actor {
   async prepareBaseData() {
     this.system.extras = {};
     const talents = this.system.talents;
-    const skills = this.system.skills;
+    // Const skills = this.system.skills;
 
     // Set up variables to be used by health trackers
     this.system.extras.maxstrain = talents.physical.endurance;
@@ -67,6 +67,22 @@ export default class C2D10Actor extends Actor {
       }
       return 0;  // Names must be equal
     });
+
+    /**
+     * Add an easy-to-parse list of focuses for use on sheets
+     */
+    this.system.focus = [];
+    for (const group in this.system.skills) {
+      for (const skill in this.system.skills[group]) {
+        if (this.system.skills[group][skill].hasFocus) {
+          let name = skill;
+          for (const focus in this.system.skills[group][skill].focus) {
+            let focusDescription = this.system.skills[group][skill].focus[focus];
+            this.system.focus.push({focusDescription, name});
+          }
+        }
+      }
+    }
   }
 
   /**
@@ -86,14 +102,19 @@ export default class C2D10Actor extends Actor {
   async modifyResource(n, type, group, res) {
     const updateData = {};
     const system = this.system;
-    const currentValue = !group ? system[type][res] : system[type][group][res];
+    let currentValue = 0;
+    if (type === "skills") {
+      currentValue = system[type][group][res].rank;
+    } else {
+      currentValue = !group ? system[type][res] : system[type][group][res];
+    }
     const max = 5;
 
     if (currentValue === max && n > 0) {
       return;
     }
 
-    const newValue = currentValue + n;
+    const newValue = parseInt(currentValue + n);
 
     if (newValue < 0) {
       return;
@@ -101,6 +122,8 @@ export default class C2D10Actor extends Actor {
 
     if (!group) {
       updateData[`system.${type}.${res}`] = newValue;
+    } else if (type === "skills") {
+      updateData[`system.${type}.${group}.${res}.rank`] = newValue;
     } else {
       updateData[`system.${type}.${group}.${res}`] = newValue;
     }
@@ -160,5 +183,48 @@ export default class C2D10Actor extends Actor {
       await this.update(updateData);
 
     }
+  }
+
+  _findSkillGroup(match) {
+    for (const skill in this.system.skills.physical) {
+      if (skill === match) return "physical";
+    }
+
+    for (const skill in this.system.skills.social) {
+      if (skill === match) return "social";
+    }
+
+    for (const skill in this.system.skills.mental) {
+      if (skill === match) return "mental";
+    }
+    return "error";
+  }
+
+  async addFocus(name, parent) {
+    const group = this._findSkillGroup(parent);
+    const updateData = {};
+    const currentArray = this.system.skills[group][parent].focus;
+    currentArray.push(name);
+
+    updateData[`system.skills.${group}.${parent}.focus`] = currentArray;
+    updateData[`system.skills.${group}.${parent}.hasFocus`] = true;
+
+    await this.update(updateData);
+  }
+
+  async removeFocus(parent, name) {
+    const group = this._findSkillGroup(parent);
+    const updateData = {};
+    const currentArray = this.system.skills[group][parent].focus;
+
+    const index = currentArray.indexOf(name);
+    if (index > -1) currentArray.splice(index, 1);
+
+    const hasFocus = currentArray.length > 0;
+
+    updateData[`system.skills.${group}.${parent}.focus`] = currentArray;
+    updateData[`system.skills.${group}.${parent}.hasFocus`] = hasFocus;
+
+    await this.update(updateData);
   }
 }

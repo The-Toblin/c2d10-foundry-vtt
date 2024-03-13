@@ -70,20 +70,21 @@ export async function rollTest(actorId,
     const physSkills = game.actors.get(actorId).system.skills.physical;
     const skillObject =
     {
-      brawl: physSkills.brawl,
-      melee: physSkills.melee,
-      firearms: physSkills.firearms
+      brawl: physSkills.brawl.rank,
+      melee: physSkills.melee.rank,
+      firearms: physSkills.firearms.rank
     };
     preSelectedSkill = Object.keys(skillObject).reduce((a, b) => skillObject[a] > skillObject[b] ? a : b);
+    pool1Level = physSkills[preSelectedSkill].rank;
 
     // We also include the attack's damage here.
     rollData.damage = parseInt(damage) || parseInt(0);
 
     // Finally, we construct a reduced skill list with only attack skills.
     attackSkillList = {
-      brawl: `${game.i18n.localize("c2d10.skills.brawl")} (${game.actors.get(actorId).system.skills.physical.brawl})`,
-      melee: `${game.i18n.localize("c2d10.skills.melee")} (${game.actors.get(actorId).system.skills.physical.melee})`,
-      firearms: `${game.i18n.localize("c2d10.skills.firearms")} (${game.actors.get(actorId).system.skills.physical.firearms})`
+      brawl: `${game.i18n.localize("c2d10.skills.brawl")} (${game.actors.get(actorId).system.skills.physical.brawl.rank})`,
+      melee: `${game.i18n.localize("c2d10.skills.melee")} (${game.actors.get(actorId).system.skills.physical.melee.rank})`,
+      firearms: `${game.i18n.localize("c2d10.skills.firearms")} (${game.actors.get(actorId).system.skills.physical.firearms.rank})`
     };
 
   } else if (type === "defense") {
@@ -470,13 +471,13 @@ async function _addValuesToList(actorId) {
    */
   const skills = {};
   for (const entry of Object.entries(actorSkills.physical)) {
-    skills[entry[0]] = entry[1];
+    skills[entry[0]] = entry[1].rank;
   }
   for (const entry of Object.entries(actorSkills.social)) {
-    skills[entry[0]] = entry[1];
+    skills[entry[0]] = entry[1].rank;
   }
   for (const entry of Object.entries(actorSkills.mental)) {
-    skills[entry[0]] = entry[1];
+    skills[entry[0]] = entry[1].rank;
   }
 
   const newTalentsList = {};

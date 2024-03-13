@@ -21,12 +21,10 @@
                                 data-id="{{name}}"
                             >
                                 {{localize (concat "c2d10.skills." name)}}
-                                    {{#each ../focus as |content id|}}
-                                        {{#if (eq content.parent name)}} *{{/if}}
-                                    {{/each}}
+                                {{#if hasFocus}} *{{/if}}
                             </th>
                             <td class="flex-row table-no-border resource-row" data-type="skills" data-group="physical" data-id="{{name}}" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
-                                {{#dots level 5}}{{/dots}}
+                                {{#dots rank 5}}{{/dots}}
                             </td>
                         </tr>
                     {{/each}}
@@ -51,12 +49,10 @@
                                 data-id="{{name}}"
                             >
                                 {{localize (concat "c2d10.skills." name)}}
-                                    {{#each ../focus as |content id|}}
-                                        {{#if (eq content.parent name)}} *{{/if}}
-                                    {{/each}}
+                                {{#if hasFocus}} *{{/if}}
                             </th>
                             <td class="flex-row table-no-border resource-row" data-type="skills" data-group="social" data-id="{{name}}" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
-                                {{#dots level 5}}{{/dots}}
+                                {{#dots rank 5}}{{/dots}}
                             </td>
                         </tr>
                     {{/each}}
@@ -81,12 +77,10 @@
                                 data-id="{{name}}"
                             >
                                 {{localize (concat "c2d10.skills." name)}}
-                                    {{#each ../focus as |content id|}}
-                                        {{#if (eq content.parent name)}} *{{/if}}
-                                    {{/each}}
+                                {{#if hasFocus}} *{{/if}}
                             </th>
                             <td class="flex-row table-no-border resource-row" data-type="skills" data-group="mental" data-id="{{name}}" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
-                                {{#dots level 5}}{{/dots}}
+                                {{#dots rank 5}}{{/dots}}
                             </td>
                         </tr>
                     {{/each}}

@@ -11,6 +11,9 @@ import C2D10MainSheet from "./module/sheets/C2D10MainSheet.js";
 import C2D10NPCSheet from "./module/sheets/C2D10NPCSheet.js";
 import * as C2D10Utility from "./module/C2D10Utility.js";
 
+/** Migration scripts */
+import { migrate } from "./module/migration/C2D10Migrate.js";
+
 /**
  * Loads HandleBars templates for use in the system.
  */
@@ -114,6 +117,14 @@ function registerSystemSettings() {
     type: Number,
     default: 0,
     onChange: value => $(".bonus-control-numbers").text(value)
+  });
+
+  /* Store version number for migration purposes. */
+  game.settings.register("c2d10", "systemMigrationVersion", {
+    config: false,
+    scope: "world",
+    type: String,
+    default: ""
   });
 }
 
@@ -430,4 +441,33 @@ Hooks.once("diceSoNiceReady", dice3d => {
     fontScale: 0.5,
     system: "c2d10"
   }, "d10");
+});
+
+Hooks.once("ready", async () => {
+  if (!game.user.isGM) {
+    return;
+  }
+
+  console.log("==== C2D10 | Checking versions ====");
+
+  const currentVersion = game.settings.get("c2d10", "systemMigrationVersion");
+  const NEEDS_MIGRATION_VERSION = "0.610";
+  let needsMigration =
+    !currentVersion || foundry.utils.isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
+
+  if (needsMigration) {
+    console.log("==== C2D10 | System out of date! Migration needed! ====");
+
+    try {
+      await migrate(currentVersion);
+
+      console.log("==== C2D10 | All migrations finished successfully. Updating settings version to", game.system.version, "from", currentVersion, "====");
+      game.settings.set("c2d10", "systemMigrationVersion", game.system.version);
+
+    } catch(err) {
+      console.error("MIGRATION FAILED!", err);
+    }
+  } else {
+    console.log("==== C2D10 | System up to date! Migration not needed. ====");
+  }
 });

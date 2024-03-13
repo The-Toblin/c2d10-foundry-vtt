@@ -25,6 +25,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     sheetData.config = CONFIG.c2d10;
     sheetData.items = this.actor.items;
     sheetData.system = this.actor.system;
+    sheetData.focus = [];
 
     /**
      * Items
@@ -53,11 +54,6 @@ export default class C2D10ActorSheet extends ActorSheet {
      * Skills
      */
     sheetData.skills = sheetData.system.extras.skills;
-
-    /**
-     * Set a flag to allow the traits tab to be shown if traits are present.
-     */
-    if (sheetData.vices || sheetData.virtues) sheetData.traits = true;
 
     /**
      * Make system settings available for sheets to use for rendering
@@ -153,7 +149,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     html.find(".add-trait").click(this._addTrait.bind(this));
     html.find(".remove-trait").click(this._removeTrait.bind(this));
     html.find(".remove-focus").click(this._removeFocus.bind(this));
-    html.find(".focus-edit").on("click contextmenu", this._editFocus.bind(this));
+    // Html.find(".focus-edit").on("click contextmenu", this._editFocus.bind(this));
     // Html.find(".c2d10-health-test").click(this._doRollTest.bind(this));
     html.find(".c2d10-economy-test").click(this._doRollTest.bind(this));
     html.find(".c2d10-talent-test").click(this._doRollTest.bind(this));
@@ -210,9 +206,6 @@ export default class C2D10ActorSheet extends ActorSheet {
     const element = event.currentTarget;
     const itemId = element.closest(".variant-item").dataset.itemId;
     const item = this.actor.items.get(itemId);
-
-    console.log(item);
-
 
     item.sheet.render(true);
   }
@@ -308,8 +301,7 @@ export default class C2D10ActorSheet extends ActorSheet {
           roll: {
             label: "Add!",
             callback: html => {
-              this._doAddFocus(html);
-
+              this.actor.addFocus(html.find("input#focus-name").val(), html.find("select#focus-skill").val());
             }
           }
         }
@@ -318,30 +310,10 @@ export default class C2D10ActorSheet extends ActorSheet {
     ).render(true);
   }
 
-  async _doAddFocus(html) {
-    const currentArray = this.getData().system.skills.focus;
-    currentArray.push({
-      name: html.find("input#focus-name").val(),
-      parent: html.find("select#focus-skill").val()
-    });
-
-    const updateData = {};
-    updateData["system.skills.focus"] = currentArray;
-
-    await this.actor.update(updateData);
-  }
-
   async _removeFocus(event) {
     event.preventDefault();
-    const name = event.currentTarget.closest(".focus").dataset.name;
-    const currentArray = this.getData().system.skills.focus;
-
-    currentArray.splice(currentArray.findIndex(v => v.name === name), 1);
-
-    const updateData = {};
-    updateData["system.skills.focus"] = currentArray;
-
-    await this.actor.update(updateData);
+    const dataset = event.currentTarget.closest(".focusdata").dataset;
+    this.actor.removeFocus(dataset.parent, dataset.name);
   }
 
   async _editFocus(event) {
@@ -465,6 +437,11 @@ export default class C2D10ActorSheet extends ActorSheet {
       name = item.name;
 
       damage = this.actor.system.extras.equippedWeapon.damage;
+
+      // Skills need an extra touch, because of the data structure using "rank".
+    } else if (type === "skills") {
+      pool = sys[type][group][id].rank;
+      name = id;
 
       // Finally, the remaining option is either a talent or skill test, both of which are handled identically.
     } else {

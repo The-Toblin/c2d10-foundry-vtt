@@ -25,6 +25,7 @@ Implemented new health system inspired by FATE.
 - Traits renamed to "Hooks" - Credit to Nina Lanfer for this excellent suggestion.
 - Removed the "plus" sign on the "Add Trait" button and made the whole button clickable. It also now responds to hover.
 - Renamed the "Title" field on the character sheet to "Citizen class" to be more usable for other settings.
+- Removed the ability to perform special attacks and defend rolls from chat messages.  This was too much automation for the system and complicated more than it helped.
 
 # TODO
 

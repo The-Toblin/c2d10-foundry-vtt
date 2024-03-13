@@ -18,8 +18,8 @@
                 <th class="table-no-border">{{localize "c2d10.sheet.focus"}}</th>
                 <th class="table-no-border">{{localize "c2d10.sheet.parent"}}</th>
             </tr>
-            {{#each system.skills.focus as | focus |}}
-            <tr class="focusdata" data-name="{{focus.name}}" data-parent="{{focus.parent}}">
+            {{#each system.focus as | focus |}}
+            <tr class="focusdata" data-name="{{focusDescription}}" data-parent="{{name}}">
                 <td class="focus c2d10-contentbox {{#if ../showEffects}}fancy-effects{{/if}}">
                     <a class="remove-focus" title="{{localize "c2d10.sheet.removeFocus"}}">
                         <i class="far fa-minus-square"></i>
@@ -27,11 +27,11 @@
                 </td>
                 <td class="focus c2d10-contentbox {{#if ../showEffects}}fancy-effects{{/if}}">
                     <div class="focus-edit" style="margin-left: 2px;">
-                        {{focus.name}}
+                        {{focusDescription}}
                     </div>
                 </td>
                 <td class="focus c2d10-contentbox {{#if ../showEffects}}fancy-effects{{/if}}">
-                    {{localize (concat "c2d10.skills." focus.parent)}}
+                    {{localize (concat "c2d10.skills." name)}}
                 </td>
             </tr>
             {{/each}}
