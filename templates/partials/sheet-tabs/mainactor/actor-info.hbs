@@ -57,62 +57,152 @@
             </div>
             <div class="w-20 flex-col">
                 <div class="c2d10-contentbox h-100 {{#if showEffects}}fancy-effects{{/if}} flex-col flex-between">
-                    <label class="c2d10-test align-center c2d10-economy-test description" data-tooltip="{{localize "c2d10.descriptions.economy"}}" data-type="info" data-group="info" data-id="economy" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
-                        {{localize "c2d10.character.economy"}}
+                    <label class="align-center description" data-tooltip="{{localize "c2d10.descriptions.strain"}}" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
+                        {{localize "c2d10.resources.strain"}}
                     </label>
-                    <div class="flex-row flex-between">
-                        <div class="flex-row resource-row" data-type="info" data-id="economy" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
-                            {{#dots system.info.economy 5}}{{/dots}}
+                    <div class="flex-row flex-center">
+                        <div class="flex-row resource-row" data-type="info" data-id="strain" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
+                            {{#if (gte system.extras.maxstrain 1) }}
+                                {{#if system.trackers.strain.one }}
+                                    <div class="health-container full" data-type="health" data-group="strain" data-id="one">
+                                        <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp" />
+                                    </div>
+                                {{else}}
+                                    <div class="health-container empty" data-type="health" data-group="strain" data-id="one">
+                                        <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp" />
+                                    </div>
+                                {{/if}}
+                            {{/if}}
+                            {{#if (gte system.extras.maxstrain 2) }}
+                                {{#if system.trackers.strain.two }}
+                                    <div class="health-container full" data-type="health" data-group="strain" data-id="two">
+                                        <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp" />
+                                    </div>
+                                {{else}}
+                                    <div class="health-container empty" data-type="health" data-group="strain" data-id="two">
+                                        <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp" />
+                                    </div>
+                                {{/if}}
+                            {{/if}}
+                            {{#if (gte system.extras.maxstrain 3) }}
+                                {{#if system.trackers.strain.three }}
+                                    <div class="health-container full" data-type="health" data-group="strain" data-id="three">
+                                        <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp" />
+                                    </div>
+                                {{else}}
+                                    <div class="health-container empty" data-type="health" data-group="strain" data-id="three">
+                                        <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp" />
+                                    </div>
+                                {{/if}}
+                            {{/if}}
+                            {{#if (gte system.extras.maxstrain 4) }}
+                                {{#if system.trackers.strain.four }}
+                                    <div class="health-container full" data-type="health" data-group="strain" data-id="four">
+                                        <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp" />
+                                    </div>
+                                {{else}}
+                                    <div class="health-container empty" data-type="health" data-group="strain" data-id="four">
+                                        <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp" />
+                                    </div>
+                                {{/if}}
+                            {{/if}}
+                            {{#if (gte system.extras.maxstrain 5) }}
+                                {{#if system.trackers.strain.five }}
+                                    <div class="health-container full" data-type="health" data-group="strain" data-id="five">
+                                        <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp" />
+                                    </div>
+                                {{else}}
+                                    <div class="health-container empty" data-type="health" data-group="strain" data-id="five">
+                                        <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp" />
+                                    </div>
+                                {{/if}}
+                            {{/if}}
                         </div>
                     </div>
                 </div>
-                <div class="c2d10-contentbox h-100 {{#if showEffects}}fancy-effects{{/if}} flex-col flex-start">
-                    <label class="description align-center" data-tooltip="{{localize "c2d10.descriptions.crisis"}}" data-id="crisis">
-                        {{localize "c2d10.resources.crisis"}}
+                <div class="c2d10-contentbox h-100 {{#if showEffects}}fancy-effects{{/if}} flex-col flex-between">
+                    <label class="description align-center" data-tooltip="{{localize "c2d10.descriptions.stress"}}" data-id="stress">
+                        {{localize "c2d10.resources.stress"}}
                     </label>
-                    <div>
-                        <div class="dot-container flex-row resource-row crisis-number crisis-alert {{#if (gt system.health.crisis 3)}} crisis-bad{{/if}}" data-type="health" data-id="crisis" data-pass="true" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
-                            {{system.health.crisis}}
+                    <div class="flex-row flex-center">
+                        <div class="flex-row resource-row" data-type="info" data-id="stress" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
+                            {{#if (gte system.extras.maxstress 1) }}
+                                {{#if system.trackers.stress.one }}
+                                    <div class="health-container full" data-type="health" data-group="stress" data-id="one">
+                                        <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp" />
+                                    </div>
+                                {{else}}
+                                    <div class="health-container empty" data-type="health" data-group="stress" data-id="one">
+                                        <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp" />
+                                    </div>
+                                {{/if}}
+                            {{/if}}
+                            {{#if (gte system.extras.maxstress 2) }}
+                                {{#if system.trackers.stress.two }}
+                                    <div class="health-container full" data-type="health" data-group="stress" data-id="two">
+                                        <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp" />
+                                    </div>
+                                {{else}}
+                                    <div class="health-container empty" data-type="health" data-group="stress" data-id="two">
+                                        <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp" />
+                                    </div>
+                                {{/if}}
+                            {{/if}}
+                            {{#if (gte system.extras.maxstress 3) }}
+                                {{#if system.trackers.stress.three }}
+                                    <div class="health-container full" data-type="health" data-group="stress" data-id="three">
+                                        <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp" />
+                                    </div>
+                                {{else}}
+                                    <div class="health-container empty" data-type="health" data-group="stress" data-id="three">
+                                        <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp" />
+                                    </div>
+                                {{/if}}
+                            {{/if}}
+                            {{#if (gte system.extras.maxstress 4) }}
+                                {{#if system.trackers.stress.four }}
+                                    <div class="health-container full" data-type="health" data-group="stress" data-id="four">
+                                        <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp" />
+                                    </div>
+                                {{else}}
+                                    <div class="health-container empty" data-type="health" data-group="stress" data-id="four">
+                                        <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp" />
+                                    </div>
+                                {{/if}}
+                            {{/if}}
+                            {{#if (gte system.extras.maxstress 5) }}
+                                {{#if system.trackers.stress.five }}
+                                    <div class="health-container full" data-type="health" data-group="stress" data-id="five">
+                                        <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp" />
+                                    </div>
+                                {{else}}
+                                    <div class="health-container empty" data-type="health" data-group="stress" data-id="five">
+                                        <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp" />
+                                    </div>
+                                {{/if}}
+                            {{/if}}
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="flex-row flex-between">
-            <div class="flex-row flex-between c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}  w-50">
-                <label class="c2d10-test c2d10-health-test description" data-tooltip="{{localize "c2d10.descriptions.strain"}}" data-type="health" data-group="physical" data-id="strain">
-                    {{localize "c2d10.resources.strain"}} {{#if system.health.physicalImpairment}}<span class="red" data-tooltip="{{localize "c2d10.sheet.impaired-tooltip"}}">{{localize "c2d10.sheet.impaired"}}</span>{{/if}}
-                </label>
-                <div class="flex-row flex-center resource-row" data-type="health" data-id="strain" data-pass="true" data-tooltip="{{localize "c2d10.sheet.health-tooltip"}}">
-                    {{#healthdots system.health.strain.superficial system.health.strain.critical system.health.strain.max "strain"}}{{/healthdots}}
-                </div>
-            </div>
-            <div class="flex-row flex-between c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}  w-50">
-                <label class="c2d10-test c2d10-health-test description" data-tooltip="{{localize "c2d10.descriptions.stress"}}" data-type="health" data-group="mental" data-id="stress">
-                    {{localize "c2d10.resources.stress"}} {{#if system.health.mentalImpairment}}<span class="red" data-tooltip="{{localize "c2d10.sheet.impaired-tooltip"}}">{{localize "c2d10.sheet.impaired"}}</span>{{/if}}
-                </label>
-                <div class="flex-row flex-center resource-row" data-type="health" data-id="stress" data-pass="true" data-tooltip="{{localize "c2d10.sheet.health-tooltip"}}">
-                    {{#healthdots system.health.stress.superficial system.health.stress.critical system.health.stress.max "stress"}}{{/healthdots}}
                 </div>
             </div>
         </div>
         <div class="flex-row flex-between">
             {{#if equippedWeapon}}
-            <div class="flex-row flex-start" style="width: 49.5%;">
-                <div class="flex-verticalcenter c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} equipment-item asset-item" data-id={{system.equipment.weapon}}>
-                    <a class="c2d10-attack-weapon c2d10-test" title="{{localize "c2d10.sheet.attack"}}" data-type="attack" data-id="{{system.equipment.weapon}}">
-                        <i class="fa-light fa-crosshairs-simple"></i>
-                    </a>
-                </div>
-                <div class="flex-row flex-between flex-verticalcenter w-100 c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} equipment equipment-item asset-item" data-id={{system.equipment.weapon}}>
-                    <label>
-                        {{equippedWeapon.name}}
-                    </label>
-                    <div class="flex-row flex-center">
-                        {{equippedWeapon.damage}} {{equippedWeapon.damageType}}
+                <div class="flex-row flex-start" style="width: 49.5%;">
+                    <div class="flex-verticalcenter c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} equipment-item asset-item" data-id={{system.equipment.weapon}}>
+                        <a class="c2d10-attack-weapon c2d10-test" title="{{localize "c2d10.sheet.attack"}}" data-type="attack" data-id="{{system.equipment.weapon}}">
+                            <i class="fa-light fa-crosshairs-simple"></i>
+                        </a>
+                    </div>
+                    <div class="flex-row flex-between flex-verticalcenter w-100 c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} equipment equipment-item asset-item" data-id={{system.equipment.weapon}}>
+                        <label>
+                            {{equippedWeapon.name}}
+                        </label>
+                        <div class="flex-row flex-center">
+                            {{equippedWeapon.damage}}
+                        </div>
                     </div>
                 </div>
-            </div>
             {{/if}}
             {{#if equippedArmor}}
                 <div class="flex-row flex-between w-50 c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} equipment equipment-item asset-item" data-id={{system.equipment.armor}}>
@@ -120,7 +210,7 @@
                         {{equippedArmor.name}}
                     </label>
                     <div class="flex-row flex-center">
-                        {{equippedArmor.protection}} {{equippedArmor.protectionType}}
+                        {{equippedArmor.protection}}
                     </div>
                 </div>
             {{/if}}

@@ -1,62 +1,75 @@
 <section class="content-box flex-col flex-between">
     <div class="flex-col">
-        <h3>
-        {{localize "c2d10.sheet.virtues"}}
+        <div class="c2d10-contentbox flex-row flex-between add-trait" title="{{localize "c2d10.sheet.addTrait"}}" style="width:fit-content; position: absolute;">
+            {{localize "c2d10.sheet.addTrait"}}
+        </div>
+        <h3 style="padding-top: 10px">
+            {{localize "c2d10.sheet.traits"}}
         </h3>
-        <div class="flex-col flex-start c2d10-subsection w-100">
-            <table class="c2d10-asset-card-table">
-                <colgroup>
-                    <col style="width: 5%;">
-                    <col class="w-60">
-                    <col class="w-20">
-                    <col class="w-20">
-                </colgroup>
-                <tr>
-                    <th class="table-no-border"></th>
-                    <th class="table-no-border">
-                        {{localize "c2d10.trait.name"}}
-                    </th>
-                    <th class="table-no-border">
-                        {{localize "c2d10.trait.traitType"}}
-                    </th>
-                    <th class="table-no-border">
-                        {{localize "c2d10.trait.level"}}
-                    </th>
-                </tr>
-                {{#each virtues as |item id|}}
-                {{> "systems/c2d10/templates/partials/list-items/trait-list-item.hbs"}}
-                {{/each}}
-            </table>
+        <div class="flex-col flex-start c2d10-subsection" style="min-height:40px;">
+            {{#each system.traits as |trait traitID|}}
+                <div class="flex-row flex-between">
+                    <div class="{{#if showEffects}} fancy-effects{{/if}}">
+                        <a class="remove-trait" title="{{localize "c2d10.sheet.removeTrait"}}" style="padding-right:2px;" data-id="{{traitID}}">
+                            <i class="far fa-minus-square c2d10-remove-trait"></i>
+                        </a>
+                    </div>
+                    <div class="c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}} flex-grow">
+                        <input id="trait-name" type="text" name="{{concat " system.traits." traitID ".description" }}" value="{{description}}" placeholder="{{localize "c2d10.sheet.description"}}" />
+                    </div>
+                </div>
+            {{/each}}
         </div>
     </div>
-    <div class="flex-col">
-        <h3>
-        {{localize "c2d10.sheet.vices"}}
-        </h3>
-        <div class="flex-col flex-start c2d10-subsection  w-100">
-            <table class="c2d10-asset-card-table">
-                <colgroup>
-                    <col style="width: 5%;">
-                    <col class="w-60">
-                    <col class="w-20">
-                    <col class="w-20">
-                </colgroup>
-                <tr>
-                    <th class="table-no-border"></th>
-                    <th class="table-no-border">
-                        {{localize "c2d10.trait.name"}}
-                    </th>
-                    <th class="table-no-border">
-                        {{localize "c2d10.trait.traitType"}}
-                    </th>
-                    <th class="table-no-border">
-                        {{localize "c2d10.trait.level"}}
-                    </th>
-                </tr>
-                {{#each vices as |item id|}}
-                {{> "systems/c2d10/templates/partials/list-items/trait-list-item.hbs"}}
-                {{/each}}
-            </table>
+</section>
+<section>
+    <h3 style="padding-top: 10px">
+        {{localize "c2d10.sheet.consequences"}}
+    </h3>
+    <div class="content-box c2d10-subsection">
+        {{#if (eq this.system.extras.maxstrain 5)}}
+            <div class="c2d10-consequence-box flex-row flex-start" data-type="health" data-group="consequence" data-id="mildPhysical">
+                <div class="c2d10-consequence-clickbox c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}}{{#if system.consequences.mildPhysical.ticked}} c2d10-invert{{/if}} c2d10-white-label">
+                    [2]
+                </div>
+                <div class="c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}} flex-grow">
+                    <input name="system.consequences.mildPhysical.description" type="text" value="{{system.consequences.mildPhysical.description}}" placeholder="{{localize "c2d10.sheet.mildPhys"}}" />
+                </div>
+            </div>
+        {{/if}}
+        {{#if (eq this.system.extras.maxstress 5)}}
+            <div class="c2d10-consequence-box flex-row flex-start" data-type="health" data-group="consequence" data-id="mildMental">
+                <div class="c2d10-consequence-clickbox c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}}{{#if system.consequences.mildMental.ticked}} c2d10-invert{{/if}} c2d10-white-label">
+                    [2]
+                </div>
+                <div class="c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}} flex-grow">
+                    <input name="system.consequences.mildMental.description" type="text" value="{{system.consequences.mildMental.description}}" placeholder="{{localize "c2d10.sheet.mildMent"}}" />
+                </div>
+            </div>
+        {{/if}}
+        <div class="c2d10-consequence-box flex-row flex-start" data-type="health" data-group="consequence" data-id="mild">
+            <div class="c2d10-consequence-clickbox c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}}{{#if system.consequences.mild.ticked}} c2d10-invert{{/if}} c2d10-white-label">
+                [2]
+            </div>
+            <div class="c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}} flex-grow">
+                <input name="system.consequences.mild.description" type="text" value="{{system.consequences.mild.description}}" placeholder="{{localize "c2d10.sheet.mild"}}" />
+            </div>
+        </div>
+        <div class="c2d10-consequence-box flex-row flex-start" data-type="health" data-group="consequence" data-id="moderate">
+            <div class="c2d10-consequence-clickbox c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}}{{#if system.consequences.moderate.ticked}} c2d10-invert{{/if}} c2d10-white-label">
+                [4]
+            </div>
+            <div class="c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}} flex-grow">
+                <input name="system.consequences.moderate.description" type="text" value="{{system.consequences.moderate.description}}" placeholder="{{localize "c2d10.sheet.moderate"}}" />
+            </div>
+        </div>
+        <div class="c2d10-consequence-box flex-row flex-start" data-type="health" data-group="consequence" data-id="severe">
+            <div class="c2d10-consequence-clickbox c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}}{{#if system.consequences.severe.ticked}} c2d10-invert{{/if}} c2d10-white-label">
+                [6]
+            </div>
+            <div class="c2d10-contentbox{{#if showEffects}} fancy-effects{{/if}} flex-grow">
+                <input name="system.consequences.severe.description" type="text" value="{{system.consequences.severe.description}}" placeholder="{{localize "c2d10.sheet.severe"}}" />
+            </div>
         </div>
     </div>
 </section>

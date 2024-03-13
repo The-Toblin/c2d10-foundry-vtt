@@ -18,6 +18,7 @@ async function preloadHandlebarsTemplates() {
   const templatePaths = [
     "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-info.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-bio.hbs",
+    "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-consequences.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-talents.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-skills.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-assets-tab.hbs",
@@ -30,6 +31,8 @@ async function preloadHandlebarsTemplates() {
     "systems/c2d10/templates/partials/list-items/equipment-list-item.hbs",
     "systems/c2d10/templates/partials/list-items/trait-list-item.hbs",
     "systems/c2d10/templates/partials/list-items/variant-list-item.hbs",
+    "systems/c2d10/templates/cards/weapon-card.hbs",
+    "systems/c2d10/templates/cards/power-card.hbs",
     "systems/c2d10/templates/dialogs/add-focus-dialog.hbs",
     "systems/c2d10/templates/dialogs/roll-test-dialog.hbs"
   ];
@@ -88,6 +91,19 @@ function registerSystemSettings() {
   });
 
   /**
+   * Add setting for tracking global campaign Crisis.
+   */
+  game.settings.register("c2d10", "campaignCrisis", {
+    config: false,
+    scope: "world",
+    name: "SETTINGS.crisis.name",
+    hint: "SETTINGS.crisis.label",
+    type: Number,
+    default: 0,
+    onChange: value => $(".crisis-control-numbers").text(value)
+  });
+
+  /**
    * Allow players to buy additional dice.
    */
   game.settings.register("c2d10", "bonusDice", {
@@ -107,7 +123,7 @@ Hooks.once("ready", () => {
    */
   const HP = C2D10Utility.getHeroPoints();
   const VP = C2D10Utility.getVillainPoints();
-  const DC = C2D10Utility.getDC();
+  const crisis = C2D10Utility.getCrisis();
   const bonusDice = C2D10Utility.getDice();
   const hide = !game.users.current.isGM ? "hide" : "";
 
@@ -122,13 +138,13 @@ Hooks.once("ready", () => {
           <button class="vp-control vp-minus">-</button>
       </div>
     </div>
-    <div class="c2d10-difficulty">
-        <div class="dc-control-numbers">
-            ${DC}
+    <div class="c2d10-crisis">
+        <div class="crisis-control-numbers">
+            ${crisis}
         </div>
         <div class="keeper-controls ${hide}">
-            <button class="dc-control dc-plus">+</button>
-            <button class="dc-control dc-minus">-</button>
+            <button class="crisis-control crisis-plus">+</button>
+            <button class="crisis-control crisis-minus">-</button>
         </div>
     </div>
     <div class="c2d10-bonus-dice">
@@ -172,7 +188,14 @@ Hooks.once("ready", () => {
     C2D10Utility.changeDC(isIncrease);
   });
 
-  // Add click events for difficulty.
+  // Add click events for campaign crisis.
+  $("body").on("click", ".crisis-control", event => {
+    const $self = $(event.currentTarget);
+    const isIncrease = $self.hasClass("crisis-plus");
+    C2D10Utility.changeCrisis(isIncrease);
+  });
+
+  // Add click events for bonus dice.
   $("body").on("click", ".bonus-control", event => {
     const $self = $(event.currentTarget);
     const isIncrease = $self.hasClass("bonus-plus");
@@ -297,57 +320,6 @@ Hooks.once("init", function() {
     return res;
   });
 
-  Handlebars.registerHelper("healthdots", function(superficial, critical, max, context, content) {
-    const critdie =
-      `<div class="dot-container full">
-      <img class="d10-dot-full" src="/systems/c2d10/assets/d10-red.webp"/>
-    </div>`;
-    const full =
-      `<div class="dot-container full">
-      <img class="d10-dot-full" src="/systems/c2d10/assets/d10-yellow.webp"/>
-    </div>`;
-    const empty =
-      `<div class="dot-container empty">
-      <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-empty.webp"/>
-    </div>`;
-
-    const space =
-      `<div class="space">
-      <img class="d10-dot-full" src="/systems/c2d10/assets/d10-white-full.webp"/>
-    </div>`;
-
-    let result = "";
-    let res = [];
-    const maximum = parseInt(critical + superficial);
-
-    if (critical > 0) {
-      for (let i = 0; i < critical; ++i) {
-        res.push(critdie);
-      }
-    }
-
-    if (superficial > 0) {
-      for (let i = 0; i < superficial; ++i) {
-        res.push(full);
-      }
-    }
-
-    for (let i = maximum; i < max; ++i) {
-      res.push(empty);
-    }
-
-    for (let i = 0; i < res.length; i++) {
-      const element = res[i];
-
-      if (i === 5) {
-        result += space;
-        result += element;
-      } else {
-        result += element;
-      }
-    }
-    return result;
-  });
 });
 
 // Add DiceSoNice presets

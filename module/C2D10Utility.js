@@ -20,6 +20,13 @@ export function getDC() {
 }
 
 /**
+ * Returns the the current game DC.
+ */
+export function getCrisis() {
+  return game.settings.get("c2d10", "campaignCrisis");
+}
+
+/**
  * Returns the current Bonus Dice Value.
  */
 export function getDice() {
@@ -62,6 +69,19 @@ export function changeDC(isIncrease) {
 
   if (newValue <= 10 && newValue >= 0) {
     game.settings.set("c2d10", "DC", newValue);
+  }
+}
+
+/**
+ * Modifies the current Crisis
+ * @param {boolean} isIncrease Whether or not it is an increase or decrease.
+ */
+export function changeCrisis(isIncrease) {
+  const currentValue = game.settings.get("c2d10", "campaignCrisis");
+  const newValue = isIncrease ? currentValue + 1 : currentValue - 1;
+
+  if (newValue <= 10 && newValue >= 0) {
+    game.settings.set("c2d10", "campaignCrisis", newValue);
   }
 }
 

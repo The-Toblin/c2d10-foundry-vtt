@@ -32,7 +32,6 @@ function onAttack(event) {
   const mentalImpairment = attacker.system.health.mentalImpairment;
   const crisis = attacker.system.health.crisis;
   const damage = card.weaponDamage;
-  const damageType = card.damageType === "Critical";
 
   rollTest(actorId,
     talents,
@@ -44,8 +43,7 @@ function onAttack(event) {
     physicalImpairment,
     mentalImpairment,
     crisis,
-    damage,
-    damageType);
+    damage);
 }
 
 /**
@@ -152,7 +150,6 @@ function _doRoll(card, attacker, defender) {
   const mentalImpairment = defender.system.health.mentalImpairment;
   const crisis = defender.system.health.crisis;
   const damage = card.weaponDamage;
-  const damageType = card.damageType === "Critical";
   const hits = card.hits;
 
   // Perform the roll.
@@ -167,7 +164,6 @@ function _doRoll(card, attacker, defender) {
     mentalImpairment,
     crisis,
     damage,
-    damageType,
     hits);
 }
 

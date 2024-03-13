@@ -15,8 +15,13 @@
     </section>
     <section>
         <div class="c2d10-subsection flex-row flex-between">
-            <div class="w-80 c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} c2d10-asset-textarea">
-                <textarea name="system.description">{{system.description}}</textarea>
+            <div class="flex-col flex-start w-80">
+                <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} c2d10-asset-textarea h-20">
+                    <textarea name="system.short-description" placeholder="Short description to show on the sheet">{{system.short-description}}</textarea>
+                </div>
+                <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} c2d10-asset-textarea h-80">
+                    <textarea name="system.description" placeholder="Full, detailed description. Only shown on the variant sheet itself.">{{system.description}}</textarea>
+                </div>
             </div>
             <div class="flex-col flex-start">
                 <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} w-fit" style="width: 100%;">
@@ -39,52 +44,29 @@
                     <div class="flex-col c2d10-contentbox">
                         <h3>{{localize "c2d10.powers.pool"}}</h3>
                         <div>
-                            <input name="system.pool" type="text" value="{{system.pool}}" placeholder="{{localize "c2d10.powers.pool"}}" />
+                            <input name="system.pool" type="text" value="{{system.pool}}" placeholder="{{localize "c2d10.powers.pool"}}"/>
                         </div>
                     </div>
                     <div class="flex-col c2d10-contentbox">
                         <h3>{{localize "c2d10.powers.cost"}}</h3>
                         <div class="flex-row flex-between">
-                            <div>
-                                <input name="system.cost" type="text" value="{{system.cost}}" placeholder="{{localize "c2d10.powers.cost"}}" />
-                            </div>
-                            <div>
-                                <select name="system.cost-resource">
-                                    {{selectOptions config.resources selected=system.cost-resource localize=true}}
-                                </select>
-                            </div>
+                            <input name="system.cost" type="text" value="{{system.cost}}" placeholder="{{localize "c2d10.powers.cost"}}"/>
                         </div>
                     </div>
                     <div class="flex-col c2d10-contentbox">
                         <h3>{{localize "c2d10.powers.range"}}</h3>
                         <div class="flex-row flex-between">
-                            <div>
-                                <input name="system.range" type="text" value="{{system.range}}" placeholder="{{localize "c2d10.powers.range"}}" />
-                            </div>
-                            <div>
-                                <select name="system.range-denominator">
-                                    {{selectOptions config.range selected=system.range-denominator localize=true}}
-                                </select>
-                            </div>
+                            <input name="system.range" type="text" value="{{system.range}}" placeholder="{{localize "c2d10.powers.range"}}"/>
                         </div>
                     </div>
                     <div class="flex-col c2d10-contentbox">
                         <h3>{{localize "c2d10.powers.opposed"}}</h3>
-                        <div>
-                            <input name="system.opposed" type="text" value="{{system.opposed}}" placeholder="{{localize "c2d10.powers.opposed"}}" />
+                            <input name="system.opposed" type="text" value="{{system.opposed}}" placeholder="{{localize "c2d10.powers.opposed"}}"/>
                         </div>
-                    </div>
                     <div class="flex-col c2d10-contentbox">
                         <h3>{{localize "c2d10.powers.duration"}}</h3>
                         <div class="flex-row flex-between">
-                            <div>
-                                <input name="system.duration" type="text" value="{{system.duration}}" placeholder="{{localize "c2d10.powers.duration"}}" />
-                            </div>
-                            <div>
-                                <select name="system.duration-denominator">
-                                    {{selectOptions config.duration selected=system.duration-denominator localize=true}}
-                                </select>
-                            </div>
+                            <input name="system.duration" type="text" value="{{system.duration}}" placeholder="{{localize "c2d10.powers.duration"}}"/>
                         </div>
                     </div>
                 </div>

@@ -32,17 +32,45 @@
                 }
             },
             "health": {
-                "health": {
+                "trackers": {
                     "strain": {
-                        "min": 0,
-                        "superficial": 0,
-                        "critical": 0
+                        "one": false,
+                        "two": false,
+                        "three": false,
+                        "four": false,
+                        "five": false
                     },
                     "stress": {
-                        "min": 0,
-                        "superficial": 0,
-                        "critical": 0
+                        "one": false,
+                        "two": false,
+                        "three": false,
+                        "four": false,
+                        "five": false
+                    }
+                },
+                "consequences": {
+                    "mild": {
+                        "ticked": false,
+                        "description": ""
                     },
+                    "mildPhysical": {
+                        "ticked": false,
+                        "description": ""
+                    },
+                    "mildMental": {
+                        "ticked": false,
+                        "description": ""
+                    },
+                    "moderate": {
+                        "ticked": false,
+                        "description": ""
+                    },
+                    "severe": {
+                        "ticked": false,
+                        "description": ""
+                    }
+                },
+                "cybernetics": {
                     "cybernetic-load": {
                         "min": 0,
                         "max": 10,
@@ -165,8 +193,7 @@
             "templates": [
                 "coreAsset"
             ],
-            "ablation": 0,
-            "deflection": 0,
+            "protection": 0,
             "penalty": "None"
         },
         "asset": {
@@ -196,15 +223,13 @@
         "variant": {
             "power": "",
             "description": "",
-            "duration": 0,
-            "duration-denominator": "None",
-            "range": 0,
-            "range-denominator": "None",
+            "short-description": "",
+            "duration": "",
+            "range": "",
             "level-req": 1,
-            "cost": 0,
-            "cost-resource": "None",
-            "pool": "None",
-            "opposed": "None"
+            "cost": "",
+            "pool": "",
+            "opposed": ""
         },
         "trait": {
             "level": 0,
@@ -219,8 +244,7 @@
             "templates": [
                 "coreAsset"
             ],
-            "critical": 0,
-            "superficial": 0,
+            "damage": 0,
             "penalty": "None"
         }
     }

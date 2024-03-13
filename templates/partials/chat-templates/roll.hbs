@@ -3,12 +3,12 @@
   data-DC="{{DC}}"
   data-hits="{{hits}}"
   data-weapon-damage="{{damage}}"
-  data-damage-type="{{damageType}}"
 >
   <div class="flex-col flex-start">
     <h2 class="align-center c2d10-capitalize">
       {{name}}
     </h2>
+    <!-- Commented out for now
     {{#if defense}}
       <h3 class="align-center c2d10-capitalize c2d10-combat-message">
         {{localize "c2d10.chat.defend.defending"}}
@@ -19,10 +19,8 @@
         {{localize "c2d10.chat.attack.attacking"}}
       </h3>
     {{/if}}
+    -->
     <h3 class="align-center c2d10-capitalize">
-      {{#unless attack}}
-        [{{localize "c2d10.chat.DC"}}{{DC}}]
-      {{/unless}}
       {{pool1Name}}
       {{#unless (eq pool2Name "None")}}
         + {{pool2Name}}
@@ -37,6 +35,7 @@
       {{localize "c2d10.chat.fateOutcome"}}
     </div>
   {{/if}}
+  <!-- Commented out for now
   {{#if attack}}
     <h3 class="align-center c2d10-capitalize">
       {{localize "c2d10.chat.actions"}}
@@ -55,12 +54,10 @@
       </h3>
       <div class="c2d10-contentbox flex-row flex-between">
         <div>
-          {{damageType}}
-        </div>
-        <div>
           {{damage}}
         </div>
       </div>
     {{/unless}}
   {{/if}}
+  -->
 </section>

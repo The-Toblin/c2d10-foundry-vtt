@@ -45,8 +45,15 @@
             "archetype": "Archetype",
             "addFocus": "Add a focus",
             "addEffect": "Add effect",
+            "addTrait": "Add a hook",
             "assets": "Assets",
             "attack": "Attack",
+            "consequences": "Consequences",
+            "mild": "Mild",
+            "mildPhys": "Mild (Exceptional physical ability bonus)",
+            "mildMent": "Mild (Exceptional mental ability bonus)",
+            "moderate": "Moderate",
+            "severe": "Severe",
             "crisis": "Crisis",
             "delete": "Delete",
             "description": "Description",
@@ -70,8 +77,9 @@
             "skill": "Skill",
             "skills": "Skills",
             "talents": "Talents",
-            "trait": "Trait",
-            "traits": "Traits",
+            "trait": "Hook",
+            "traits": "Hooks",
+            "tandc": "Hooks & Consequences",
             "virtue": "Virtue",
             "vice": "Vice",
             "virtues": "Virtues",
@@ -82,11 +90,10 @@
             "gender": "Gender",
             "playerName": "Player name",
             "sex": "Sex",
-            "title": "Title",
+            "title": "Citizen class",
             "species": "Species",
             "dot-tooltip": "<p>Left click to increase, right click or shift+left click, to reduce.</p>",
-            "health-tooltip": "<p>Left click to increase superficial damage, right click to reduce. Press CTRL and click to increase critical damage. CTLR+right click to reduce critical damage.</p><p>In lieu of a right mouse button, SHIFT left-click can be used instead.</p>",
-            "impaired-tooltip": "<p>You are impaired. All tests performed with this group of talents, skills and powers will suffer a -2 dice penalty until you recover."
+            "health-tooltip": "<p>Click to toggle the health box on, or off.</p>"
         },
         "talents": {
             "physical": "Physical",
@@ -162,6 +169,7 @@
             "description": "Description",
             "assetType": "Type",
             "critical": "Critical",
+            "protection": "Protection",
             "superficial": "Superficial",
             "value": "Value",
             "quality": "Quality",
@@ -243,8 +251,9 @@
             "survival": "<p>When caught in a situation without water, food or shelter, it’s a good thing you know how to find what you need, yes? Survival, no matter the location, is a matter of knowledge of where to find resources. It can be used to find food, water, shelter for the night or other matters of survival in any kind of terrain or settlement.</p>",
             "technology": "<p>Technology varies between locations, but most of it works in a similar way. If you know one gadget, you can probably figure out how to use another. Technology covers everything from doing less legal activities on a terminal to repairing cybertech. Engineering, programming, cybersecurity is all covered under this skill.</p>",
             "crisis": "<p>Crisis is a measure of how debilitated a character is both mentally and physically. Causes your pools to accumulate Crisis Dice.</p>",
-            "strain": "<p>In-scene measure of physical strain. Yellow denotes superficial damage, red denotes critical damage. Critical damage contributes to Crisis.</p><p>Click to perform the strain test.</p>",
-            "stress": "<p>In-scene measure of mental stress. Yellow denotes superficial damage, red denotes critical damage. Critical damage contributes to Crisis.</p><p>Click to perform the stress test.</p>",
+            "strain": "<p>In-scene measure of physical strain. Depending on your Endurance talent rank, you will have up to five boxes of Strain to tick.</p>",
+            "stress": "<p>In-scene measure of mental stress. Depending on your Willpower, or Poise, talent rank, you will have up to five boxes of Stress to tick.</p>",
+            "consequences": "Coming soon...",
             "economy": "<p>Your character's economic power class.</p><p>Click to perform an acquisition test.</p>"
         }
     },
@@ -264,6 +273,10 @@
         "DC": {
             "name": "Difficulty",
             "label": "Setting difficulty for tests taken. Most tests performed will be matched against this."
+        },
+        "campaignCrisis": {
+            "name": "Campaign Crisis",
+            "label": "The value of the current campaign's Crisis. This influences how many Crisis Dice each character will be rolling with."
         },
         "bonusDice": {
             "name": "Bonus Dice Purchase",

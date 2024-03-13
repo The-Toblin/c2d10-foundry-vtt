@@ -7,11 +7,9 @@ import { rollTest } from "../dice/C2D10Roll.js";
 
 export default class C2D10ActorSheet extends ActorSheet {
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       template: "systems/c2d10/templates/sheets/actor-sheet.hbs",
       classes: ["c2d10", "sheet"],
-      height: 895,
-      width: 910,
       tabs: [
         {
           navSelector: ".sheet-tabs",
@@ -33,12 +31,6 @@ export default class C2D10ActorSheet extends ActorSheet {
      */
     sheetData.assets = sheetData.system.extras.assets;
     sheetData.equipment = sheetData.system.extras.equipment;
-
-    /**
-     * Traits
-     */
-    sheetData.virtues = sheetData.system.extras.virtues;
-    sheetData.vices = sheetData.system.extras.vices;
 
     /**
      * Powers
@@ -151,36 +143,33 @@ export default class C2D10ActorSheet extends ActorSheet {
    */
   activateListeners(html) {
     html.find(".dot-container").on("click contextmenu", this._onResourceChange.bind(this));
+    html.find(".health-container").on("click contextmenu", this._onModifyHealth.bind(this));
+    html.find(".c2d10-consequence-clickbox").on("click contextmenu", this._onToggleConsequence.bind(this));
     html.find(".description").on("contextmenu", this._postDescription.bind(this));
     html.find(".item-description").on("contextmenu", this._postItemDescription.bind(this));
     html.find(".edit-lock").click(this._toggleEditLock.bind(this));
     html.find(".delete-item").click(this._deleteItem.bind(this));
     html.find(".add-focus").click(this._addFocus.bind(this));
+    html.find(".add-trait").click(this._addTrait.bind(this));
+    html.find(".remove-trait").click(this._removeTrait.bind(this));
     html.find(".remove-focus").click(this._removeFocus.bind(this));
     html.find(".focus-edit").on("click contextmenu", this._editFocus.bind(this));
-    html.find(".c2d10-health-test").click(this._doRollTest.bind(this));
+    // Html.find(".c2d10-health-test").click(this._doRollTest.bind(this));
     html.find(".c2d10-economy-test").click(this._doRollTest.bind(this));
     html.find(".c2d10-talent-test").click(this._doRollTest.bind(this));
     html.find(".c2d10-skill-test").click(this._doRollTest.bind(this));
     html.find(".c2d10-power-test").click(this._doRollTest.bind(this));
     html.find(".c2d10-attack-weapon").click(this._doPostEquipmentCard.bind(this));
-    // Html.find(".asset").click(this._onClickItem.bind(this));
+    html.find(".variant-item").click(this._onClickVariant.bind(this));
     html.find(".equipment").click(this._onClickItem.bind(this));
     html.find(".quantity-asset").click(this._modifyQuantity.bind(this));
     html.find(".c2d10-toggle-effect").click(this._onToggleEffect.bind(this));
-
-    // Ugly hack to make the sheet update when switching tabs, since active effects don't trigger a sheet update.
-    html.find(".sheet-tabs").click(this._onNavClick.bind(this));
+    html.find(".c2d10-button-collapsible").click(this._onToggleCollapsible.bind(this));
 
     new ContextMenu(html, ".asset", this.itemContextMenu);
     new ContextMenu(html, ".equipment", this.equipmentContextMenu);
 
     super.activateListeners(html);
-  }
-
-  _onNavClick(event) {
-    event.preventDefault();
-    this.render(true);
   }
 
   _modifyQuantity(event) {
@@ -208,6 +197,22 @@ export default class C2D10ActorSheet extends ActorSheet {
     const element = event.currentTarget;
     const itemId = element.closest(".asset-item").dataset.id;
     const item = this.actor.items.get(itemId);
+
+    item.sheet.render(true);
+  }
+
+  /**
+   * Render the item sheet when clicking an item
+   * @param {object} event The clicked event-data.
+   */
+  _onClickVariant(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    const itemId = element.closest(".variant-item").dataset.itemId;
+    const item = this.actor.items.get(itemId);
+
+    console.log(item);
+
 
     item.sheet.render(true);
   }
@@ -263,6 +268,14 @@ export default class C2D10ActorSheet extends ActorSheet {
     } else {
       ui.notifications.error("Unlock your sheet before attempting to edit it!");
     }
+  }
+
+  _onModifyHealth(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    const dataset = element.closest(".health-container").dataset;
+
+    this.actor.modifyHealth(dataset.group, dataset.id);
   }
 
   /**
@@ -378,6 +391,19 @@ export default class C2D10ActorSheet extends ActorSheet {
     await this.actor.update(updateData);
   }
 
+  async _addTrait(event) {
+    if (event) event.preventDefault();
+
+    await this.actor.addTrait(false, 0);
+  }
+
+  async _removeTrait(event) {
+    if (event) event.preventDefault();
+
+    await this.actor.addTrait(true, event.currentTarget.closest(".remove-trait").dataset.id);
+
+  }
+
   async _deleteItem(event) {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".asset-item").dataset.id;
@@ -403,12 +429,10 @@ export default class C2D10ActorSheet extends ActorSheet {
     const actorId = this.actor.id;
 
     /**
-     * A test (or roll) in C2D10 requires two (or rarely three) pools,
-     * the impairment status of the actor performing the roll,
-     * the character's current number of crisis dice.
+     * A test (or roll) in C2D10 requires two (or rarely three) pools.
      *
      * The function in the roll class takes the actorId, the type, group and id (name in clear text) of
-     * the primary pool item, that item's pool value (number of D10), and the character's impairment.
+     * the primary pool item and that item's pool value (number of D10).
      *
      * So we'll first need to establish those values and deliver them to the function.
      *
@@ -420,22 +444,13 @@ export default class C2D10ActorSheet extends ActorSheet {
     const type = dataset.type;
     const group = dataset.group;
     const id = dataset.id;
-    const physicalImpairment = sys.health.physicalImpairment;
-    const mentalImpairment = sys.health.mentalImpairment;
-    const crisis = sys.health.crisis;
     let damage = 0;
-    let damageType = true;
     let pool = null;
     let name = null; // This is just to get around the fact that we use itemId to fetch power data.
 
     // First, if this is an acquisition roll, set the pool to the economy value.
     if (id === "economy") {
       pool = sys[type][id] > 1 ? sys[type][id] : 1;
-      name = id;
-
-    // If not, check if it's a health test and determine the value of the pool.
-    } else if (type === "health") {
-      pool = sys[type][id].value > 1 ? sys[type][id].value : 1;
       name = id;
 
     // If it's a power test, we fetch the pool value from the power item.
@@ -449,7 +464,6 @@ export default class C2D10ActorSheet extends ActorSheet {
       item.showDescription();
       name = item.name;
 
-      damageType = this.actor.system.extras.equippedWeapon.damageType === "Critical";
       damage = this.actor.system.extras.equippedWeapon.damage;
 
       // Finally, the remaining option is either a talent or skill test, both of which are handled identically.
@@ -459,7 +473,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     }
 
     // Perform the roll
-    await rollTest(actorId, type, group, name, pool, physicalImpairment, mentalImpairment, crisis, damage, damageType);
+    await rollTest(actorId, type, group, name, pool, damage);
   }
 
   async _doPostEquipmentCard(event) {
@@ -514,5 +528,29 @@ export default class C2D10ActorSheet extends ActorSheet {
     item.toggleEffects();
 
     this.render(true); // Ugly hack to update the sheet with new data, since active effects don't do this inherently.
+  }
+
+  async _onToggleConsequence(event) {
+    event.preventDefault();
+    const dataset = event.currentTarget.closest(".c2d10-consequence-box").dataset;
+
+    await this.actor.toggleConsequence(dataset.id);
+  }
+
+  _onToggleCollapsible(event) {
+    event.preventDefault();
+
+    const buttonClass = event.currentTarget;
+    const content = buttonClass.nextElementSibling;
+
+    if (content.style.display === "flex") {
+
+      content.style.display = "none";
+      buttonClass.textContent = "Open Power";
+
+    } else {
+      content.style.display = "flex";
+      buttonClass.textContent = "Close Power";
+    }
   }
 }

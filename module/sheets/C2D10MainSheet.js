@@ -5,11 +5,11 @@ import C2D10ActorSheet from "./C2D10ActorSheet.js";
  */
 export default class C2D10MainSheet extends C2D10ActorSheet {
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       template: "systems/c2d10/templates/sheets/actor-sheet.hbs",
       classes: ["c2d10", "sheet"],
-      height: 890,
-      width: 910,
+      height: "auto",
+      width: "auto",
       tabs: [
         {
           navSelector: ".sheet-tabs",
