@@ -27,7 +27,11 @@ Implemented new health system inspired by FATE.
 - Renamed the "Title" field on the character sheet to "Citizen class" to be more usable for other settings.
 - Removed the ability to perform special attacks and defend rolls from chat messages.  This was too much automation for the system and complicated more than it helped.
 
-# TODO
-
-- Remove the multiple stars for Focus
-- In order to achieve the above, Focuses should really be moved to be in an array underneath their parent skill.
+## 0.611
+- Removed multiple asterisks on skills because of multiple focuses.
+- Focuses moved from `system.skills.focus` to their respective parent skills (eg `system.skills.physical.acrobatics.focus["parkour"]`).
+- Implemented proper migration scripts to handle version updates.
+- Removed old trait `item`s from characters since traits are now "Hooks" and are text based.
+- Above done to ensure that no old active-effects are still present when migrating characters.
+- Temporarily disabled the function to check for Fated outcomes in `./module/dice/C2D10Roll.js`. The recursive function is currently bugged and endlessly loops.
+- Since active effects and the old traits are gone, you can't be Fated atm anyway, so this isn't a loss.

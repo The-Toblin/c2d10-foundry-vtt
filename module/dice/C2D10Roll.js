@@ -189,7 +189,7 @@ const _evaluateHits = async (isDefense, isAttack, attackerHits, mainDice = false
   const complication = crisisDice ? crisisDice.values.some(x => x === 0) : false;
   const mess = crisisDice ? crisisDice.values.some(x => x === 9) : false;
   const numOfZeroes = mainDice ? mainDice.values.filter(x => x === 0).length : 0;
-  const fatedOutcome = findFated(mainDice, "fated").length > 0;
+  const fatedOutcome = false; // FindFated(mainDice, "fated").length > 0; Temporarily disabled because of a bug
 
   const successfulDefense = isDefense && parseInt(numOfHits) >= parseInt(attackerHits);
 
@@ -204,6 +204,7 @@ const _evaluateHits = async (isDefense, isAttack, attackerHits, mainDice = false
   };
 };
 
+// TODO: Fix this function. Right now it never ends.
 /**
  * Novelty function to find if any of the dice were Fated
  * @param {object}  mainDice  The Object holding the main dice of the roll
@@ -218,7 +219,7 @@ function findFated(mainDice, fated) {
    */
   function recursivelyFindProp(mainDice, fated) {
     Object.keys(mainDice).forEach(function(key) {
-      if (typeof mainDice[key] === "object") {
+      if (typeof mainDice[key] === "object" && mainDice[key] !== null) {
         recursivelyFindProp(mainDice[key], fated);
       } else if (key === fated) result.push(mainDice[key]);
     });
@@ -385,7 +386,7 @@ const _doRoll = async rollData => {
 
   const theRoll = new Roll(rollFormula);
   // Execute the roll
-  await theRoll.evaluate({async: true});
+  await theRoll.evaluate();
 
   // Construct lists of dice, taking into account any FATED characters
   const mainDice = fated ? theRoll.dice.filter(function(term) {return term instanceof FatedDie;})[0]
@@ -427,7 +428,7 @@ const _doRoll = async rollData => {
     speaker: ChatMessage.getSpeaker(),
     roll: theRoll,
     content: await renderTemplate(messageTemplate, templateContext),
-    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+    type: 0,
     sound: CONFIG.sounds.dice
   };
 
