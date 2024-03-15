@@ -428,7 +428,8 @@ const _doRoll = async rollData => {
     speaker: ChatMessage.getSpeaker(),
     roll: theRoll,
     content: await renderTemplate(messageTemplate, templateContext),
-    type: 0,
+    // Type: 0, Temporarily reverting this change. DiceSoNice does not recognize the 0. Will update when DSN fixes it.
+    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
     sound: CONFIG.sounds.dice
   };
 
