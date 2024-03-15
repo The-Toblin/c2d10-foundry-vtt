@@ -384,7 +384,9 @@ const _doRoll = async rollData => {
     rollFormula += `${crisis}ds`;
   }
 
-  const theRoll = new Roll(rollFormula);
+  // Create the roll object
+  const theRoll = await new Roll(rollFormula);
+
   // Execute the roll
   await theRoll.evaluate();
 
@@ -426,12 +428,13 @@ const _doRoll = async rollData => {
 
   let chatData = {
     speaker: ChatMessage.getSpeaker(),
-    roll: theRoll,
+    rolls: [theRoll],
     content: await renderTemplate(messageTemplate, templateContext),
-    // Type: 0, Temporarily reverting this change. DiceSoNice does not recognize the 0. Will update when DSN fixes it.
-    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
     sound: CONFIG.sounds.dice
   };
+
+  // Apply rollmode to ensure DiceSoNice detects the roll.
+  ChatMessage.applyRollMode(chatData, "roll");
 
   // Post chat message to chat.
   ChatMessage.create(chatData);

@@ -35,3 +35,6 @@ Implemented new health system inspired by FATE.
 - Above done to ensure that no old active-effects are still present when migrating characters.
 - Temporarily disabled the function to check for Fated outcomes in `./module/dice/C2D10Roll.js`. The recursive function is currently bugged and endlessly loops.
 - Since active effects and the old traits are gone, you can't be Fated atm anyway, so this isn't a loss.
+
+## 0.612
+- Fixed a bug after misunderstanding the new v12 API. Completely removed the `type` attribute from the Chat message data in `./module/dice/C2D10Roll.js`. Now Foundry doesn't complain, and DiceSoNice works as expected.
