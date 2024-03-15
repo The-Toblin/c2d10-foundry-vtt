@@ -430,6 +430,7 @@ const _doRoll = async rollData => {
     speaker: ChatMessage.getSpeaker(),
     rolls: [theRoll],
     content: await renderTemplate(messageTemplate, templateContext),
+    type: CONST.CHAT_MESSAGE_TYPES.ROLL, // Temporarily returning this line to keep DiceSoNice functioning in V11.
     sound: CONFIG.sounds.dice
   };
 

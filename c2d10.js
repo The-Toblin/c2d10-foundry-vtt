@@ -451,7 +451,7 @@ Hooks.once("ready", async () => {
   console.log("==== C2D10 | Checking versions ====");
 
   const currentVersion = game.settings.get("c2d10", "systemMigrationVersion");
-  const NEEDS_MIGRATION_VERSION = "0.612";
+  const NEEDS_MIGRATION_VERSION = "0.613";
   let needsMigration =
     !currentVersion || foundry.utils.isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
 

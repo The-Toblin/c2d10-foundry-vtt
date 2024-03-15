@@ -38,3 +38,6 @@ Implemented new health system inspired by FATE.
 
 ## 0.612
 - Fixed a bug after misunderstanding the new v12 API. Completely removed the `type` attribute from the Chat message data in `./module/dice/C2D10Roll.js`. Now Foundry doesn't complain, and DiceSoNice works as expected.
+
+## 0.613
+- Welp, turns out this doesn't work in v11 and DSN will break. Reverting change until v12 is live and DSN is updated.
