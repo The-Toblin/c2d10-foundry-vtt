@@ -6,16 +6,24 @@ This is public, but in no way in any shape or form in release territory. This is
 Made by the Toblin
 tobias@celenia.se
 
+Major release
+
 # CHANGELOG 
 ## 0.601
 Implemented new health system inspired by FATE.
+- Health is now no longer separated into "Superficial" and "Critical". Instead, each pip represents damage to the tracker, without  distinction. 
+- Each pip on the Strain and Stress tracker is no longer a "hit point" track, instead it's a representative of a value, which the first pip representing 1 damage, the fifth representing 5 damage. If you take, for example, 3 damage, you only mark the 3 pip, not the 1,2 and 3 pip. You can, after that, take 2 damage and mark the 2 pip. 
+- If a pip that is already filled needs to be filled again, say, taking 3 damage twice in a row, then the second instance is upgraded one pip, resulting in the 4 pip being marked instead.
+- If a character exceeds their tracker (ie, they can't mark a pip without going off the tracker), they must take a Consequence. Consequences represent 2, 4 and 6 damage respectively.
+- Stress and Strain are both cleared after a scene/conflict ends, whatever makes most sense narratively. Consequences must be cleared over time and are more long-lasting. See the rules for details.
 
 ## 0.606
 - New traits in place
 - Sheets updated
 - Fixed CSS on roll messages in chat
 - Removed DC setting
-- Added global crisis
+- Reworked Crisis. No longer tied to character's health. Instead it's a value the Keeper can increase, using Villain points, that gives EVERYONE Crisis dice. 
+- The party can spend hero points to reduce Crisis.
 
 ## 0.607
 - Minor chat styling
@@ -28,7 +36,7 @@ Implemented new health system inspired by FATE.
 - Removed the ability to perform special attacks and defend rolls from chat messages.  This was too much automation for the system and complicated more than it helped.
 
 ## 0.611
-- Removed multiple asterisks on skills because of multiple focuses.
+- Removed multiple asterisks on skills because of multiple focuses. It will now only ever show one asterisk, if a Focus is present.
 - Focuses moved from `system.skills.focus` to their respective parent skills (eg `system.skills.physical.acrobatics.focus["parkour"]`).
 - Implemented proper migration scripts to handle version updates.
 - Removed old trait `item`s from characters since traits are now "Hooks" and are text based.
