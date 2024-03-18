@@ -41,3 +41,6 @@ Implemented new health system inspired by FATE.
 
 ## 0.613
 - Welp, turns out this doesn't work in v11 and DSN will break. Reverting change until v12 is live and DSN is updated.
+
+## 0.614
+- Fixed a major bug that broke saving of Hooks. Turns out the HBS autoformat breaks quote marks within variables. It changed `name="{{concat "system.traits." traitID ".description" }}` to `name="{{concat " system.traits." traitID ".description" }}` which broke saving of hooks. Fixed.
