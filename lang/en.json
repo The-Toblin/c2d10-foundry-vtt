@@ -38,7 +38,7 @@
             "ambition": "Ambition",
             "species": "Species",
             "faction": "Faction",
-            "economy": "Economy"
+            "economy": "Influence"
         },
         "sheet": {
             "appearance": "Appearance",
@@ -213,6 +213,45 @@
             "crisis": "Crisis Dice",
             "fateOutcome": "Fate is not on your side..."
         },
+        "roll": {
+            "agility": "Agility",
+            "endurance": "Endurance",
+            "strength": "Strength",
+            "charm": "Charm",
+            "manipulation": "Manipulation",
+            "poise": "Poise",
+            "intuition": "Intuition",
+            "logic": "Logic",
+            "willpower": "Willpower",
+            "economy": "Influence",
+            "acrobatics": "Acrobatics",
+            "athletics": "Athletics",
+            "brawl": "Brawl",
+            "burglary": "Burglary",
+            "crafts": "Crafts",
+            "driving": "Driving",
+            "firearms": "Firearms",
+            "melee": "Melee",
+            "mechanics": "Mechanics",
+            "carousing": "Carousing",
+            "insight": "Insight",
+            "intimidation": "Intimidation",
+            "leadership": "Leadership",
+            "performance": "Performance",
+            "persuasion": "Persuasion",
+            "politics": "Politics",
+            "streetsmarts": "Street-smarts",
+            "subterfuge": "Subterfuge",
+            "academia": "Academia",
+            "awareness": "Awareness",
+            "electronics": "Electronics",
+            "investigation": "Investigation",
+            "medicine": "Medicine",
+            "mysticism": "Mysticism",
+            "stealth": "Stealth",
+            "survival": "Survival",
+            "technology": "Technology"
+        },
         "descriptions": {
             "agility": "<p>A measure of a character's ability to coordinate their body and a general measure of their flexibility and control of fine motorics.</p>",
             "endurance": "<p>A measure of a character's ability to endure high physical stress, exhaustion and push through pain.</p>",
@@ -254,7 +293,7 @@
             "strain": "<p>In-scene measure of physical strain. Depending on your Endurance talent rank, you will have up to five boxes of Strain to tick.</p>",
             "stress": "<p>In-scene measure of mental stress. Depending on your Willpower, or Poise, talent rank, you will have up to five boxes of Stress to tick.</p>",
             "consequences": "Coming soon...",
-            "economy": "<p>Your character's economic power class.</p><p>Click to perform an acquisition test.</p>"
+            "economy": "<p>Your character's primary power class, by it political or economical. Used to gain favors and acquire items.</p><p>Click to perform an acquisition test.</p>"
         }
     },
     "SETTINGS": {

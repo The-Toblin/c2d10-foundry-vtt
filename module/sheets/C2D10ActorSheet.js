@@ -422,7 +422,7 @@ export default class C2D10ActorSheet extends ActorSheet {
 
     // First, if this is an acquisition roll, set the pool to the economy value.
     if (id === "economy") {
-      pool = sys[type][id] > 1 ? sys[type][id] : 1;
+      pool = sys.info[id] > 1 ? sys.info[id] : 1;
       name = id;
 
     // If it's a power test, we fetch the pool value from the power item.

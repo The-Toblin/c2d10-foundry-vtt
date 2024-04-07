@@ -411,9 +411,9 @@ const _doRoll = async rollData => {
   // Create the chat message object
   let templateContext = {
     name: game.actors.get(rollData.id).name,
-    pool1Name: rollData.pool1Name,
+    pool1Name: game.i18n.localize(`c2d10.roll.${rollData.pool1Name}`),
     pool1Level: rollData.pool1Level,
-    pool2Name: rollData.pool2Name,
+    pool2Name: game.i18n.localize(`c2d10.roll.${rollData.pool2Name}`),
     pool2Level: rollData.pool2Level,
     crisis: crisis,
     hits: evaluation.hits,
