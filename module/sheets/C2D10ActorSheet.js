@@ -76,7 +76,7 @@ export default class C2D10ActorSheet extends ActorSheet {
       name: game.i18n.localize("c2d10.sheet.edit"),
       icon: '<i class="fas fa-edit"></i>',
       callback: element => {
-        const itemId = element.closest(".asset-item")[0].dataset.id;
+        const itemId = element.closest(".sheet-item")[0].dataset.id;
         const item = this.actor.items.get(itemId);
 
         item.sheet.render(true);
@@ -86,7 +86,7 @@ export default class C2D10ActorSheet extends ActorSheet {
       name: game.i18n.localize("c2d10.sheet.remove"),
       icon: '<i class="fas fa-trash"></i>',
       callback: element => {
-        const itemId = element.closest(".asset-item")[0].dataset.id;
+        const itemId = element.closest(".sheet-item")[0].dataset.id;
         this.actor.deleteEmbeddedDocuments("Item", [itemId]);
       }
     }
@@ -117,6 +117,33 @@ export default class C2D10ActorSheet extends ActorSheet {
       }
     },
     {
+      name: game.i18n.localize("c2d10.sheet.postDescription"),
+      icon: '<i class="fas fa-book"></i>',
+      callback: element => {
+        const itemId = element.currentTarget.closest(".equipment-item")[0].dataset.id;
+        const messageTemplate = "systems/c2d10/templates/partials/chat-templates/description.hbs";
+        let messageContext = {};
+
+        console.log("YES! WE DID IT!", itemId);
+
+        // Check if it's a hardcoded attribute, or a created Item and act accordingly.
+        if (this.actor.items.get("itemId").type !== null) {
+          console.log("NOT A HARDCODED TEXT");
+        } else {
+          messageContext = {
+            description: game.i18n.localize(`c2d10.descriptions.${itemId}`),
+            title: itemId
+          };
+        }
+        const chatData = {
+          speaker: ChatMessage.getSpeaker(),
+          content: renderTemplate(messageTemplate, messageContext)
+        };
+
+        ChatMessage.create(chatData);
+      }
+    },
+    {
       name: game.i18n.localize("c2d10.sheet.remove"),
       icon: '<i class="fas fa-trash"></i>',
       callback: element => {
@@ -138,11 +165,11 @@ export default class C2D10ActorSheet extends ActorSheet {
    * @param {html} html The sheet HTML.
    */
   activateListeners(html) {
+    html.find(".sheet-item").on("click", this._showItemSheet.bind(this));
+    html.find(".equipment-item").on("click", this._showItemSheet.bind(this));
     html.find(".dot-container").on("click contextmenu", this._onResourceChange.bind(this));
     html.find(".health-container").on("click contextmenu", this._onModifyHealth.bind(this));
     html.find(".c2d10-consequence-clickbox").on("click contextmenu", this._onToggleConsequence.bind(this));
-    html.find(".description").on("contextmenu", this._postDescription.bind(this));
-    html.find(".item-description").on("contextmenu", this._postItemDescription.bind(this));
     html.find(".edit-lock").click(this._toggleEditLock.bind(this));
     html.find(".delete-item").click(this._deleteItem.bind(this));
     html.find(".add-focus").click(this._addFocus.bind(this));
@@ -162,11 +189,61 @@ export default class C2D10ActorSheet extends ActorSheet {
     html.find(".c2d10-toggle-effect").click(this._onToggleEffect.bind(this));
     html.find(".c2d10-button-collapsible").click(this._onToggleCollapsible.bind(this));
 
-    new ContextMenu(html, ".asset", this.itemContextMenu);
-    new ContextMenu(html, ".equipment", this.equipmentContextMenu);
+    new ContextMenu(html, ".sheet-item", this.itemContextMenu);
+    new ContextMenu(html, ".equipment-item", this.equipmentContextMenu);
 
     super.activateListeners(html);
   }
+
+  // TODO: Make a "Clickable" class, something like "c2d10-clickable" and tie all listeners to that. Have a function responsible for identifying the clicked item and call a function to act on it.
+  // === ITEM MANAGEMENT ===
+
+  _showItemSheet(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+
+    if (element.className.includes("equipment-item")) {
+      const itemId = element.closest(".equipment-item").dataset.id;
+      const item = this.actor.items.get(itemId);
+
+      item.sheet.render(true);
+    } else if (element.className.includes("equipment-item")) {
+      const itemId = element.closest(".equipment-item").dataset.id;
+    }
+  }
+
+  /**
+   * Render the item sheet when clicking an item
+   * @param {object} event The clicked event-data.
+   */
+  _onClickItem(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    const itemId = element.closest(".asset-item").dataset.id;
+    const item = this.actor.items.get(itemId);
+
+    item.sheet.render(true);
+  }
+
+  /**
+   * Render the item sheet when clicking a variant item
+   * @param {object} event The clicked event-data.
+   */
+  _onClickVariant(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    const itemId = element.closest(".variant-item").dataset.itemId;
+    const item = this.actor.items.get(itemId);
+
+    item.sheet.render(true);
+  }
+
+  async _deleteItem(event) {
+    event.preventDefault();
+    const itemId = event.currentTarget.closest(".asset-item").dataset.id;
+    await this.actor.deleteEmbeddedDocuments("Item", [itemId]);
+  }
+
 
   _modifyQuantity(event) {
     event.preventDefault();
@@ -184,31 +261,6 @@ export default class C2D10ActorSheet extends ActorSheet {
     if (quantity >= 0) item.update(updateData);
   }
 
-  /**
-   * Render the item sheet when clicking an item
-   * @param {object} event The clicked event-data.
-   */
-  _onClickItem(event) {
-    event.preventDefault();
-    const element = event.currentTarget;
-    const itemId = element.closest(".asset-item").dataset.id;
-    const item = this.actor.items.get(itemId);
-
-    item.sheet.render(true);
-  }
-
-  /**
-   * Render the item sheet when clicking an item
-   * @param {object} event The clicked event-data.
-   */
-  _onClickVariant(event) {
-    event.preventDefault();
-    const element = event.currentTarget;
-    const itemId = element.closest(".variant-item").dataset.itemId;
-    const item = this.actor.items.get(itemId);
-
-    item.sheet.render(true);
-  }
 
   /**
    * Function to increase or decrease a resource on the sheet. Allows modification of health resources
@@ -376,11 +428,6 @@ export default class C2D10ActorSheet extends ActorSheet {
 
   }
 
-  async _deleteItem(event) {
-    event.preventDefault();
-    const itemId = event.currentTarget.closest(".asset-item").dataset.id;
-    await this.actor.deleteEmbeddedDocuments("Item", [itemId]);
-  }
 
   /**
    * Perform a test or contest.
@@ -478,7 +525,8 @@ export default class C2D10ActorSheet extends ActorSheet {
     ChatMessage.create(chatData);
   }
 
-  async _postItemDescription(event) {
+  /**
+    Async _postItemDescription(event) {
     event.preventDefault();
     const id = event.currentTarget.closest(".item-description").dataset.id;
     const item = this.actor.items.get(id);
@@ -494,6 +542,7 @@ export default class C2D10ActorSheet extends ActorSheet {
 
     ChatMessage.create(chatData);
   }
+   */
 
   async _onToggleEffect(event) {
     event.preventDefault();
