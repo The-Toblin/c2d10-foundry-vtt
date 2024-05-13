@@ -52,3 +52,6 @@ Implemented new health system inspired by FATE.
 
 ## 0.614
 - Fixed a major bug that broke saving of Hooks. Turns out the HBS autoformat breaks quote marks within variables. It changed `name="{{concat "system.traits." traitID ".description" }}` to `name="{{concat " system.traits." traitID ".description" }}` which broke saving of hooks. Fixed.
+
+## 0.620 (WIP)
+- Reworked item handling to be uniform across all sheets. A left click will now bring up the item's sheet, while a right click will provide a context menu for handling item specific actions, such as equipping as well as deleting the item from the character.
