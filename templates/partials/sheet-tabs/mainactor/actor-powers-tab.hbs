@@ -6,20 +6,22 @@
         <div class="flex-col flex-center content-box c2d10-subsection">
             <div class="flex-row flex-between">
                 <div class="flex-row flex-start">
-                    <a class="remove-power delete-item asset-item" data-id="{{power._id}}" title="{{localize "c2d10.sheet.removePower"}}">
+                    <a class="remove-power delete-item c2d10-asset-item" data-id="{{power._id}}" title="{{localize " c2d10.sheet.removePower"}}">
                         <i class="far fa-minus-square" style="margin-right: 5px"></i>
                     </a>
-                    <h3 class="description sheet-item c2d10-test c2d10-power-test" data-type="powers" data-group="powers" data-id="{{power._id}}" style="margin-right: 10px;">{{power.name}}</h3>
+                    <h3 class="c2d10-description equipment-item power-item c2d10-do-roll" data-type="powers" data-group="powers" data-id="{{power._id}}" style="margin-right: 10px;">{{power.name}}</h3>
                 </div>
-                <div class="flex-row table-no-border power-resource-row" data-res="level" data-id="{{power._id}}" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
+                <div class="flex-row table-no-border power-resource-row" data-res="level" data-id="{{power._id}}" data-tooltip="{{localize " c2d10.sheet.dot-tooltip"}}">
                     {{#dots power.system.level 5}}{{/dots}}
                 </div>
             </div>
             <button type="button" class="c2d10-button-collapsible">Open power</button>
-            <div class="c2d10-collapsible-content">
+            <div class="c2d10-collapsible-content flex-wrap">
                 {{#each ../variants as |variant|}}
                     {{#if (eq power.system.powerId variant.system.power)}}
-                        {{> "systems/c2d10/templates/cards/power-card.hbs"}}
+                        <div class="w-50">
+                            {{> "systems/c2d10/templates/cards/variant-card.hbs"}}
+                        </div>
                     {{/if}}
                 {{/each}}
             </div>

@@ -19,7 +19,6 @@ import { migrate } from "./module/migration/C2D10Migrate.js";
  */
 async function preloadHandlebarsTemplates() {
   const templatePaths = [
-    "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-info.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-bio.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-consequences.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-talents.hbs",
@@ -32,10 +31,9 @@ async function preloadHandlebarsTemplates() {
     "systems/c2d10/templates/partials/sheet-tabs/npc/npc-skills.hbs",
     "systems/c2d10/templates/partials/list-items/asset-list-item.hbs",
     "systems/c2d10/templates/partials/list-items/equipment-list-item.hbs",
-    "systems/c2d10/templates/partials/list-items/trait-list-item.hbs",
     "systems/c2d10/templates/partials/list-items/variant-list-item.hbs",
     "systems/c2d10/templates/cards/weapon-card.hbs",
-    "systems/c2d10/templates/cards/power-card.hbs",
+    "systems/c2d10/templates/cards/variant-card.hbs",
     "systems/c2d10/templates/dialogs/add-focus-dialog.hbs",
     "systems/c2d10/templates/dialogs/roll-test-dialog.hbs"
   ];

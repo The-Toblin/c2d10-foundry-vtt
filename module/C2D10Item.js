@@ -2,6 +2,7 @@ export default class C2D10Item extends Item {
 
   chatTemplate = {
     trait: "systems/c2d10/templates/partials/chat-templates/trait-chat.hbs",
+    variant: "systems/c2d10/templates/cards/variant-card.hbs",
     weapon: "systems/c2d10/templates/cards/weapon-card.hbs"
   };
 
@@ -33,6 +34,14 @@ export default class C2D10Item extends Item {
   }
 
   async showDescription() {
+
+    // If this item type doesn't have a card yet, then just open the sheet
+    if (this.chatTemplate[this.type] === undefined) {
+      ui.notifications.error(`This item type (${this.type}) does not yet have an equipment card to post.`);
+      this.sheet.render(true);
+      return;
+    }
+
     const chatData = {
       user: game.user.id,
       speaker: ChatMessage.getSpeaker()
@@ -42,13 +51,15 @@ export default class C2D10Item extends Item {
       ...this,
       itemId: this.id,
       owner: this.actor.id,
-      damage: parseInt(this.system.damage)
+      itemData: this.system
     };
+
 
     chatData.content = await renderTemplate(
       this.chatTemplate[this.type],
       cardData
     );
+
 
     return ChatMessage.create(chatData);
   }
@@ -101,6 +112,12 @@ export default class C2D10Item extends Item {
   equipItem(unequip) {
     const sys = this.actor.system;
     const type = this.type === "weapon" || this.type === "armor" ? this.type : null;
+
+    if (type === null) {
+      ui.notifications.error(`This item type (${this.type}) is not equippable!`);
+      return;
+    }
+
     const updateData = {};
 
     if (unequip || this.id === sys.equipment[type]) {

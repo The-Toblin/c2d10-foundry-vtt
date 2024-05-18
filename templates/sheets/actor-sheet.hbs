@@ -92,7 +92,7 @@
                     </div>
                     <div class="w-20 flex-col">
                         <div class="c2d10-contentbox h-100 {{#if showEffects}}fancy-effects{{/if}} flex-col flex-between">
-                            <label class="align-center description" data-tooltip="{{localize "c2d10.descriptions.strain"}}" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
+                            <label class="align-center c2d10-description" data-tooltip="{{localize "c2d10.descriptions.strain"}}" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
                                 {{localize "c2d10.resources.strain"}}
                             </label>
                             <div class="flex-row flex-center">
@@ -156,7 +156,7 @@
                             </div>
                         </div>
                         <div class="c2d10-contentbox h-100 {{#if showEffects}}fancy-effects{{/if}} flex-col flex-between">
-                            <label class="description align-center" data-tooltip="{{localize "c2d10.descriptions.stress"}}" data-id="stress">
+                            <label class="c2d10-description align-center" data-tooltip="{{localize "c2d10.descriptions.stress"}}" data-id="stress">
                                 {{localize "c2d10.resources.stress"}}
                             </label>
                             <div class="flex-row flex-center">
@@ -224,9 +224,9 @@
 
                 <div class="flex-row flex-start">
                     <div class="c2d10-contentbox flex-row flex-between w-33">
-                        <div class="w-50 c2d10-test c2d10-skill-test align-left c2d10-capitalize" style="font-family: VT323, monospace; font-size: 0.875rem;" data-tooltip="{{localize "c2d10.character.economy"}} <p>Left click to roll, right click or shift+click for description.</p>" data-type="economy" data-group="economy" data-id="economy">
+                        <label class="w-50 c2d10-do-roll c2d10-description c2d10-sheet-item align-left" data-tooltip="{{localize "c2d10.character.economy"}} <p>Left click to roll, right click or shift+click for description.</p>" data-type="economy" data-group="economy" data-id="economy">
                             {{localize "c2d10.character.economy"}}
-                        </div>
+                        </label>
                         <div class="w-50 flex-row resource-row" style="justify-content: right;" data-type="economy" data-group="economy" data-id="economy" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
                             {{#dots system.info.economy 5}}{{/dots}}
                         </div>
@@ -234,11 +234,11 @@
                     {{#if equippedWeapon}}
                         <div class="flex-row flex-start w-33">
                             <div class="flex-verticalcenter c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
-                                <a class="c2d10-attack-weapon c2d10-test" title="{{localize "c2d10.sheet.attack"}}" data-type="attack" data-id="{{system.equipment.weapon}}">
+                                <a class="c2d10-attack-weapon c2d10-do-roll" title="{{localize "c2d10.sheet.attack"}}" data-type="attack" data-id="{{system.equipment.weapon}}">
                                     <i class="fa-light fa-crosshairs-simple"></i>
                                 </a>
                             </div>
-                            <div class="flex-row flex-between flex-verticalcenter w-100 c2d10-contentbox equipment-item {{#if showEffects}}fancy-effects{{/if}}" data-id={{system.equipment.weapon}}>
+                            <div class="flex-row flex-between flex-verticalcenter w-100 c2d10-contentbox c2d10-clickable-item c2d10-sheet-item c2d10-equipment-item c2d10-asset-item {{#if showEffects}}fancy-effects{{/if}}" data-id={{system.equipment.weapon}}>
                                 <label>
                                     {{equippedWeapon.name}}
                                 </label>
@@ -249,7 +249,7 @@
                         </div>
                     {{/if}}
                     {{#if equippedArmor}}
-                        <div class="flex-row flex-between w-33 c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} equipment-item" data-id={{system.equipment.armor}}>
+                        <div class="flex-row flex-between w-33 c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} c2d10-clickable-item c2d10-sheet-item c2d10-equipment-item c2d10-asset-item" data-id={{system.equipment.armor}}>
                             <label>
                                 {{equippedArmor.name}}
                             </label>
@@ -269,7 +269,7 @@
                 {{!-- Bio Tab --}}
                 <div class="tab sheet-bio" data-group="primary" data-tab="bio">
                     {{!DO NOT UNINDENT! Will break handlebars handling of textareas}}
-                    {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-bio.hbs"}}
+{{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-bio.hbs"}}
                 </div>
                 {{!-- Focus Tab --}}
                 <div class="tab sheet-focus" data-group="primary" data-tab="focus">
