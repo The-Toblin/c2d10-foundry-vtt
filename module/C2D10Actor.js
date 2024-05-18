@@ -105,6 +105,8 @@ export default class C2D10Actor extends Actor {
     let currentValue = 0;
     if (type === "skills") {
       currentValue = system[type][group][res].rank;
+    } else if (type === "economy") {
+      currentValue = parseInt(system.info.economy);
     } else {
       currentValue = !group ? system[type][res] : system[type][group][res];
     }
@@ -124,6 +126,8 @@ export default class C2D10Actor extends Actor {
       updateData[`system.${type}.${res}`] = newValue;
     } else if (type === "skills") {
       updateData[`system.${type}.${group}.${res}.rank`] = newValue;
+    } else if (type === "economy") {
+      updateData["system.info.economy"] = newValue;
     } else {
       updateData[`system.${type}.${group}.${res}`] = newValue;
     }

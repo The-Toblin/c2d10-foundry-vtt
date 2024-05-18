@@ -230,13 +230,17 @@ Hooks.on("renderPlayerList", html => {
   }
 });
 
+// Modify the pause icon
 Hooks.on("renderPause", (_app, html, options) => {
   html.find('img[src="icons/svg/clockwork.svg"]').attr("src", "systems/c2d10/assets/cd10-logo-circle.webp");
 });
 
+// Add listeners for chat message buttons
 Hooks.on("renderChatLog", (app, html, data) => Chat.addChatListeners(html));
 Hooks.on("renderChatMessage", (app, html, data) => Chat.hideChatActionButtons(app, html, data));
 
+
+// Initialize system specific functions, such as classes, sheets and set up DiceSoNice presets
 Hooks.once("init", function() {
   console.log("==== C2D10 | Initialising CD10 RPG System 2nd Edition ====");
 
@@ -443,6 +447,7 @@ Hooks.once("diceSoNiceReady", dice3d => {
   }, "d10");
 });
 
+// If the logged in player is a Keeper, handle system migration.
 Hooks.once("ready", async () => {
   if (!game.user.isGM) {
     return;
