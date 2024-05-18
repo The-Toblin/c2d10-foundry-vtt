@@ -73,91 +73,66 @@ export default class C2D10ActorSheet extends ActorSheet {
    */
   itemContextMenu = [
     {
-      name: game.i18n.localize("c2d10.sheet.edit"),
-      icon: '<i class="fas fa-edit"></i>',
-      callback: element => {
-        const itemId = element.closest(".sheet-item")[0].dataset.id;
-        const item = this.actor.items.get(itemId);
-
-        item.sheet.render(true);
-      }
-    },
-    {
-      name: game.i18n.localize("c2d10.sheet.remove"),
-      icon: '<i class="fas fa-trash"></i>',
-      callback: element => {
-        const itemId = element.closest(".sheet-item")[0].dataset.id;
-        this.actor.deleteEmbeddedDocuments("Item", [itemId]);
-      }
-    }
-  ];
-
-  /**
-   * Equipment item context menu. Edit, equip/unequip, post and remove.
-   */
-  equipmentContextMenu = [
-    {
       name: game.i18n.localize("c2d10.sheet.equip"),
       icon: '<i class="fas fa-toolbox"></i>',
       callback: element => {
-        const itemId = element.closest(".equipment-item")[0].dataset.id;
+        const itemId = element[0].dataset.id;
         const item = this.actor.items.get(itemId);
 
-        item.equipItem();
+        if (typeof item === "object") {
+          item.equipItem();
+        } else {
+          ui.notifications.error("Not an equippable item!");
+        }
       }
     },
     {
       name: game.i18n.localize("c2d10.sheet.edit"),
       icon: '<i class="fas fa-edit"></i>',
       callback: element => {
-        const itemId = element.closest(".equipment-item")[0].dataset.id;
+        const itemId = element[0].dataset.id;
         const item = this.actor.items.get(itemId);
 
-        item.sheet.render(true);
+        if (typeof item === "object") {
+          this._showItemSheet(null, item);
+        } else {
+          ui.notifications.error("Not an editable item!");
+        }
       }
     },
     {
       name: game.i18n.localize("c2d10.sheet.postDescription"),
       icon: '<i class="fas fa-book"></i>',
       callback: element => {
-        const itemId = element.currentTarget.closest(".equipment-item")[0].dataset.id;
-        const messageTemplate = "systems/c2d10/templates/partials/chat-templates/description.hbs";
-        let messageContext = {};
+        const itemId = element[0].dataset.id;
+        const item = this.actor.items.get(itemId);
 
-        console.log("YES! WE DID IT!", itemId);
-
-        // Check if it's a hardcoded attribute, or a created Item and act accordingly.
-        if (this.actor.items.get("itemId").type !== null) {
-          console.log("NOT A HARDCODED TEXT");
+        if (typeof item === "object") {
+          item.showDescription();
         } else {
-          messageContext = {
-            description: game.i18n.localize(`c2d10.descriptions.${itemId}`),
-            title: itemId
-          };
+          this._postDescription(itemId);
         }
-        const chatData = {
-          speaker: ChatMessage.getSpeaker(),
-          content: renderTemplate(messageTemplate, messageContext)
-        };
-
-        ChatMessage.create(chatData);
       }
     },
     {
       name: game.i18n.localize("c2d10.sheet.remove"),
       icon: '<i class="fas fa-trash"></i>',
       callback: element => {
-        const itemId = element.closest(".equipment-item")[0].dataset.id;
+        const itemId = element[0].dataset.id;
         const item = this.actor.items.get(itemId);
 
-        if (this.actor.system.equipment[item.type] === itemId) {
-          item.equipItem(true);
+        if (typeof item === "object") {
+          if (this.actor.system.equipment[item.type] === itemId) {
+            item.equipItem(true);
+          }
+          this.actor.deleteEmbeddedDocuments("Item", [itemId]);
+
+        } else {
+          ui.notifications.error("This item cannot be removed!");
         }
-        this.actor.deleteEmbeddedDocuments("Item", [itemId]);
       }
     }
   ];
-
 
   /**
    * Makes sure the listeners are active on the sheet. They monitor mouse-movements and clicks on the sheet
@@ -165,8 +140,7 @@ export default class C2D10ActorSheet extends ActorSheet {
    * @param {html} html The sheet HTML.
    */
   activateListeners(html) {
-    html.find(".sheet-item").on("click", this._showItemSheet.bind(this));
-    html.find(".equipment-item").on("click", this._showItemSheet.bind(this));
+    html.find(".c2d10-clickable-item").on("click", this._onClickItem.bind(this));
     html.find(".dot-container").on("click contextmenu", this._onResourceChange.bind(this));
     html.find(".health-container").on("click contextmenu", this._onModifyHealth.bind(this));
     html.find(".c2d10-consequence-clickbox").on("click contextmenu", this._onToggleConsequence.bind(this));
@@ -176,74 +150,82 @@ export default class C2D10ActorSheet extends ActorSheet {
     html.find(".add-trait").click(this._addTrait.bind(this));
     html.find(".remove-trait").click(this._removeTrait.bind(this));
     html.find(".remove-focus").click(this._removeFocus.bind(this));
-    // Html.find(".focus-edit").on("click contextmenu", this._editFocus.bind(this));
-    // Html.find(".c2d10-health-test").click(this._doRollTest.bind(this));
-    html.find(".c2d10-economy-test").click(this._doRollTest.bind(this));
-    html.find(".c2d10-talent-test").click(this._doRollTest.bind(this));
-    html.find(".c2d10-skill-test").click(this._doRollTest.bind(this));
-    html.find(".c2d10-power-test").click(this._doRollTest.bind(this));
-    html.find(".c2d10-attack-weapon").click(this._doPostEquipmentCard.bind(this));
-    html.find(".variant-item").click(this._onClickVariant.bind(this));
-    html.find(".equipment").click(this._onClickItem.bind(this));
+    html.find(".c2d10-do-roll").on("click contextmenu", this._doRollTest.bind(this));
     html.find(".quantity-asset").click(this._modifyQuantity.bind(this));
     html.find(".c2d10-toggle-effect").click(this._onToggleEffect.bind(this));
     html.find(".c2d10-button-collapsible").click(this._onToggleCollapsible.bind(this));
 
-    new ContextMenu(html, ".sheet-item", this.itemContextMenu);
-    new ContextMenu(html, ".equipment-item", this.equipmentContextMenu);
+    new ContextMenu(html, ".c2d10-clickable-item", this.itemContextMenu);
 
     super.activateListeners(html);
   }
 
-  // TODO: Make a "Clickable" class, something like "c2d10-clickable" and tie all listeners to that. Have a function responsible for identifying the clicked item and call a function to act on it.
-  // === ITEM MANAGEMENT ===
-
-  _showItemSheet(event) {
-    event.preventDefault();
-    const element = event.currentTarget;
-
-    if (element.className.includes("equipment-item")) {
-      const itemId = element.closest(".equipment-item").dataset.id;
-      const item = this.actor.items.get(itemId);
-
-      item.sheet.render(true);
-    } else if (element.className.includes("equipment-item")) {
-      const itemId = element.closest(".equipment-item").dataset.id;
-    }
-  }
-
+  // === GENERAL CLICK INTERACTION WITH THE SHEET ===
   /**
-   * Render the item sheet when clicking an item
-   * @param {object} event The clicked event-data.
+   * Handle clicking on a label or item on the sheet
+   * @param {object}  event       The clicked event-data.
    */
   _onClickItem(event) {
     event.preventDefault();
-    const element = event.currentTarget;
-    const itemId = element.closest(".asset-item").dataset.id;
-    const item = this.actor.items.get(itemId);
+    const classList = event.currentTarget.classList;
+    const itemId = classList.contains("c2d10-sheet-item") ? event.currentTarget.closest(".c2d10-sheet-item").dataset.id : null;
 
+    if (itemId === null) {
+      console.error("No valid ItemID provided!");
+      return;
+    } else {
+      console.log("Your ItemID is:", itemId);
+    }
+
+    if (classList.contains("c2d10-equipment-item")
+    || classList.contains("c2d10-variant-item")) {
+      const item = this.actor.items.get(itemId);
+      this._showItemSheet(event, item);
+
+    } else {
+      this._postDescription(event, itemId);
+    }
+  }
+
+  _showItemSheet(event, item) {
     item.sheet.render(true);
   }
 
-  /**
-   * Render the item sheet when clicking a variant item
-   * @param {object} event The clicked event-data.
-   */
-  _onClickVariant(event) {
+  async _postDescription(event, itemId = null) {
     event.preventDefault();
-    const element = event.currentTarget;
-    const itemId = element.closest(".variant-item").dataset.itemId;
-    const item = this.actor.items.get(itemId);
+    let newId = itemId;
 
-    item.sheet.render(true);
+    if (itemId === null) {
+      const classList = event.currentTarget.classList;
+      newId = classList.contains("c2d10-sheet-item") ? event.currentTarget.closest(".c2d10-sheet-item").dataset.id : null;
+
+      if (newId === null) {
+        console.error("No valid ItemID provided!");
+        return;
+      } else {
+        console.log("Your ItemID is:", newId);
+      }
+    }
+
+    const messageTemplate = "systems/c2d10/templates/partials/chat-templates/description.hbs";
+    const messageContext = {
+      description: game.i18n.localize(`c2d10.descriptions.${newId}`),
+      title: newId
+    };
+
+    const chatData = {
+      speaker: ChatMessage.getSpeaker(),
+      content: await renderTemplate(messageTemplate, messageContext)
+    };
+
+    ChatMessage.create(chatData);
   }
 
   async _deleteItem(event) {
     event.preventDefault();
-    const itemId = event.currentTarget.closest(".asset-item").dataset.id;
+    const itemId = event.currentTarget.closest(".c2d10-asset-item").dataset.id;
     await this.actor.deleteEmbeddedDocuments("Item", [itemId]);
   }
-
 
   _modifyQuantity(event) {
     event.preventDefault();
@@ -436,14 +418,14 @@ export default class C2D10ActorSheet extends ActorSheet {
   async _doRollTest(event) {
     event.preventDefault();
 
-    // If the shiftkey is held down, post the description to chat instead of rolling.
-    if (event.shiftKey) {
-      this._postDescription(event);
+    // If the shiftkey is held down or it's a right click, handle it as an item click and call the _onClickItem instead.
+    if (event.shiftKey || event.button === 2) {
+      this._onClickItem(event);
       return;
     }
 
     // Extract the dataset from the HTML data and establish a few constants we'll need.
-    const dataset = event.currentTarget.closest(".c2d10-test").dataset;
+    const dataset = event.currentTarget.closest(".c2d10-do-roll").dataset;
     const sys = this.getData().system;
     const actorId = this.actor.id;
 
@@ -508,41 +490,6 @@ export default class C2D10ActorSheet extends ActorSheet {
     // item.showDescription();
     this._doRollTest(event);
   }
-
-  async _postDescription(event) {
-    event.preventDefault();
-    const id = event.currentTarget.closest(".description").dataset.id;
-    const messageTemplate = "systems/c2d10/templates/partials/chat-templates/description.hbs";
-    const messageContext = {
-      description: game.i18n.localize(`c2d10.descriptions.${id}`),
-      title: id
-    };
-    const chatData = {
-      speaker: ChatMessage.getSpeaker(),
-      content: await renderTemplate(messageTemplate, messageContext)
-    };
-
-    ChatMessage.create(chatData);
-  }
-
-  /**
-    Async _postItemDescription(event) {
-    event.preventDefault();
-    const id = event.currentTarget.closest(".item-description").dataset.id;
-    const item = this.actor.items.get(id);
-    const messageTemplate = "systems/c2d10/templates/partials/chat-templates/description.hbs";
-    const messageContext = {
-      description: item.system.description,
-      title: item.name
-    };
-    const chatData = {
-      speaker: ChatMessage.getSpeaker(),
-      content: await renderTemplate(messageTemplate, messageContext)
-    };
-
-    ChatMessage.create(chatData);
-  }
-   */
 
   async _onToggleEffect(event) {
     event.preventDefault();

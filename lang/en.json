@@ -56,7 +56,9 @@
             "severe": "Severe",
             "crisis": "Crisis",
             "delete": "Delete",
+            "delete-item-tooltip": "Click to remove the item from your character. This cannot be undone!",
             "description": "Description",
+            "postDescription": "Post description",
             "edit": "Edit",
             "effect": "Effect",
             "effects": "Effects",
@@ -293,7 +295,7 @@
             "strain": "<p>In-scene measure of physical strain. Depending on your Endurance talent rank, you will have up to five boxes of Strain to tick.</p>",
             "stress": "<p>In-scene measure of mental stress. Depending on your Willpower, or Poise, talent rank, you will have up to five boxes of Stress to tick.</p>",
             "consequences": "Coming soon...",
-            "economy": "<p>Your character's primary power class, by it political or economical. Used to gain favors and acquire items.</p><p>Click to perform an acquisition test.</p>"
+            "economy": "<p>Your character's primary power and status class, be it political or economical. Used to gain favors and acquire items.</p><p>Click to perform an acquisition och influence test.</p>"
         }
     },
     "SETTINGS": {

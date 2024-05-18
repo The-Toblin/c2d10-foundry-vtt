@@ -675,9 +675,12 @@ table input {
 }
 .c2d10.sheet {
   min-width: 900px;
+  min-height: fit-content;
+  max-height: 100%;
 }
 .c2d10.item-sheet {
   min-width: 900px;
+  min-height: fit-content;
 }
 .sheet.journal-entry .journal-entry-content {
   background: none;
@@ -938,8 +941,8 @@ table input {
   font-family: VT323, monospace;
   font-size: 1.09375rem;
 }
-.c2d10.sheet .c2d10-test:hover,
-.c2d10.item-sheet .c2d10-test:hover {
+.c2d10.sheet .c2d10-do-roll:hover,
+.c2d10.item-sheet .c2d10-do-roll:hover {
   text-shadow: 0 0 10px #e5e5ec;
 }
 .c2d10.sheet table,
@@ -958,7 +961,7 @@ table input {
 }
 .c2d10.sheet .c2d10-fit-content,
 .c2d10.item-sheet .c2d10-fit-content {
-  height: fit-content !important;
+  height: fit-content;
 }
 .c2d10.sheet nav.sheet-tabs .item,
 .c2d10.item-sheet nav.sheet-tabs .item {
@@ -979,7 +982,7 @@ table input {
   filter: invert(1);
 }
 .c2d10.item-sheet {
-  height: fit-content !important;
+  height: fit-content;
 }
 .c2d10-invert {
   filter: invert(1);
