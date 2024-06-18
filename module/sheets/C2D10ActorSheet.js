@@ -104,8 +104,11 @@ export default class C2D10ActorSheet extends ActorSheet {
       name: game.i18n.localize("c2d10.sheet.postDescription"),
       icon: '<i class="fas fa-book"></i>',
       callback: element => {
+        console.log(element);
         const itemId = element[0].dataset.id;
         const item = this.actor.items.get(itemId);
+
+        console.log("Your itemId is:", itemId);
 
         if (typeof item === "object") {
           item.showDescription();
@@ -168,7 +171,7 @@ export default class C2D10ActorSheet extends ActorSheet {
   _onClickItem(event) {
     event.preventDefault();
     const classList = event.currentTarget.classList;
-    const itemId = classList.contains("c2d10-sheet-item") ? event.currentTarget.closest(".c2d10-sheet-item").dataset.id : null;
+    const itemId = classList.contains("c2d10-clickable-item") ? event.currentTarget.closest(".c2d10-sheet-item").dataset.id : null;
 
     if (itemId === null) {
       console.error("No valid ItemID provided!");
@@ -177,8 +180,7 @@ export default class C2D10ActorSheet extends ActorSheet {
       console.log("Your ItemID is:", itemId);
     }
 
-    if (classList.contains("c2d10-equipment-item")
-    || classList.contains("c2d10-variant-item")) {
+    if (classList.contains("c2d10-equipment-item") || classList.contains("c2d10-variant-item") || classList.contains("c2d10-asset-item")) {
       const item = this.actor.items.get(itemId);
       this._showItemSheet(event, item);
 
@@ -191,8 +193,8 @@ export default class C2D10ActorSheet extends ActorSheet {
     item.sheet.render(true);
   }
 
-  async _postDescription(event, itemId = null) {
-    event.preventDefault();
+  async _postDescription(event = null, itemId = null) {
+    if (event !== null) event.preventDefault();
     let newId = itemId;
 
     if (itemId === null) {
@@ -230,7 +232,7 @@ export default class C2D10ActorSheet extends ActorSheet {
   _modifyQuantity(event) {
     event.preventDefault();
     const element = event.currentTarget;
-    const itemId = element.closest(".asset-item").dataset.id;
+    const itemId = element.closest(".c2d10-asset-item").dataset.id;
     const item = this.actor.items.get(itemId);
 
     const modifier = element.className.includes("increase") ? 1 : -1;

@@ -1,28 +1,28 @@
-<tr class="c2d10-clickable-item c2d10-sheet-item c2d10-variant-item" data-id="{{id}}">
-    <td class="align-left resource-row c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
+<tr class="c2d10-sheet-item c2d10-variant-item" data-id="{{id}}">
+    <td class="align-left resource-row c2d10-contentbox c2d10-clickable-item c2d10-variant-item {{#if showEffects}}fancy-effects{{/if}}" data-id="{{id}}">
         {{name}}
     </td>
-    <td class="align-left resource-row c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
+    <td class="align-left resource-row c2d10-contentbox c2d10-clickable-item c2d10-variant-item {{#if showEffects}}fancy-effects{{/if}}" data-id="{{id}}">
         {{#unless (eq "None" system.pool)}} 
             {{system.pool}} 
         {{/unless}}
     </td>
-    <td class="align-left resource-row c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
+    <td class="align-left resource-row c2d10-contentbox c2d10-clickable-item c2d10-variant-item {{#if showEffects}}fancy-effects{{/if}}" data-id="{{id}}">
         {{#unless (eq "None" system.cost)}} 
             {{system.cost}} {{localize (concat "c2d10.resources." system.cost-resource)}} 
         {{/unless}}
     </td>
-    <td class="align-left resource-row c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
+    <td class="align-left resource-row c2d10-contentbox c2d10-clickable-item c2d10-variant-item {{#if showEffects}}fancy-effects{{/if}}" data-id="{{id}}">
         {{#unless (eq "None" system.range)}} 
             {{system.range}} {{localize (concat "c2d10.range." system.range-denominator)}} 
         {{/unless}}
     </td>
-    <td class="align-left resource-row c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
+    <td class="align-left resource-row c2d10-contentbox c2d10-clickable-item c2d10-variant-item {{#if showEffects}}fancy-effects{{/if}}" data-id="{{id}}">
         {{#unless (eq "None" system.opposed)}} 
             {{system.opposed}} 
         {{/unless}}
     </td>
-    <td class="align-left resource-row c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
+    <td class="align-left resource-row c2d10-contentbox c2d10-clickable-item c2d10-variant-item {{#if showEffects}}fancy-effects{{/if}}" data-id="{{id}}">
         {{#unless (eq "None" system.duration)}} 
             {{system.duration}} {{localize (concat "c2d10.duration." system.duration-denominator)}} 
         {{/unless}}

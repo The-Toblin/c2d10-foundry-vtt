@@ -1,7 +1,6 @@
 export default class C2D10Item extends Item {
 
   chatTemplate = {
-    trait: "systems/c2d10/templates/partials/chat-templates/trait-chat.hbs",
     variant: "systems/c2d10/templates/cards/variant-card.hbs",
     weapon: "systems/c2d10/templates/cards/weapon-card.hbs"
   };
