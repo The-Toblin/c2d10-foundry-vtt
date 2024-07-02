@@ -1,11 +1,26 @@
 .app {
     .c2d10-dark-background();
-    
+
     .window-content {
         background-image: url(./assets/backgrounds/circuit_green.webp);
         background-position: center;
         background-size: cover;
         color: @colors[ghost];
+    }
+
+    select {
+        color: @colors[main];
+
+        option {
+            color: @colors[main];
+            background-color: @colors[bkg];
+
+        }
+    }
+
+    textarea {
+        color: @colors[main];
+        background-color: @colors[bkg];
     }
 
     button {
