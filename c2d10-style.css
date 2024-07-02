@@ -1297,7 +1297,8 @@ table input {
   color: #88f2ad;
   background-color: #021109;
 }
-.app textarea {
+.app textarea,
+.app .title {
   color: #88f2ad;
   background-color: #021109;
 }
