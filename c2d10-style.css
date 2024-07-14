@@ -1281,47 +1281,71 @@ table input {
   font-family: VT323, monospace;
   font-size: 0.875rem;
 }
-.app {
+.app,
+.standard-form {
   background: linear-gradient(0deg, #021109, 55%, rgba(2, 17, 9, 0.85));
 }
-.app .window-content {
+.app .window-content,
+.standard-form .window-content {
   background-image: url(assets/backgrounds/circuit_green.webp);
   background-position: center;
   background-size: cover;
   color: #e5e5ec;
 }
-.app select {
+.app select,
+.standard-form select {
   color: #88f2ad;
 }
-.app select option {
+.app select option,
+.standard-form select option {
   color: #88f2ad;
   background-color: #021109;
 }
 .app textarea,
-.app .title {
+.standard-form textarea,
+.app .title,
+.standard-form .title {
   color: #88f2ad;
   background-color: #021109;
 }
-.app button {
+.app button,
+.standard-form button {
   border-radius: 3px;
   border: 2px solid;
   border-color: #29a253 !important;
   background: linear-gradient(0deg, #021109, 55%, rgba(2, 17, 9, 0.85));
   color: #e5e5ec;
 }
-.app form {
+.app .prosemirror button,
+.standard-form .prosemirror button {
+  border-radius: 3px;
+  border: 2px solid;
+  border-color: #29a253 !important;
   background: linear-gradient(0deg, #021109, 55%, rgba(2, 17, 9, 0.85));
-}
-.app p {
   color: #e5e5ec;
 }
-.app input {
+.app .prosemirror .pm-dropdown ul,
+.standard-form .prosemirror .pm-dropdown ul {
+  color: #88f2ad;
+  background-color: #021109;
+}
+.app form,
+.standard-form form {
+  background: linear-gradient(0deg, #021109, 55%, rgba(2, 17, 9, 0.85));
+}
+.app p,
+.standard-form p {
+  color: #e5e5ec;
+}
+.app input,
+.standard-form input {
   background: none !important;
   border: none !important;
   box-shadow: none !important;
   color: #e5e5ec;
 }
-.app h1 {
+.app h1,
+.standard-form h1 {
   border: none !important;
   text-align: center;
   color: #29a253;
@@ -1329,7 +1353,8 @@ table input {
   font-size: 2.1875rem;
   height: fit-content;
 }
-.app h3 {
+.app h3,
+.standard-form h3 {
   border: none !important;
   text-align: center;
   color: #29a253;
@@ -1338,7 +1363,8 @@ table input {
   text-shadow: none;
   height: fit-content;
 }
-.app label {
+.app label,
+.standard-form label {
   color: #29a253;
   font-family: Quantum, sans-serif;
   font-size: 1.09375rem;

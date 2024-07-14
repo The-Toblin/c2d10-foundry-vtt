@@ -1,4 +1,5 @@
-.app {
+.app,
+.standard-form {
     .c2d10-dark-background();
 
     .window-content {
@@ -28,6 +29,19 @@
         .green-border();
         .c2d10-dark-background();
         color: @colors[ghost];
+    }
+
+    .prosemirror {
+        button {
+            .green-border();
+            .c2d10-dark-background();
+            color: @colors[ghost];
+        }
+
+        .pm-dropdown ul {
+            color: @colors[main];
+            background-color: @colors[bkg];
+        }
     }
 
     form {
