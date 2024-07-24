@@ -1371,3 +1371,20 @@ table input {
   text-shadow: none;
   margin: none;
 }
+.app .inline-roll,
+.standard-form .inline-roll {
+  background: linear-gradient(0deg, #021109, 55%, rgba(2, 17, 9, 0.85));
+}
+.app .dice-tooltip,
+.standard-form .dice-tooltip {
+  background: inherit;
+  background-image: url(assets/backgrounds/circuit_green.webp);
+  background-position: center;
+  background-size: cover;
+}
+.app .dice-tooltip .tooltip-part .dice .dice-rolls img,
+.standard-form .dice-tooltip .tooltip-part .dice .dice-rolls img {
+  background: linear-gradient(0deg, #021109, 45%, rgba(2, 17, 9, 0.65));
+  max-width: 133px;
+  border-color: #88f2ad;
+}

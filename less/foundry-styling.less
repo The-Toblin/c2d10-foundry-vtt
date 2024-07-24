@@ -85,4 +85,28 @@
         text-shadow: none;
         margin: none;
     }
+
+    .inline-roll {
+        .c2d10-dark-background();
+    }
+    .dice-tooltip
+     {
+        background: inherit;
+        background-image: url(./assets/backgrounds/circuit_green.webp);
+        background-position: center;
+        background-size: cover;
+
+        .tooltip-part {
+            .dice {
+                .dice-rolls {
+                    img {
+                        background: linear-gradient(0deg, @colors[bkg], 45%, fade(@colors[bkg], 65%));
+                        max-width: 133px;
+                        border-color: @colors[main];
+                    }
+                }
+            }
+        }
+   }
 }
+

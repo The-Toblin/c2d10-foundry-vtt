@@ -63,3 +63,6 @@ Implemented new health system inspired by FATE.
 - Actually addressed the bug mentioned in 0.622. Turns out you shouldn't be lazy. 
 - When I was in there, I fixed the powers tab and allowed variants to be properly interacted with, in addition to changing all `{{#Select}}` hbs helpers to `{{selectOptions}}`, as per the v12 update.
 - While I was doing that, I noticed that posting descriptions from the assets tab didn't work, and it turns out context menues interact differently with the HTML classes than standard listeners, so I had to do an ugly hack of adding the `data-id` to every row of the assets. Until I can figure out a prettier solution to that, this is what will be.
+
+## 0.624 and 0.625
+- Styling changes to add styling to Foundry elements like Labels, Select drop downs and Inline rolls (with tooltips). 
