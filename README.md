@@ -66,3 +66,6 @@ Implemented new health system inspired by FATE.
 
 ## 0.624 and 0.625
 - Styling changes to add styling to Foundry elements like Labels, Select drop downs and Inline rolls (with tooltips). 
+
+##  0.626
+- Styling changes on the Chat box as it was completely borked.

@@ -673,6 +673,21 @@ table input {
 .d10.complication {
   background-image: url(assets/d10-red.webp) !important;
 }
+#chat-form textarea {
+  background: linear-gradient(0deg, #021109, 55%, rgba(2, 17, 9, 0.85));
+  color: #e5e5ec;
+  font-family: VT323, monospace;
+  font-size: 0.875rem;
+  font-weight: 200;
+  letter-spacing: 1px;
+}
+#chat-controls .roll-type-select select {
+  color: #88f2ad;
+}
+#chat-controls .roll-type-select select option {
+  color: #88f2ad;
+  background-color: #021109;
+}
 .c2d10.sheet {
   min-width: 900px;
   min-height: fit-content;
