@@ -1403,3 +1403,6 @@ table input {
   max-width: 133px;
   border-color: #88f2ad;
 }
+#chat-controls .roll-type-select {
+  color: #021109;
+}
