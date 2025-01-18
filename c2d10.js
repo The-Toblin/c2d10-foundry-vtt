@@ -24,12 +24,14 @@ async function preloadHandlebarsTemplates() {
     "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-talents.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-skills.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-assets-tab.hbs",
+    "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-cybernetics-tab.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-traits-tab.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-powers-tab.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-focus-tab.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/npc/npc-info.hbs",
     "systems/c2d10/templates/partials/sheet-tabs/npc/npc-skills.hbs",
     "systems/c2d10/templates/partials/list-items/asset-list-item.hbs",
+    "systems/c2d10/templates/partials/list-items/cybernetics-list-item.hbs",
     "systems/c2d10/templates/partials/list-items/equipment-list-item.hbs",
     "systems/c2d10/templates/partials/list-items/variant-list-item.hbs",
     "systems/c2d10/templates/cards/weapon-card.hbs",
@@ -255,7 +257,7 @@ Hooks.once("init", function() {
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("c2d10", C2D10ItemSheet, {
     makeDefault: true,
-    types: ["armor", "asset", "power", "trait", "variant", "weapon"],
+    types: ["armor", "asset", "cybernetics", "power", "trait", "variant", "weapon"],
     label: "C2D10 Item Sheet"
   });
 

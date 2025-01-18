@@ -1,0 +1,36 @@
+<section>
+    <h3>
+        {{localize "c2d10.sheet.cybernetics"}}
+    </h3>
+    <div class="content-box c2d10-subsection flex-row flex-between">
+        <div class="flex-col flex-start w-100">
+            <table class="c2d10-asset-card-table">
+                <colgroup>
+                    <col style="width: 5%;">
+                    <col class="w-40">
+                    <col class="w-40">
+                    <col class="w-10">
+                    <col class="w-10">
+                </colgroup>
+                <tr>
+                    <th class="table-no-border"></th>
+                    <th class="table-no-border">
+                        {{localize "c2d10.asset.name"}}
+                    </th>
+                    <th class="table-no-border">
+                        {{localize "c2d10.asset.assetType"}}
+                    </th>
+                    <th class="table-no-border">
+                        {{localize "c2d10.cybernetics.load"}}
+                    </th>
+                    <th class="table-no-border">
+                        {{localize "c2d10.asset.value"}}
+                    </th>
+                </tr>
+                {{#each cybernetics as |item id|}}
+                {{> "systems/c2d10/templates/partials/list-items/cybernetics-list-item.hbs"}}
+                {{/each}}
+            </table>
+        </div>
+    </div>
+</section>

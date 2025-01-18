@@ -16,6 +16,7 @@ export default class C2D10Actor extends Actor {
     // Set up different objects, handy for other classes and displaying on the sheet
     this.system.extras.assets = this.items.filter(p => p.type === "asset");
     this.system.extras.equipment = this.items.filter(p => p.type === "armor" || p.type === "weapon");
+    this.system.extras.cybernetics = this.items.filter(p => p.type === "cybernetics");
     this.system.extras.virtues = this.items.filter(p => p.type === "trait" && p.system.traitType === "virtue");
     this.system.extras.vices = this.items.filter(p => p.type === "trait" && p.system.traitType === "vice");
     this.system.extras.powers = this.items.filter(p => p.type === "power");

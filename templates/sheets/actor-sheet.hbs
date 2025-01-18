@@ -28,6 +28,9 @@
                 {{else if equipment}}
                     <a class="item" data-tab="assets">{{localize "c2d10.sheet.assets"}}</a>
                 {{/if}}
+                {{#if cybernetics}}
+                    <a class="item" data-tab="cybernetics">{{localize "c2d10.sheet.cybernetics"}}</a>
+                {{/if}}
                 {{#if powers}}
                     <a class="item" data-tab="powers">{{localize "c2d10.sheet.powers"}}</a>
                 {{/if}}
@@ -283,6 +286,12 @@
                 <div class="tab sheet-assets" data-group="primary" data-tab="assets">
                     {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-assets-tab.hbs"}}
                 </div>
+                {{!-- Cybernetics Tab --}}
+                {{#if cybernetics}}
+                    <div class="tab sheet-cybernetics" data-group="primary" data-tab="cybernetics">
+                        {{> "systems/c2d10/templates/partials/sheet-tabs/mainactor/actor-cybernetics-tab.hbs"}}
+                    </div>
+                {{/if}}
                 {{!-- Powers Tab --}}
                 {{#if powers}}
                     <div class="tab sheet-powers" data-group="primary" data-tab="powers">

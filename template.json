@@ -75,11 +75,6 @@
                         "min": 0,
                         "max": 10,
                         "current": 0
-                    },
-                    "neural-load": {
-                        "min": 0,
-                        "max": 10,
-                        "current": 0
                     }
                 }
             },
@@ -287,9 +282,13 @@
             "templates": [
                 "coreAsset"
             ],
-            "cybernetic_load": 1,
-            "type": "Neural",
-            "surgery": "Neural"
+            "load": 1,
+            "type": "Passive",
+            "surgery": "Mild",
+            "restricted": "No",
+            "register": "Yes",
+            "value": 1,
+            "manufacturer": "Seris"
         },
         "debt": {
             "templates": [

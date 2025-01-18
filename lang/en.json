@@ -49,6 +49,7 @@
             "assets": "Assets",
             "attack": "Attack",
             "consequences": "Consequences",
+            "cybernetics": "Cybernetics",
             "mild": "Mild",
             "mildPhys": "Mild (Exceptional physical ability bonus)",
             "mildMent": "Mild (Exceptional mental ability bonus)",
@@ -176,6 +177,13 @@
             "value": "Value",
             "quality": "Quality",
             "quantity": "Quantity"
+        },
+        "cybernetics": {
+            "load": "Cybernetic Load",
+            "surgery": "Surgery",
+            "restricted": "Restricted", 
+            "register": "Registration?",
+            "manufacturer": "Manufacturer"
         },
         "trait": {
             "name": "Name",

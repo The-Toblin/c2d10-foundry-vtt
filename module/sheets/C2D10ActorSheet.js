@@ -46,6 +46,11 @@ export default class C2D10ActorSheet extends ActorSheet {
     sheetData.equippedArmor = sheetData.system.extras.equippedArmor;
 
     /**
+     * Cybernetics
+     */
+    sheetData.cybernetics = sheetData.system.extras.cybernetics;
+
+    /**
      * Talents
      */
     sheetData.talents = sheetData.system.extras.talents;
