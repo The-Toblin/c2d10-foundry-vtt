@@ -42,8 +42,10 @@
   "url": "https://github.com/The-Toblin/c2d10-foundry-vtt/",
   "manifest": "https://raw.githubusercontent.com/The-Toblin/c2d10-foundry-vtt/main/system.json",
   "download": "https://github.com/The-Toblin/c2d10-foundry-vtt/archive/refs/heads/main.zip",
-  "gridDistance": 1.5,
-  "gridUnits": "m",
+  "grid": {
+	 "distance": 1.5,
+     "units": "m"
+  },
   "primaryTokenAttribute": "strain",
   "secondaryTokenAttribute": "stress"
 }
