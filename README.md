@@ -87,3 +87,6 @@ Implemented new health system inspired by FATE.
 
 ## 0.633
 - Re-added "auto" sizing to the actor sheet. Forgot that when I removed the double classes. Oops.
+
+## 0.634
+- Bugfix: Fixed code to add, remove and delete assets on the assets tab.

@@ -270,15 +270,19 @@ export default class C2D10ActorSheet extends ActorSheet {
 
   async _deleteItem(event) {
     event.preventDefault();
-    const itemId = event.currentTarget.closest(".c2d10-asset-item").dataset.id;
+    const itemId = event.currentTarget.closest(".c2d10-equipment-item").dataset.id;
     await this.actor.deleteEmbeddedDocuments("Item", [itemId]);
   }
 
   _modifyQuantity(event) {
     event.preventDefault();
     const element = event.currentTarget;
-    const itemId = element.closest(".c2d10-asset-item").dataset.id;
+    console.warn("Table row", element.closest("tr"));
+    console.warn("ID", element.closest("#c2d10-asset-row-id"));
+    console.warn("CSS Class", element.closest(".c2d10-equipment-item"));
+    const itemId = element.closest(".c2d10-equipment-item").dataset.id;
     const item = this.actor.items.get(itemId);
+
 
     const modifier = element.className.includes("increase") ? 1 : -1;
     const quantity = item.system.quantity + modifier;
@@ -287,7 +291,11 @@ export default class C2D10ActorSheet extends ActorSheet {
       "system.quantity": quantity
     };
 
-    if (quantity >= 0) item.update(updateData);
+    if (quantity > 0) {
+      item.update(updateData);
+    } else if (quantity <= 0) {
+      this.actor.deleteEmbeddedDocuments("Item", [item]);
+    }
   }
 
 
