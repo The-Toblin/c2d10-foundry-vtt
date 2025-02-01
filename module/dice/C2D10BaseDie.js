@@ -2,7 +2,7 @@
  * Extend the basic Die to show custom CD10 icons on a d10.
  * @extends {Die}
  */
-export class CeleniaDie extends Die {
+export class CeleniaDie extends foundry.dice.terms.Die {
   constructor(termData = {}) {
 
     termData.faces = 10;

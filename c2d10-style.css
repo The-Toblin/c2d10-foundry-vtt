@@ -912,6 +912,15 @@ table input {
   letter-spacing: 1px;
   text-align: center;
 }
+.c2d10.sheet .cyberload-box,
+.c2d10.item-sheet .cyberload-box {
+  font-size: 1.09375rem;
+  text-transform: uppercase;
+  padding-left: 1em;
+  padding-right: 1em;
+  justify-content: center;
+  text-align: center;
+}
 .c2d10.sheet .space,
 .c2d10.item-sheet .space {
   visibility: hidden;

@@ -61,8 +61,6 @@ export default class C2D10MainSheet extends C2D10ActorSheet {
       return 0;  // Names must be equal
     });
 
-    sheetData.focus = sheetData.system.focus;
-
     return sheetData;
   }
 }

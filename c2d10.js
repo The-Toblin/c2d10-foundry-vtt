@@ -7,7 +7,7 @@ import * as Chat from "./module/chat.js";
 import C2D10Item from "./module/C2D10Item.js";
 import C2D10ItemSheet from "./module/sheets/C2D10ItemSheet.js";
 import C2D10Actor from "./module/C2D10Actor.js";
-import C2D10MainSheet from "./module/sheets/C2D10MainSheet.js";
+import C2D10MainSheet from "./module/sheets/C2D10ActorSheet.js";
 import C2D10NPCSheet from "./module/sheets/C2D10NPCSheet.js";
 import * as C2D10Utility from "./module/C2D10Utility.js";
 

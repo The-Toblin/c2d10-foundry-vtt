@@ -20,12 +20,50 @@ export default class C2D10ActorSheet extends ActorSheet {
     });
   }
 
-  getData() {
+  async getData() {
     const sheetData = super.getData();
     sheetData.config = CONFIG.c2d10;
     sheetData.items = this.actor.items;
     sheetData.system = this.actor.system;
-    sheetData.focus = [];
+
+    sheetData.skills = {};
+    for (const entry of Object.entries(sheetData.system.skills.physical)) {
+      sheetData.skills[entry[0]] = entry[1].rank;
+    }
+    for (const entry of Object.entries(sheetData.system.skills.social)) {
+      sheetData.skills[entry[0]] = entry[1].rank;
+    }
+    for (const entry of Object.entries(sheetData.system.skills.mental)) {
+      sheetData.skills[entry[0]] = entry[1].rank;
+    }
+
+    if (!sheetData.system.focus) {
+      sheetData.system.focus = await this.actor.getFocuses();
+
+      sheetData.system.focus.sort(function(a, b) {
+        let nameA = a.focusDescription.toUpperCase(); // Ignore upper and lowercase
+        let nameB = b.focusDescription.toUpperCase(); // Ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1; // NameA comes first
+        }
+        if (nameA > nameB) {
+          return 1; // NameB comes first
+        }
+        return 0;  // Names must be equal
+      });
+
+      sheetData.system.focus.sort(function(a, b) {
+        let nameA = a.name.toUpperCase(); // Ignore upper and lowercase
+        let nameB = b.name.toUpperCase(); // Ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1; // NameA comes first
+        }
+        if (nameA > nameB) {
+          return 1; // NameB comes first
+        }
+        return 0;  // Names must be equal
+      });
+    }
 
     /**
      * Items

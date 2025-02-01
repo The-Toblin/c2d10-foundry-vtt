@@ -72,3 +72,15 @@ Implemented new health system inspired by FATE.
 
 ## 0.627
 - Further styling changes to adjust the roll select box.
+
+## 0.630
+- Implemented cybernetic implants
+- Implant sheets added
+- Implants can be added to a character now
+
+## 0.631
+- Implant cyberload is now calculated and added to the character. Not shown on sheets (yet).
+
+## 0.632
+- Added cybernetic load to sheet under cybernetics tab
+- Reworked how Focuses are fetched from Actor to Sheet, since the old method was causing some weird cases where Focus would be blanked while updating the sheet, leading to the sort function exploding.

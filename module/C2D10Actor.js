@@ -21,6 +21,7 @@ export default class C2D10Actor extends Actor {
     this.system.extras.vices = this.items.filter(p => p.type === "trait" && p.system.traitType === "vice");
     this.system.extras.powers = this.items.filter(p => p.type === "power");
     this.system.extras.variants = this.items.filter(p => p.type === "variant");
+    this.system.extras.cyberload = await this.calculateCyberload();
 
     /**
      * Set up equipped weapon and armor objects to display on the sheet
@@ -68,22 +69,6 @@ export default class C2D10Actor extends Actor {
       }
       return 0;  // Names must be equal
     });
-
-    /**
-     * Add an easy-to-parse list of focuses for use on sheets
-     */
-    this.system.focus = [];
-    for (const group in this.system.skills) {
-      for (const skill in this.system.skills[group]) {
-        if (this.system.skills[group][skill].hasFocus) {
-          let name = skill;
-          for (const focus in this.system.skills[group][skill].focus) {
-            let focusDescription = this.system.skills[group][skill].focus[focus];
-            this.system.focus.push({focusDescription, name});
-          }
-        }
-      }
-    }
   }
 
   /**
@@ -91,6 +76,19 @@ export default class C2D10Actor extends Actor {
    */
   _onCreate() {
     this.setFlag("c2d10", "locked", false);
+  }
+
+  /**
+   * Calculate cybernetic load
+   */
+
+  async calculateCyberload() {
+    let load = 0;
+    this.system.extras.cybernetics.forEach(implant => {
+      load += parseInt(implant.system.load);
+    });
+
+    return load;
   }
 
   /**
@@ -231,5 +229,25 @@ export default class C2D10Actor extends Actor {
     updateData[`system.skills.${group}.${parent}.hasFocus`] = hasFocus;
 
     await this.update(updateData);
+  }
+
+  /**
+   * Add an easy-to-parse list of focuses for use on sheets
+   */
+  async getFocuses() {
+    let focusList = [];
+    for (const group in this.system.skills) {
+      for (const skill in this.system.skills[group]) {
+        if (this.system.skills[group][skill].hasFocus) {
+          let name = skill;
+          for (const focus in this.system.skills[group][skill].focus) {
+            let focusDescription = this.system.skills[group][skill].focus[focus];
+            focusList.push({focusDescription, name});
+          }
+        }
+      }
+    }
+
+    return focusList;
   }
 }

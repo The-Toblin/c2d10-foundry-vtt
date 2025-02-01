@@ -180,6 +180,7 @@
         },
         "cybernetics": {
             "load": "Cybernetic Load",
+            "totalLoad": "Total cybernetic load",
             "surgery": "Surgery",
             "restricted": "Restricted", 
             "register": "Registration?",
