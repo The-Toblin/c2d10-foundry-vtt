@@ -481,8 +481,11 @@ export default class C2D10ActorSheet extends ActorSheet {
 
     // Extract the dataset from the HTML data and establish a few constants we'll need.
     const dataset = event.currentTarget.closest(".c2d10-do-roll").dataset;
-    const sys = this.getData().system;
+    const sheetData = await this.getData();
+    const sys = sheetData.system;
     const actorId = this.actor.id;
+
+    console.warn(sheetData);
 
     /**
      * A test (or roll) in C2D10 requires two (or rarely three) pools.
@@ -521,6 +524,7 @@ export default class C2D10ActorSheet extends ActorSheet {
       name = item.name;
 
       damage = this.actor.system.extras.equippedWeapon.damage;
+
 
       // Skills need an extra touch, because of the data structure using "rank".
     } else if (type === "skills") {

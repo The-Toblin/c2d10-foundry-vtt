@@ -90,3 +90,6 @@ Implemented new health system inspired by FATE.
 
 ## 0.634
 - Bugfix: Fixed code to add, remove and delete assets on the assets tab.
+
+## 0.635
+- Bugfix: Fixed roll function accidentally getting a promise instead of the value (added await).
