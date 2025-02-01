@@ -84,3 +84,6 @@ Implemented new health system inspired by FATE.
 ## 0.632
 - Added cybernetic load to sheet under cybernetics tab
 - Reworked how Focuses are fetched from Actor to Sheet, since the old method was causing some weird cases where Focus would be blanked while updating the sheet, leading to the sort function exploding.
+
+## 0.633
+- Re-added "auto" sizing to the actor sheet. Forgot that when I removed the double classes. Oops.

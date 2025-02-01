@@ -10,6 +10,8 @@ export default class C2D10ActorSheet extends ActorSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
       template: "systems/c2d10/templates/sheets/actor-sheet.hbs",
       classes: ["c2d10", "sheet"],
+      height: "auto",
+      width: "auto",
       tabs: [
         {
           navSelector: ".sheet-tabs",
