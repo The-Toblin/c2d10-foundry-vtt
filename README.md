@@ -93,3 +93,9 @@ Implemented new health system inspired by FATE.
 
 ## 0.635
 - Bugfix: Fixed roll function accidentally getting a promise instead of the value (added await).
+
+## 0.636
+- Bugfix: Fixed "addFocus" function because I forgot to update functions to await. Which reminds me, I need to check more of them.
+
+## 0.637
+- Bugfix: Fixed "editFocus" and a few more functions that were also missing `await`.

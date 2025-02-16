@@ -385,7 +385,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     new Dialog(
       {
         title: "Add a focus",
-        content: await renderTemplate("systems/c2d10/templates/dialogs/add-focus-dialog.hbs", this.getData()),
+        content: await renderTemplate("systems/c2d10/templates/dialogs/add-focus-dialog.hbs", await this.getData()),
         buttons: {
           roll: {
             label: "Add!",
@@ -410,7 +410,7 @@ export default class C2D10ActorSheet extends ActorSheet {
     const dataset = event.currentTarget.closest(".focusdata").dataset;
     const name = dataset.name;
     const parent = dataset.parent;
-    const dialogData = this.getData();
+    const dialogData = await this.getData();
     dialogData.focusContent = { name, parent };
 
     const dialogOptions = {
@@ -437,7 +437,7 @@ export default class C2D10ActorSheet extends ActorSheet {
   }
 
   async _doEditFocus(html, focusContent) {
-    const currentArray = this.getData().system.skills.focus;
+    const currentArray = await this.getData().system.skills.focus;
     const newName = html.find("input#focus-name").val();
     const newParent = html.find("select#focus-skill").val();
     const index = currentArray.findIndex(p => p.name === focusContent.name);
