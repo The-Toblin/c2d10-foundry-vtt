@@ -1,0 +1,76 @@
+<form class="sheet-main-content c2d10 sheet flex-col flex-start">
+    <section class="c2d10-sheet-header-box">
+        <h1>
+            <input name="name" type="text" value="{{item.name}}" placeholder="{{localize "c2d10.trait.name"}}"/>
+        </h1>
+        <h3 class="c2d10-alert">
+            <select name="system.traitType">
+                {{selectOptions config.virtueVice selected=system.traitType localize=true}}
+            </select>
+        </h3>
+    </section>
+    <section>
+        <div class="c2d10-subsection flex-row flex-between">
+            <div class="w-80 c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} c2d10-asset-textarea">
+                <textarea name="system.description">{{system.description}}</textarea>
+            </div>
+            <div class="flex-col flex-start">
+                <div class="c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}} w-fit">
+                    <div class="image-box flex-row flex-center">
+                        <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" height="145px" width="auto"/>
+                    </div>
+                </div>
+                <div class="flex-col flex-start w-20 value-box c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
+                    <table>
+                        <tr>
+                            <th class="table-no-border">
+                                {{localize "c2d10.trait.level"}}
+                            </th>
+                            <td class="flex-row table-no-border resource-row" data-id="level" data-tooltip="{{localize "c2d10.sheet.dot-tooltip"}}">
+                                {{#dots system.level 5}}{{/dots}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="c2d10-subsection flex-row flex-between">
+            <div class="w-80 c2d10-contentbox {{#if showEffects}}fancy-effects{{/if}}">
+                <table class="item-list effects-list">
+                    <colgroup>
+                    <col class="w-90">
+                    <col class="w-5">
+                    <col class="w-5">
+                </colgroup>
+                    <tr>
+                        <th>{{localize "c2d10.sheet.effects"}}</th>
+                        <th class="c2d10-icon-column">
+                            <a class="effect-control" data-action="create">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        </th>
+                    </tr>
+                    {{#each effects as | effect |}}
+                        <tr class="item c2d10-effect" data-effect-id="{{effect.id}}">
+                            <td class="item-name effect-name">
+                                {{effect.name}}
+                            </td>
+                            <td class="c2d10-icon-column">
+                                <a class="effect-control" data-action="edit" title="{{localize "c2d10.sheet.edit"}}">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </td>
+                            <td class="c2d10-icon-column">
+                                <a class="effect-control" data-action="delete" title="{{localize "c2d10.sheet.delete"}}">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {{/each}}
+                </table>
+            </div>
+        </div>
+    </section>
+</form>

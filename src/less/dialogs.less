@@ -1,0 +1,79 @@
+.c2d10-dialog {
+    .c2d10-section();
+
+    .window-content {
+        background: inherit;
+        background-image: url(./assets/backgrounds/circuit_green.webp);
+        background-position: center;
+        background-size: cover;
+    }
+
+    input {
+        background: linear-gradient(0deg, @colors[bkg], 55%, fade(@colors[bkg], 85%));
+        border: none !important;
+        box-shadow: none !important;
+        color: @colors[main];
+        font-size: @size[large];
+        font-family: @h1;
+    }
+
+
+    select {
+        border: none;
+        color: @colors[main];
+        background: linear-gradient(0deg, @colors[bkg], 55%, fade(@colors[bkg], 85%));
+        font-family: @m2;
+        font-size: @size[large];
+        padding: 5px 10px;
+        width: 100%;
+        height: 35px !important;
+    }
+
+    select option {
+        background-color: @colors[bkg];
+        font-family: @m2;
+        font-size: @size[large]
+    }
+
+    h1 {
+        border: none !important;
+        text-align: center;
+        color: @colors[green];
+        font-family: @h1;
+        font-size: @size[giant];
+    }
+
+    h3 {
+        border: none !important;
+        text-align: center;
+        color: @colors[green];
+        font-family: @h1;
+        font-size: @size[large];
+        text-shadow: none;
+    }
+
+    .label-box {
+        padding: 3px 2px 2px 2px;
+    }
+
+    label {
+        border: none !important;
+        color: @colors[green];
+        font-family: @h1;
+        font-size: @size[normal];
+        text-shadow: none;
+    }
+
+    .value-box {
+        color: inherit;
+        font-family: @h1;
+        font-size: @size[large];
+        margin: auto
+    }
+
+    p {
+        color: @colors[ghost];
+        font-family: @m2;
+        font-size: @size[normal];
+    }
+}

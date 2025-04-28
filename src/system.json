@@ -1,0 +1,51 @@
+{
+  "id": "c2d10",
+  "title": "Celenia D10 Roleplaying System - 2nd Edition",
+  "version": "0.637",
+  "compatibility": {
+    "minimum": "10",
+    "verified": "12",
+    "maximum": "13"
+  },
+  "authors": [
+    {
+      "name": "The Toblin",
+      "url": "http://www.celenia.se",
+      "email": "tobias@celenia.se",
+      "discord": "Toblin#2367",
+      "flags": {}
+    }
+  ],
+  "esmodules": [
+    "c2d10.js"
+  ],
+  "styles": [
+    "c2d10-style.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json",
+      "flags": {}
+    }
+  ],
+  "media": [
+    {
+      "type": "cover",
+      "url": "https://www.worldanvil.com/media/cache/cover/uploads/images/0cf18b9b9afa7979c1555bb8d8713da2.webp",
+      "caption": "Celenia D10 RPG System 2nd Edition",
+      "loop": false,
+      "flags": {}
+    }
+  ],
+  "url": "https://github.com/The-Toblin/c2d10-foundry-vtt/",
+  "manifest": "https://raw.githubusercontent.com/The-Toblin/c2d10-foundry-vtt/main/system.json",
+  "download": "https://github.com/The-Toblin/c2d10-foundry-vtt/archive/refs/heads/main.zip",
+  "grid": {
+	 "distance": 1.5,
+     "units": "m"
+  },
+  "primaryTokenAttribute": "strain",
+  "secondaryTokenAttribute": "stress"
+}
