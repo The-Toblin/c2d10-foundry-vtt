@@ -4,9 +4,11 @@
     "babel-eslint": "^10.1.0"
   },
   "devDependencies": {
+    "@league-of-foundry-developers/foundry-vtt-types": "^13.340.0",
+    "@types/jquery": "^3.5.32",
     "eslint-plugin-jsdoc": "^38.0.6"
   },
-  "scripts":{
+  "scripts": {
     "lint": "eslint ."
   }
 }
