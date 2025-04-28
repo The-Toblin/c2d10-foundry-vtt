@@ -6,8 +6,6 @@ This is public, but in no way in any shape or form in release territory. This is
 Made by the Toblin
 tobias@celenia.se
 
-Major release
-
 # CHANGELOG 
 ## 0.601
 Implemented new health system inspired by FATE.
@@ -99,3 +97,8 @@ Implemented new health system inspired by FATE.
 
 ## 0.637
 - Bugfix: Fixed "editFocus" and a few more functions that were also missing `await`.
+
+# TODO
+- Make sure everything is up to date and compatible with v13
+- Implement DataModels for actors and items, thus deprecating the old template.json way.
+- Add descriptions for what each class actually does, like actor, sheets, roll etc. A third party should be able to read this and understand how it works.
