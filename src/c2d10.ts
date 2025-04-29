@@ -1,5 +1,3 @@
-import { preloadTemplates } from "./preloadTemplates";
-
 import { c2d10 } from "./module/config.js";
 import { RegularDie } from "./module/dice/C2D10RegularDie.js";
 import { CrisisDie } from "./module/dice/C2D10CrisisDie.js";
